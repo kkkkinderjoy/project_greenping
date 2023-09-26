@@ -9,10 +9,6 @@ import { NavLink, useLocation } from 'react-router-dom'
 import axios from 'axios'
 import styled from 'styled-components'
 
-
-const Wrap = styled.div`
-  height: 5000px;
-`
 const Wrapper = styled.div`
   margin-top: 5px;
   width: 100%;
@@ -165,7 +161,7 @@ function Search() {
        const Filterdonm = [...new Set(alldonm && alldonm.map(e=>e.doNm).sort())];
   return (
     <>
-      <Wrap>
+      
       {/* 모바일 써치+버튼 시작 */}
         {/* <Mwrap className={scrollPosition > 500 ? ".on" : ""}>
           <Mwrapper>
@@ -215,7 +211,7 @@ function Search() {
           </SearchContent>
         </Wrapper>
         {/* 유리써치 끝*/}
-      </Wrap>
+      
     </>
   )
   }
