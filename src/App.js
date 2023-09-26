@@ -14,6 +14,7 @@ import { collection, doc, getDoc, getFirestore } from "firebase/firestore";
 import store from "./store";
 import SearchD from './pages/SearchD';
 import Descpage from './pages/Descpage';
+import ReviewMore from './pages/ReviewMore';
 
 
 
@@ -42,8 +43,9 @@ function Inner(){
     <>
       <GlobalStyle />
         <Header/>
-        <Main />
           <Routes>
+            <Route path='/' element={<Main />}></Route>
+            <Route path='/reviewmore' element={<ReviewMore />}></Route>
             <Route path='/login' element={<Login />}></Route>
             <Route path='/logout' element={<Logout />}></Route>
             <Route path='/member' element={<Member />}></Route>
