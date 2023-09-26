@@ -1,6 +1,6 @@
 import './App.css';
 import { Route, Routes } from 'react-router-dom';
-import Search from './pages/Search';
+import Search from './components/Search';
 import Test from './pages/Test';
 import SearchD from './pages/SearchD';
 import Descpage from './pages/Descpage';
