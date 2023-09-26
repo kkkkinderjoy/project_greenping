@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React, { useState } from 'react'
 import { NavLink, useLocation, useNavigate } from 'react-router-dom'
 import { styled } from 'styled-components'
-import Modal from '../components/Modal'
+import Modal from './../components/Modal'
 
 
 const Dwrap = styled.div`

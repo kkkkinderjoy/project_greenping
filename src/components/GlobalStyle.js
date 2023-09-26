@@ -8,6 +8,7 @@ const GlobalStyle = createGlobalStyle`
     font-weight: normal;
     font-style: normal;
 }
+
 *{
     margin: 0;
     padding: 0;
@@ -16,4 +17,4 @@ const GlobalStyle = createGlobalStyle`
     a{text-decoration: none; color: #000;}
 }
 `
-export default GlobalStyle
+export default GlobalStyle ;

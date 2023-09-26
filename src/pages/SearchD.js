@@ -7,8 +7,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLocationDot, faPhoneVolume, faUser } from "@fortawesome/free-solid-svg-icons";
 
 
-
-
 const Wrap = styled.div`
   width: 100%;
 `;

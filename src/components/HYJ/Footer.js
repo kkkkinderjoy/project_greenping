@@ -1,5 +1,4 @@
 import React from 'react'
-import pclogo from './../images/pc_logo.png'
 import styled from 'styled-components'
 import { NavLink } from 'react-router-dom'
 
@@ -104,7 +103,7 @@ function Footer(){
       <FooterWrap>
         <Container>
           <LogoWrap>
-          <NavLink to="/"><Logo src={pclogo} alt="logo" /></NavLink>
+          <NavLink to="/"><Logo src={`images/pc_logo.png`} alt="logo" /></NavLink>
 
           </LogoWrap>
           <LinksContainer>

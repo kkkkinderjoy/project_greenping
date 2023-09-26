@@ -1,10 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { NavLink, Route, Routes, useLocation, useNavigate } from 'react-router-dom'
 import { Link } from 'react-router-dom'
-import pclogo from './../images/pc_logo.png'
-import mobilelogo from './../images/mobile.logo.png'
+
+// import mobilelogo from import pclogo from '../../../public/images/mobile_logo.png'
 import "react-datepicker/dist/react-datepicker.css"
-import Login from './../pages/Login'
+
 import styled from 'styled-components'
 
 
@@ -120,7 +120,7 @@ function Header({userState}){
      <Content >
         <HeaderWrap>
           <LogoWrap>
-            <NavLink to="/"><Logo src={pclogo} alt='로고' /></NavLink>
+            <NavLink to="/"><Logo src={`images/pc_logo.png`} alt='로고' /></NavLink>
           </LogoWrap>
           <ListWrap>
             <List>
@@ -135,7 +135,7 @@ function Header({userState}){
           <NavMember>
             <ul>
               <li>
-                <NavLink to={userState ? "/logout" : "login"}>{userState ? "로그아웃" : "로그인"} </NavLink>
+                <NavLink to={userState ? "/logout" : "/login"}>{userState ? "로그아웃" : "로그인"} </NavLink>
               </li>
               <li>
                 {
