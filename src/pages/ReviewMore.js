@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import Card from '../data/ReviewData.js';
-import Pagenation from '../components/Pagenation';
+import Pagenation from '../components/LJS/Pagenation';
 
 
 const Header = styled.div`
   margin-top: 80px;
   width: 100%;
   background-color: #f9fcfc;
-`;
+`
 
 const Container = styled.ul`
   max-width: 1280px; 
@@ -26,7 +26,7 @@ const Container = styled.ul`
       width: 100%;
     }
   }
-`;
+`
 
 const CardItem = styled.li`
   border: 1px solid #ccc;
@@ -40,7 +40,7 @@ const CardItem = styled.li`
   @media screen and (max-width: 768px) {
     max-width: 483px;
   }
-`;
+`
 
 const ImageContainer = styled.div`
   width: 100%;
@@ -52,7 +52,7 @@ const ImageContainer = styled.div`
   background-position: center;
   margin-bottom: 1rem;
 
-`;
+`
 
 const CardInfo = styled.div`
   display: flex;
@@ -62,13 +62,13 @@ const CardInfo = styled.div`
   @media (max-width: 768px) {
     height: auto;
   }
-`;
+`
 
 const CardTitle = styled.div`
   font-weight: bold;
   font-size: 16px;
   margin-bottom: 1rem;
-`;
+`
 
 const CardDesc = styled.div`
   font-size: 14px;
@@ -77,7 +77,7 @@ const CardDesc = styled.div`
   @media (max-width: 768px) {
     height: auto;
   }
-`;
+`
 
 const CardFooter = styled.div`
   display: flex;
@@ -89,7 +89,7 @@ const CardFooter = styled.div`
       margin-left: 10px;
     }
   }
-`;
+`
 
 function GreenTalk() {
   const [limit, setLimit] = useState(10);

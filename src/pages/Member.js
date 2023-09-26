@@ -12,7 +12,7 @@ import { getAuth, fetchSignInMethodsForEmail } from 'firebase/auth';
 
 const Container = styled.div`
   display: flex;
-  background-color: #f5f5f5;
+  background-color: #f9fcfc;
   justify-content: center;
   height: calc(100vh - 86px);
   align-items: center;

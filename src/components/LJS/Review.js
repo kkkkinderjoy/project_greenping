@@ -243,7 +243,7 @@ function Review() {
                   }
                 </HashWrapper>
               </CardTextWrapper>
-              <NavLink to='/greentalk'>
+              <NavLink to='/reviewmore'>
                 <More>
                   <p>더 보기</p>
                   <img src="" alt="" />
