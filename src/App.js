@@ -11,11 +11,14 @@ import Noticedetail from './pages/Noticedetail';
 import Findemail from './pages/Findemail';
 import { Provider, useDispatch, useSelector } from "react-redux";
 import { collection, doc, getDoc, getFirestore } from "firebase/firestore";
-import store, { loggedIn } from "./store";
+import store from "./store";
+import SearchD from './pages/SearchD';
+import Descpage from './pages/Descpage';
+
 
 
 function App() {
-
+  
   return (
   <>
   <Provider store={store}>
@@ -47,10 +50,10 @@ function Inner(){
             <Route path="/notice" element={<Notice />}></Route>
             <Route path="/noticedetail/:seq" element={<Noticedetail/>}></Route>
             <Route path="/findemail" element={<Findemail />}></Route>
+            <Route path='/searchd/' element={<SearchD />} />
+            <Route path='/searchd/desc/:seq' element={<Descpage />} />
           </Routes>
         <Footer />
-     
-    
   </>
   )
 }
