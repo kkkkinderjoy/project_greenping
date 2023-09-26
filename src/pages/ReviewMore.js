@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import Card from '../data/Data';
+import Card from '../data/ReviewData.js';
 import Pagenation from '../components/Pagenation';
 
 
@@ -95,12 +95,7 @@ function GreenTalk() {
   const [limit, setLimit] = useState(10);
   const [page, setPage] = useState(1);
   const offset = (page - 1) * limit;
-  const [good, setGood] = useState(0);
-  
-  function ClickGood() {
-    setGood(good+1)
-  } 
-  let [like, setLike] = useState([0, 0, 0,0,0,0,0,0,0,0]);
+
   return (
     <Header>
       <Container >
@@ -114,12 +109,6 @@ function GreenTalk() {
             <CardDesc>{e.desc}</CardDesc>
           </CardInfo>
           <CardFooter>
-          <p onClick={()=>{
-            let likeCnt = [...like];
-            likeCnt[i]++;
-            setLike(likeCnt); 
-            }}>추천👍 {like[i]} </p>     
-            <p>{e.date}</p>
           </CardFooter>
         </CardItem>
         </React.Fragment>

@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
-import Card from '../data/Data'
+// import Card from './../data/ReviewData'
 
 
 const Wrapper = styled.div`

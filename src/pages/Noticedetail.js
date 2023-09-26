@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
-import datalist from '../data/data'
 import { useLocation } from 'react-router-dom'
 
 const Container=styled.div`

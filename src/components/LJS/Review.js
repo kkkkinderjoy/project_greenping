@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
-import Card from '../data/Data';
+import Card from './../../data/ReviewData';
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 import { faFontAwesome } from '@fortawesome/free-solid-svg-icons';
-
 
 
 const Wrapper = styled.div`
@@ -187,9 +186,8 @@ const More = styled.p`
 `;
 
 function Review() {
-  const [Bgcolor, setBgColor] = useState(false)
+  // const [Bgcolor, setBgColor] = useState(false)
   
-
   let [data, setData] = useState(Card);
   let [type, setType] = useState("best");
   const hashTag = {

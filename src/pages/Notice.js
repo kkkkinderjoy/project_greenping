@@ -1,6 +1,6 @@
 import React from 'react'
 import { NavLink, Route, Routes } from 'react-router-dom';
-import datalist from './../data/data'
+import datalist from './../data/NoticeData'
 import { useLocation } from 'react-router-dom';
 import { useState } from 'react';
 import styled from 'styled-components';
