@@ -2,6 +2,7 @@ import { Route, Routes } from 'react-router-dom';
 import GlobalStyle from "./components/GlobalStyle";
 import Header from './components/HYJ/Header';
 import Footer from './components/HYJ/Footer';
+
 import Main from './pages/Main';
 import Member from './pages/Member';
 import Board from './pages/Board';
