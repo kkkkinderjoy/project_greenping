@@ -28,11 +28,10 @@ const ListWrap = styled.ul`
 `
 
 const List = styled.li`
-  flex-basis: 24%;
-  
-  
+  flex-basis: 20%;
   >img{
-    height:200px;
+    width: 300px;
+    height: 300px;
     object-fit: cover;
     margin-bottom: 7px;
   }
@@ -110,7 +109,7 @@ function Choice() {
                           <FontAwesomeIcon
                             className="text-[15px] mr-1"
                             icon={faLocationDot}
-                            size="2x" color="#d8d8d8"
+                            size="xl" color="#98eecc" 
                           />
                           <p>{e.doNm + e.sigunguNm}</p>
                         </Location>

@@ -9,10 +9,9 @@ import { styled } from 'styled-components';
 
 const StyledEventBanner = styled.div`
   .swiper-container {
-    width: 80%;
-    max-width: 1200px;
+    max-width: 1000px;
     margin: 0 auto;
-    height: 180px;
+    height: 300px;
 
   }
 
@@ -22,11 +21,11 @@ const StyledEventBanner = styled.div`
   }
 
   .image-container {
-    flex-basis: 50%;
+   
+    flex-basis: 45%;
     display: flex;
     justify-content: space-between;
   }
-
   img {
     width: 100%;
     height: auto;
