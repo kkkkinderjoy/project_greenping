@@ -3,20 +3,20 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 import { styled } from "styled-components";
-import dataList from "./../data/data"
+import dataList from "./../../data/Choicedata"
 
 const ContentWrap = styled.div`
   width: 100%;
   margin-top: 60px;
-`;
+`
 const Content = styled.div`
   margin: 3px auto;
   max-width: 1280px;
-`;
+`
 const Title = styled.h3`
   font-size: 25px;
 
-`;
+`
 
 const ListWrap = styled.ul`
   max-width: 1280px;
@@ -25,7 +25,7 @@ const ListWrap = styled.ul`
   flex-wrap: wrap;
   margin-top: 5px;
   justify-content: space-around;
-`;
+`
 
 const List = styled.li`
   flex-basis: 24%;
@@ -51,7 +51,7 @@ const List = styled.li`
       }
       margin-bottom: 20px;
   }
-`;
+`
 
 const TextWrap = styled.div`
     margin-top: 3px;

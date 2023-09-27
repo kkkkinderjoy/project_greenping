@@ -8,7 +8,6 @@ import { faMessage } from '@fortawesome/free-regular-svg-icons';
 
 
 
-
 function Aside() {
     // top 함수
     const moveToTop = () => (document.documentElement.scrollTop = 0);
