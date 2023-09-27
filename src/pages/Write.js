@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faImage } from '@fortawesome/free-solid-svg-icons';
 import styled from 'styled-components';
-import Ckeditor from '../components/Ckeditor';
+import Ckeditor from '../components/KNH/Ckeditor';
 
 
 

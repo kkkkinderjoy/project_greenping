@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import dataList from './../data/Data'
+// import dataList from './../data/Data'
 import { useNavigate } from 'react-router-dom';
 import Write from '../pages/Write';
 import styled from 'styled-components';
@@ -161,19 +161,19 @@ const HeartIcon = styled.div`
 
 function Main() {
   const navigate = useNavigate();
-  const [data, setData] = useState(dataList);
+  // const [data, setData] = useState(dataList);
   
 
   const goWrite = () => {
     navigate('/write');
   };
 
-  const [likes, setLikes] = useState(Array(data.length).fill(false));
-    const toggleLike = (index)=>{
-      const newLikes = [...likes];
-      newLikes[index] = !newLikes[index]
-      setLikes(newLikes)
-    }
+  // const [likes, setLikes] = useState(Array(data.length).fill(false));
+  //   const toggleLike = (index)=>{
+  //     const newLikes = [...likes];
+  //     newLikes[index] = !newLikes[index]
+  //     setLikes(newLikes)
+  //   }
   
 
 
@@ -185,7 +185,7 @@ function Main() {
         <Title>그린톡
         <WriteButton onClick={goWrite}>글쓰기</WriteButton>
         </Title>
-        {data.map((e, i) => (
+        {/* {data.map((e, i) => (
           <Card key={i}>
             <CardHeader>
               <User>
@@ -214,7 +214,7 @@ function Main() {
               </div>
             </CommentSection>
           </Card>
-        ))}
+        ))} */}
       </Container>
     </Wrapper>
   );
