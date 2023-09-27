@@ -16,6 +16,7 @@ const Container = styled.div`
   justify-content: center;
   height: calc(100vh - 86px);
   align-items: center;
+  
 `
 const SignUp = styled.div`
     width: 25vw;
@@ -98,7 +99,6 @@ function Member() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("")
-  const [nickname, setNickname] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [error, setError] = useState("");
   const [eye, setEye] = useState([0, 0]);
@@ -165,9 +165,6 @@ function Member() {
       setError("유요한 이메일 주소를 입력해주세요");
       return;
     }
-    else if (nickname.length === 0) {
-      errorMessage = "닉네임";
-    }
     else if (password.length === 0) {
       errorMessage("비밀번호")
     } else if (passwordConfirm.length === 0) {
@@ -194,7 +191,6 @@ function Member() {
 
       const userProfile = {
         name,
-        nickname,
         phoneNumber,
         email,
       }
@@ -254,10 +250,6 @@ function Member() {
           <Input defaultValue={email} onChange={(e) => { setEmail(e.target.value) }} type='email' className='email'/>
             <button onClick={()=>{checkEmail(email)}} ><p>중복 확인</p></button>
           </Emailbox>
-         
-          <p>닉네임<span>*</span></p>
-          <Input value={nickname} onChange={(e) => { setNickname(e.target.value) }} type='text' className='nickname' />
-
           <p>비밀번호<span>*</span></p>
           <Password>
             <Input type={eye[0] ? 'text' : 'password'} className='password' onChange={(e) => { setPassword(e.target.value) }} />

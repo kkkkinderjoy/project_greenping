@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import Card from './../../data/ReviewData';
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
-import { faFontAwesome } from '@fortawesome/free-solid-svg-icons';
+import { faChevronRight, faFontAwesome } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 
 const Wrapper = styled.div`
@@ -152,12 +153,9 @@ const HashWrapper = styled.div`
   text-align: center;
   width: 85%;
   margin: auto;
-
+  font-size: 13px;
+  color: #353535;
   div {
-    border: 1px solid #000;
-    border-radius: 8px;
-    padding: 10px;
-    margin-top: 15px;
     width: 30%;
 
     @media (min-width: 768px) {
@@ -213,7 +211,7 @@ function Review() {
     <>
       <Wrapper>
         <FlexContainer>
-          <Heading>리뷰&</Heading>
+          <Heading>리뷰 <FontAwesomeIcon icon={faChevronRight} /></Heading>
           <ListContainer>
             <ListItem onClick={() =>
 

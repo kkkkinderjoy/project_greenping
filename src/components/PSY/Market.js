@@ -5,6 +5,7 @@ import { NavLink } from "react-router-dom";
 import { styled } from "styled-components";
 
 const Content = styled.div`
+  padding: 100px;
   width: 100%;
   margin: 0 auto;
 `
@@ -71,7 +72,6 @@ function Market() {
   return (
     <>
     <Content>
-    <NavLink to='/'><ment>메인으로 돌아가기</ment></NavLink>
       <ContentWrap>
         <ContentItem>
           <h3>그린마켓</h3>

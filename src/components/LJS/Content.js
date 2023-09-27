@@ -71,9 +71,9 @@ const ContentVideo = styled.div`
 
 function Content() {
   const [camping, setCamping] = useState(0);
-  const campingList = ['캠핑 안전수칙@@@@' , '캠핑재밌게@@@#', '캠핑 꿀팁@@@', '캠핑 플레이리스트', '캠핑 용품추천'];
+  const campingList = ['캠핑 안전수칙' , '캠핑재밌게', '캠핑 꿀팁', '캠핑 플레이리스트', '캠핑 용품추천'];
   const youTubeList = ['3uyjWs7L8Bs?si=rc4OM-h1rg5wWL8X,','6HXsc-KSvQQ?si=04KgBm8uY-EA3rRT','ZBo8_JcCeU4?si=Xz5EATGL8rLBFdUU','TScI7--3lvo?si=xRXrnetKgUeieIKm']  
-  const [btnActive, setbtnActive] = useState(false);
+  const [btnActive, setbtnActive] = useState(0);
 
   return (
     <>
@@ -95,9 +95,9 @@ function Content() {
       <ContentVideo>
       <ul>
         {
-          campingList.map((e,i)=>{
+          youTubeList.map((e,i)=>{
             return(
-              camping === i &&
+              btnActive === i &&
               <li>
                 <iframe src={`https://www.youtube.com/embed/${youTubeList[i]}`} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
               </li>

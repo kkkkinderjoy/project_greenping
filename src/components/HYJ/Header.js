@@ -34,7 +34,7 @@ const Logo = styled.img`
   width: 0;
   @media (min-width: 768px){
     width: 150px;
-    height: 90px;
+    height: 120px;
   }
 `
 
@@ -57,10 +57,10 @@ const ListItem = styled.li`
 `
 
 const NavMember = styled.div`
-  font-size: 15px;
+  font-size: 13.5px;
   position: absolute;
   top: 10px;
-  right: 30px;
+  right: 50px;
   z-index: 50;
  ul{
   display: flex;

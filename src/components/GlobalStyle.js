@@ -3,8 +3,8 @@ import { createGlobalStyle } from "styled-components"
 
 const GlobalStyle = createGlobalStyle`
 @font-face {
-    font-family: 'S-CoreDream-3Light';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff') format('woff');
+    font-family: 'HakgyoansimWoojuR';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2307-2@1.0/HakgyoansimWoojuR.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
 }
@@ -12,7 +12,7 @@ const GlobalStyle = createGlobalStyle`
 *{
     margin: 0;
     padding: 0;
-    font-family: 'S-CoreDream-3Light';
+    font-family: 'HakgyoansimWoojuR';
     ul{list-style: none;}
     a{text-decoration: none; color: #000;}
 }
