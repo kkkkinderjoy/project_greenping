@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPen } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
 import {  addDoc, collection, doc, getDocs, getFirestore } from 'firebase/firestore';
-import { fireStore } from '../firebase';
+// import { fireStore } from './../firebase';
 
 const Button = styled.button`
     border-radius: 0.5rem;
@@ -49,10 +49,10 @@ function Ckeditor({title,postData}) {
         try{
 
         
-            await addDoc(collection(fireStore,"board"),{
-                title: "title",
-                content: "test"
-            })
+            // await addDoc(collection(fireStore,"board"),{
+            //     title: "title",
+            //     content: "test"
+            // })
 
             alert("게시글이 성공적으로 등록되었습니다");
           

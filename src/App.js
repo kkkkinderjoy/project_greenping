@@ -4,6 +4,8 @@ import Header from './components/HYJ/Header';
 import Footer from './components/HYJ/Footer';
 import Main from './pages/Main';
 import Member from './pages/Member';
+import Board from './pages/Board';
+import Write from './pages/Write';
 import Login from './pages/Login';
 import Logout from './pages/Logout';
 import Notice from './pages/Notice';
@@ -54,6 +56,8 @@ function Inner(){
             <Route path="/findemail" element={<Findemail />}></Route>
             <Route path='/searchd/' element={<SearchD />} />
             <Route path='/searchd/desc/:seq' element={<Descpage />} />
+            <Route path='/board' element={<Board />} />
+            <Route path='/write' element={<Write />} />
           </Routes>
         <Footer />
   </>

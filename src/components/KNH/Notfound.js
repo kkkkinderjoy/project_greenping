@@ -9,7 +9,6 @@ import { useNavigate } from 'react-router-dom'
 const Background = styled.div`
     width:100%;
     
-    
 
 `
 const ContentWrap = styled.div`
