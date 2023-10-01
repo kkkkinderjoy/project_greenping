@@ -15,7 +15,7 @@ const Wrapper = styled.div`
   height: 300px;
 `
 const SearchContent = styled.div`
-  max-width: 1280px;
+  max-width: 1200px;
   height: 70px;
   margin: 0 auto;
   display: flex;
@@ -24,27 +24,28 @@ const SearchContent = styled.div`
   border-radius: 5px;
   align-items: center;
   >input{
-    flex-basis: 40%;
+    flex-basis: 30%;
     height: 100%;
+    font-size: 1.2em;
   }
-  @media screen {
-    
-  }
+  
 `
 const StyleDate = styled(DatePicker)`
-    width: 250px;
-    color: black;
+    color: #666666;
     height: 100%;
+    border: none;
+    font-size: 1.2em;
+    flex-basis: 40%;
 `
 const NavLinkWrap = styled.div`
   background-color: #98eecc;
   color: #fff;
   font-weight: bold;
-  border-radius: 0 10px 10px 0;
+  border-radius: 10px;
   font-size: 18px;
   right: 0;
   flex-basis: 20%;
-  height: 100%;
+  height: 80%;
   a{
     display: flex;
     height: 100%;
@@ -63,11 +64,15 @@ const NavLinkWrap = styled.div`
 const Input = styled.input`
   border: none;
   right: 30%;
+  height: 100%;
 `
 
 const Select = styled.select`
   font-size: 24px;
   font-weight: bold;
+  border: none;
+  color: #666666;
+  flex-basis: 8%;
 `
 const Mwrap = styled.div`
   z-index: 50; background-color: #fff; 
@@ -99,7 +104,7 @@ const MbuttonBox = styled.div`
     font-weight: bold;
     border-radius: 5px;
     font-size: 25px;
-    right: 0; width: 100%; height: 100%;
+    right: 0; width: 100%; height: 80%;
   }
 `
 // ${scrollPosition > 500 ? "block" : "hidden"}`}
@@ -197,7 +202,7 @@ function Search() {
               startDate={startDate} 
               endDate={endDate} 
               onChange={(date)=>setDateRange(date)} 
-              dateFormat="yyyy년 MM월 dd"
+              dateFormat="MM월 dd일"
 
               minDate={subDays(new Date(), 0)}
               maxDate={addDays(new Date(), 300)}
