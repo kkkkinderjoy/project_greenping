@@ -28,28 +28,31 @@ const SearchContent = styled.div`
   flex-wrap: nowrap;
   border-radius: 5px;
   align-items: center;
-  > input {
-    flex-basis: 40%;
+  >input{
+    flex-basis: 30%;
     height: 100%;
+    font-size: 1.2em;
   }
-  @media screen {
-  }
-`;
+
 const StyleDate = styled(DatePicker)`
-  width: 250px;
-  color: black;
-  height: 100%;
-`;
+    color: #666666;
+    height: 100%;
+    border: none;
+    font-size: 1.2em;
+    flex-basis: 40%;
+`
 const NavLinkWrap = styled.div`
   background-color: #98eecc;
   color: #fff;
   font-weight: bold;
-  border-radius: 0 10px 10px 0;
+  border-radius: 10px;
   font-size: 18px;
   right: 0;
   flex-basis: 20%;
-  height: 100%;
-  a {
+
+  height: 80%;
+  a{
+
     display: flex;
     height: 100%;
     align-items: center;
@@ -67,12 +70,16 @@ const NavLinkWrap = styled.div`
 const Input = styled.input`
   border: none;
   right: 30%;
-`;
+
 
 const Select = styled.select`
   font-size: 24px;
   font-weight: bold;
-`;
+  border: none;
+  color: #666666;
+  flex-basis: 8%;
+`
+
 const Mwrap = styled.div`
   z-index: 50;
   background-color: #fff;
@@ -115,9 +122,8 @@ const MbuttonBox = styled.div`
     font-weight: bold;
     border-radius: 5px;
     font-size: 25px;
-    right: 0;
-    width: 100%;
-    height: 100%;
+    right: 0; width: 100%; height: 80%;
+
   }
 `;
 // ${scrollPosition > 500 ? "block" : "hidden"}`}
@@ -193,6 +199,7 @@ function Search() {
         </Mwrap> */}
       {/* 모바일 써치+버튼 끝 */}
       {/* 유리써치 */}
+
       <Wrapper>
         <SearchContent>
           <Select onChange={optionDonm}>
@@ -226,6 +233,7 @@ function Search() {
         </SearchContent>
       </Wrapper>
       {/* 유리써치 끝*/}
+
     </>
   );
 }
