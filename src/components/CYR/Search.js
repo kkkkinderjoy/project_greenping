@@ -14,65 +14,112 @@ import { NavLink, useLocation } from "react-router-dom";
 import axios from "axios";
 import styled from "styled-components";
 
-const Wrapper = styled.div`
+const Content = styled.div`
   margin-top: 5px;
   width: 100%;
   height: 300px;
+  
 `;
-const SearchContent = styled.div`
+const ContentWrap = styled.div`
   max-width: 1200px;
-  height: 70px;
   margin: 0 auto;
+`
+
+const Inner = styled.div`
+  
+  height: 73px;
   display: flex;
   justify-content: center;
-  flex-wrap: nowrap;
-  border-radius: 5px;
   align-items: center;
-  > input {
-    flex-basis: 40%;
-    height: 100%;
+  flex-wrap: nowrap;
+  border-radius: 100px;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 20px 30px;
+`
+
+const Select = styled.select`
+  
+  width: 10%;
+  padding: 2%;
+  font-size: 1.2em;
+  font-weight: bold;
+  border: none;
+  -webkit-appearance:none; //크롬 화살표 없애기
+  appearance: none; //화살표 없애기
+  -moz-appearance: none; //파이어폭스 화살표 없애기
+  text-align: center;
+  &:focus{
+    outline: none;
+    border-radius: 100px;
+    border: 1px solid #2ed090;
   }
-  @media screen {
-  }
-`;
+`
+const Option = styled.option`
+  font-size: 1em;
+  border: none;
+  text-align: center;
+
+`
+
 const StyleDate = styled(DatePicker)`
   width: 250px;
-  color: black;
-  height: 100%;
-`;
+  height: 65px;
+  font-size: 1.2em;
+  font-weight: bold;
+  border: 0;
+  appearance: none;
+  -moz-appearance: none;
+  text-align: center;
+  &:focus{
+    outline: none;
+    border-radius: 100px;
+    border: 1px solid #2ed090;
+  }
+`
+const Input = styled.input`
+  border: none;
+  width: 40%;
+  padding: 2%;
+  font-size: 1.2em;
+  font-weight: bold;
+  border: 0;
+  appearance: none;
+  -moz-appearance: none;
+  text-align: center;
+  &:focus{
+    outline: none;
+    border-radius: 100px;
+    border: 1px solid #2ed090;
+  }
+`
+
+
+
 const NavLinkWrap = styled.div`
   background-color: #98eecc;
-  color: #fff;
   font-weight: bold;
-  border-radius: 0 10px 10px 0;
-  font-size: 18px;
+  border-radius: 100px;
   right: 0;
   flex-basis: 20%;
-  height: 100%;
-  a {
+  height: 75%;
+    a{
     display: flex;
     height: 100%;
     align-items: center;
-    p {
-      width: 100%;
-      font-size: 30px;
-      margin: 10px auto;
-      text-align: center;
-      font-weight: 800;
-      color: #fff;
-    }
+      p{
+        width: 100%;
+        font-size: 1.7em;
+        text-align: center;
+        font-weight: bold;
+        color: #fff;
+      }
   }
 `;
 
-const Input = styled.input`
-  border: none;
-  right: 30%;
-`;
 
-const Select = styled.select`
-  font-size: 24px;
-  font-weight: bold;
-`;
+
+
+
+
 const Mwrap = styled.div`
   z-index: 50;
   background-color: #fff;
@@ -83,7 +130,8 @@ const Mwrap = styled.div`
   top: 0;
   display: flex;
   justify-content: space-around;
-`;
+`
+
 const Mwrapper = styled.div`
   width: 70%;
   height: 40px;
@@ -119,8 +167,10 @@ const MbuttonBox = styled.div`
     width: 100%;
     height: 100%;
   }
-`;
+`
+
 // ${scrollPosition > 500 ? "block" : "hidden"}`}
+
 function Search() {
   const [dateRange, setDateRange] = useState([null, null]);
   const [startDate, endDate] = dateRange;
@@ -193,12 +243,13 @@ function Search() {
         </Mwrap> */}
       {/* 모바일 써치+버튼 끝 */}
       {/* 유리써치 */}
-      <Wrapper>
-        <SearchContent>
+      <Content>
+        <ContentWrap>
+          <Inner>
           <Select onChange={optionDonm}>
-            <option value="전체">전체</option>
+            <Option value="전체">전체</Option>
             {Filterdonm.map((e, i) => {
-              return <option key={i}>{e}</option>;
+              return <Option key={i}>{e}</Option>;
             })}
           </Select>
           <StyleDate
@@ -223,8 +274,9 @@ function Search() {
               <p>검색하기</p>
             </NavLink>
           </NavLinkWrap>
-        </SearchContent>
-      </Wrapper>
+          </Inner>
+        </ContentWrap>
+      </Content>
       {/* 유리써치 끝*/}
     </>
   );
