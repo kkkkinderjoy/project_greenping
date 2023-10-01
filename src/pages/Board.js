@@ -1,10 +1,10 @@
-import React, { useState } from 'react'
-// import dataList from './../data/Data'
-import { useNavigate } from 'react-router-dom';
-import Write from '../pages/Write';
-import styled from 'styled-components';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHeart } from '@fortawesome/free-regular-svg-icons'
+import React, { useState } from "react";
+import dataList from "./../data/list";
+import { useNavigate } from "react-router-dom";
+import Write from "../pages/Write";
+import styled from "styled-components";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHeart } from "@fortawesome/free-regular-svg-icons";
 
 const Wrapper = styled.div`
   width: 100%;
@@ -12,7 +12,7 @@ const Wrapper = styled.div`
 `;
 
 const Container = styled.div`
-  max-width: 1280px;
+  max-width: 1200px;
   margin: 0 auto;
   padding: 0 1rem;
 `;
@@ -25,7 +25,7 @@ const Title = styled.h3`
   align-items: end;
 
   &::after {
-    content: '';
+    content: "";
     width: 30px;
     height: 5px;
     margin-left: 0.5px;
@@ -46,8 +46,6 @@ const WriteButton = styled.button`
   padding: 0 10px;
   font-size: 13px;
   cursor: pointer;
-
- 
 `;
 
 const Card = styled.ul`
@@ -101,14 +99,13 @@ const CardImages = styled.li`
   height: auto;
   display: flex;
   height: auto;
-  @media screen and (min-width: 841px){
+  @media screen and (min-width: 841px) {
     height: 500px;
   }
   justify-content: space-around;
   margin-bottom: 20px;
-  @media screen and (max-width:840px){
-  flex-wrap: wrap;
-  
+  @media screen and (max-width: 840px) {
+    flex-wrap: wrap;
   }
 `;
 
@@ -118,54 +115,48 @@ const CardImage = styled.img`
   margin-bottom: 5px;
   background-position: center center;
   object-fit: cover;
-  @media screen and (max-width:840px) {
-   flex-basis:99% ;
-   height:230px;
-
+  @media screen and (max-width: 840px) {
+    flex-basis: 99%;
+    height: 230px;
   }
 `;
 
 const CardContent = styled.li`
-height:auto;
+  height: auto;
 `;
 
 const CommentSection = styled.li`
   margin-top: 7px;
-  
 `;
 
 const CommentTitle = styled.h2`
   position: relative;
 
-  &::after{
-    content: '';
+  &::after {
+    content: "";
     position: absolute;
     bottom: 0;
     left: 0;
     width: 100%;
-  height: 1px;
-  background-color: #cbd5e0;
+    height: 1px;
+    background-color: #cbd5e0;
   }
- 
 `;
 
 const CommentText = styled.p`
   width: 100%;
-
 `;
-
 
 const HeartIcon = styled.div`
   cursor: pointer;
-`
+`;
 
 function Main() {
   const navigate = useNavigate();
-  // const [data, setData] = useState(dataList);
-  
+  const [data, setData] = useState(dataList);
 
   const goWrite = () => {
-    navigate('/write');
+    navigate("/write");
   };
 
   // const [likes, setLikes] = useState(Array(data.length).fill(false));
@@ -174,18 +165,15 @@ function Main() {
   //     newLikes[index] = !newLikes[index]
   //     setLikes(newLikes)
   //   }
-  
-
-
-  
 
   return (
     <Wrapper>
       <Container>
-        <Title>그린톡
-        <WriteButton onClick={goWrite}>글쓰기</WriteButton>
+        <Title>
+          그린톡
+          <WriteButton onClick={goWrite}>글쓰기</WriteButton>
         </Title>
-        {/* {data.map((e, i) => (
+        {data.map((e, i) => (
           <Card key={i}>
             <CardHeader>
               <User>
@@ -196,9 +184,7 @@ function Main() {
             </CardHeader>
             <CardTitle>{e.title}</CardTitle>
             <CardImages>
-              {
-
-              }
+              {}
               <CardImage src={e.imageURL} alt="img" />
               <CardImage src={e.imageURL2} alt="img" />
             </CardImages>
@@ -208,16 +194,16 @@ function Main() {
               <CommentText>{e.answer}</CommentText>
               <div>
                 {e.answer2}
-                <HeartIcon onClick={()=>{toggleLike(i)}}>
+                {/* <HeartIcon onClick={()=>{toggleLike(i)}}>
                   <FontAwesomeIcon icon={ likes[i] ?  faHeart : faHeart} size="lg"/>
-                </HeartIcon>
+                </HeartIcon> */}
               </div>
             </CommentSection>
           </Card>
-        ))} */}
+        ))}
       </Container>
     </Wrapper>
   );
 }
 
-export default Main
+export default Main;

@@ -5,16 +5,15 @@ import { NavLink } from "react-router-dom";
 import { styled } from "styled-components";
 
 const Content = styled.div`
-  padding: 100px;
+  
   width: 100%;
-  margin: 0 auto;
+  
 `
 const ContentWrap = styled.div`
     max-width: 1200px;
-    margin: 0 auto;
+    margin: 100px auto;
     padding: 0 2%;
     display: flex;
-    flex-wrap: wrap;
 `
 const Title = styled.h3`
   font-size: 2.2em;
