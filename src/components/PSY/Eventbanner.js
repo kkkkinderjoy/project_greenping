@@ -10,7 +10,7 @@ import { styled } from 'styled-components';
 const StyledEventBanner = styled.div`
   .swiper-container {
     max-width: 1000px;
-    margin: 0 auto;
+    margin: 40px auto;
     height: 300px;
 
   }
