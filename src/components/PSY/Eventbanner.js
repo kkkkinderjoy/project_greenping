@@ -12,14 +12,11 @@ const StyledEventBanner = styled.div`
     max-width: 1000px;
     margin: 0 auto;
     height: 300px;
-
   }
-
   .swiper-slide {
     display: flex;
     flex-wrap: wrap;
   }
-
   .image-container {
    
     flex-basis: 45%;
@@ -32,6 +29,18 @@ const StyledEventBanner = styled.div`
   }
 `;
 
+const SwiperPaginationBullet = styled.div`
+  background: #868686;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  &.on{
+    background: #A3EBCE;
+    width: 28px;
+    transition: width 0.5s; 
+    border-radius: 4px;
+  }
+`;
 
 function Eventbanner() {
   return (
@@ -69,6 +78,9 @@ function Eventbanner() {
               <img src='/images/green-market.jpg' alt="그린마켓 이벤트" />
             </div>
           </SwiperSlide>
+          <SwiperPaginationBullet>
+            <span></span>
+          </SwiperPaginationBullet>
         </Swiper>
         </StyledEventBanner>
         </>

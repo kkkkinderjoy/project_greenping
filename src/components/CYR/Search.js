@@ -180,6 +180,7 @@ function Search() {
       {/* 모바일 써치+버튼 끝 */}               
       {/* 유리써치 */}
         <Wrapper>
+          <img src={`images/main-banner.jpg`} alt='메인배너' />
           <SearchContent>
             <Select  onChange={optionDonm}>
               <option value="전체">전체</option>

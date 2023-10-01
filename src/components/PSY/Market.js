@@ -17,13 +17,13 @@ const ContentWrap = styled.div`
     flex-wrap: wrap;
 `
 const Title = styled.h3`
-  font-size: 35px;
+  font-size: 2.2em;
   text-align: center;
   padding-bottom: 20px;
 `
 const ContentItem = styled.div`
   width: 100%;
-  h3{font-size: 35px; text-align: start;}
+  h3{font-size: 35px; text-align: start; margin-bottom: 15px;}
   ul{
     display: flex;
     justify-content: space-between; 
@@ -46,8 +46,8 @@ const ContentItem = styled.div`
       p{
         text-align: end;
         padding: 10px 0;
-        width: 198px;
-        height: 47px;
+        width: 191px;
+        height: 30px;
         background-color: #24d181;
         position: absolute;
         bottom: 0;
