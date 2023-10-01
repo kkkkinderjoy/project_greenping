@@ -8,10 +8,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Wrapper = styled.div`
   width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
+  
 `;
 
+const WrapperContent= styled.div`
+ max-width: 1200px;
+  margin: 0 auto;
+`
 const FlexContainer = styled.div`
   margin-top: 50px;
   display: flex;
@@ -24,10 +27,17 @@ const FlexContainer = styled.div`
 `;
 
 const Heading = styled.h2`
-  
+  text-align: center;
   font-size: 2.2em;
   margin: 0 auto;
-  flex-basis: 72%;
+  flex-basis: 90%;
+
+  svg{
+    font-size: 0.7em;
+    margin-left: 2px;
+    margin-bottom: 1px;
+    color: #777777;
+  }
   @media screen and (max-width: 768px) {
     flex-basis: 55%;
   }
@@ -62,7 +72,7 @@ const CardWrapper = styled.div`
     height: 100%;
     width: 100%;
 
-    @media (min-width: 768px) {
+    @media screen and (min-width: 768px) {
       display: flex;
       justify-content: center;
     }
@@ -78,16 +88,16 @@ const CardItem = styled.li`
   padding: 2px;
   width: 100%;
 
-  @media (max-width: 560px) {
+  @media screen and (max-width: 560px) {
     width: 85%;
     margin: auto;
   }
-  @media (min-width: 768px) {
+  @media screen and (min-width: 768px) {
     width: 40%;
     display: flex;
   }
 
-  @media (min-width: 1024px) {
+  @media screen and (min-width: 1024px) {
     width: 50%;
   }
 `;
@@ -173,6 +183,8 @@ const HashWrapper = styled.div`
   }
 `;
 
+
+
 const More = styled.p`
   font-size: 12px;
   position: relative;
@@ -213,6 +225,7 @@ function Review() {
   return (
     <>
       <Wrapper>
+        <WrapperContent>
         <FlexContainer>
           <Heading>
             리뷰 <FontAwesomeIcon icon={faChevronRight} />
@@ -240,13 +253,13 @@ function Review() {
               </CardTextWrapper>
               <NavLink to="/reviewmore">
                 <More>
-                  <p>더 보기</p>
                   <img src="" alt="" />
                 </More>
               </NavLink>
             </ul>
           ))}
         </CardWrapper>
+        </WrapperContent>
       </Wrapper>
     </>
   );

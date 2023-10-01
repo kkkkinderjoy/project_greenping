@@ -4,9 +4,8 @@ import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 import { styled } from "styled-components";
 
-import dataList from "./../../data/Choicedata"
+import dataList from "./../../data/Choicedata";
 import { NavLink } from "react-router-dom";
-
 
 const ContentWrap = styled.div`
   width: 100%;
@@ -19,7 +18,6 @@ const Content = styled.div`
 const Title = styled.h3`
   text-align: center;
   font-size: 2.2em;
-  
 `;
 
 const ListWrap = styled.ul`
@@ -34,7 +32,7 @@ const ListWrap = styled.ul`
 const List = styled.li`
   flex-basis: 24%;
   > img {
-    width: 100%;
+    width: 250px;
     height: 200px;
     object-fit: cover;
     margin-bottom: 7px;
@@ -44,12 +42,10 @@ const List = styled.li`
   @media screen and (min-width: 641px) and (max-width: 768px) {
     flex-basis: 48%;
     margin-bottom: 20px;
-   
   }
   @media screen and (max-width: 640px) {
     flex-basis: 98%;
     > img {
-      width: 100%;
       height: 400px;
     }
     margin-bottom: 20px;
@@ -107,31 +103,32 @@ function Choice() {
             {data &&
               data.slice(0, 4).map((e, i) => {
                 return (
-
-
                   <React.Fragment key={i}>
                     {
-                    <NavLink to={`desc/${e.contentId}`} state={e}>
-                      <List>
-                        {e.firstImageUrl !== "" && (
-                          <img src={e.firstImageUrl} alt="{e.firstImageUrl}" />
-                        )}
-                        <TextWrap>
-                          <Location>
-                            <FontAwesomeIcon
-                              className="text-[15px] mr-1"
-                              icon={faLocationDot}
-                              size="xl" color="#98eecc" 
+                      <NavLink to={`desc/${e.contentId}`} state={e}>
+                        <List>
+                          {e.firstImageUrl !== "" && (
+                            <img
+                              src={e.firstImageUrl}
+                              alt="{e.firstImageUrl}"
                             />
-                            <p>{e.doNm + e.sigunguNm}</p>
-                          </Location>
-                          <p>{e.facltNm}</p>
-                        </TextWrap>
-                      </List>
-                    </NavLink>
+                          )}
+                          <TextWrap>
+                            <Location>
+                              <FontAwesomeIcon
+                                className="text-[15px] mr-1"
+                                icon={faLocationDot}
+                                size="xl"
+                                color="#98eecc"
+                              />
+                              <p>{e.doNm + e.sigunguNm}</p>
+                            </Location>
+                            <p>{e.facltNm}</p>
+                          </TextWrap>
+                        </List>
+                      </NavLink>
                     }
                   </React.Fragment>
-
                 );
               })}
           </ListWrap>

@@ -5,27 +5,28 @@ import { NavLink } from "react-router-dom";
 import { styled } from "styled-components";
 
 const Content = styled.div`
-  
   width: 100%;
+ 
   
 `
 const ContentWrap = styled.div`
     max-width: 1200px;
     margin: 100px auto;
     padding: 0 2%;
-    display: flex;
+    
+    
 `
+
 const Title = styled.h3`
   font-size: 2.2em;
   text-align: center;
-  padding-bottom: 20px;
+  padding-bottom: 30px;
 `
 const ContentItem = styled.div`
   width: 100%;
-  h3{font-size: 35px; text-align: start; margin-bottom: 15px;}
   ul{
     display: flex;
-    justify-content: space-between; 
+    justify-content: space-around; 
     flex-wrap: wrap;
     li{
       width: 200px;
@@ -73,7 +74,7 @@ function Market() {
     <Content>
       <ContentWrap>
         <ContentItem>
-          <h3>그린마켓</h3>
+          <Title>그린마켓</Title>
           <ul>
             <li>
             <NavLink to='/sale'>

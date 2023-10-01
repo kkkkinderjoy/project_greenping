@@ -11,8 +11,7 @@ const StyledEventBanner = styled.div`
   margin: 120px auto;
 
   .swiper-container {
-
-    max-width: 1000px;
+    
     margin: 40px auto;
 
   }
@@ -22,7 +21,7 @@ const StyledEventBanner = styled.div`
   }
   .image-container {
     column-gap: 10px;
-    flex-basis: 49%;
+    flex-basis: 50%;
     display: flex;
     justify-content: space-between;
   }
@@ -83,9 +82,6 @@ function Eventbanner() {
               <img src="/images/green-market.jpg" alt="그린마켓 이벤트" />
             </div>
           </SwiperSlide>
-          <SwiperPaginationBullet>
-            <span></span>
-          </SwiperPaginationBullet>
         </Swiper>
       </StyledEventBanner>
     </>
