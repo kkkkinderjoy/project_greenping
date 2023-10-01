@@ -3,8 +3,8 @@ import styled from 'styled-components'
 import { NavLink } from 'react-router-dom'
 
 const FooterContent = styled.div`
-  height: 250px;
-  font-size: 13px;
+  height: 20px;
+  
   border-top: 1px solid #ddd;
   background-color: #f9f9f9;
   color: #999999;
@@ -16,7 +16,7 @@ const FooterContent = styled.div`
 `
 const FooterWrap = styled.div`
  max-width: 1200px;
- margin: 0 auto;
+ margin: 50px auto;
  @media (min-width: 768px) {
     font-size: 15px;
     display: flex;
@@ -27,25 +27,10 @@ const Container = styled.div`
     display: flex;
     justify-content: center;
     margin-right: 16px;
+    font-size: 18px;
    
 `
 
-const LogoWrap = styled.div`
-@media (min-width: 768px) {
-      display: flex;
-      align-items: center;
-  }
-`
-
-const Logo = styled.img`
-  width: 70px;
-  height: 70px;
-  @media (min-width: 768px) {
-    width: 100px;
-    height: 100px;
-    }
-  
-`
 
 const LinksContainer = styled.div`
   position: relative;
@@ -102,24 +87,20 @@ function Footer(){
     <FooterContent>
       <FooterWrap>
         <Container>
-          <LogoWrap>
-          <NavLink to="/"><Logo src={`images/pc_logo.png`} alt="logo" /></NavLink>
-
-          </LogoWrap>
           <LinksContainer>
+            <CompanyInfo>
+              <p>(주)그린핑</p>
+              <p>대표이사 : ooo </p>
+              <p>사업자등록번호 : 504-85-25999</p>
+              <p>주소 : 대구광역시 중구 중앙대로 394, 제일빌딩 5F</p>
+              <p>전화 : 053-123-4567</p>
+            </CompanyInfo>
             <ul>
               <li><NavLink to="/">서비스 이용약관</NavLink></li>
               <li><NavLink to="/">개인정보 처리방침</NavLink></li>
               <li><NavLink to="/">제휴 신청</NavLink></li>
               <li><NavLink to="/">제휴 문의</NavLink></li>
             </ul>
-            <CompanyInfo>
-              <p><NavLink to="/">(주)그린핑</NavLink></p>
-              <p><NavLink to="/">대표이사:ooo</NavLink></p>
-              <p><NavLink to="/">사업자등록번호 : 504-85-25999</NavLink></p>
-              <p><NavLink to="/">주소:대구광역시 중구 중앙대로 394, 제일빌딩 5F </NavLink></p>
-              <p><NavLink to="/">전화:053-123-4567</NavLink></p>
-            </CompanyInfo>
           </LinksContainer>
         </Container> 
         <CustomerService>

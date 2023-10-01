@@ -2,29 +2,28 @@
 import styled from 'styled-components'
 import { useState } from 'react'
 
-const ContentHead = styled.div`
+const Container= styled.div`
   width: 100%;
-  margin-top: 50px;
+  margin: 160px 0;
 `
-const ContentHeadWrap = styled.div`
-  width: 100%;
+const ContentWrap = styled.div`
   display: flex;
   justify-content: center;
+  
   @media screen and (max-width: 768px) {
     display: flex;
     flex-direction: column;
   }
 `
+
 const MenuList = styled.div`
     display: flex;
     justify-content: center;
-    align-content: center;
-   
+    align-content: center;  
   ul{
     display: flex;
     flex-direction: column;
     width: 300px;
-    
     @media screen and (max-width: 768px) {
       display: flex;
       flex-direction: row;
@@ -34,7 +33,7 @@ const MenuList = styled.div`
     li{ 
       width: 100%;
       text-align: center;
-      font-size: 18px;
+      font-size: 1.2em;
       border-bottom: 3px solid #eee;
       height: 100%;
       line-height: 70px;
@@ -44,21 +43,17 @@ const MenuList = styled.div`
         justify-content: space-between;
         width: 100%;
         border-right: 1px solid #eee;
-        align-content: center;
-        font-size: 16px;
+        align-items: center;
+        font-size: 1em;
         line-height: 40px;
         letter-spacing: -1px;
-        &.on{
-          background-color: black;
-          color: #fff;
-        }
+        
       }     
     }
   }
 `
 const ContentVideo = styled.div`
-  flex-basis: 70%;
-
+  flex-basis: 60%;
   ul{
     li{
       iframe{
@@ -77,16 +72,17 @@ function Content() {
 
   return (
     <>
-  <ContentHead>
-    <ContentHeadWrap>
+  <Container>
+    <ContentWrap>
       <MenuList>
       <ul>
-        {
-          campingList.map((e,i)=>{
+        {campingList.map((e,i)=>{
             return(
-              <li 
+              <li
               className={btnActive === true ? 'on' : "" }
-              onClick={()=>{setbtnActive(i) }}>{e}</li>
+              onClick={()=>{
+                setbtnActive(i); 
+              }} >{e}</li>
             )
           })
         }
@@ -106,8 +102,8 @@ function Content() {
         }
       </ul>
       </ContentVideo>
-    </ContentHeadWrap>
-  </ContentHead>
+    </ContentWrap>
+  </Container>
     </>
   )
 }

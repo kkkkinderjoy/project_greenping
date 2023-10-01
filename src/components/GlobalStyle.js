@@ -12,6 +12,7 @@ const GlobalStyle = createGlobalStyle`
     margin: 0;
     padding: 0;
     font-family: 'HakgyoansimWoojuR';
+    line-height: 18px;
     ul{list-style: none;}
     a{text-decoration: none; color: #333333;}
 }
