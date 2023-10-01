@@ -1,32 +1,31 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
-import Card from '../data/ReviewData.js';
-import Pagenation from '../components/LJS/Pagenation';
-
+import React, { useState } from "react";
+import styled from "styled-components";
+import Card from "../data/ReviewData.js";
+import Pagenation from "../components/LJS/Pagenation";
 
 const Header = styled.div`
   margin-top: 80px;
   width: 100%;
   background-color: #f9fcfc;
-`
+`;
 
 const Container = styled.ul`
-  max-width: 1280px; 
+  max-width: 1200px;
   margin: 0 auto;
   display: flex;
   flex-wrap: wrap;
   grid-gap: 15px;
- 
-  @media screen and (max-width: 768px){
+
+  @media screen and (max-width: 768px) {
     width: 90%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    ul{
+    ul {
       width: 100%;
     }
   }
-`
+`;
 
 const CardItem = styled.li`
   border: 1px solid #ccc;
@@ -40,7 +39,7 @@ const CardItem = styled.li`
   @media screen and (max-width: 768px) {
     max-width: 483px;
   }
-`
+`;
 
 const ImageContainer = styled.div`
   width: 100%;
@@ -51,8 +50,7 @@ const ImageContainer = styled.div`
   background-repeat: no-repeat;
   background-position: center;
   margin-bottom: 1rem;
-
-`
+`;
 
 const CardInfo = styled.div`
   display: flex;
@@ -62,13 +60,13 @@ const CardInfo = styled.div`
   @media (max-width: 768px) {
     height: auto;
   }
-`
+`;
 
 const CardTitle = styled.div`
   font-weight: bold;
   font-size: 16px;
   margin-bottom: 1rem;
-`
+`;
 
 const CardDesc = styled.div`
   font-size: 14px;
@@ -77,19 +75,19 @@ const CardDesc = styled.div`
   @media (max-width: 768px) {
     height: auto;
   }
-`
+`;
 
 const CardFooter = styled.div`
   display: flex;
   justify-content: space-between;
   font-size: 12px;
-  p{
+  p {
     cursor: pointer;
-    span{
+    span {
       margin-left: 10px;
     }
   }
-`
+`;
 
 function GreenTalk() {
   const [limit, setLimit] = useState(10);
@@ -98,29 +96,28 @@ function GreenTalk() {
 
   return (
     <Header>
-      <Container >
+      <Container>
         {Card.slice(offset, offset + limit).map((e, i) => {
-        return(
-          <React.Fragment key={i}> 
-          <CardItem>
-          <ImageContainer img={e.img}></ImageContainer>
-          <CardInfo>
-            <CardTitle>{e.title}</CardTitle>
-            <CardDesc>{e.desc}</CardDesc>
-          </CardInfo>
-          <CardFooter>
-          </CardFooter>
-        </CardItem>
-        </React.Fragment>
-        )
-          })}
+          return (
+            <React.Fragment key={i}>
+              <CardItem>
+                <ImageContainer img={e.img}></ImageContainer>
+                <CardInfo>
+                  <CardTitle>{e.title}</CardTitle>
+                  <CardDesc>{e.desc}</CardDesc>
+                </CardInfo>
+                <CardFooter></CardFooter>
+              </CardItem>
+            </React.Fragment>
+          );
+        })}
       </Container>
-        <Pagenation
-         total={Card.length}
-         limit={limit}
-         page={page}
-         setPage={setPage}
-        />
+      <Pagenation
+        total={Card.length}
+        limit={limit}
+        page={page}
+        setPage={setPage}
+      />
     </Header>
   );
 }

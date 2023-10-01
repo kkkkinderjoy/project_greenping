@@ -1,42 +1,45 @@
-import React, { useState } from 'react';
-import Card from './../../data/ReviewData';
-import { NavLink } from 'react-router-dom';
-import styled from 'styled-components';
-import { faChevronRight, faFontAwesome } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
+import React, { useState } from "react";
+import Card from "./../../data/ReviewData";
+import { NavLink } from "react-router-dom";
+import styled from "styled-components";
+import {
+  faChevronRight} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Wrapper = styled.div`
   width: 100%;
-  max-width: 1280px;
+  max-width: 1200px;
   margin: 0 auto;
 `;
 
 const FlexContainer = styled.div`
-margin-top: 50px;
+  margin-top: 50px;
   display: flex;
   margin-bottom: 4px;
   width: 100%;
 
   @media (max-width: 768px) {
-      width: 90%;
+    width: 90%;
   }
 `;
 
 const Heading = styled.h2`
-  font-size: 20px;
-  margin: auto;
+  
+  font-size: 2.2em;
+  margin: 0 auto;
   flex-basis: 72%;
-  @media screen and (max-width:768px) {
-      flex-basis: 55%;
+  @media screen and (max-width: 768px) {
+    flex-basis: 55%;
   }
 `;
+
+
 
 const ListContainer = styled.ul`
   display: flex;
   flex-basis: 10%;
-  @media screen and (max-width:768px) {
-      flex-basis: 25%;
+  @media screen and (max-width: 768px) {
+    flex-basis: 25%;
   }
 `;
 
@@ -45,8 +48,8 @@ const ListItem = styled.li`
   margin-right: 2px;
   cursor: pointer;
   margin: 0 auto;
-  &.on{
-    color: #A6F4D0;
+  &.on {
+    color: #a6f4d0;
   }
 `;
 
@@ -58,22 +61,23 @@ const CardWrapper = styled.div`
     justify-content: center;
     height: 100%;
     width: 100%;
-    
+
     @media (min-width: 768px) {
       display: flex;
       justify-content: center;
     }
-    @media screen and (max-width: 560px){
+    @media screen and (max-width: 560px) {
       display: flex;
       flex-direction: column;
     }
   }
 `;
 
-const CardItem = styled.li` //이미지 li
+const CardItem = styled.li`
+  //이미지 li
   padding: 2px;
   width: 100%;
- 
+
   @media (max-width: 560px) {
     width: 85%;
     margin: auto;
@@ -93,11 +97,12 @@ const CardImage = styled.img`
   height: 200px;
   width: 100%;
   margin: auto;
-  border-radius: 20px;
+  border-radius: 10px;
+  object-fit: cover;
   @media (max-width: 768px) {
     width: 100%;
   }
- 
+
   @media (min-width: 1024px) {
     width: 70%;
     height: 240px;
@@ -115,10 +120,10 @@ const CardTextWrapper = styled.li`
   @media (max-width: 768px) {
     width: 35%;
     margin-top: 5px;
-    display: flex;  
+    display: flex;
     flex-direction: column;
     width: 100%;
-    -webkit-line-clamp: 2
+    -webkit-line-clamp: 2;
   }
 `;
 
@@ -165,7 +170,6 @@ const HashWrapper = styled.div`
     @media screen and (max-width: 560px) {
       display: none;
     }
- 
   }
 `;
 
@@ -176,33 +180,32 @@ const More = styled.p`
   left: -20px;
 
   @media (max-width: 768px) {
-   p{
-    display: none;
-   }
-    
+    p {
+      display: none;
+    }
   }
 `;
 
 function Review() {
   // const [Bgcolor, setBgColor] = useState(false)
-  
+
   let [data, setData] = useState(Card);
   let [type, setType] = useState("best");
   const hashTag = {
     best: [
-      ['#맛있는 먹거리', '#재미있는', '#낭만캠핑'],
-      ['#가족과함께', '#애완동물동반', '#캠핑카'],
-      ['#카라반', '#자연과함께', '#모두와함께']
+      ["#맛있는 먹거리", "#재미있는", "#낭만캠핑"],
+      ["#가족과함께", "#애완동물동반", "#캠핑카"],
+      ["#카라반", "#자연과함께", "#모두와함께"],
     ],
     recent: [
-      ['#가족과함께', '#애완동물동반', '#캠핑카'],
-      ['#추천캠핑', '#조용해요', '#별이보여요'],
-      ['#낭만캠핑', '#다양한먹거리', '#자연과함께']
-    ]
-  }
-  console.log(hashTag)
+      ["#가족과함께", "#애완동물동반", "#캠핑카"],
+      ["#추천캠핑", "#조용해요", "#별이보여요"],
+      ["#낭만캠핑", "#다양한먹거리", "#자연과함께"],
+    ],
+  };
+  console.log(hashTag);
 
-  const CardMenu = data.filter(e => {
+  const CardMenu = data.filter((e) => {
     return type === "" || e.type === type;
   });
 
@@ -211,15 +214,13 @@ function Review() {
     <>
       <Wrapper>
         <FlexContainer>
-          <Heading>리뷰 <FontAwesomeIcon icon={faChevronRight} /></Heading>
+          <Heading>
+            리뷰 <FontAwesomeIcon icon={faChevronRight} />
+          </Heading>
           <ListContainer>
-            <ListItem onClick={() =>
-
-              setType("best")}>인기순</ListItem>
+            <ListItem onClick={() => setType("best")}>인기순</ListItem>
             <ListItem>ㅣ</ListItem>
-            <ListItem onClick={() =>
-
-              setType("recent")}>최신순</ListItem>
+            <ListItem onClick={() => setType("recent")}>최신순</ListItem>
           </ListContainer>
         </FlexContainer>
         <CardWrapper>
@@ -232,16 +233,12 @@ function Review() {
                 <CardTitle>{e.title}</CardTitle>
                 <CardDescription>{e.desc}</CardDescription>
                 <HashWrapper>
-                  {
-                    hashTag[e.type].map((el, index) => {
-                      return (
-                        <div key={index}>{hashTag[e.type][i][index]}</div>
-                      )
-                    })
-                  }
+                  {hashTag[e.type].map((el, index) => {
+                    return <div key={index}>{hashTag[e.type][i][index]}</div>;
+                  })}
                 </HashWrapper>
               </CardTextWrapper>
-              <NavLink to='/reviewmore'>
+              <NavLink to="/reviewmore">
                 <More>
                   <p>더 보기</p>
                   <img src="" alt="" />

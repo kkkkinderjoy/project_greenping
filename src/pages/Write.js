@@ -1,10 +1,8 @@
-import React, { useState } from 'react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faImage } from '@fortawesome/free-solid-svg-icons';
-import styled from 'styled-components';
-import Ckeditor from '../components/KNH/Ckeditor';
-
-
+import React, { useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faImage } from "@fortawesome/free-solid-svg-icons";
+import styled from "styled-components";
+import Ckeditor from "../components/KNH/Ckeditor";
 
 const Container = styled.div`
   width: 100%;
@@ -14,7 +12,7 @@ const Container = styled.div`
 
 const InnerContainer = styled.div`
   margin: 0 4px;
-  max-width: 1280px;
+  max-width: 1200px;
   margin: 0 auto;
 `;
 
@@ -29,7 +27,7 @@ const Heading = styled.h3`
   position: relative;
 
   &::after {
-    content: '';
+    content: "";
     width: 30px;
     height: 5px;
     margin-left: 0.5px;
@@ -40,8 +38,6 @@ const Heading = styled.h3`
     border-radius: 2px;
   }
 `;
-
-
 
 const ContentWrapper = styled.div`
   width: auto;
@@ -57,11 +53,9 @@ const ContentInner = styled.div`
   width: 100%;
   margin-top: 10px;
   text-align: center;
- 
 `;
 
 const Title = styled.h2`
-  
   font-size: 20px;
 `;
 
@@ -90,11 +84,6 @@ const ContentInput = styled.input`
   font-size: 13px;
 `;
 
-
-
-
-
-
 const TextArea = styled.textarea`
   width: 85%;
   border: 1px solid #e5e7eb;
@@ -103,36 +92,38 @@ const TextArea = styled.textarea`
   padding-left: 4px;
 `;
 
-
-
 const Write = () => {
   const [txtTitle, setTxtTitle] = useState("");
   const [postData, setPostData] = useState(null);
-
-
 
   return (
     <Container>
       <InnerContainer>
         <Header>
           <Heading>글쓰기</Heading>
-          
         </Header>
 
         <ContentWrapper>
           <ContentInner>
-            <Title defaultValue={postData && postData.title} type="text" onChange={(e)=>{setTxtTitle(e.target.value)}}>제목</Title>
+            <Title
+              defaultValue={postData && postData.title}
+              type="text"
+              onChange={(e) => {
+                setTxtTitle(e.target.value);
+              }}
+            >
+              제목
+            </Title>
             <TextInput type="text" />
           </ContentInner>
           <ContentInputWrapper>
-                <ContentLabel>내용</ContentLabel>
-                <Ckeditor title={txtTitle} postData={postData}/>
-              </ContentInputWrapper>
+            <ContentLabel>내용</ContentLabel>
+            <Ckeditor title={txtTitle} postData={postData} />
+          </ContentInputWrapper>
         </ContentWrapper>
       </InnerContainer>
     </Container>
   );
-}
-
+};
 
 export default Write;
