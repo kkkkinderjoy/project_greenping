@@ -7,13 +7,10 @@ import { styled } from "styled-components";
 //import { useState } from 'react';
 
 const StyledEventBanner = styled.div`
-  max-width: 1200px;
+  /* max-width: 1200px; */
   margin: 120px auto;
-
   .swiper-container {
-    
     margin: 40px auto;
-
   }
   .swiper-slide {
     display: flex;
@@ -23,14 +20,13 @@ const StyledEventBanner = styled.div`
     column-gap: 10px;
     flex-basis: 50%;
     display: flex;
-    justify-content: space-between;
+    
   }
   img {
     width: 100%;
     height: auto;
-  }
-`;
-
+  } 
+`
 
 const SwiperPaginationBullet = styled.div`
   background: #868686;
@@ -43,7 +39,7 @@ const SwiperPaginationBullet = styled.div`
     transition: width 0.5s; 
     border-radius: 4px;
   }
-`;
+`
 
 
 function Eventbanner() {
@@ -85,7 +81,7 @@ function Eventbanner() {
         </Swiper>
       </StyledEventBanner>
     </>
-  );
+  )
 }
 
 export default Eventbanner;

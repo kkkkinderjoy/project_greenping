@@ -1,21 +1,21 @@
 import React, { useState } from "react";
-import dataList from "./../data/data";
+// import dataList from "./../data/data";
 
 
 function Detail() {
-  const [data, setData] = useState(dataList);
-  const [allData, setAllData] = useState();
+  // const [data, setData] = useState(dataList);
+  // const [allData, setAllData] = useState();
   const [kind, setKind] = useState("전체");
   
-  const FilterData =
-    data &&
-    data.filter((e) => {
-      return kind === "전체" || kind === e.induty;
-    });
+  // const FilterData =
+  //   data &&
+  //   data.filter((e) => {
+  //     return kind === "전체" || kind === e.induty;
+  //   });
 
 
-  const FilterKind = [...new Set(allData && allData.map((e) => e.induty))];
-  const [isActive, setIsActive] =useState(-1)
+  // const FilterKind = [...new Set(allData && allData.map((e) => e.induty))];
+  // const [isActive, setIsActive] =useState(-1)
 
   return (
     <>
@@ -31,7 +31,7 @@ function Detail() {
             {/* <li className={`${isActive === -1 && "bg-black"}`></li> */}
           </ul>
 
-          <ul className="w-auto mx-auto pl-[60px] mt-10 ml-[40px]">
+          {/* <ul className="w-auto mx-auto pl-[60px] mt-10 ml-[40px]">
             {data &&
               FilterData.slice(0,10).map((e, i) => {
                 return (
@@ -60,7 +60,7 @@ function Detail() {
                   </>
                 );
               })}
-          </ul>
+          </ul> */}
         </div>
       </div>
     </>
