@@ -26,15 +26,18 @@ const Content = styled.div`
 const ContentWrap = styled.div`
   max-width: 1200px;
   margin: 0 auto;
-  
+  display: flex;
+  transform: translateY(500%);
 `
 
 const Inner = styled.div`
-  height: 73px;
+  height: 75px;
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-wrap: nowrap;
+  background-color: #fff;
   border-radius: 100px;
   box-shadow: rgba(0, 0, 0, 0.2) 0px 20px 30px;
 `
