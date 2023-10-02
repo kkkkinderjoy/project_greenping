@@ -18,15 +18,10 @@ import styled from "styled-components";
 const Content = styled.div`
   margin-top: 5px;
   width: 100%;
-  height: 300px;
-  
-
+  height: 496px;
+  background: url('/images/main-banner.jpg');
 `
 
-const Banner = styled.image`
-  background-image: url("images/main-banner.jpg");
-  background-size: cover;
-`
 
 const ContentWrap = styled.div`
   max-width: 1200px;
@@ -82,6 +77,7 @@ const StyleDate = styled(DatePicker)`
     border: 1px solid #2ed090;
   }
 `
+
 const Input = styled.input`
   border: none;
   width: 40%;
@@ -126,6 +122,16 @@ const NavLinkWrap = styled.div`
 
 
 
+
+
+const Select = styled.select`
+  font-size: 24px;
+  font-weight: bold;
+  border: none;
+  color: #666666;
+  flex-basis: 8%;
+  background: none;
+`
 
 const Mwrap = styled.div`
   z-index: 50;
@@ -250,6 +256,7 @@ function Search() {
         </Mwrap> */}
       {/* 모바일 써치+버튼 끝 */}
       {/* 유리써치 */}
+
      
       <Content> 
         <ContentWrap>
