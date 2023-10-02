@@ -18,28 +18,26 @@ import styled from "styled-components";
 const Content = styled.div`
   margin-top: 5px;
   width: 100%;
-  height: 300px;
-  
-
-`
-
-const Banner = styled.image`
-  background-image: url("images/main-banner.jpg");
-  background-size: cover;
+  height: 470px;
+  background-image: url(images/main-banner.jpg);
+ 
 `
 
 const ContentWrap = styled.div`
   max-width: 1200px;
   margin: 0 auto;
-  
+  display: flex;
+  transform: translateY(500%);
 `
 
 const Inner = styled.div`
-  height: 73px;
+  height: 75px;
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-wrap: nowrap;
+  background-color: #fff;
   border-radius: 100px;
   box-shadow: rgba(0, 0, 0, 0.2) 0px 20px 30px;
 `

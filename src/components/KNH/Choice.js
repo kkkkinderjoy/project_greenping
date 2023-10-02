@@ -9,7 +9,7 @@ import { NavLink } from "react-router-dom";
 
 const ContentWrap = styled.div`
   width: 100%;
-  margin-top: 60px;
+  margin-top: 120px;
 `;
 const Content = styled.div`
   margin: 3px auto;
