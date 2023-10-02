@@ -1,5 +1,4 @@
-import { createGlobalStyle } from "styled-components"
-
+import { createGlobalStyle } from "styled-components";
 
 const GlobalStyle = createGlobalStyle`
 @font-face {
@@ -13,8 +12,14 @@ const GlobalStyle = createGlobalStyle`
     margin: 0;
     padding: 0;
     font-family: 'HakgyoansimWoojuR';
+    line-height: 18px;
     ul{list-style: none;}
-    a{text-decoration: none; color: #000;}
+    a{text-decoration: none; color: #333333;}
 }
-`
-export default GlobalStyle ;
+body{
+    overflow-x: hidden;
+
+};
+`;
+
+export default GlobalStyle;

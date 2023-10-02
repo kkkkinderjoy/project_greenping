@@ -162,7 +162,7 @@ function Member() {
     let errorMessage = "";
 
     if (!isValidEmail(email)) {
-      setError("유요한 이메일 주소를 입력해주세요");
+      setError("유효한 이메일 주소를 입력해주세요");
       return;
     }
     else if (password.length === 0) {

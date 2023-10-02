@@ -19,27 +19,28 @@ const Content = styled.div`
   width: 450px;
   padding: 30px;
   background-color: white;
-  border-radius: 12px;
-  box-shadow: 0px 5px 14px rgba(127, 138, 140, 0.09);
-  
+  border-radius: 10px;
+  /* box-shadow: 0px 5px 14px rgba(127, 138, 140, 0.09);
+   */
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;
 `
 
 const Title = styled.div`
   text-align: center;
-  font-size: 22px;
+  font-size: 1.6em;
   font-weight: 600;
-  color: #333;
-  margin-bottom: 9px;
+  color: #333333;
+  margin-bottom: 12px;
 `
 
 
 const Input = styled.input`
-  padding: 15px;
-  width: 100%;
+  padding: 13px;
+  width: 95%;
   margin-bottom: 10px;
-  height: 54px;
+  height: 40px;
   border: 1px solid #e4e4e4;
-  border-radius: 4px;
+  border-radius: 10px;
   &:focus{
     outline: none;
     border-color: #2ed090;
@@ -56,7 +57,7 @@ const InputWrap = styled.div`
   input:not(:placeholder-shown) +label{
     top: 4px;
     left: 4px;
-    font-size: 10px;
+    font-size: 1em;
     color: #2ed090;
   }
 `
@@ -65,8 +66,8 @@ const Label = styled.label`
   position: absolute;
   top: 10px;
   left: 10px;
-  font-size: 14px;
-  color: #999;
+  font-size: 1em;
+  color: #999999;
   transition: all 0.3s;
   pointer-events: none;
 `
@@ -76,29 +77,30 @@ const CheckboxContent = styled.div`
   cursor: pointer;
   display: flex;
   align-items: center;
-  font-size: 12px;
+  font-size: 1em;
   color: #999;
 `
 
 const Checkbox = styled.input`
   margin-right: 4px;
   p{
-    font-size: 12px;
-    color: #999;
+    font-size: 1em;
+    color: #999999;
   }
  
 `
 
 const Button = styled.button`
+  font-size: 1em;
   background-color: #2ed090;
   color: #fff;
-  border: 1px solid #b2ffa4;
+  border: 1px solid #2ed090;
   width: 100%;
   height: 50px;
   font-weight: bold;
-  border-radius: 5px;
+  border-radius: 10px;
   text-align: center;
-  line-height: 13px;
+  line-height: 1.3;
   cursor: pointer;
   margin-top: 25px;
 `
@@ -111,7 +113,7 @@ const LinksWrapper = styled.div`
 
 const LinkItem = styled.ul`
   color: #999;
-  font-size: 12px;
+  font-size: 1em;
   display: flex; gap: 12px;
   /* li{
     margin-bottom: 0; margin-top: 20px;
