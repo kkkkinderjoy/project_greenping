@@ -2,8 +2,7 @@ import React, { useState } from "react";
 import Card from "./../../data/ReviewData";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
-import {
-  faChevronRight} from "@fortawesome/free-solid-svg-icons";
+import {faPlusCircle} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Content = styled.div`
@@ -150,7 +149,6 @@ const CardDescription = styled.p`
 `
 
 const HashWrapper = styled.div`
-  
   display: flex;
   font-size: 1em;
   text-align: center;
@@ -171,13 +169,16 @@ const HashWrapper = styled.div`
     }
   }
 `
-
 const Btn = styled.div`
-  margin-top: 50px;
-  font-size: 2em;
-  text-align: center;
-
+  margin-top: 20px;
+  transform: translate(50%,50%);
+    svg{  
+    width: 5%;
+    height: 5%;
+  }
+  
 `
+
 
 function Review() {
   // const [Bgcolor, setBgColor] = useState(false)
@@ -208,10 +209,8 @@ function Review() {
       <Content>
         <ContentWrap>
         <Title>리뷰</Title>
-       
           <List>
             <ListItem onClick={() => setType("best")}>인기순 </ListItem>
-            
             <ListItem onClick={() => setType("recent")}> 최신순</ListItem>
           </List>
        
@@ -231,15 +230,14 @@ function Review() {
                 </HashWrapper>
               </CardTextWrapper>
             </ul>
-          ))}
-            <Btn>
-              <NavLink to="/reviewmore">
-                더보기
-            </NavLink>
-            </Btn>
-        </CardWrapper>
+          ))} 
+        </CardWrapper> 
+        <Btn><NavLink to="/reviewmore"><FontAwesomeIcon icon={faPlusCircle}/></NavLink></Btn>
         </ContentWrap>
       </Content>
+     
+          
+
     </>
   );
 }

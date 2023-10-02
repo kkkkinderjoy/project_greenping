@@ -14,19 +14,27 @@ import { NavLink, useLocation } from "react-router-dom";
 import axios from "axios";
 import styled from "styled-components";
 
+
 const Content = styled.div`
   margin-top: 5px;
   width: 100%;
   height: 300px;
   
-`;
+
+`
+
+const Banner = styled.image`
+  background-image: url("images/main-banner.jpg");
+  background-size: cover;
+`
+
 const ContentWrap = styled.div`
   max-width: 1200px;
   margin: 0 auto;
+  
 `
 
 const Inner = styled.div`
-  
   height: 73px;
   display: flex;
   justify-content: center;
@@ -37,7 +45,6 @@ const Inner = styled.div`
 `
 
 const Select = styled.select`
-  
   width: 10%;
   padding: 2%;
   font-size: 1.2em;
@@ -99,7 +106,7 @@ const NavLinkWrap = styled.div`
   font-weight: bold;
   border-radius: 100px;
   right: 0;
-  flex-basis: 20%;
+  flex-basis: 15%;
   height: 75%;
     a{
     display: flex;
@@ -243,7 +250,8 @@ function Search() {
         </Mwrap> */}
       {/* 모바일 써치+버튼 끝 */}
       {/* 유리써치 */}
-      <Content>
+     
+      <Content> 
         <ContentWrap>
           <Inner>
           <Select onChange={optionDonm}>
@@ -276,7 +284,8 @@ function Search() {
           </NavLinkWrap>
           </Inner>
         </ContentWrap>
-      </Content>
+        </Content>
+      
       {/* 유리써치 끝*/}
     </>
   );
