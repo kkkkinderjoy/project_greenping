@@ -12,21 +12,25 @@ import styled from 'styled-components'
 const Wrapper = styled.div`
   margin-top: 5px;
   width: 100%;
-  height: 300px;
+  height: 496px;
+  background: url('/images/main-banner.jpg');
+  background-size: cover;
 `
 const SearchContent = styled.div`
   max-width: 1200px;
   height: 70px;
-  margin: 0 auto;
+  margin: 0 auto ;
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   flex-wrap: nowrap;
-  border-radius: 5px;
+  background-color: #fff;
+  border-radius: 10px;
   align-items: center;
   >input{
     flex-basis: 30%;
     height: 100%;
     font-size: 1.2em;
+    background: none;
   }
   
 `
@@ -36,6 +40,7 @@ const StyleDate = styled(DatePicker)`
     border: none;
     font-size: 1.2em;
     flex-basis: 40%;
+    background: none;
 `
 const NavLinkWrap = styled.div`
   background-color: #98eecc;
@@ -73,6 +78,7 @@ const Select = styled.select`
   border: none;
   color: #666666;
   flex-basis: 8%;
+  background: none;
 `
 const Mwrap = styled.div`
   z-index: 50; background-color: #fff; 
@@ -185,7 +191,6 @@ function Search() {
       {/* 모바일 써치+버튼 끝 */}               
       {/* 유리써치 */}
         <Wrapper>
-          <img src={`images/main-banner.jpg`} alt='메인배너' />
           <SearchContent>
             <Select  onChange={optionDonm}>
               <option value="전체">전체</option>
