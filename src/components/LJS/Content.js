@@ -34,21 +34,25 @@ const MenuList = styled.div`
       width: 100%;
       text-align: center;
       font-size: 1.2em;
-      border-bottom: 2px solid #eee;
+      border-bottom: 3px solid #eee;
       height: 100%;
       line-height: 70px;
       cursor: pointer;
       @media screen and (max-width: 768px){
         display: flex;
-        justify-content: space-between;
+        justify-content: center;
         width: 100%;
-        border-right: 1px solid #eee;
+        border: 1px solid gray;
+        text-align: center;
         align-items: center;
         font-size: 1em;
         line-height: 40px;
-        letter-spacing: -1px;
-        
-      }     
+        letter-spacing: -1.55px;
+      }   
+      &.on{
+        background-color: #A6F4D0;
+        color: white;
+      }
     }
   }
 `
@@ -66,9 +70,10 @@ const ContentVideo = styled.div`
 
 function Content() {
   const [camping, setCamping] = useState(0);
-  const campingList = ['안전한 캠핑 즐기기' , '캠핑을 더 재밌게', '전문가가 알려주는 캠핑꿀팁', '캠핑 플레이리스트', '초보 캠퍼를 위한 캠핑템 추천'];
-  const youTubeList = ['3uyjWs7L8Bs?si=rc4OM-h1rg5wWL8X,','6HXsc-KSvQQ?si=04KgBm8uY-EA3rRT','ZBo8_JcCeU4?si=Xz5EATGL8rLBFdUU','TScI7--3lvo?si=xRXrnetKgUeieIKm','KDggryzMYqA?si=aPIkyymruTmXbE-']  
+  const campingList = ['캠핑  안전수칙' , '캠핑 추천 레시피', '캠핑 꿀팁', '캠핑  플레이리스트', '캠핑  용품 추천'];
+  const youTubeList = ['3uyjWs7L8Bs?si=rc4OM-h1rg5wWL8X,','J-Q9Om2ohfQ?si=R3Nr343ZSOizmqz6','ZBo8_JcCeU4?si=Xz5EATGL8rLBFdUU','TScI7--3lvo?si=xRXrnetKgUeieIKm','7SkvMmhUl5I?si=9ykA86sWSyx0yHd3']  
   const [btnActive, setbtnActive] = useState(0);
+ 
 
   return (
     <>
@@ -79,9 +84,9 @@ function Content() {
         {campingList.map((e,i)=>{
             return(
               <li
-              className={btnActive === true ? 'on' : "" }
+              className={btnActive === i ? 'on' : "" }
               onClick={()=>{
-                setbtnActive(i); 
+                setbtnActive(i);   
               }} >{e}</li>
             )
           })
