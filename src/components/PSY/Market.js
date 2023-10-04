@@ -60,12 +60,14 @@ const ContentItem = styled.div`
       }
     }
   }
-  @media screen and (max-width: 1200px){
-    flex-basis: 49%;
-  }
-  @media screen and (max-width: 640px){
-    flex-basis: 100%;
-  }
+  @media screen and (max-width: 768px) {
+    ul{
+      li{
+        width: 32.5%;
+        height: auto;
+      }
+    }
+}
 `
 const SvgBox = styled.div`
   background-color: #fff;

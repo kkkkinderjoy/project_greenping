@@ -32,20 +32,26 @@ const TitleWrap = styled.div`
 `
 const ContentWrap = styled.div`
     width: 100%;
+    height: 100%;
     gap: 15px;
     margin-bottom: 50px;
     padding: 0 2%;
     display: flex;
     flex-wrap: wrap;
     justify-content: start;
-    position: relative;
-    p{
-      position: absolute;
-      font-size: 18px;
-      right: 5%;
-      top: -22px;
-    }
 `
+const Tomain = styled.div`
+  width: 100%;
+  position: relative;
+  p{
+    position: absolute;
+    font-size: 18px;
+    top: -10px;
+    right: 4%;
+    color: #999;
+  }
+`
+
 const ContentItem = styled.div`
   width: 500px;
   height: 500px;
@@ -53,7 +59,6 @@ const ContentItem = styled.div`
   border: 1px solid #ddd;
   border-radius: 10px;
   box-sizing: border-box;
-  white-space: break-spaces;
   position: relative;
   img{
     width: 300px; 
@@ -85,6 +90,7 @@ const Button = styled.button`
     width: 100px;
     height: 30px;
     background-color: #70e6b7;
+    border: none;
     border-radius: 10px;
     color: #fff;
     right: 10px;
@@ -128,7 +134,9 @@ function Buy() {
           </ul>
         </TitleWrap>
         <ContentWrap>
-          <NavLink to='/'><p>메인으로 돌아가기</p></NavLink>
+          <Tomain>
+            <NavLink to='/'><p>메인으로 돌아가기</p></NavLink>
+          </Tomain>
             {
              dataFilter.slice().reverse().map((e,i)=>{
                 return(
