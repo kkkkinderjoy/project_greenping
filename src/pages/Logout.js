@@ -22,11 +22,13 @@ function Logout() {
     .catch((error)=>{
         console.log(error);
     })
+
   return (
     <>
         {
-          logIn &&
-          <Modal error="로그아웃 되었습니다." onClose={()=>{setIsModal(false); navigate("/")}}/>
+          isModal &&
+          <Modal error="로그아웃 되었습니다." onClose={()=>{setIsModal(false); navigate("/")}} /> 
+            
         } 
     </>
   )

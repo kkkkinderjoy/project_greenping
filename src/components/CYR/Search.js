@@ -131,6 +131,10 @@ function Search() {
   
   // const getValue = (e) => {
   //   setUserInput(e.target.value)};
+  const dateNow = new Date();
+  const today = dateNow.toISOString().slice(0, 10);
+  const [saleStartDate, setSaleStartDate] = useState(today);
+
 
 
     const updateScroll = () => {
@@ -186,40 +190,46 @@ function Search() {
             </div>
           </Mwrapper>
         </Mwrap> */}
-      {/* 모바일 써치+버튼 끝 */}               
-      {/* 유리써치 시작*/}
-        <Wrapper>
-          <SearchContent>
-            <Select  onChange={optionDonm}>
-              <option value="" disabled selected>어디로 떠나볼까요</option>
-              <option value="전체">전체</option>
-                {
-                   Filterdonm.map((e,i) =>{
-                    return(
-                      <option key={i}>{e}</option>)
-                  })
-                }
-            </Select>
-            <StyleDate
-              locale={ko}
-              selectsRange={true}
-              startDate={startDate} 
-              endDate={endDate} 
-              onChange={(date)=>setDateRange(date)} 
-              dateFormat="MM월 dd일"
-              placeholderText="날짜를 입력하세요"
-              minDate={subDays(new Date(), 0)}
-              maxDate={addDays(new Date(), 300)}
-              monthsShown={2} />
-            <Input type='text' placeholder='검색어를 입력하세요' onChange={optionDonm} />
-            <NavLinkWrap>
-              <NavLink to='/searchd'>
-                <p>검색하기</p>
-              </NavLink>
-            </NavLinkWrap>
-          </SearchContent>
-        </Wrapper>
-        {/* 유리써치 끝*/}
+      {/* 모바일 써치+버튼 끝 */}
+      {/* 유리써치 */}
+
+     
+      <Content> 
+        <ContentWrap>
+          <Inner>
+          <Select onChange={optionDonm}>
+            <Option value="전체">전체</Option>
+            {Filterdonm.map((e, i) => {
+              return <Option key={i}>{e}</Option>;
+            })}
+          </Select>
+          <StyleDate
+            locale={ko}
+            selectsRange={true}
+            startDate={startDate}
+            endDate={endDate}
+            onChange={(date) => setDateRange(date)}
+            dateFormat="yyyy년 MM월 dd"
+            minDate={subDays(new Date(), 0)}
+            maxDate={addDays(new Date(), 300)}
+            monthsShown={2}
+            defaultValue ={today}
+          />
+          <Input
+            type="text"
+            placeholder="검색어를 입력하세요"
+            onChange={optionDonm}
+          />
+          <NavLinkWrap>
+            <NavLink to="/searchd">
+              {/* <FontAwesomeIcon icon={faMagnifyingGlass} /> */}
+              <p>검색하기</p>
+            </NavLink>
+          </NavLinkWrap>
+          </Inner>
+        </ContentWrap>
+        </Content>
+
       
     </>
   )

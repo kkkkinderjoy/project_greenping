@@ -9,6 +9,7 @@ import { faUser } from '@fortawesome/free-regular-svg-icons'
 import { faChevronRight } from '@fortawesome/free-solid-svg-icons'
 import Eventbanner from '../PSY/Eventbanner'
 import { useSelector } from 'react-redux'
+import { logIn, loggedIn } from '../../store'
 
 
 const ListItems = ['캠핑장 예약', '후기', '랭킹','그린톡','그린마켓','고객센터'] 
@@ -16,6 +17,7 @@ const LinkArray = ['main','review','ranking','greentalk','greenmarket','notice']
 
 
 const Content = styled.div`
+  padding: 10px;
   width: 100%;
   background-color: #fff;
   z-index: 30;
@@ -23,13 +25,15 @@ const Content = styled.div`
   @media screen and (min-width: 768px){height: 130px;}
 `
 
+
 const HeaderWrap = styled.div`
   max-width: 1200px;
   margin: 0 auto;
- 
+  position: relative;
   align-items: center;
   display: flex;
 `
+
 
 const LogoWrap = styled.div`
   display: flex;
@@ -48,8 +52,10 @@ const ListWrap = styled.div`
    display: flex;
    justify-content: space-between;
    flex-basis: 85%;
+   font-size: 1.5em;
    @media screen and (max-width:768px) {display: none;}
 `
+
 
 const List = styled.ul`
   flex-basis: 100%;
@@ -95,6 +101,7 @@ const Hamburger= styled.div`
   @media screen and (min-width: 768px){display: none;}
   @media screen and (max-width: 640px){}
 `
+
 const Container = styled.div` //모바일 네비
   width: 100%;
   height: 100%;
@@ -166,9 +173,10 @@ const MnavBanner = styled.div`
   width: 100%;
 `
 
-function Header(){
+function Header({userState}){
+
   const [isActive,setIsActive]=useState(false);
-  const userState = useSelector(state => state.user);
+  // const userState = useSelector(state => state.user);
   return (
     <>
      <Content $isopen={isActive}>
@@ -189,7 +197,7 @@ function Header(){
           <NavMember>
             <ul>
               <li>
-                <NavLink to={userState.uid ? "/logout" : "/login"}>{userState.uid ? "로그아웃" : "로그인"} </NavLink>
+                <NavLink to={userState.uid ? "/logout" : "/login" }>{userState.uid ? "로그아웃" : "로그인"} </NavLink>
               </li>
               <li>
                 {
@@ -210,12 +218,12 @@ function Header(){
           <MnavLogo>
           <FontAwesomeIcon icon={faUser}></FontAwesomeIcon>                       
           </MnavLogo>
-          {
-              userState.uid 
+            {
+              userState.data
               ?
-            <NavLink to ='/modify'><span onClick={()=>{
+              <NavLink to ='/modify'><span onClick={()=>{
                             setIsActive(!isActive)
-              }}>{userState.name}님 안녕하세요.</span></NavLink>
+              }}>{userState?.data}님 안녕하세요.</span></NavLink>
                
               :
               <NavLink to ='/login'><span onClick={()=>{
