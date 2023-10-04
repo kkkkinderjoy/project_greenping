@@ -47,6 +47,7 @@ function Inner() {
 
   const dispatch =useDispatch();
   const uid = sessionStorage.getItem("users");
+
   console.log(uid);
 
 
@@ -74,6 +75,7 @@ function Inner() {
     }
     fetchUser();
   }, [dispatch,uid]) //0919-4 dispatch,uid를 추가해주면 
+
 
   const navigate = useNavigate();
   return (
