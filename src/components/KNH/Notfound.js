@@ -1,13 +1,19 @@
 import React from 'react'
 import styled from 'styled-components'
-import image from './../images/error-404.png'
+// import image from './../images/error-404.png'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronLeft, faHome } from '@fortawesome/free-solid-svg-icons'
 import { useNavigate } from 'react-router-dom'
 
 
 const Background = styled.div`
-    width:100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #fff;
+  z-index: 10000000;
+  width: 100%;
+  height:100%;
     
 
 `
@@ -89,7 +95,7 @@ const Button = styled.button`
   background-color: #fff;
   margin-right: 10px;
   border-radius: 3px;
-  
+  cursor: pointer;
   >p{
     margin-left: 10px;
 
@@ -110,7 +116,7 @@ function Notfound() {
     <>
       <Background>
         <ContentWrap>
-            <img src={image} alt="404" />
+            {/* <img src={image} alt="404" /> */}
             <TextWrap>
               <span><p>404</p>NOT FOUND</span>
               <span>페이지를 찾을 수 없습니다</span>

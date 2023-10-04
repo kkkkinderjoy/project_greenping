@@ -127,14 +127,7 @@ const NavLinkWrap = styled.div`
 
 
 
-const Select = styled.select`
-  font-size: 24px;
-  font-weight: bold;
-  border: none;
-  color: #666666;
-  flex-basis: 8%;
-  background: none;
-`
+
 
 const Mwrap = styled.div`
   z-index: 50;

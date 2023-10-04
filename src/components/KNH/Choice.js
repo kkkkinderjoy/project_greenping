@@ -3,7 +3,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 import { styled } from "styled-components";
-
 import dataList from "./../../data/Choicedata";
 import { NavLink } from "react-router-dom";
 
@@ -21,8 +20,8 @@ const Title = styled.h3`
 `;
 
 const ListWrap = styled.ul`
-  max-width: 1200px;
-  margin: 20px auto;
+  max-width: 1280px;
+  margin: 30px auto;
   display: flex;
   padding: 0 30px;
   flex-wrap: wrap;
@@ -32,20 +31,26 @@ const ListWrap = styled.ul`
 const List = styled.li`
   flex-basis: 24%;
   > img {
-    width: 250px;
-    height: 200px;
+    width:280px;
+    height: 220px;
     object-fit: cover;
     margin-bottom: 7px;
     border-radius: 10px;
   }
 
+
   @media screen and (min-width: 641px) and (max-width: 768px) {
     flex-basis: 48%;
     margin-bottom: 20px;
+    > img {
+      width: 300px;
+      height: 400px;
+    }
   }
   @media screen and (max-width: 640px) {
     flex-basis: 98%;
     > img {
+      width: 100%;
       height: 400px;
     }
     margin-bottom: 20px;
@@ -94,7 +99,7 @@ function Choice() {
       <ContentWrap>
         <Content>
           {/* 주제 */}
-          <div className="top-wrap w-full flex justify-between items-end">
+          <div >
             <Title>그린핑 PICK!</Title>
           </div>
 
@@ -116,9 +121,7 @@ function Choice() {
                           <TextWrap>
                             <Location>
                               <FontAwesomeIcon
-                                className="text-[15px] mr-1"
                                 icon={faLocationDot}
-                                size="xl"
                                 color="#98eecc"
                               />
                               <p>{e.doNm + e.sigunguNm}</p>

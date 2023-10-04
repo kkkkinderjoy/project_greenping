@@ -202,7 +202,7 @@ function Login() {
           <LinksWrapper>
             <LinkItem>
             <li><NavLink to="/findemail">이메일/비밀번호 재설정</NavLink></li>
-            <li><NavLink to="/membership">회원가입</NavLink></li>
+            <li><NavLink to="/member">회원가입</NavLink></li>
             </LinkItem>
           </LinksWrapper>
       </Content>

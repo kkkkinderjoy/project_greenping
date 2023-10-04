@@ -34,7 +34,7 @@ const MenuList = styled.div`
       width: 100%;
       text-align: center;
       font-size: 1.2em;
-      border-bottom: 3px solid #eee;
+      border-bottom: 2px solid #eee;
       height: 100%;
       line-height: 70px;
       cursor: pointer;
@@ -66,8 +66,8 @@ const ContentVideo = styled.div`
 
 function Content() {
   const [camping, setCamping] = useState(0);
-  const campingList = ['캠핑 안전수칙' , '캠핑재밌게', '캠핑 꿀팁', '캠핑 플레이리스트', '캠핑 용품추천'];
-  const youTubeList = ['3uyjWs7L8Bs?si=rc4OM-h1rg5wWL8X,','6HXsc-KSvQQ?si=04KgBm8uY-EA3rRT','ZBo8_JcCeU4?si=Xz5EATGL8rLBFdUU','TScI7--3lvo?si=xRXrnetKgUeieIKm']  
+  const campingList = ['안전한 캠핑 즐기기' , '캠핑을 더 재밌게', '전문가가 알려주는 캠핑꿀팁', '캠핑 플레이리스트', '초보 캠퍼를 위한 캠핑템 추천'];
+  const youTubeList = ['3uyjWs7L8Bs?si=rc4OM-h1rg5wWL8X,','6HXsc-KSvQQ?si=04KgBm8uY-EA3rRT','ZBo8_JcCeU4?si=Xz5EATGL8rLBFdUU','TScI7--3lvo?si=xRXrnetKgUeieIKm','KDggryzMYqA?si=aPIkyymruTmXbE-']  
   const [btnActive, setbtnActive] = useState(0);
 
   return (

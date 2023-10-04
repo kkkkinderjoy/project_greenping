@@ -85,6 +85,7 @@ const CardItem = styled.li`
   padding: 2px;
   width: 100%;
   height: 250px;
+  margin-right: 15px;
   @media (max-width: 560px) {
     width: 85%;
     margin: auto;
@@ -156,10 +157,11 @@ const HashWrapper = styled.div`
   gap: 5%;
   color: #666666;
   div {
-    padding: 1%;
+    padding: 1.6%;
     width: 30%;
-    border-radius: 10px;
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+    border-radius: 50px;
+    border: 0.5px solid #d8d8d8;
+    /* box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset; */
     @media (min-width: 768px) {
       display: block;
       width: 25%;
@@ -211,6 +213,7 @@ function Review() {
         <Title>리뷰</Title>
           <List>
             <ListItem onClick={() => setType("best")}>인기순 </ListItem>
+            <ListItem>|</ListItem>
             <ListItem onClick={() => setType("recent")}> 최신순</ListItem>
           </List>
        
