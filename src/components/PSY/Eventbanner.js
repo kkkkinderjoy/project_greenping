@@ -21,7 +21,7 @@ const StyledEventBanner = styled.div`
   }
   .image-container {
     column-gap: 10px;
-    flex-basis: 50%;
+    flex-basis: 100%;
     display: flex;
     justify-content: space-between;
   }
