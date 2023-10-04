@@ -103,7 +103,6 @@ function Assi() {
     console.log(FilterAssi)
     
     const AssiFilter = [...new Set(data.map(e => e.ID))]
-    //console.log(AssiFilter)
 
     const [assi, setAssi] = useState(2);
 

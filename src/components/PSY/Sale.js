@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import data from './../../data/MarketData'
 import { styled } from 'styled-components';
 import { NavLink, useLocation } from 'react-router-dom';
-import Inquiry from './../../pages/Inquiry';
 
 const Content = styled.div`
     width: 100%;
@@ -30,9 +29,6 @@ const TitleWrap = styled.div`
     }
   }
 }
-`
-const ment = styled.div`
-  font-size: 20px;
 `
 
 const ContentWrap = styled.div`
@@ -88,7 +84,8 @@ const Button = styled.button`
     cursor: pointer;
 `
 
-function Sale(props) {
+function Sale({userState}){
+    const [isActive,setIsActive]=useState(false);
 
     const [ID, setID] = useState("판매");
 
@@ -123,23 +120,9 @@ function Sale(props) {
           </ul>
         </TitleWrap>
         <ContentWrap>
-            {   
-             saleFilter.map((e,i)=>{
-                return(
-                <ContentItem key={i}>
-                    <h3>{e.TITLE}</h3>
-                    <img src={e.IMG} alt="판매용품 이미지들" />
-                    <ul>
-                        <li>{e.PRICE}</li>  
-                        <li>업로드일: {e.DATE}</li>
-                    </ul>
-  
-                    <NavLink to={`/inquiry/${e.NUM}`} state={e}><Button>문의하기</Button></NavLink>
-                    
-                </ContentItem>
-                )
-              })         
-            }
+        <NavLink to ='/login'><span onClick={()=>{
+          setIsActive(!isActive)
+         }}>로그인이 필요합니다.</span></NavLink>
         </ContentWrap>
     </Content>
     </>

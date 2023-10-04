@@ -40,6 +40,9 @@ const StyleSlide = styled(SwiperSlide)`
     display: flex;
     flex-wrap: wrap;
     img{width: 100%; height: auto;}
+    @media screen and (max-width: 768px) {
+      flex-basis: 100%;
+    }
 `
 
 function Eventbanner() {
