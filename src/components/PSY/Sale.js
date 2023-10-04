@@ -67,9 +67,7 @@ const ContentItem = styled.div`
       }
     }
   }
-  @media screen and (max-width: 768px){
-    flex-basis: 100%;
-  }
+
 `  
 const Button = styled.button`
     position: absolute;
