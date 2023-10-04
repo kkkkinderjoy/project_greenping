@@ -8,6 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUser } from '@fortawesome/free-regular-svg-icons'
 import { faChevronRight } from '@fortawesome/free-solid-svg-icons'
 import Eventbanner from '../PSY/Eventbanner'
+import { useSelector } from 'react-redux'
 
 
 const ListItems = ['캠핑장 예약', '후기', '랭킹','그린톡','그린마켓','고객센터'] 
@@ -165,9 +166,9 @@ const MnavBanner = styled.div`
   width: 100%;
 `
 
-function Header({userState}){
+function Header(){
   const [isActive,setIsActive]=useState(false);
- 
+  const userState = useSelector(state => state.user);
   return (
     <>
      <Content $isopen={isActive}>
@@ -177,22 +178,22 @@ function Header({userState}){
           </LogoWrap>
           <ListWrap>
             <List>
-            <ListItem><NavLink to="/">캠핑장 찾기</NavLink></ListItem>
-            <ListItem><NavLink to="/">랭킹</NavLink></ListItem>
-            <ListItem><NavLink to="/">리뷰</NavLink></ListItem>
-            <ListItem><NavLink to="/">그린톡</NavLink></ListItem>
-            <ListItem><NavLink to="/">그린마켓</NavLink></ListItem>
-            <ListItem><NavLink to="/">고객센터</NavLink></ListItem>
+            <ListItem><NavLink to="/searchd">캠핑장 찾기</NavLink></ListItem>
+            <ListItem><NavLink to="/ranking">랭킹</NavLink></ListItem>
+            <ListItem><NavLink to="/reviewmore">리뷰</NavLink></ListItem>
+            <ListItem><NavLink to="/board">그린톡</NavLink></ListItem>
+            <ListItem><NavLink to="/market">그린마켓</NavLink></ListItem>
+            <ListItem><NavLink to="/notice">고객센터</NavLink></ListItem>
           </List>
           </ListWrap>
           <NavMember>
             <ul>
               <li>
-                <NavLink to={userState ? "/logout" : "/login"}>{userState ? "로그아웃" : "로그인"} </NavLink>
+                <NavLink to={userState.uid ? "/logout" : "/login"}>{userState.uid ? "로그아웃" : "로그인"} </NavLink>
               </li>
               <li>
                 {
-                  userState ?
+                  userState.uid ?
                   <li>
                     <NavLink to="/modify">정보수정</NavLink>
                   </li>
@@ -204,16 +205,25 @@ function Header({userState}){
               </li>
             </ul>
           </NavMember>
-          
            <Container $isopen={isActive} $height={isActive}>
           <MnavTitle>
           <MnavLogo>
           <FontAwesomeIcon icon={faUser}></FontAwesomeIcon>                       
           </MnavLogo>
-         <NavLink to ='/login'><span onClick={()=>{
-          setIsActive(!isActive)
-         }}>로그인이 필요합니다.</span></NavLink>
-         </MnavTitle>
+          {
+              userState.uid 
+              ?
+            <NavLink to ='/modify'><span onClick={()=>{
+                            setIsActive(!isActive)
+              }}>{userState.name}님 안녕하세요.</span></NavLink>
+               
+              :
+              <NavLink to ='/login'><span onClick={()=>{
+                setIsActive(!isActive)
+               }}>로그인이 필요합니다.</span></NavLink>
+               
+          }
+        </MnavTitle>
         <MnavList>
          {
            ListItems.map((e,i)=>{
