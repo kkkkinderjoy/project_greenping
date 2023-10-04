@@ -169,6 +169,7 @@ const MnavBanner = styled.div`
 function Header(){
   const [isActive,setIsActive]=useState(false);
   const userState = useSelector(state => state.user);
+  console.log(userState);
   return (
     <>
      <Content $isopen={isActive}>
@@ -189,7 +190,7 @@ function Header(){
           <NavMember>
             <ul>
               <li>
-                <NavLink to={userState.uid ? "/logout" : "/login"}>{userState.uid ? "로그아웃" : "로그인"} </NavLink>
+                <NavLink to={userState.data?.email ? "/logout" : "/login"}>{userState.data?.email ? "로그아웃" : "로그인"} </NavLink>
               </li>
               <li>
                 {
@@ -229,7 +230,7 @@ function Header(){
            ListItems.map((e,i)=>{
              return(
                <>
-              <ul>
+              <ul key={i}>
               <li  onClick={()=>{
                 setIsActive(!isActive)
               }}><NavLink to={`/${LinkArray[i]}`}>{e}</NavLink></li>

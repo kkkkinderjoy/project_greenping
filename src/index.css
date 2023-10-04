@@ -10,3 +10,9 @@
     transition: width 0.5s; 
     border-radius: 4px !important;
   }
+
+
+  .ck-editor__editable_inline {
+    min-height: 500px;
+  }
+  

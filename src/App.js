@@ -39,9 +39,8 @@ function Inner() {
   const userState = useSelector((state) => state.user);
   console.log(userState);
 
-  // const dispatch =useDispatch();
-  // const uid = sessionStorage.getItem("users");
-  // console.log(uid);
+  const dispatch =useDispatch();
+  const uid = sessionStorage.getItem("users");
 
   return (
     <>
