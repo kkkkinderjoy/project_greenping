@@ -22,6 +22,10 @@ import { Provider, useDispatch, useSelector } from "react-redux";
 import { collection, doc, getDoc, getFirestore } from "firebase/firestore";
 import store from "./store";
 import Aside from "./components/KNH/Aside";
+import Sale from "./components/PSY/Sale";
+import Buy from "./components/PSY/Buy";
+import Assi from "./components/PSY/Assi";
+import Inquiry from "./pages/Inquiry";
 
 
 
@@ -64,7 +68,10 @@ function Inner() {
         <Route path="/member" element={<Member />}></Route>
         <Route path="/findemail" element={<Findemail />}></Route>
         {/* <Route path="/*" element={<Notfound />}></Route> */}
-        
+        <Route path="/sale" element={<Sale />} />
+        <Route path="/buy" element={<Buy />} />
+        <Route path="/Assi" element={<Assi />} />
+        <Route path="/inquiry/:seq" element={<Inquiry />} />
       </Routes>
       <Aside/>
       <Footer />

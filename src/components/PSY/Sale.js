@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
-import data from './../data/Data'
+import data from './../../data/MarketData'
 import { styled } from 'styled-components';
 import { NavLink, useLocation } from 'react-router-dom';
-import Inquiry from '../pages/Inquiry';
+import Inquiry from './../../pages/Inquiry';
 
 const Content = styled.div`
     width: 100%;
@@ -47,7 +47,7 @@ const ContentWrap = styled.div`
 const ContentItem = styled.div`
   width: 500px;
   height: 500px;
-  flex-basis: 32.5%;
+  flex-basis: 31.5%;
   border: 1px solid #ddd;
   border-radius: 10px;
   box-sizing: border-box;
@@ -71,10 +71,7 @@ const ContentItem = styled.div`
       }
     }
   }
-  @media screen and (max-width: 1200px){
-    flex-basis: 49%;
-  }
-  @media screen and (max-width: 640px){
+  @media screen and (max-width: 768px){
     flex-basis: 100%;
   }
 `  
@@ -113,7 +110,6 @@ function Sale(props) {
   return (
     <>
     <Content>
-      <NavLink to='/'><ment>메인으로 돌아가기</ment></NavLink>
         <TitleWrap> 
           <ul>
             {

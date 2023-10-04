@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import '../index.css'
 import { useState } from 'react';
 import React from 'react';
-import { useLocation, useParams } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 const TextContent = styled.div`
     width: 100%;
@@ -24,7 +24,7 @@ const Title = styled.div`
     margin-left: 0.5px;
     background-color: #2ed090;
     position: absolute;
-    top: -5px;
+    top: -10px;
     left: 0;
     border-radius: 2px;
   }
@@ -57,7 +57,7 @@ const Text = styled.div`
 const Button = styled.button`
     position: absolute;
     bottom: 0;
-    right: 90px;
+    right: 20px;
     height: 30px;
     background-color: #70e6b7;
     color: white;
@@ -71,8 +71,9 @@ const Button = styled.button`
 function Inquiry() {
 
     const [comment, setComment] = useState("");
-    const location = useLocation()
+    const location = useLocation();
     const data = location.state;
+    console.log(data)
     
   return (
     <>
