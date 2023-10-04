@@ -183,14 +183,13 @@ function Search() {
   // const [Selected, setSelected] = useState("");
   const [userInput, setUserInput] = useState('');
   const [optiondonmSelect, setOptionDonmSelect] = useState("");
-  
+
+  const dateNow = new Date();
+  const today = `${dateNow.getFullYear()}년 ${dateNow.getMonth() + 1}월 ${dateNow.getDate()}일`;
+
+
   // const getValue = (e) => {
   //   setUserInput(e.target.value)};
-  const dateNow = new Date();
-  const today = dateNow.toISOString().slice(0, 10);
-  const [saleStartDate, setSaleStartDate] = useState(today);
-
-
 
     const updateScroll = () => {
         setScrollPosition(window.scrollY || document.documentElement.scrollTop);
@@ -261,13 +260,15 @@ function Search() {
             selectsRange={true}
             startDate={startDate}
             endDate={endDate}
-            onChange={(date) => setDateRange(date)}
+            onChange={(date,today) => {
+              setDateRange(date);
+             
+            }}
             dateFormat="yyyy년 MM월 dd"
             minDate={subDays(new Date(), 0)}
             maxDate={addDays(new Date(), 300)}
             monthsShown={2}
-            defaultValue ={today}
-            
+            placeholderText={today}
           />
           <Input
             type="text"

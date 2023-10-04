@@ -174,7 +174,7 @@ const MnavBanner = styled.div`
 `
 
 function Header({userState}){
-
+  
   const [isActive,setIsActive]=useState(false);
   // const userState = useSelector(state => state.user);
   return (
@@ -218,12 +218,13 @@ function Header({userState}){
           <MnavLogo>
           <FontAwesomeIcon icon={faUser}></FontAwesomeIcon>                       
           </MnavLogo>
+          
             {
-              userState.data
+              userState.uid
               ?
               <NavLink to ='/modify'><span onClick={()=>{
                             setIsActive(!isActive)
-              }}>{userState?.data}님 안녕하세요.</span></NavLink>
+              }}>{useState}님 안녕하세요.</span></NavLink>
                
               :
               <NavLink to ='/login'><span onClick={()=>{
