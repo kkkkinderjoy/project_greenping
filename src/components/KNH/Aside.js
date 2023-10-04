@@ -11,7 +11,7 @@ const Wrap = styled.ul`
   bottom: 4px;
   right: 30px;
   align-items: center;
-  z-index: 5000000;
+  z-index: 500;
 `;
 const Content = styled.li`
   padding: 18px;
