@@ -17,9 +17,13 @@ import Logout from "./pages/Logout";
 import Member from "./pages/Member";
 import Findemail from "./pages/Findemail";
 import Descpage from "./pages/Descpage";
+import Notfound from "./components/KNH/Notfound";
 import { Provider, useDispatch, useSelector } from "react-redux";
 import { collection, doc, getDoc, getFirestore } from "firebase/firestore";
 import store from "./store";
+import Aside from "./components/KNH/Aside";
+
+
 
 function App() {
   return (
@@ -47,19 +51,22 @@ function Inner() {
         <Route path="/" element={<Main />}></Route>
         <Route path="/searchd/" element={<SearchD />} />
         <Route path="/searchd/desc/:seq" element={<Descpage />} />
+        <Route path="/desc/:seq" element={<Descpage />} />
         <Route path="/ranking" element={<Ranking />} />
         <Route path="/reviewmore" element={<ReviewMore />}></Route>
         <Route path="/board" element={<Board />} />
         <Route path="/write" element={<Write />} />
         <Route path="/market" element={<Market />} />
         <Route path="/notice" element={<Notice />}></Route>
-        <Route path="/noticedetail/:seq" element={<Noticedetail />}></Route>
+        {/* <Route path="/noticedetail/:seq" element={<Noticedetail />}></Route> */}
         <Route path="/login" element={<Login />}></Route>
         <Route path="/logout" element={<Logout />}></Route>
         <Route path="/member" element={<Member />}></Route>
         <Route path="/findemail" element={<Findemail />}></Route>
+        {/* <Route path="/*" element={<Notfound />}></Route> */}
         
       </Routes>
+      <Aside/>
       <Footer />
     </>
   );

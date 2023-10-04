@@ -1,68 +1,151 @@
 import React, { useState } from "react";
-// import dataList from "./../data/data";
+import dataList from "./../data/Choicedata";
+import { styled } from "styled-components";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHome, faLocationDot } from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
 
+const Content = styled.div`
+  width: 100%;
+`;
+const ContentWrap = styled.div`
+  width: 90%;
+  max-width: 1280px;
+  margin: 60px auto;
+`;
+
+const Title = styled.div`
+  padding: 10px 20px;
+  font-weight: bold;
+  font-size: 2.2em;
+  position: relative;
+
+  &::after {
+    content: "";
+    width: 30px;
+    height: 5px;
+    margin-left: 0.5px;
+    background-color: #2ed090;
+    position: absolute;
+    top: -8px;
+    left: 18px;
+    border-radius: 2px;
+  }
+`;
+
+
+const Rank = styled.ul`
+  margin-top: 60px;
+  display: flex;
+  flex-wrap: wrap;
+`;
+const RankList = styled.li`
+  display: flex;
+  justify-content: space-around;
+  align-items: start;
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #ddd;
+  cursor: pointer;
+  > img {
+    width: 250px;
+    height: 160px;
+    border-radius: 10px;
+    margin-right: 10px;
+  }
+`;
+
+const Num = styled.p`
+width: 50px;
+height: 50px;
+  border-radius:20px;
+  background-color: #98eecc;
+  text-align: center;
+  color: #333333;
+  font-weight: bold;
+  margin-right: 30px;
+  line-height: 50px;
+  font-size: 1.3em;
+  
+  
+`
+
+const RankCon = styled.div`
+  width: 700px;
+  p{
+    margin-bottom: 5px;
+  }
+  p:nth-child(1){
+    font-size: 1.3em;
+  }
+  p:nth-child(2){
+    display: flex;
+    align-items:center;
+    font-size: 0.9em;
+    color: #999999;
+    >svg{
+      padding-right: 3px;
+    }
+  }
+
+`;
+
+const Homepage = styled.div`
+    display: flex;
+    color: #999999;
+    font-size: 0.9em;
+    padding-top: 10px;
+    align-items: center;
+    >svg{
+      color: #999999;
+      
+      padding-right: 3px;
+    }
+`
 
 function Detail() {
-  // const [data, setData] = useState(dataList);
-  // const [allData, setAllData] = useState();
-  const [kind, setKind] = useState("전체");
-  
-  // const FilterData =
-  //   data &&
-  //   data.filter((e) => {
-  //     return kind === "전체" || kind === e.induty;
-  //   });
-
-
-  // const FilterKind = [...new Set(allData && allData.map((e) => e.induty))];
-  // const [isActive, setIsActive] =useState(-1)
+  const [data, setData] = useState(dataList);
 
   return (
     <>
-      <div className="w-full ">
-        <div className="w-7xl mx-auto">
-          <img
-            className="mt-3 mx-auto"
-            src="http://via.placeholder.com/1080x200"
-            alt="1200x300"
-          />
-          <h3 className="ml-[120px] mt-9 text-[30px]">랭킹</h3>
-          <ul className=" w-[400px] mt-3 flex justify-around mx-auto">
-            {/* <li className={`${isActive === -1 && "bg-black"}`></li> */}
-          </ul>
-
-          {/* <ul className="w-auto mx-auto pl-[60px] mt-10 ml-[40px]">
+      <Content>
+        <ContentWrap>
+        <Title>랭킹</Title>
+          <Rank>
             {data &&
-              FilterData.slice(0,10).map((e, i) => {
+              data.slice(0, 10).map((e, i) => {
                 return (
                   <>
-                  
-                    <li className="basis-[24%] mr-[5px] flex mb-4">
-                      <p className="p-[19px] h-[50px] mr-[30px] text-center text-[25px] bg-green-100 rounded-sm">
-                        {i + 1}
-                      </p>
-                      {e.firstImageUrl !== "" && 
-                        <img
-                          className="w-[250px] h-[160px] mr-3"
-                          src={e.firstImageUrl}
-                          alt="{e.firstImageUrl}"
-                        />
-                      }
-                      <div className="w-[800px]">
-                        <p className="text-[20px]">{e.facltNm}</p>
-                        <p className="text-[15px]">{e.addr1}</p>
-                        {e.featureNm !== "" &&  
-                        <p className="text-[13px]">{e.featureNm}</p>
-                         }
-                        <p className="text-[15px]">{e.resveUrl}</p>
-                      </div>
-                    </li>
+                    <RankList>
+                      <Num>{i + 1}</Num>
+                      {e.firstImageUrl !== "" && (
+                        <img src={e.firstImageUrl} alt="{e.firstImageUrl}" />
+                      )}
+                      <RankCon>
+                        <p>{e.facltNm}</p>
+                        <p> <FontAwesomeIcon
+                                icon={faLocationDot}
+                                color="#98eecc"
+                              />{e.addr1}</p>
+                        {e.featureNm !== "" && (
+                          <p>{e.featureNm}</p>
+                        )}
+                        {e.resveUrl !== "" && 
+                        <Homepage>
+                          
+                            <FontAwesomeIcon icon={faHome}/>
+                          
+                          <Link to={e.resveUrl}>{e.resveUrl}</Link>
+                        </Homepage>
+                        }
+                      </RankCon>
+                    </RankList>
                   </>
                 );
               })}
-          </ul> */}
-        </div>
-      </div>
+          </Rank>
+        </ContentWrap>
+      </Content>
     </>
   );
 }

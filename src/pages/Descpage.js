@@ -18,9 +18,12 @@ const Dwrapper = styled.div`
     width: 90%;
     height: 100%;
     margin: 0 auto;
-    display: flex; justify-content: space-between;
+    display: flex; 
+    flex-wrap: wrap;
+    justify-content: space-between;
     align-items: center;
     img{
+        margin: auto;
         border: 5px solid #ddd;
         margin: 20px;
         display: inline-block;
