@@ -196,10 +196,14 @@ function Search() {
 
   // const getValue = (e) => {
   //   setUserInput(e.target.value)};
+  const dateNow = new Date();
+  const today = dateNow.toISOString().slice(0, 10);
+  const [saleStartDate, setSaleStartDate] = useState(today);
 
   const updateScroll = () => {
     setScrollPosition(window.scrollY || document.documentElement.scrollTop);
   };
+  
 
   useEffect(() => {
     window.addEventListener("scroll", updateScroll);
@@ -275,6 +279,7 @@ function Search() {
             minDate={subDays(new Date(), 0)}
             maxDate={addDays(new Date(), 300)}
             monthsShown={2}
+            defaultValue ={today}
           />
           <Input
             type="text"

@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import GlobalStyle from "./components/GlobalStyle";
 import Header from "./components/HYJ/Header";
 import Footer from "./components/HYJ/Footer";
@@ -20,8 +20,9 @@ import Descpage from "./pages/Descpage";
 import Notfound from "./components/KNH/Notfound";
 import { Provider, useDispatch, useSelector } from "react-redux";
 import { collection, doc, getDoc, getFirestore } from "firebase/firestore";
-import store from "./store";
+import store, { logIn, loggedIn } from "./store";
 import Aside from "./components/KNH/Aside";
+import { useEffect } from "react";
 
 
 
@@ -39,14 +40,41 @@ function Inner() {
   const userState = useSelector((state) => state.user);
   console.log(userState);
 
-  // const dispatch =useDispatch();
-  // const uid = sessionStorage.getItem("users");
-  // console.log(uid);
+  const dispatch =useDispatch();
+  const uid = sessionStorage.getItem("users");
+  console.log(uid);
 
+
+  useEffect(()=>{
+    if(uid){
+      dispatch(logIn(uid));
+    }
+    const fetchUser = async () =>{
+      if(!uid) return;
+      const userDoc = doc(collection(getFirestore(),"users"),uid);
+      console.log(userDoc);
+      try{
+        const docSnapshot = await getDoc(userDoc);
+        console.log(docSnapshot);
+        if(docSnapshot.exists()){
+          const userData= docSnapshot.data();
+          dispatch(loggedIn(userData)); 
+          //로그인에서 로그아웃으로 바껴야하니깐 데이터를 불러옴
+
+        }
+
+      }catch(error){
+        console.log(error)
+      }
+    }
+    fetchUser();
+  }, [dispatch,uid]) //0919-4 dispatch,uid를 추가해주면 
+
+  const navigate = useNavigate();
   return (
     <>
       <GlobalStyle />
-      <Header />
+      <Header userState={userState}/>
       <Routes>
         <Route path="/" element={<Main />}></Route>
         <Route path="/searchd/" element={<SearchD />} />
