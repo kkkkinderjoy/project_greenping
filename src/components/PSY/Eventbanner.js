@@ -4,11 +4,14 @@ import "swiper/css/pagination";
 import "swiper/css";
 import { Autoplay, Pagination } from "swiper/modules";
 import { styled } from "styled-components";
-//import { useState } from 'react';
+import './../../index.css'
 
 const StyledEventBanner = styled.div`
-  /* max-width: 1200px; */
+  max-width: 1200px;
+  height: 110px;
   margin: 120px auto;
+  position: relative;
+
   .swiper-container {
     margin: 40px auto;
   }
@@ -18,70 +21,51 @@ const StyledEventBanner = styled.div`
   }
   .image-container {
     column-gap: 10px;
-    flex-basis: 50%;
+    flex-basis: 100%;
     display: flex;
-    
+    justify-content: space-between;
   }
   img {
     width: 100%;
     height: auto;
-  } 
-`
-
-const SwiperPaginationBullet = styled.div`
-  background: #868686;
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  &.on{
-    background: #A3EBCE;
-    width: 28px;
-    transition: width 0.5s; 
-    border-radius: 4px;
   }
-`
+`;
 
+const StyleSlide = styled(SwiperSlide)`
+    display: flex;
+    flex-wrap: wrap;
+    img{width: 100%; height: auto;}
+`
 
 function Eventbanner() {
   return (
     <>
       <StyledEventBanner>
         <Swiper
-          spaceBetween={50}
-          //centeredSlide={true}
+          spaceBetween={10}
           autoplay={{
             delay: 4000,
             disableOnInteraction: false,
           }}
           pagination={{ clickable: true }}
           grabCursor={false}
-          loopedSlides={true}
           modules={[Autoplay, Pagination]}
-          slidesPerView={1}
+          slidesPerView={2}
           loop={true}
         >
-          <SwiperSlide>
-            <div className="image-container">
-              <img src="/images/greenping-event.jpg" alt="그린핑 이벤트" />
-              <img src="/images/card-event.jpg" alt="카드 이벤트" />
-            </div>
-          </SwiperSlide>
-          <SwiperSlide>
-            <div className="image-container">
-              <img src="/images/greentalk.jpg" alt="그린톡 이벤트" />
-              <img src="/images/birthday.jpg" alt="생일축하 이벤트" />
-            </div>
-          </SwiperSlide>
-          <SwiperSlide>
-            <div className="image-container">
-              <img src="/images/best-rivewer.png" alt="베스트 리뷰어 이벤트" />
-              <img src="/images/green-market.jpg" alt="그린마켓 이벤트" />
-            </div>
-          </SwiperSlide>
+          {
+            Array(6).fill().map((_,i)=>{
+              return(
+                <StyleSlide key={i}>
+                  <img src={`./images/event${i+1}.jpg`} alt="slide" />
+                </StyleSlide>
+              )
+            })
+          }
         </Swiper>
       </StyledEventBanner>
     </>
-  )
+  );
 }
 
 export default Eventbanner;

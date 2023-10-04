@@ -1,0 +1,12 @@
+@charset "utf-8";
+
+
+.swiper-pagination-bullet {
+    background: #868686 !important;
+  }
+  .swiper-pagination-bullet-active {
+    background: #A3EBCE !important;
+    width: 28px !important;
+    transition: width 0.5s; 
+    border-radius: 4px !important;
+  }
