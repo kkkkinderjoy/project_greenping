@@ -6,113 +6,168 @@ import {addDays, subDays} from 'date-fns'
 import { NavLink, useLocation } from 'react-router-dom'
 import styled from 'styled-components'
 
-const Wrapper = styled.div`
+const Content = styled.div`
   margin-top: 5px;
   width: 100%;
   height: 496px;
   background: url('/images/main-banner.jpg');
   background-size: cover;
 `
-const SearchContent = styled.div`
+
+
+const ContentWrap = styled.div`
   max-width: 1200px;
-  height: 70px;
-  margin: 0 auto ;
+  margin: 0 auto;
   display: flex;
-  justify-content: space-around;
+  transform: translateY(500%);
+`
+
+const Inner = styled.div`
+  height: 75px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   flex-wrap: nowrap;
   background-color: #fff;
-  border-radius: 10px;
-  align-items: center;
-  >input{
-    flex-basis: 30%;
-    height: 100%;
-    font-size: 1.2em;
-    background: none;
+  border-radius: 100px;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 20px 30px;
+`
+
+const Select = styled.select`
+  width: 10%;
+  padding: 2%;
+  font-size: 1.2em;
+  font-weight: bold;
+  border: none;
+  -webkit-appearance:none; //크롬 화살표 없애기
+  appearance: none; //화살표 없애기
+  -moz-appearance: none; //파이어폭스 화살표 없애기
+  text-align: center;
+  &:focus{
+    outline: none;
+    border-radius: 100px;
+    border: 1px solid #2ed090;
   }
-  
 `
+const Option = styled.option`
+  font-size: 1em;
+  border: none;
+  text-align: center;
+
+`
+
 const StyleDate = styled(DatePicker)`
-    color: #666666;
-    height: 100%;
-    border: none;
-    font-size: 1.2em;
-    flex-basis: 40%;
-    background: none;
+  width: 250px;
+  height: 65px;
+  font-size: 1.2em;
+  font-weight: bold;
+  border: 0;
+  appearance: none;
+  -moz-appearance: none;
+  text-align: center;
+  &:focus{
+    outline: none;
+    border-radius: 100px;
+    border: 1px solid #2ed090;
+  }
 `
+
+const Input = styled.input`
+  border: none;
+  width: 40%;
+  padding: 2%;
+  font-size: 1.2em;
+  font-weight: bold;
+  border: 0;
+  appearance: none;
+  -moz-appearance: none;
+  text-align: center;
+  &:focus{
+    outline: none;
+    border-radius: 100px;
+    border: 1px solid #2ed090;
+  }
+`
+
+
+
 const NavLinkWrap = styled.div`
   background-color: #98eecc;
-  color: #fff;
   font-weight: bold;
-  border-radius: 10px;
-  font-size: 18px;
+  border-radius: 100px;
   right: 0;
-  flex-basis: 20%;
-  height: 80%;
-  a{
+  flex-basis: 15%;
+  height: 75%;
+    a{
     display: flex;
     height: 100%;
     align-items: center;
-    p{
-      width: 100%;
-      font-size: 30px;
-      margin: 10px auto;
-      text-align: center;
-      font-weight: 800;
-      color: #fff;
-    }
+      p{
+        width: 100%;
+        font-size: 1.7em;
+        text-align: center;
+        font-weight: bold;
+        color: #fff;
+      }
   }
-`
-const Input = styled.input`
-  border: none;
-  right: 30%;
-  height: 100%;
-`
-const Select = styled.select`
-  font-size: 24px;
-  font-weight: bold;
-  border: none;
-  color: #666666;
-  flex-basis: 8%;
-  background: none;
-  select:required:invalid{
-    color: #909090;
-  }
-  option{color: #ddd;}
-  option[value=""][disabled] {
-  display:none
-  }
-`
+`;
+
+
+
+
+
+
+
+
 const Mwrap = styled.div`
-  z-index: 50; background-color: #fff; 
-  padding-top: 5px; width: 100%; height: 300px;
-  position: fixed; top: 0; display: flex; justify-content: space-around;
+  z-index: 50;
+  background-color: #fff;
+  padding-top: 5px;
+  width: 100%;
+  height: 300px;
+  position: fixed;
+  top: 0;
+  display: flex;
+  justify-content: space-around;
 `
+
 const Mwrapper = styled.div`
-   width: 70%; height:40px;
-   display: flex; justify-content: space-between; flex-wrap: nowrap; border-radius: 10px;
-   align-items: center;
+  width: 70%;
+  height: 40px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+  border-radius: 10px;
+  align-items: center;
 `
+
 const MinputBox = styled.div`
-  flex-basis: 3/4; 
-  border: 1px solid #ddd; height: 100%;
+  flex-basis: 3/4;
+  border: 1px solid #ddd;
+  height: 100%;
   border-radius: 5px;
-  >input{
+  > input {
     border: none;
     height: 100%;
   }
 `
+
 const MbuttonBox = styled.div`
   flex-basis: 1/4;
-  border: 1px solid #ddd; height: 100%;
+  border: 1px solid #ddd;
+  height: 100%;
   border-radius: 5px;
-  >button{
+  > button {
     border: 1px solid #ddd;
     background-color: #98eecc;
     color: #fff;
     font-weight: bold;
     border-radius: 5px;
     font-size: 25px;
-    right: 0; width: 100%; height: 80%;
+    right: 0;
+    width: 100%;
+    height: 100%;
   }
 `
 
@@ -192,8 +247,6 @@ function Search() {
         </Mwrap> */}
       {/* 모바일 써치+버튼 끝 */}
       {/* 유리써치 */}
-
-     
       <Content> 
         <ContentWrap>
           <Inner>
@@ -214,6 +267,7 @@ function Search() {
             maxDate={addDays(new Date(), 300)}
             monthsShown={2}
             defaultValue ={today}
+            
           />
           <Input
             type="text"
