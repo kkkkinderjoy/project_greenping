@@ -23,7 +23,6 @@ const Dwrapper = styled.div`
     justify-content: space-between;
     align-items: center;
     img{
-        margin: auto;
         border: 5px solid #ddd;
         margin: 20px;
         display: inline-block;
@@ -61,6 +60,9 @@ const Dbutton = styled.button`
 
 const Ddesc = styled.div`
     width: 80%;
+    height: 400px;
+    align-items: center;
+    line-height: 50px;
     margin: 0 auto;
     display: flex; justify-content: space-between;
     >svg{
@@ -92,7 +94,8 @@ return(
             <h2>{data.facltNm}</h2>
             <Dwrapper>
                 {
-                    data.firstImageUrl === "" ? <img src='https://www.placeholder.com/100x100' alt='img' /> : <img src={data.firstImageUrl} alt={data.facltNm} title={data.facltNm} /> 
+                    data.firstImageUrl === "" ? <img src='https://www.placeholder.com/100x100' alt='img' /> : 
+                    <img src={data.firstImageUrl} alt={data.facltNm} title={data.facltNm} /> 
                 }
                 
                 <Imgdesc>
@@ -107,17 +110,21 @@ return(
                             data.homepage != "" && <p>홈페이지 : {data.homepage}</p> 
                         }
                     </NavLink>
-                    <Dbutton className={isActive === true ? "on" : ""} onClick={()=>{setIsActive(true); setIsModal(true);}}> 예약하기</Dbutton>
+                    <Dbutton className={isActive === true ? "on" : ""} onClick={()=>{setIsActive(true); 
+                        setIsModal(true);}}> 예약하기</Dbutton>
                 </Imgdesc>
             </Dwrapper>
             <SearchLine />
             <Ddesc>
-                <FontAwesomeIcon icon={faCircleRight} />
                 {
-                    data.intro != "" && <p>{data.intro}</p>
+                    data.intro != "" 
+                    && 
+                    <>
+                        <FontAwesomeIcon icon={faCircleRight} />
+                        <p>{data.intro}</p>
+                    </>
                 }
             </Ddesc>
-
         </Dwrap>
     </>
   )

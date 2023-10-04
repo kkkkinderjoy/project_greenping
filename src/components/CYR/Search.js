@@ -3,7 +3,7 @@ import DatePicker from 'react-datepicker'
 import "react-datepicker/dist/react-datepicker.css"
 import {ko} from 'date-fns/esm/locale'
 import {addDays, subDays} from 'date-fns'
-import { NavLink, useLocation } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import styled from 'styled-components'
 
 const Wrapper = styled.div`
@@ -122,16 +122,9 @@ function Search() {
   const [startDate, endDate] = dateRange;
   const [alldonm, setAllDonm] = useState([]);
   const [donm, setDonm] = useState("")
-  const [ischoice, setIsChoice] = useState([null,null]);
   const [scrollPosition, setScrollPosition] = useState(0);
-  // const [page, setPage] = useState(1);
-  // const [Selected, setSelected] = useState("");
-  const [userInput, setUserInput] = useState('');
   const [optiondonmSelect, setOptionDonmSelect] = useState("");
-  
-  // const getValue = (e) => {
-  //   setUserInput(e.target.value)};
-
+  const [userinput, setUserInput] = useState("");
 
     const updateScroll = () => {
         setScrollPosition(window.scrollY || document.documentElement.scrollTop);
@@ -140,15 +133,7 @@ function Search() {
     useEffect(() => {
             window.addEventListener("scroll", updateScroll);
         }, []);
-
-    const searched = alldonm.filter((item) =>
-
-      item.facltNm.includes(userInput)
-    );
-
-
-
-    
+  
         useEffect(()=>{
       fetch("https://apis.data.go.kr/B551011/GoCamping/basedList?numOfRows=100&pageNo=1&MobileOS=ETC&MobileApp=project&serviceKey=hQ42F%2BSKq2L%2FUrlhNoGxv63elQn7W8CmL22xl6yXuGk%2BMz0zdU%2Frk2CIdCeX5%2BYPmg39K5QBYCeSgUyqtD7Qdg%3D%3D&_type=json")
       .then((res) =>{return res.json()})
@@ -161,12 +146,12 @@ function Search() {
     const optionDonm = (e) =>{
         const donmValue = e.target.value
         setOptionDonmSelect(donmValue);
-        setUserInput(e.target.value)
       }
     
-      //   const FilterData = donm && donm.filter(e =>{
-      //   return donm === "전체" || donm === e.doNm
-      //  })
+    const InputValue = (e) =>{
+      const ValueI = e.target.value
+      setUserInput(ValueI)
+    }
        const Filterdonm = [...new Set(alldonm && alldonm.map(e=>e.doNm).sort())];
   return (
     <>
@@ -211,9 +196,11 @@ function Search() {
               minDate={subDays(new Date(), 0)}
               maxDate={addDays(new Date(), 300)}
               monthsShown={2} />
-            <Input type='text' placeholder='검색어를 입력하세요' onChange={optionDonm} />
+            <Input type='text' placeholder='검색어를 입력하세요' onChange={InputValue} />
             <NavLinkWrap>
-              <NavLink to='/searchd'>
+              <NavLink to={{
+                pathname:'/searchd',
+              }} state={{optiondonmSelect: optiondonmSelect, userinput: userinput}}>
                 <p>검색하기</p>
               </NavLink>
             </NavLinkWrap>
