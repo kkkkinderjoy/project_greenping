@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
 import { firebaseAuth, signInWithEmailAndPassword } from './../firebase'
 import styled from 'styled-components'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { logIn, loggedIn } from '../store'
 import { collection, doc, getDoc, getFirestore } from 'firebase/firestore'
 
@@ -136,12 +136,12 @@ const LinkItem = styled.ul`
 
 function Login() {
 
-    const[email,setEmail] = useState();
-    const[password,setPassword]=useState();
-    const[error,setError] = useState();
+    const[email,setEmail] = useState("");
+    const[password,setPassword]=useState("");
+    const[error,setError] = useState("");
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    
+    const userState = useSelector(state => state.user);
     const errorMsg = (errorCode) =>{
       const firebaseError = {
         'auth/user-not-found' :"이메일 혹은 비밀번호가 잘못 되었습니다.",
@@ -162,7 +162,7 @@ function Login() {
 
         const userDoc = doc(collection(getFirestore(),"users"),user.uid);
         const userDocSnapshot = await getDoc(userDoc);
-        console.log(userDocSnapshot.data())
+        // console.log(userDocSnapshot.data())
         if(userDocSnapshot.exists()){
           const userData = userDocSnapshot.data();
           dispatch(loggedIn(userData));
@@ -177,7 +177,6 @@ function Login() {
   return (
     <LoginContent>
       <Content>
-        {email}{password}
         <Title>로그인</Title>
         <form onSubmit={LoginForm}>
           <InputWrap>

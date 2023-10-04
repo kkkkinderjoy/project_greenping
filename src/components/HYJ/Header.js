@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom'
 import "react-datepicker/dist/react-datepicker.css"
 
 import styled from 'styled-components'
+import { useSelector } from 'react-redux'
 
 
 const Content = styled.div`
@@ -113,8 +114,10 @@ const Container = styled.div` //모바일 네비
   }
 `
 
-function Header({userState}){
+function Header(){
+
   const [isActive,setIsActive]=useState(false);
+  const userState = useSelector(state => state.user);
   
   return (
     <>
@@ -136,11 +139,11 @@ function Header({userState}){
           <NavMember>
             <ul>
               <li>
-                <NavLink to={userState ? "/logout" : "/login"}>{userState ? "로그아웃" : "로그인"} </NavLink>
+                <NavLink to={userState.uid ? "/logout" : "/login"}>{userState.uid ? "로그아웃" : "로그인"} </NavLink>
               </li>
               <li>
                 {
-                  userState ?
+                  userState.uid ?
                   <li>
                     <NavLink to="/modify">정보수정</NavLink>
                   </li>
