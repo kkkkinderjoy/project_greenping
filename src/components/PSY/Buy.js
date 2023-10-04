@@ -1,20 +1,9 @@
 import React, { useState } from 'react'
-import data from './../data/Data'
+import data from './../../data/MarketData'
 import { styled } from 'styled-components'
 import { NavLink } from 'react-router-dom'
-import Inquiry from '../pages/Inquiry'
 
-const Title = styled.div`
-    width: 100%;
-    ul{
-        margin: 0 auto;
-        display: flex;
-        justify-content: space-between;
-        li{
-          margin-bottom: 7px;
-        }
-    }
-`
+
 const Content = styled.div`
     width: 100%;
 `
@@ -49,11 +38,18 @@ const ContentWrap = styled.div`
     display: flex;
     flex-wrap: wrap;
     justify-content: start;
+    position: relative;
+    p{
+      position: absolute;
+      font-size: 18px;
+      right: 5%;
+      top: -22px;
+    }
 `
 const ContentItem = styled.div`
   width: 500px;
   height: 500px;
-  flex-basis: 32.5%;
+  flex-basis: 31.5%;
   border: 1px solid #ddd;
   border-radius: 10px;
   box-sizing: border-box;
@@ -95,9 +91,6 @@ const Button = styled.button`
     bottom: 10px;
     cursor: pointer;
 `
-const ment = styled.div`
-  font-size: 20px;
-`
 
 function Buy() {
 
@@ -121,7 +114,6 @@ function Buy() {
   return (
     <>
     <Content>
-    <NavLink to='/'><ment>메인으로 돌아가기</ment></NavLink>
         <TitleWrap>
           <ul>
             {
@@ -134,6 +126,7 @@ function Buy() {
           </ul>
         </TitleWrap>
         <ContentWrap>
+          <NavLink to='/'><p>메인으로 돌아가기</p></NavLink>
             {
              dataFilter.map((e,i)=>{
                 return(

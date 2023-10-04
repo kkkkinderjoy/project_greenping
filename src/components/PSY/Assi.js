@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import data from './../data/Data'
+import data from './../../data/MarketData'
 import { styled } from 'styled-components';
 import { NavLink } from 'react-router-dom';
 
@@ -33,16 +33,24 @@ const TitleWrap = styled.div`
 const ContentWrap = styled.div`
     width: 100%;
     gap: 15px;
-    margin: 0 auto;
+    margin-bottom: 50px;
     padding: 0 2%;
     display: flex;
     flex-wrap: wrap;
     justify-content: start;
+    position: relative;
+    p{
+      position: absolute;
+      font-size: 18px;
+      right: 5%;
+      top: -22px;
+    }
+
 `
 const ContentItem = styled.div`
   width: 500px;
   height: 500px;
-  flex-basis: 32.5%;
+  flex-basis: 31.5%;
   border: 1px solid #ddd;
   border-radius: 10px;
   box-sizing: border-box;
@@ -59,7 +67,6 @@ const ContentItem = styled.div`
     flex-wrap: wrap;
     justify-content: space-around;
     li{
-
         margin-bottom: 7px;
         &:nth-child(1){
         font-size: 18px;
@@ -85,9 +92,6 @@ const Button = styled.button`
     bottom: 10px;
     cursor: pointer;
 `
-const ment = styled.div`
-  font-size: 20px;
-`
 
 function Assi() {
 
@@ -108,7 +112,6 @@ function Assi() {
   return (
     <>
     <Content>
-    <NavLink to='/'><ment>메인으로 돌아가기</ment></NavLink>
         <TitleWrap>
           <ul>
             {
@@ -121,6 +124,7 @@ function Assi() {
           </ul>
         </TitleWrap>
         <ContentWrap>
+        <NavLink to='/'><p>메인으로 돌아가기</p></NavLink>
           {
           FilterAssi.map((e,i)=>{
             return(

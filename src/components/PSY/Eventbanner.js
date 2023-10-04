@@ -7,9 +7,9 @@ import { styled } from "styled-components";
 import './../../index.css'
 
 const StyledEventBanner = styled.div`
-  max-width: 1200px;
-  height: 110px;
+  max-width: 90%;
   margin: 120px auto;
+  height: 110px;
   position: relative;
 
   .swiper-container {
@@ -31,6 +31,11 @@ const StyledEventBanner = styled.div`
   }
 `;
 
+const StyleSwiper = styled(Swiper)`
+  position: relative;
+  padding-bottom: 20px;
+`
+
 const StyleSlide = styled(SwiperSlide)`
     display: flex;
     flex-wrap: wrap;
@@ -41,7 +46,7 @@ function Eventbanner() {
   return (
     <>
       <StyledEventBanner>
-        <Swiper
+        <StyleSwiper
           spaceBetween={10}
           autoplay={{
             delay: 4000,
@@ -51,6 +56,7 @@ function Eventbanner() {
           grabCursor={false}
           modules={[Autoplay, Pagination]}
           slidesPerView={2}
+          slidesPerGroup={2}
           loop={true}
         >
           {
@@ -62,7 +68,7 @@ function Eventbanner() {
               )
             })
           }
-        </Swiper>
+        </StyleSwiper>
       </StyledEventBanner>
     </>
   );

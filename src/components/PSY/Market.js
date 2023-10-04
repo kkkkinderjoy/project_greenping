@@ -23,7 +23,7 @@ const Title = styled.h3`
   padding-bottom: 30px;
 `
 const ContentItem = styled.div`
-  width: 100%;
+  max-width: 1200px;
   ul{
     display: flex;
     justify-content: space-around; 
@@ -38,7 +38,7 @@ const ContentItem = styled.div`
       cursor: pointer;
       position: relative;
       svg{
-        color: #DDDDDD;
+        color: #dddddd;
         font-size: 65px;
         padding-top: 50px;
         filter: drop-shadow(3px 3px rgba(127, 138, 140, 0.15));
@@ -59,6 +59,12 @@ const ContentItem = styled.div`
         padding-right: 10px;
       }
     }
+  }
+  @media screen and (max-width: 1200px){
+    flex-basis: 49%;
+  }
+  @media screen and (max-width: 640px){
+    flex-basis: 100%;
   }
 `
 const SvgBox = styled.div`
