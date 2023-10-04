@@ -11,6 +11,7 @@ function Logout() {
     const dispatch=useDispatch();
     const navigate=useNavigate();
     const[isModal,setIsModal]= useState(true);
+    const [error, setError] = useState();
 
     signOut(firebaseAuth)
     .then(()=>{
@@ -25,11 +26,11 @@ function Logout() {
 
   return (
     <>
-        {
-          isModal &&
-          <Modal error="로그아웃 되었습니다." onClose={()=>{setIsModal(false); navigate("/")}} /> 
+        
+          <Modal error="로그아웃이 되었습니다." onClose={()=>{setIsModal(false); navigate("/")}} />
+           
             
-        } 
+        
     </>
   )
 }
