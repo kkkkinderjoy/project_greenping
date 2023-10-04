@@ -89,7 +89,7 @@ const Hamburger= styled.div`
   right: 0;
   top: 20px;
   cursor: pointer;
-  z-index: 200;
+  z-index: 1000;
   transform: all 1s; 
   > div{
     width: 30px; height: 2px; background-color: #000; border-radius: 4px; margin: 6px;
@@ -102,19 +102,18 @@ const Hamburger= styled.div`
   @media screen and (max-width: 640px){}
 `
 
-const Container = styled.div` //모바일 네비
+const Mnav = styled.div` //모바일 네비
   width: 100%;
   height: 100%;
-  position: relative;
   position: fixed;
-  background-color: #ddd;
+  background-color: #eee;
   left: ${({ $isopen }) => $isopen ? "0" : "100%;"};
   height: ${({ $isopen, $height }) => ($isopen === "true" ? $height : "100%")};
   top: 0;
   padding: 40px;
   margin: 0 auto;
   box-sizing: border-box;
-  z-index: 40;
+  z-index: 999;
   transition: all 0.5s;
   @media screen and (min-width: 768px){display: none;}
   >ul{
@@ -130,9 +129,7 @@ const MnavTitle = styled.div`
       display: flex;
       flex-direction: column;
       align-items: center;
-      
       span{
-        border-bottom: 1px solid gray;
         margin-bottom: 20px;
       }
   `
@@ -154,13 +151,13 @@ const MnavLogo = styled.div`
 `
 
 const MnavList = styled.div`
-  margin-top: 30px;
+  width: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  margin: 0 auto;
-  padding: 40px;
+  margin-top: 40px;
+
   ul{
+    justify-content: center;
     margin-bottom: 40px;
     display: flex;
     cursor: pointer;
@@ -172,6 +169,22 @@ const MnavList = styled.div`
 const MnavBanner = styled.div`
   width: 100%;
 `
+
+const MyList = styled.div`
+width: 90%;
+margin-top: 20px;
+ul{
+  display: flex;
+  justify-content: space-around;
+  align-content: center;
+  background-color: #FEFFDD;
+  
+  padding: 15px 0px;
+  border-radius: 10px;
+}
+`
+
+
 
 function Header({userState}){
   
@@ -213,7 +226,7 @@ function Header({userState}){
               </li>
             </ul>
           </NavMember>
-           <Container $isopen={isActive} $height={isActive}>
+           <Mnav $isopen={isActive} $height={isActive}>
           <MnavTitle>
           <MnavLogo>
           <FontAwesomeIcon icon={faUser}></FontAwesomeIcon>                       
@@ -222,10 +235,19 @@ function Header({userState}){
             {
               userState.uid
               ?
+              <>
+             
               <NavLink to ='/modify'><span onClick={()=>{
                             setIsActive(!isActive)
-              }}>{useState}님 안녕하세요.</span></NavLink>
-               
+              }}>{userState.uid.name}님 안녕하세요.</span></NavLink>
+              <MyList>
+                <ul>
+                  <li>회원정보수정</li>
+                  <li>예약 내역</li>
+                  <li>나의 활동</li>
+                </ul>
+              </MyList>
+               </> 
               :
               <NavLink to ='/login'><span onClick={()=>{
                 setIsActive(!isActive)
@@ -250,7 +272,7 @@ function Header({userState}){
          }
         </MnavList>
         <MnavBanner>{Eventbanner()}</MnavBanner>
-        </Container>        
+        </Mnav>        
         </HeaderWrap>
          {/* 모바일네비 */}
          
