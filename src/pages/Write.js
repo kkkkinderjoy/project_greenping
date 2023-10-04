@@ -1,8 +1,17 @@
-import React, { useState } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faImage } from "@fortawesome/free-solid-svg-icons";
+import React from "react";
 import styled from "styled-components";
 import Ckeditor from "../components/KNH/Ckeditor";
+import { useState } from "react";
+import {
+  useAsyncError,
+  useParams,
+  Navigate,
+  useNavigate,
+} from "react-router-dom";
+import Modal from "../components/Modal";
+import { useSelector } from "react-redux";
+import { useEffect } from "react";
+import { doc, getDoc, getFirestore } from "firebase/firestore";
 
 const Container = styled.div`
   width: 100%;
@@ -12,7 +21,7 @@ const Container = styled.div`
 
 const InnerContainer = styled.div`
   margin: 0 4px;
-  max-width: 1200px;
+  max-width: 1280px;
   margin: 0 auto;
 `;
 
@@ -20,10 +29,11 @@ const Header = styled.div`
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
+  margin-bottom: 50px;
 `;
 
 const Heading = styled.h3`
-  font-size: 30px;
+  font-size: 2.2em;
   position: relative;
 
   &::after {
@@ -33,15 +43,18 @@ const Heading = styled.h3`
     margin-left: 0.5px;
     background-color: #2ed090;
     position: absolute;
-    top: -6px;
+    top: -17px;
     left: 0;
     border-radius: 2px;
   }
 `;
 
 const ContentWrapper = styled.div`
-  width: auto;
-  height: auto;
+  width: 100%;
+  height: 800px;
+  margin-top: 30px;
+  padding-top: 20px;
+  padding-right: 120px;
   margin-top: 9px;
   border: 1px solid #e5e7eb;
   border-radius: 0.375rem;
@@ -60,9 +73,11 @@ const Title = styled.h2`
 `;
 
 const TextInput = styled.input`
+  padding: 5px;
   height: 40px;
   border: 1px solid #e5e7eb;
   flex-basis: 75%;
+  font-size: 15px;
 `;
 
 const ContentInputWrapper = styled.div`
@@ -75,55 +90,96 @@ const ContentLabel = styled.p`
   margin-bottom: 15px;
 `;
 
-const ContentInput = styled.input`
-  background-color: #2ed090;
-  margin-left: 13px;
-  color: white;
-  border-radius: 2px;
-  padding: 2px;
-  font-size: 13px;
-`;
-
-const TextArea = styled.textarea`
-  width: 85%;
-  border: 1px solid #e5e7eb;
-  padding-bottom: 600px; /* You might want to adjust this value */
-  padding-top: 2px;
-  padding-left: 4px;
-`;
-
-const Write = () => {
+function Write() {
   const [txtTitle, setTxtTitle] = useState("");
+  // 제목데이터를 에디터로 넘겨야 함
+  const { board, view } = useParams();
+  const [isModal, setIsModal] = useState(view ? false : true);
+  const navigate = useNavigate();
+
+  const memberProfile = useSelector((state) => state.user);
+  // 로그인 하지 않으면 이용할 수 없음
+  const [message, setMessage] = useState("");
   const [postData, setPostData] = useState(null);
 
-  return (
-    <Container>
-      <InnerContainer>
-        <Header>
-          <Heading>글쓰기</Heading>
-        </Header>
+  // 수정 버튼 홈페이지 이동 막기
+  const uid = sessionStorage.getItem("users");
+  const [userUid, setUserUid] = useState(uid);
 
-        <ContentWrapper>
-          <ContentInner>
-            <Title
-              defaultValue={postData && postData.title}
-              type="text"
-              onChange={(e) => {
-                setTxtTitle(e.target.value);
-              }}
-            >
-              제목
-            </Title>
-            <TextInput type="text" />
-          </ContentInner>
-          <ContentInputWrapper>
-            <ContentLabel>내용</ContentLabel>
-            <Ckeditor title={txtTitle} postData={postData} />
-          </ContentInputWrapper>
-        </ContentWrapper>
-      </InnerContainer>
-    </Container>
+  useEffect(() => {
+    if (board) {
+      const fetchData = async () => {
+        const postRef = doc(getFirestore(), "board");
+        const postSnapShot = await getDoc(postRef);
+        if (postSnapShot.exists()) {
+          setPostData(postSnapShot.data());
+          setTxtTitle(postSnapShot.data().title);
+          if (uid !== postSnapShot.data().uid) {
+            setIsModal(true);
+            setMessage("권한없음");
+            return;
+          }
+        } else {
+          setIsModal(false);
+          setMessage("해당 문서가 존재하지 않습니다");
+        }
+      };
+      fetchData();
+    }
+  });
+
+  // if(!memberProfile.loggedIn){
+  //   return(
+  //     <>
+  //     {
+  //       isModal &&
+  //       <Modal error="로그인 이후 이용해주시기 바랍니다!" onClose={()=>{setIsModal(false); navigate('/login')}}/>
+  //       // 유효성 검사 -> 주소를 잘못 쓴 경우 메인으로 가게 만듦
+
+  //     }
+  //     {/* 버그 방지 */}
+  //     </>
+  //   )
+  // }
+
+  return (
+    <>
+      {/* {isModal && view && (
+        <Modal
+          error={message}
+          onClose={() => {
+            setIsModal(false);
+            navigate(`/service/${board}`);
+          }}
+        />
+      )} */}
+
+      <Container>
+        <InnerContainer>
+          <Header>
+            <Heading>{board && view ? "글수정" : "글쓰기"}</Heading>
+          </Header>
+
+          <ContentWrapper>
+            <ContentInner>
+              <Title>제목</Title>
+              <TextInput
+                defaultValue={postData && postData.title}
+                type="text"
+                onChange={(e) => {
+                  setTxtTitle(e.target.value);
+                }}
+              />
+            </ContentInner>
+            <ContentInputWrapper>
+              <ContentLabel>내용</ContentLabel>
+              <Ckeditor title={txtTitle} postData={postData} />
+            </ContentInputWrapper>
+          </ContentWrapper>
+        </InnerContainer>
+      </Container>
+    </>
   );
-};
+}
 
 export default Write;

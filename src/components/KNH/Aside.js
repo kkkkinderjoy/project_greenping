@@ -1,36 +1,73 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { icon } from '@fortawesome/fontawesome-svg-core';
-import { faChevronUp } from '@fortawesome/free-solid-svg-icons';
-import { faInstagram } from '@fortawesome/free-brands-svg-icons';
-import { throttle } from 'lodash';
-import { faMessage } from '@fortawesome/free-regular-svg-icons';
+import { faChevronUp } from "@fortawesome/free-solid-svg-icons";
+import { faInstagram } from "@fortawesome/free-brands-svg-icons";
+import { faMessage } from "@fortawesome/free-regular-svg-icons";
+import { styled } from "styled-components";
+import { Link } from "react-router-dom";
 
-
+const Wrap = styled.ul`
+  position: fixed;
+  bottom: 4px;
+  right: 30px;
+  align-items: center;
+  z-index: 5000000;
+`;
+const Content = styled.li`
+  padding: 18px;
+  border-radius: 22px;
+  background-color: white;
+  opacity: 0.98;
+  box-shadow: 1px 1px 4px gainsboro;
+  margin-bottom: 10px;
+  text-align: center;
+  cursor: pointer;
+   svg {
+    font-size: 1.3em;
+    color: #98eecc;
+   
+  }
+`;
 
 function Aside() {
-    // top 함수
-    const moveToTop = () => (document.documentElement.scrollTop = 0);
-    
+  const [isActive, setIsActive] = useState(false);
+
+  useEffect(() => {
+    const isActiveClick = () => {
+      if (window.scrollY > 350) {
+        setIsActive(true);
+      } else {
+        setIsActive(false);
+      }
+    };
+    window.addEventListener("scroll", isActiveClick);
+  }, []);
+
+  const moveToTop = () =>
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+
   return (
     <>
-    {/* aside */}
-
-    <ul className="aside fixed bottom-4 -right-[70px] w-[200px] align-middle">
-        <li className="w-[60px] h-[60px] mb-[6px] shadow-lg
- bg-[#ffffff] rounded-full text-center">
-<FontAwesomeIcon className='text-[20px] mt-5 text-[#6fed8a]' icon={faMessage} />
-
- </li>
-        <li className="w-[60px] h-[60px]  mb-[6px] shadow-lg  bg-[#ffffff] rounded-full text-center">
-                    <FontAwesomeIcon className='text-[24px] mt-4 text-[#6fed8a]' icon={faInstagram} />
-        </li>
-        <li onClick={moveToTop} className="transition duration-600 ease-out w-[60px] h-[60px] shadow-lg mb-[6px]  bg-[#ffffff] rounded-full text-center">
-                     <FontAwesomeIcon className='mt-5' icon={faChevronUp} />
-        </li>
-      </ul>
+      {isActive && (
+        <Wrap>
+          <Content>
+            <FontAwesomeIcon icon={faMessage} />
+          </Content>
+          <Content>
+            <Link to="https://instagram.com/green_ping2023?igshid=MzRlODBiNWFlZA==">
+              <FontAwesomeIcon icon={faInstagram} />
+            </Link>
+          </Content>
+          <Content onClick={moveToTop}>
+            <FontAwesomeIcon className="mt-5" icon={faChevronUp} />
+          </Content>
+        </Wrap>
+      )}
     </>
-  )
+  );
 }
 
-export default Aside
+export default Aside;
