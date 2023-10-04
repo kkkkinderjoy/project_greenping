@@ -9,6 +9,7 @@ import { faUser } from '@fortawesome/free-regular-svg-icons'
 import { faChevronRight } from '@fortawesome/free-solid-svg-icons'
 import Eventbanner from '../PSY/Eventbanner'
 import { useSelector } from 'react-redux'
+import { logIn, loggedIn } from '../../store'
 
 
 const ListItems = ['캠핑장 예약', '후기', '랭킹','그린톡','그린마켓','고객센터'] 
@@ -16,6 +17,7 @@ const LinkArray = ['main','review','ranking','greentalk','greenmarket','notice']
 
 
 const Content = styled.div`
+  padding: 10px;
   width: 100%;
   background-color: #fff;
   z-index: 30;
@@ -23,13 +25,15 @@ const Content = styled.div`
   @media screen and (min-width: 768px){height: 130px;}
 `
 
+
 const HeaderWrap = styled.div`
   max-width: 1200px;
   margin: 0 auto;
- 
+  position: relative;
   align-items: center;
   display: flex;
 `
+
 
 const LogoWrap = styled.div`
   display: flex;
@@ -48,8 +52,10 @@ const ListWrap = styled.div`
    display: flex;
    justify-content: space-between;
    flex-basis: 85%;
+   font-size: 1.5em;
    @media screen and (max-width:768px) {display: none;}
 `
+
 
 const List = styled.ul`
   flex-basis: 100%;
@@ -83,7 +89,7 @@ const Hamburger= styled.div`
   right: 0;
   top: 20px;
   cursor: pointer;
-  z-index: 200;
+  z-index: 1000;
   transform: all 1s; 
   > div{
     width: 30px; height: 2px; background-color: #000; border-radius: 4px; margin: 6px;
@@ -95,19 +101,19 @@ const Hamburger= styled.div`
   @media screen and (min-width: 768px){display: none;}
   @media screen and (max-width: 640px){}
 `
-const Container = styled.div` //모바일 네비
+
+const Mnav = styled.div` //모바일 네비
   width: 100%;
   height: 100%;
-  position: relative;
   position: fixed;
-  background-color: #ddd;
+  background-color: #eee;
   left: ${({ $isopen }) => $isopen ? "0" : "100%;"};
   height: ${({ $isopen, $height }) => ($isopen === "true" ? $height : "100%")};
   top: 0;
   padding: 40px;
   margin: 0 auto;
   box-sizing: border-box;
-  z-index: 40;
+  z-index: 999;
   transition: all 0.5s;
   @media screen and (min-width: 768px){display: none;}
   >ul{
@@ -123,9 +129,7 @@ const MnavTitle = styled.div`
       display: flex;
       flex-direction: column;
       align-items: center;
-      
       span{
-        border-bottom: 1px solid gray;
         margin-bottom: 20px;
       }
   `
@@ -147,13 +151,13 @@ const MnavLogo = styled.div`
 `
 
 const MnavList = styled.div`
-  margin-top: 30px;
+  width: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  margin: 0 auto;
-  padding: 40px;
+  margin-top: 40px;
+
   ul{
+    justify-content: center;
     margin-bottom: 40px;
     display: flex;
     cursor: pointer;
@@ -166,10 +170,27 @@ const MnavBanner = styled.div`
   width: 100%;
 `
 
-function Header(){
+const MyList = styled.div`
+width: 90%;
+margin-top: 20px;
+ul{
+  display: flex;
+  justify-content: space-around;
+  align-content: center;
+  background-color: #FEFFDD;
+  
+  padding: 15px 0px;
+  border-radius: 10px;
+}
+`
+
+
+
+function Header({userState}){
+  
   const [isActive,setIsActive]=useState(false);
-  const userState = useSelector(state => state.user);
-  console.log(userState);
+  // const userState = useSelector(state => state.user);
+
   return (
     <>
      <Content $isopen={isActive}>
@@ -190,7 +211,9 @@ function Header(){
           <NavMember>
             <ul>
               <li>
-                <NavLink to={userState.data?.email ? "/logout" : "/login"}>{userState.data?.email ? "로그아웃" : "로그인"} </NavLink>
+
+                <NavLink to={userState.uid ? "/logout" : "/login" }>{userState.uid ? "로그아웃" : "로그인"} </NavLink>
+
               </li>
               <li>
                 {
@@ -206,18 +229,28 @@ function Header(){
               </li>
             </ul>
           </NavMember>
-           <Container $isopen={isActive} $height={isActive}>
+           <Mnav $isopen={isActive} $height={isActive}>
           <MnavTitle>
           <MnavLogo>
           <FontAwesomeIcon icon={faUser}></FontAwesomeIcon>                       
           </MnavLogo>
-          {
-              userState.uid 
+          
+            {
+              userState.uid
               ?
-            <NavLink to ='/modify'><span onClick={()=>{
+              <>
+             
+              <NavLink to ='/modify'><span onClick={()=>{
                             setIsActive(!isActive)
-              }}>{userState.name}님 안녕하세요.</span></NavLink>
-               
+              }}>{userState.uid.name}님 안녕하세요.</span></NavLink>
+              <MyList>
+                <ul>
+                  <li>회원정보수정</li>
+                  <li>예약 내역</li>
+                  <li>나의 활동</li>
+                </ul>
+              </MyList>
+               </> 
               :
               <NavLink to ='/login'><span onClick={()=>{
                 setIsActive(!isActive)
@@ -242,7 +275,7 @@ function Header(){
          }
         </MnavList>
         <MnavBanner>{Eventbanner()}</MnavBanner>
-        </Container>        
+        </Mnav>        
         </HeaderWrap>
          {/* 모바일네비 */}
          

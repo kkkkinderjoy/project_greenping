@@ -1,5 +1,9 @@
 @charset "utf-8";
 
+.swiper-pagination{
+    position: absolute;
+    bottom: 0px !important;
+}
 
 .swiper-pagination-bullet {
     background: #868686 !important;
@@ -12,7 +16,15 @@
   }
 
 
+
   .ck-editor__editable_inline {
     min-height: 500px;
   }
   
+
+.textarea{
+  border: 1px solid #ddd;
+  width: 600px;
+  height: 150px;
+  border-radius: 10px;
+}
