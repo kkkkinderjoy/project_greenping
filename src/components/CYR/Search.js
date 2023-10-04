@@ -20,6 +20,7 @@ const Content = styled.div`
   width: 100%;
   height: 496px;
   background: url('/images/main-banner.jpg');
+  background-size: cover;
 `
 
 
@@ -127,15 +128,6 @@ const NavLinkWrap = styled.div`
 
 
 
-const Select = styled.select`
-  font-size: 24px;
-  font-weight: bold;
-  border: none;
-  color: #666666;
-  flex-basis: 8%;
-  background: none;
-`
-
 const Mwrap = styled.div`
   z-index: 50;
   background-color: #fff;
@@ -156,7 +148,8 @@ const Mwrapper = styled.div`
   flex-wrap: nowrap;
   border-radius: 10px;
   align-items: center;
-`;
+`
+
 const MinputBox = styled.div`
   flex-basis: 3/4;
   border: 1px solid #ddd;
@@ -166,7 +159,8 @@ const MinputBox = styled.div`
     border: none;
     height: 100%;
   }
-`;
+`
+
 const MbuttonBox = styled.div`
   flex-basis: 1/4;
   border: 1px solid #ddd;

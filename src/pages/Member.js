@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { createUserWithEmailAndPassword, firebaseAuth } from './../firebase'
 import { doc, setDoc, getFirestore, Firestore, getDoc, query, collection, where, getDocs } from 'firebase/firestore'
@@ -8,6 +8,7 @@ import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons'
 import { useDispatch, useSelector } from 'react-redux'
 import { logIn } from '../store'
 import { getAuth, fetchSignInMethodsForEmail } from 'firebase/auth';
+
 
 
 const Container = styled.div`
@@ -106,6 +107,38 @@ function Member() {
   const dispatch = useDispatch();
   const [dateOfBirth, setDateOfBirth] = useState("");
   const userState = useSelector(state => state.user);
+  const initialMode = window.location.pathname.includes("member");
+  const[userUid,setUserUid] =useState(userState && userState.uid);
+
+  useEffect(()=>{
+    if(!initialMode){ 
+      firebaseAuth.onAuthStateChanged((user)=>{ //인증을 초기화해서 다시 가져오겠다
+        if(user){
+          setUserUid(user.uid);
+        }
+      })  
+    }
+  },[initialMode])
+
+
+  useEffect(()=>{
+    if(!initialMode && userUid){
+      const fetchUserData = async () =>{
+        const userRef = doc(getFirestore(), "users" ,userUid);
+        const userSnap = await getDoc(userRef);
+        // console.log(userSnap.data()); 
+        
+        if(userSnap.exists()){
+          const data= userSnap.data();
+          setName(data.name);
+          setPhoneNumber(data.phoneNumber);
+          setEmail(data.email);
+        }
+      }
+      fetchUserData();
+    }
+  },[initialMode,userUid])
+
 
   const toggleEye = (index) => {
     const newEye = [...eye];
@@ -193,6 +226,7 @@ function Member() {
         name,
         phoneNumber,
         email,
+        dateOfBirth
       }
       await setDoc(doc(getFirestore(), "users", user.uid), userProfile)
      
