@@ -109,6 +109,10 @@ function Assi() {
 
     const menu = ["/sale", "/buy", "/assi"]
 
+    const uid = sessionStorage.getItem("users");
+    const [userUid, setUserUid] = useState(uid);
+    console.log(userUid)
+
   return (
     <>
     <Content>
@@ -126,7 +130,7 @@ function Assi() {
         <ContentWrap>
         <NavLink to='/'><p>메인으로 돌아가기</p></NavLink>
           {
-          FilterAssi.map((e,i)=>{
+          FilterAssi.slice().reverse().map((e,i)=>{
             return(
               <ContentItem key={i}>
                 <h3>{e.TITLE}</h3>
@@ -135,7 +139,10 @@ function Assi() {
                   <li>{e.PRICE}</li>
                   <li>업로드일: {e.DATE}</li>
                 </ul>
+                {
+                  uid && 
                 <NavLink to={`/inquiry/${e.NUM}`} state={e}><Button>문의하기</Button></NavLink>
+                }
               </ContentItem>
             )
           })      

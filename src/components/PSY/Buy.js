@@ -33,7 +33,7 @@ const TitleWrap = styled.div`
 const ContentWrap = styled.div`
     width: 100%;
     gap: 15px;
-    margin: 0 auto;
+    margin-bottom: 50px;
     padding: 0 2%;
     display: flex;
     flex-wrap: wrap;
@@ -109,7 +109,9 @@ function Buy() {
 
     const menu = ["/sale" , "/buy", "/assi"]
 
-    
+    const uid = sessionStorage.getItem("users");
+    const [userUid, setUserUid] = useState(uid);
+    console.log(userUid)
 
   return (
     <>
@@ -128,7 +130,7 @@ function Buy() {
         <ContentWrap>
           <NavLink to='/'><p>메인으로 돌아가기</p></NavLink>
             {
-             dataFilter.map((e,i)=>{
+             dataFilter.slice().reverse().map((e,i)=>{
                 return(
                 <ContentItem key={i}>
                     <h3>{e.TITLE}</h3>
@@ -137,7 +139,10 @@ function Buy() {
                         <li>{e.PRICE}</li>
                         <li>업로드일: {e.DATE}</li>
                     </ul>
+                    {
+                      uid &&
                     <NavLink to={`/inquiry/${e.NUM}`} state={e}><Button>문의하기</Button></NavLink>
+                    }
                 </ContentItem>
                 )
               })         
