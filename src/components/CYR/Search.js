@@ -44,6 +44,12 @@ const Select = styled.select`
   appearance: none; //화살표 없애기
   -moz-appearance: none; //파이어폭스 화살표 없애기
   text-align: center;
+  select:required:invalid{
+    color: #909090;
+  }
+  option[value=""][disabled]{
+    display: none;
+  }
   &:focus{
     outline: none;
     border-radius: 100px;
@@ -54,6 +60,7 @@ const Option = styled.option`
   font-size: 1em;
   border: none;
   text-align: center;
+ 
 
 `
 
@@ -75,7 +82,7 @@ const StyleDate = styled(DatePicker)`
 
 const Input = styled.input`
   border: none;
-  width: 40%;
+  width: 30%;
   padding: 2%;
   font-size: 1.2em;
   font-weight: bold;
@@ -250,10 +257,13 @@ function Search() {
         <ContentWrap>
           <Inner>
           <Select onChange={optionDonm}>
+            <option value="" disabled selected>어디로 떠나볼까요</option>
             <Option value="전체">전체</Option>
-            {Filterdonm.map((e, i) => {
+            {
+              Filterdonm.map((e, i) => {
               return <Option key={i}>{e}</Option>;
-            })}
+              })
+            }
           </Select>
           <StyleDate
             locale={ko}
