@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
 import data from './../../data/MarketData'
 import { styled } from 'styled-components';
-import { NavLink, useLocation } from 'react-router-dom';
+import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCartShopping } from '@fortawesome/free-solid-svg-icons';
 import Write from '../../pages/Write';
+import Salewrite from './Salewrite';
 
 const Content = styled.div`
   background-color: #f9fcfc;
@@ -49,7 +50,7 @@ const ContentItem = styled.div`
   transform: translateX(-50%);
   h3{padding-top: 50px; font-size: 28px;}
   svg{
-      color: #70e6b7;
+      color: #ddd;
       font-size: 150px;
       filter: drop-shadow(3px 3px rgba(127, 138, 140, 0.15));
       position: absolute;
@@ -100,6 +101,7 @@ function Sale({userState}){
     const [userUid, setUserUid] = useState(uid);
     console.log(userUid)
     //로그인 했을때 문의하기버튼 보이게 
+    const navigate = useNavigate();
 
   return (
     <>
@@ -119,7 +121,7 @@ function Sale({userState}){
     {
       uid ?
       <li>
-        <Write />
+        <Salewrite />
       </li>
       :
       <>
