@@ -27,7 +27,8 @@ import Buy from "./components/PSY/Buy";
 import Assi from "./components/PSY/Assi";
 import Inquiry from "./pages/Inquiry";
 import { useEffect } from "react";
-
+import Salepage from "./components/PSY/Salepage";
+import Salewrite from "./components/PSY/Salewrite";
 
 
 
@@ -81,6 +82,7 @@ function Inner() {
   return (
     <>
       <GlobalStyle />
+
       <Header userState={userState}/>
       <Routes>
         <Route path="/" element={<Main />}></Route>
@@ -100,6 +102,8 @@ function Inner() {
         <Route path="/findemail" element={<Findemail />}></Route>
         {/* <Route path="/*" element={<Notfound />}></Route> */}
         <Route path="/sale" element={<Sale />} />
+        <Route path="/salewrite" element={<Salewrite />} />
+        <Route path="/salepage" element={<Salepage />} />
         <Route path="/buy" element={<Buy />} />
         <Route path="/Assi" element={<Assi />} />
         <Route path="/inquiry/:seq" element={<Inquiry />} />
