@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { NavLink } from "react-router-dom";
-import axios from "axios";
-import { eachDayOfInterval } from "date-fns";
+import { NavLink, useLocation } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLocationDot, faPhoneVolume, faUser } from "@fortawesome/free-solid-svg-icons";
 
@@ -86,15 +84,16 @@ const ContentItem = styled.div`
         flex-direction: column;
         justify-content: center;
         li{
+          margin-top: 5px;
           text-align: left;
           display: flex;
           >svg{
             color: #98eecc;
           }
-          p{
+          .div{
           display: flex;
           flex-wrap: wrap;
-
+          column-gap: 60%;
             img{ 
               display: block;
               position: relative;
@@ -102,10 +101,15 @@ const ContentItem = styled.div`
               height: 28px;
             }
             >p{
+              margin-top: 20px;
               display: block;
               font-size: 10px;
             }   
-          } 
+          }
+        }
+        li:nth-last-child(1){
+          margin-top: 20px;
+          border: 1px solid #ddd;
         }
       }
   }
@@ -123,6 +127,9 @@ function SearchD() {
   const [searchTerm, setSearchTerm] = useState("");
   const [searchKeyword, setSearchKeyword] = useState("");
   const [Selected, setSelected] = useState("");
+  const location = useLocation();
+  console.log(location.state.optiondonmSelect)
+  console.log(location.state.userinput)
 
   
   const SbrsCl = ["전기","장작판매","물놀이장","놀이터","산책로","운동시설","무선인터넷","트렘폴린","마트.편의점","온수","운동장"]
@@ -139,8 +146,10 @@ function SearchD() {
       });
   }, []);
 
-  const handleSearch = () => {
+  const handleSearch = (el) => {
+    const donmValue = el.target.value;
     setSearchKeyword(searchTerm);
+    setSelected(donmValue);
     setData(
       data.filter(
         (e) =>
@@ -218,10 +227,10 @@ function SearchD() {
                                   {
                                     listArray.map((el,index)=>{
                                       return (
-                                          <p>
+                                          <div key={index}>
                                             <img width="50" src={`images/ico_${imgUrl[index]}.png`} alt="" />
                                             <p>{el}</p> 
-                                          </p>
+                                          </div>
                                       )
                                     })
                                   }
