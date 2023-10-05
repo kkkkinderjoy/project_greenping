@@ -24,12 +24,11 @@ const Content = styled.li`
   margin-bottom: 10px;
   text-align: center;
   cursor: pointer;
-  font-size: 1.3em;
+  font-size: 1.2em;
    img {
     width: 30px;
     height: 30px;
     color: #98eecc;
-   
   }
 `;
 

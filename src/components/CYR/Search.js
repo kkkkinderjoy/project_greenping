@@ -12,24 +12,49 @@ const Content = styled.div`
   height: 496px;
   background: url('/images/main-banner.jpg');
   background-size: cover;
+  >p{
+  width: 100%;
+  height: 140px;
+  background-color: #fff;
+  opacity: 0.95;
+  display: none;
+  &.active{
+    display: block;
+    position: fixed;
+    top: 0;
+    z-index: 9000;
+  }
+  }
 `
-
+// const ScrollWrap = styled.div`
+//   position: absolute;
+//   top: 0;
+//   width: 100%;
+//   background-color: #ddd;
+//   opacity: 0.95;
+//   &.active{
+//     display: block;
+//     z-index: 7000;
+//     position: absolute;
+//     width: 100%;
+//     background-color: #ddd;
+//   }
+// `
 
 const ContentWrap = styled.div`
   max-width: 1200px;
   margin: 0 auto;
   display: flex;
-  transform: translateY(500%);
-  
+  position: relative;
+  top: 80%;
+  left: 32%;
+  transform: translate(-50%,-50%);
   &.on{
     position: fixed;
-    top: 0;
-    left: 0;
-    max-width: 1200px;
-    margin: 0 auto;
-    display: flex;
-    
-    
+    top: 6%;
+    left: 50%;
+    width: 100%;
+    z-index: 10000;
   }
 `
 
@@ -43,22 +68,24 @@ const Inner = styled.div`
   background-color: #fff;
   border-radius: 100px;
   box-shadow: rgba(0, 0, 0, 0.2) 0px 20px 30px;
+  /* &.on{
+    box-shadow: rgba(37, 40, 47, 0.15) 0 0 3px 0;
+  } */
 `
 
 const Select = styled.select`
   width: 18%;
   padding: 2%;
-  font-size: 1.2em;
-  font-weight: bold;
+  font-size: 1em;
   border: none;
   -webkit-appearance:none; //크롬 화살표 없애기
   appearance: none; //화살표 없애기
   -moz-appearance: none; //파이어폭스 화살표 없애기
   text-align: center;
   select:required:invalid{
-    color: #909090;
+    color: red;
   }
-  option[value=""][disabled]{
+  >option[value=""][disabled]{
     display: none;
   }
   &:focus{
@@ -71,14 +98,12 @@ const Option = styled.option`
   font-size: 1em;
   border: none;
   text-align: center;
- 
-
 `
 
 const StyleDate = styled(DatePicker)`
   width: 250px;
   height: 65px;
-  font-size: 1.2em;
+  font-size: 1em;
   font-weight: bold;
   border: 0;
   appearance: none;
@@ -95,7 +120,7 @@ const Input = styled.input`
   border: none;
   width: 30%;
   padding: 2%;
-  font-size: 1.2em;
+  font-size: 1em;
   font-weight: bold;
   border: 0;
   appearance: none;
@@ -167,11 +192,6 @@ const NavLinkWrap = styled.div`
 
 
 
-
-
-
-
-
 function Search() {
   const [dateRange, setDateRange] = useState([null, null]);
   const [startDate, endDate] = dateRange;
@@ -181,7 +201,8 @@ function Search() {
   const [optiondonmSelect, setOptionDonmSelect] = useState("");
   //날짜 나오게 하기
   const dateNow = new Date();
-  const today = ` ${dateNow.getMonth() + 1}월 ${dateNow.getDate()}일`;
+  const today = `${dateNow.getMonth() + 1}월 ${dateNow.getDate()}일`;
+
         useEffect(()=>{
       fetch("https://apis.data.go.kr/B551011/GoCamping/basedList?numOfRows=100&pageNo=1&MobileOS=ETC&MobileApp=project&serviceKey=hQ42F%2BSKq2L%2FUrlhNoGxv63elQn7W8CmL22xl6yXuGk%2BMz0zdU%2Frk2CIdCeX5%2BYPmg39K5QBYCeSgUyqtD7Qdg%3D%3D&_type=json")
       .then((res) =>{return res.json()})
@@ -191,6 +212,7 @@ function Search() {
       }); 
     },[]);
     
+
     const optionDonm = (e) =>{
         const donmValue = e.target.value
         setOptionDonmSelect(donmValue);
@@ -200,12 +222,14 @@ function Search() {
       const ValueI = e.target.value
       setUserInput(ValueI)
     }
-       const Filterdonm = [...new Set(alldonm && alldonm.map(e=>e.doNm).sort())];
+    const Filterdonm = [...new Set(alldonm && alldonm.map(e=>e.doNm).sort())];
 
-       //스크롤 이벤트
-      const [ScrollY, setScrollY] = useState(0); // window 의 scrollY값을 저장 
-      const [ScrollActive, setScrollActive] = useState(false); 
-      function scrollFixed() { 
+
+    //스크롤 이벤트
+
+    const [ScrollY, setScrollY] = useState(0); // window 의 scrollY값을 저장 
+    const [ScrollActive, setScrollActive] = useState(false); 
+    function scrollFixed() { 
           if(ScrollY > 600) {
               setScrollY(window.scrollY);
               setScrollActive(true);
@@ -213,12 +237,15 @@ function Search() {
               setScrollY(window.scrollY);
               setScrollActive(false);
           }
-      }
-      useEffect(() => {
-          function scrollListener() {window.addEventListener("scroll", scrollFixed);}
+    }
+      
+    useEffect(() => {
+          function scrollListener(){window.addEventListener("scroll", scrollFixed)}
           scrollListener();
           return () => { window.removeEventListener("scroll", scrollFixed); }; 
       });
+
+
 
   return (
     <> 
@@ -237,10 +264,12 @@ function Search() {
             </div>
           </Mwrapper>
         </Mwrap> */}
-      {/* 모바일 써치+버튼 끝 */}               
-      {/* 유리써치 시작*/}
-      <Content > 
-        <ContentWrap className={ScrollActive? "on" :""} >
+
+      {/* 모바일 써치+버튼 끝 */}
+      {/* 유리써치 */}
+      <Content> 
+        <p className={ScrollActive? "active" :""}></p>
+        <ContentWrap className={ScrollActive? "on" :""}>
           <Inner>
           <Select onChange={optionDonm}>
             <option value="" disabled selected>어디로 떠나볼까요</option>
@@ -258,7 +287,6 @@ function Search() {
             endDate={endDate}
             onChange={(date,today) => {
               setDateRange(date);
-             
             }}
             dateFormat="MM월 dd일"
             minDate={subDays(new Date(), 0)}
@@ -280,6 +308,7 @@ function Search() {
           </NavLinkWrap>
           </Inner>
         </ContentWrap>
+        
         </Content>
     </>
   )

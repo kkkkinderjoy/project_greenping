@@ -33,7 +33,7 @@ const Header = styled.div`
 `;
 
 const Heading = styled.h3`
-  font-size: 2.2em;
+  font-size: 2.0em;
   position: relative;
 
   &::after {
