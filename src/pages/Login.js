@@ -142,6 +142,7 @@ function Login() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const userState = useSelector(state => state.user);
+    console.log(userState)
     const errorMsg = (errorCode) =>{
       const firebaseError = {
         'auth/user-not-found' :"이메일 혹은 비밀번호가 잘못 되었습니다.",
@@ -153,13 +154,14 @@ function Login() {
 
     const LoginForm = async (e)=>{
       e.preventDefault();
+      
       try{
         const userLogin = await signInWithEmailAndPassword(firebaseAuth, email, password);
         const user = userLogin.user;
-        // console.log(user);
+        console.log(user);
         sessionStorage.setItem("users",user.uid);
         dispatch(logIn(user.uid));
-
+        
         const userDoc = doc(collection(getFirestore(),"users"),user.uid);
         const userDocSnapshot = await getDoc(userDoc);
         // console.log(userDocSnapshot.data())

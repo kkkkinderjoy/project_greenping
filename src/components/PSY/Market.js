@@ -56,8 +56,14 @@ const ContentItem = styled.div`
         padding-right: 10px;
       }
     }
-    @media screen and (max-width: 600px){
-    flex-basis: 100%;}
+  @media screen and (max-width: 768px) {
+    ul{
+      li{
+        width: 32.5%;
+        height: auto;
+      }
+    }
+}
 `
 const SvgBox = styled.div`
   background-color: #fff;
