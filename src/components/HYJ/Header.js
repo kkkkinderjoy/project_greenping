@@ -52,7 +52,7 @@ const ListWrap = styled.div`
    display: flex;
    justify-content: space-between;
    flex-basis: 85%;
-   font-size: 1.5em;
+   font-size: 1.2em;
    @media screen and (max-width:768px) {display: none;}
 `
 
@@ -99,7 +99,6 @@ const Hamburger= styled.div`
   &.on div:nth-child(2){opacity: 0;}
   &.on div:nth-child(3){transform:rotate(-45deg) translateY(-12px)}
   @media screen and (min-width: 768px){display: none;}
-  @media screen and (max-width: 640px){}
 `
 
 const Mnav = styled.div` //모바일 네비
@@ -200,13 +199,13 @@ function Header({userState}){
           </LogoWrap>
           <ListWrap>
             <List>
-            <ListItem><NavLink to="/searchd">캠핑장 찾기</NavLink></ListItem>
-            <ListItem><NavLink to="/ranking">랭킹</NavLink></ListItem>
-            <ListItem><NavLink to="/reviewmore">리뷰</NavLink></ListItem>
-            <ListItem><NavLink to="/board">그린톡</NavLink></ListItem>
-            <ListItem><NavLink to="/market">그린마켓</NavLink></ListItem>
-            <ListItem><NavLink to="/notice">고객센터</NavLink></ListItem>
-          </List>
+              <ListItem><NavLink to="/searchd">캠핑장 찾기</NavLink></ListItem>
+              <ListItem><NavLink to="/ranking">랭킹</NavLink></ListItem>
+              <ListItem><NavLink to="/reviewmore">리뷰</NavLink></ListItem>
+              <ListItem><NavLink to="/board">그린톡</NavLink></ListItem>
+              <ListItem><NavLink to="/buy">그린마켓</NavLink></ListItem>
+              <ListItem><NavLink to="/notice">고객센터</NavLink></ListItem>
+            </List>
           </ListWrap>
           <NavMember>
             <ul>

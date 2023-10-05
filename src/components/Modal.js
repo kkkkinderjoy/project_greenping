@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faX } from '@fortawesome/free-solid-svg-icons';
+import Logout from '../pages/Logout';
 
 
 const ContentWrap = styled.div`
@@ -89,8 +90,8 @@ const Button = styled.button`
 `
 
 
-function Modal({onClose}) {
-  const [error, setError] = useState("");
+function Modal({error,onClose}) {
+  
   const [isModal, setIsModal] = useState(true);
 
   return (
@@ -100,10 +101,11 @@ function Modal({onClose}) {
       isModal &&
     
     <ContentWrap>
-        <Content>
+        <Content >
             <CloseBtn  onClick={onClose}> 
               <p><FontAwesomeIcon icon={faX} /></p>
             </CloseBtn>
+        <p>{error}</p>
         </Content>
     </ContentWrap>
     }

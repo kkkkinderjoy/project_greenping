@@ -165,6 +165,9 @@ function Board() {
               <ListItem>
                 {e.title}
               </ListItem>
+              <ListItem>
+                {e.name}
+              </ListItem>
               <div dangerouslySetInnerHTML={{__html: e.content}}/>
               
               <ListItem

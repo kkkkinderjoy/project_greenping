@@ -6,15 +6,11 @@ import { styled } from "styled-components";
 
 const Content = styled.div`
   width: 100%;
- 
-  
 `
 const ContentWrap = styled.div`
     max-width: 1200px;
     margin: 100px auto;
     padding: 0 2%;
-    
-    
 `
 
 const Title = styled.h3`
@@ -23,7 +19,7 @@ const Title = styled.h3`
   padding-bottom: 30px;
 `
 const ContentItem = styled.div`
-  max-width: 1200px;
+  width: 100%;
   ul{
     display: flex;
     justify-content: space-around; 
@@ -37,6 +33,7 @@ const ContentItem = styled.div`
       text-align: center;
       cursor: pointer;
       position: relative;
+    }
       svg{
         color: #dddddd;
         font-size: 65px;
@@ -59,13 +56,14 @@ const ContentItem = styled.div`
         padding-right: 10px;
       }
     }
-  }
-  @media screen and (max-width: 1200px){
-    flex-basis: 49%;
-  }
-  @media screen and (max-width: 640px){
-    flex-basis: 100%;
-  }
+  @media screen and (max-width: 768px) {
+    ul{
+      li{
+        width: 32.5%;
+        height: auto;
+      }
+    }
+}
 `
 const SvgBox = styled.div`
   background-color: #fff;
