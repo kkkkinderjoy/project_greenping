@@ -67,7 +67,7 @@ function Ckeditor({ title, postData }) {
         content: writeData,
         view: 1,
         uid: userState.uid,
-        name: userState.data?.name,
+        name: userState.uid.name,
         timestamp: serverTimestamp(),
         file : fileUrl,
         likes: true,
