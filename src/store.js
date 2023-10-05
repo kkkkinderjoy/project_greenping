@@ -15,7 +15,7 @@ let user = createSlice({
         },
         loggedIn :(state,action)=>{
             state.loggedIn = true;
-            state.uid = action.payload;
+            state.data = action.payload;
         },
         logOut:(state)=>{
             state.loggedIn = false;
