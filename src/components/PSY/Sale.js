@@ -2,10 +2,14 @@ import React, { useState } from 'react'
 import data from './../../data/MarketData'
 import { styled } from 'styled-components';
 import { NavLink, useLocation } from 'react-router-dom';
-import Inquiry from './../../pages/Inquiry';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCartShopping } from '@fortawesome/free-solid-svg-icons';
+import Write from '../../pages/Write';
 
 const Content = styled.div`
-    width: 100%;
+  background-color: #f9fcfc;
+  padding-top: 60px;
+  padding-bottom: 140px;
 `
 const TitleWrap = styled.div`
     max-width: 800px;
@@ -22,7 +26,6 @@ const TitleWrap = styled.div`
         border-radius: 20px;
         text-align: center;
         cursor: pointer;
-        line-height: 52px;
         line-height: 50px;
     &.on{
         background-color: #24d181;
@@ -31,76 +34,66 @@ const TitleWrap = styled.div`
   }
 }
 `
-const ment = styled.div`
-  font-size: 20px;
-`
 
-const ContentWrap = styled.div`
-    width: 100%;
-    gap: 15px;
-    margin: 0 auto;
-    padding: 0 2%;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: start;
-`
 const ContentItem = styled.div`
-  width: 500px;
+  width: 600px;
   height: 500px;
-  flex-basis: 31.5%;
   border: 1px solid #ddd;
   border-radius: 10px;
   box-sizing: border-box;
-  white-space: break-spaces;
+  background-color: #fff;
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;
+  text-align: center;
   position: relative;
-  img{
-    width: 300px; 
-    height:300px; 
-    display: block; margin: 0 auto; margin-bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  h3{padding-top: 50px; font-size: 28px;}
+  svg{
+      color: #70e6b7;
+      font-size: 150px;
+      filter: drop-shadow(3px 3px rgba(127, 138, 140, 0.15));
+      position: absolute;
+      top: 35%;
+      left: 34%;
     }
-  h3{margin-bottom: 24px; text-align: center; padding-top: 24px; font-size: 22px;}
-  ul{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    li{
-      margin-bottom: 7px;
-      &:nth-child(1){
-        font-size: 18px;
-        font-weight: bold;
-      }
+    @media screen and (max-width: 768px) {
+    width: 100%;
+    height: 400px;
+    max-width: 400px;
+    h3 {
+      font-size: 24px;
     }
-  }
-  @media screen and (max-width: 768px){
-    flex-basis: 100%;
+    svg {
+      font-size: 100px;
+      top: 35%;
+      left: 35%;
+    }
   }
 `  
 const Button = styled.button`
     position: absolute;
-    width: 100px;
-    height: 30px;
-    line-height: 32px;
-    background-color: #70e6b7;
+    width: 80%;
+    height: 50px;
+    font-size: 18px;
+    line-height: 30px;
+    background-color: #2ed090;
     border-radius: 10px;
+    border: none;
     color: #fff;
-    right: 10px;
-    bottom: 10px;
+    right: 50%;
+    bottom: 10%;
+    transform: translate(50%);
     cursor: pointer;
 `
 
 function Sale(props) {
 
-    const [ID, setID] = useState("판매");
+  const [ID, setID] = useState("판매");
+  const [sale, setSale] = useState(0);
 
-    const Filter = [...new Set(data.map(e => e.ID))]
+  const Filter = [...new Set(data.map(e => e.ID))]
 
-    const [sale, setSale] = useState(0);
-
-    const saleFilter =  data.filter(e =>{
-      return (e.ID === "판매" || e.ID === ID)
-    })
-    
-    const menu = ["/sale" , "/buy", "/assi"]
+  const menu = ["/sale" , "/buy", "/assi"]
 
     const uid = sessionStorage.getItem("users");
     const [userUid, setUserUid] = useState(uid);
@@ -110,8 +103,8 @@ function Sale(props) {
   return (
     <>
     <Content>
-        <TitleWrap> 
-          <ul>
+      <TitleWrap>
+      <ul>
             {
               Filter.map((e,i)=>{
                 return (
@@ -121,26 +114,21 @@ function Sale(props) {
               })
             }
           </ul>
-        </TitleWrap>
-        <ContentWrap>
-            {   
-             saleFilter.map((e,i)=>{
-                return(
-                <ContentItem key={i}>
-                    <h3>{e.TITLE}</h3>
-                    <img src={e.IMG} alt="판매용품 이미지들" />
-                    <ul>
-                        <li>{e.PRICE}</li>  
-                        <li>업로드일: {e.DATE}</li>
-                    </ul>
-  
-                    <NavLink to={`/inquiry/${e.NUM}`} state={e}><Button>문의하기</Button></NavLink>
-                    
-                </ContentItem>
-                )
-              })         
-            }
-        </ContentWrap>
+      </TitleWrap>
+    {
+      useState.uid ?
+      <li>
+        <Write />
+      </li>
+      :
+      <>
+      <ContentItem>
+        <h3>판매를 원한다면 로그인해주세요!</h3>
+        <FontAwesomeIcon icon={faCartShopping} />
+        <NavLink to='/login'><Button>로그인하기</Button></NavLink>
+      </ContentItem>
+      </>
+    }
     </Content>
     </>
   )

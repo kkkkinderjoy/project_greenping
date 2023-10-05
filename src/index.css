@@ -28,3 +28,9 @@
   height: 150px;
   border-radius: 10px;
 }
+
+.textarea:focus {
+  border-color: #2ed090;
+  outline: none;
+}
+
