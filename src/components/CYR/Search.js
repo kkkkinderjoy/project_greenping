@@ -82,39 +82,39 @@ const Select = styled.select`
   display:none
   }
 `
-const Mwrap = styled.div`
-  z-index: 50; background-color: #fff; 
-  padding-top: 5px; width: 100%; height: 300px;
-  position: fixed; top: 0; display: flex; justify-content: space-around;
-`
-const Mwrapper = styled.div`
-   width: 70%; height:40px;
-   display: flex; justify-content: space-between; flex-wrap: nowrap; border-radius: 10px;
-   align-items: center;
-`
-const MinputBox = styled.div`
-  flex-basis: 3/4; 
-  border: 1px solid #ddd; height: 100%;
-  border-radius: 5px;
-  >input{
-    border: none;
-    height: 100%;
-  }
-`
-const MbuttonBox = styled.div`
-  flex-basis: 1/4;
-  border: 1px solid #ddd; height: 100%;
-  border-radius: 5px;
-  >button{
-    border: 1px solid #ddd;
-    background-color: #98eecc;
-    color: #fff;
-    font-weight: bold;
-    border-radius: 5px;
-    font-size: 25px;
-    right: 0; width: 100%; height: 80%;
-  }
-`
+// const Mwrap = styled.div`
+//   z-index: 50; background-color: #fff; 
+//   padding-top: 5px; width: 100%; height: 300px;
+//   position: fixed; top: 0; display: flex; justify-content: space-around;
+// `
+// const Mwrapper = styled.div`
+//    width: 70%; height:40px;
+//    display: flex; justify-content: space-between; flex-wrap: nowrap; border-radius: 10px;
+//    align-items: center;
+// `
+// const MinputBox = styled.div`
+//   flex-basis: 3/4; 
+//   border: 1px solid #ddd; height: 100%;
+//   border-radius: 5px;
+//   >input{
+//     border: none;
+//     height: 100%;
+//   }
+// `
+// const MbuttonBox = styled.div`
+//   flex-basis: 1/4;
+//   border: 1px solid #ddd; height: 100%;
+//   border-radius: 5px;
+//   >button{
+//     border: 1px solid #ddd;
+//     background-color: #98eecc;
+//     color: #fff;
+//     font-weight: bold;
+//     border-radius: 5px;
+//     font-size: 25px;
+//     right: 0; width: 100%; height: 80%;
+//   }
+// `
 
 // ${scrollPosition > 500 ? "block" : "hidden"}`}
 function Search() {

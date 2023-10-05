@@ -4,6 +4,7 @@ import React, { useState } from 'react'
 import { NavLink, useLocation, useNavigate } from 'react-router-dom'
 import { styled } from 'styled-components'
 import Modal from './../components/Modal'
+import Reserve from '../components/CYR/Reserve'
 
 
 const Dwrap = styled.div`
@@ -62,7 +63,6 @@ const Ddesc = styled.div`
     width: 80%;
     height: 400px;
     align-items: center;
-    line-height: 50px;
     margin: 0 auto;
     display: flex; justify-content: space-between;
     >svg{
@@ -71,6 +71,7 @@ const Ddesc = styled.div`
     }
     >p{
         margin-left: 50px;
+        line-height: 50px;
     }
 `
 const SearchLine = styled.div`
@@ -81,14 +82,13 @@ const SearchLine = styled.div`
 function Descpage() {
     const location = useLocation()
     const data = location.state;
-    console.log(data)
+    // console.log(data)
     const [isActive, setIsActive] = useState(false);
     const [isModal, setIsModal] = useState(false);
-    const navigate = useNavigate("");
 return(
     <>
         {
-             isModal && <Modal onClose={()=>{setIsModal(false)}}/>
+             isModal && <Reserve onClose={()=>{setIsModal(false)}}/>
         }
         <Dwrap>
             <h2>{data.facltNm}</h2>
