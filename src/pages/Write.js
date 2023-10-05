@@ -33,7 +33,7 @@ const Header = styled.div`
 `;
 
 const Heading = styled.h3`
-  font-size: 2.2em;
+  font-size: 2.0em;
   position: relative;
 
   &::after {
@@ -128,31 +128,24 @@ function Write() {
     }
   });
 
-  // if(!memberProfile.loggedIn){
-  //   return(
-  //     <>
-  //     {
-  //       isModal &&
-  //       <Modal error="로그인 이후 이용해주시기 바랍니다!" onClose={()=>{setIsModal(false); navigate('/login')}}/>
+  if(!memberProfile.loggedIn){
+    return(
+      <>
+      {
+        isModal &&
+        <Modal error="로그인 이후 이용해주시기 바랍니다!" onClose={()=>{setIsModal(false); navigate('/login')}}/>
         // 유효성 검사 -> 주소를 잘못 쓴 경우 메인으로 가게 만듦
 
-  //     }
-  //     {/* 버그 방지 */}
-  //     </>
-  //   )
-  // }
+      }
+      {/* 버그 방지 */}
+      </>
+    )
+  }
+
 
   return (
     <>
-      {/* {isModal && view && (
-        <Modal
-          error={message}
-          onClose={() => {
-            setIsModal(false);
-            navigate(`/service/${board}`);
-          }}
-        />
-      )} */}
+   
 
       <Container>
         <InnerContainer>

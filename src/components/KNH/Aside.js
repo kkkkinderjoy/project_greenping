@@ -14,18 +14,21 @@ const Wrap = styled.ul`
   z-index: 500;
 `;
 const Content = styled.li`
-  padding: 18px;
+  width: 30px;
+  height: 30px;
+  padding: 15px;
   border-radius: 22px;
-  background-color: white;
+  background-color: #ffffff;
   opacity: 0.98;
   box-shadow: 1px 1px 4px gainsboro;
   margin-bottom: 10px;
   text-align: center;
   cursor: pointer;
-   svg {
-    font-size: 1.3em;
+  font-size: 1.2em;
+   img {
+    width: 30px;
+    height: 30px;
     color: #98eecc;
-   
   }
 `;
 
@@ -54,11 +57,11 @@ function Aside() {
       {isActive && (
         <Wrap>
           <Content>
-            <FontAwesomeIcon icon={faMessage} />
+            <img src={`images/chat (1).png`} alt="" />
           </Content>
           <Content>
             <Link to="https://instagram.com/green_ping2023?igshid=MzRlODBiNWFlZA==">
-              <FontAwesomeIcon icon={faInstagram} />
+              <img src={`images/instagram.png`} alt="instagram" />
             </Link>
           </Content>
           <Content onClick={moveToTop}>

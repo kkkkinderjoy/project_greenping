@@ -3,7 +3,9 @@ import Card from "./../../data/ReviewData";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import {
-  faChevronRight} from "@fortawesome/free-solid-svg-icons";
+  faArrowAltCircleDown,
+  faArrowRight,
+  faChevronRight, faPlus} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 
@@ -18,7 +20,7 @@ const ContentWrap= styled.div`
 
 const Title = styled.h2`
   text-align: center;
-  font-size: 2.2em;
+  font-size: 2.0em;
   margin: 0 auto;
 `
 
@@ -112,7 +114,7 @@ const CardTextWrapper = styled.li`
 
 const CardTitle = styled.p`
   font-weight: 600;
-  font-size: 1.3em;
+  font-size: 1.2em;
   color: #333333;
   @media (max-width: 768px) {
     margin-bottom: 15px;
@@ -142,7 +144,7 @@ const CardDescription = styled.p`
 
 const HashWrapper = styled.div`
   display: flex;
-  font-size: 1em;
+  font-size: 0.8em;
   text-align: center;
   width: 350px;
   gap: 2%;
@@ -151,20 +153,18 @@ const HashWrapper = styled.div`
     padding: 10px;
     width: 100px;
     border-radius: 10px;
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+    border: 1px solid #ddd;
     @media (max-width: 768px) {
       display: none;
     }
   }
 `
 const Btn = styled.div`
-  margin-top: 50px;
-  font-size: 2em;
+  font-size: 1.4em;
   text-align: center;
-  border-bottom: 7px solid #A6F4D0;
   width: 20%;
   margin: 0 auto;
-  margin-top: 60px;
+  margin-top: 100px;
   @media (max-width: 768px) {
      margin: 0 auto;
      width: 30%;
@@ -174,6 +174,10 @@ const Btn = styled.div`
   p{
     color: #333333;
     font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    column-gap: 10px;
   }
 `
 
@@ -236,7 +240,7 @@ function Review() {
           }
             <Btn>
               <NavLink to="/reviewmore">
-                <p>전체 리뷰 보기</p>
+              <p>전체 보기 <FontAwesomeIcon icon={faArrowRight} /></p>
             </NavLink>
             </Btn>
         </CardWrapper>

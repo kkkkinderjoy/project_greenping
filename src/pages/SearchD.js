@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { NavLink } from "react-router-dom";
-import axios from "axios";
-import { eachDayOfInterval } from "date-fns";
+import { NavLink, useLocation } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLocationDot, faPhoneVolume, faUser } from "@fortawesome/free-solid-svg-icons";
 
@@ -11,42 +9,55 @@ const Wrap = styled.div`
   width: 100%;
 `;
 const Searchwrap = styled.div`
-  width: 1280px;
+  max-width: 1200px;
   height: 400px;
   margin: 0 auto;
   border: 5px solid #ddd;
   border-radius: 10px;
+  @media screen and (max-width: 768px){
+    flex-basis: 70%;
+    margin: 0 auto;
+  }
 `;
 const SearchForm = styled.div`
   width: 80%;
   height: 300px;
-  margin: 0 auto;
+  margin: 50px auto;
   border: 1px solid #ddd;
   border-radius: 10px;
+  @media screen and (max-width: 768px){
+    flex-basis: 80%;
+    margin: 0 auto;
+  }
 `;
 const Searchbar = styled.div`
   all: unset;
   height: 45px;
   width: 70%;
-  margin: 20px auto;
+  margin: 50px auto;
   display: flex;
   justify-content: center;
   > input {
     flex-basis: 80%;
     border: 1px solid #ddd;
-    border-radius: 10px 0 0 10px;
+    border-radius: 10px;
   }
   > button {
+    flex-basis: 30%;
     background-color: #98eecc;
-    border-radius: 0 10px 10px 0;
+    border-radius: 10px;
+    @media screen and (max-width: 768px){
+    flex-direction: column;
+    }
   }
   > select {
     width: 50%;
   }
+
 `;
 const SearchLine = styled.div`
   margin: 40px auto;
-  width: 1280px;
+  max-width: 1200px;
   border: 1px solid #ddd;
 `;
 const Content = styled.div`
@@ -86,26 +97,27 @@ const ContentItem = styled.div`
         flex-direction: column;
         justify-content: center;
         li{
+          margin-top: 5px;
           text-align: left;
           display: flex;
+          flex-wrap: wrap;
           >svg{
             color: #98eecc;
           }
-          p{
-          display: flex;
-          flex-wrap: wrap;
-
             img{ 
               display: block;
-              position: relative;
-              width: 36px;
+              max-width: 36px;
               height: 28px;
+              flex-direction: column;
             }
-            >p{
-              display: block;
+            p{
+              margin-top: 20px;
               font-size: 10px;
             }   
-          } 
+          }
+        li:nth-last-child(1){
+          margin-top: 20px;
+          border: 1px solid #ddd;
         }
       }
   }
@@ -123,6 +135,10 @@ function SearchD() {
   const [searchTerm, setSearchTerm] = useState("");
   const [searchKeyword, setSearchKeyword] = useState("");
   const [Selected, setSelected] = useState("");
+  const location = useLocation();
+  const stateData = location.state;
+  // console.log(location.state.optiondonmSelect)
+  // console.log(location.state.userinput)
 
   
   const SbrsCl = ["전기","장작판매","물놀이장","놀이터","산책로","운동시설","무선인터넷","트렘폴린","마트.편의점","온수","운동장"]
@@ -139,14 +155,19 @@ function SearchD() {
       });
   }, []);
 
-  const handleSearch = () => {
+  const handleSearch = (el) => {
+    const donmValue = el.target.value;
     setSearchKeyword(searchTerm);
+    setSelected(donmValue);
     setData(
       data.filter(
         (e) =>
           e.facltNm.toLowerCase().includes(searchTerm.toLowerCase()) ||
           e.addr1.includes(searchTerm) ||
-          e.induty.toLowerCase().includes(searchTerm.toLowerCase())
+          e.induty.toLowerCase().includes(searchTerm.toLowerCase()) 
+          // ||
+          // e.donm.includes(donmValue) ||
+          // e.sigunguNm.includes(donmValue)
       )
     );
   };
@@ -173,22 +194,26 @@ function SearchD() {
                   placeholder="검색어를 입력하세요"
                   onChange={(e) => setSearchTerm(e.target.value)}
                 />
-                <button onClick={handleSearch}>검색하기</button>
+                
               </Searchbar>
               <Searchbar>
                 <select onChange={optionDonm}>
                   <option value="전체">전체</option>
-                  {Filterdonm.map((e, i) => {
-                    return <option key={i}>{e}</option>;
-                  })}
+                  {
+                    Filterdonm.map((e, i) => {
+                    return <option key={i}>{e}</option>;})
+                  }
                 </select>
                 <select>
                   <option value="전체">전체</option>
                   {
                     FilterSigun.map((e, i) => {
-                    return <option key={i}>{e}</option>;
-                  })}
+                    return <option key={i}>{e}</option>;})
+                  }
                 </select>
+              </Searchbar>
+              <Searchbar>
+                <button onClick={handleSearch}>검색하기</button>
               </Searchbar>
           </SearchForm>
         </Searchwrap>
@@ -218,10 +243,10 @@ function SearchD() {
                                   {
                                     listArray.map((el,index)=>{
                                       return (
-                                          <p>
-                                            <img width="50" src={`images/ico_${imgUrl[index]}.png`} alt="" />
+                                          <div key={index}>
+                                            <img src={`images/ico_${imgUrl[index]}.png`} alt="이미지파일" />
                                             <p>{el}</p> 
-                                          </p>
+                                          </div>
                                       )
                                     })
                                   }

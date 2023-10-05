@@ -9,11 +9,15 @@ import {
   addDoc,
   collection,
   doc,
+  getDoc,
   getFirestore,
   serverTimestamp,
+  setDoc,
 } from "firebase/firestore";
 import { useSelector } from "react-redux";
 import {getStorage, ref, uploadBytesResumable, getDownloadURL} from 'firebase/storage'
+import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { firebaseAuth } from "../../firebase";
 // import { fireStore } from './../firebase';
 
 const Button = styled.button`
@@ -41,7 +45,8 @@ function Ckeditor({ title, postData }) {
   const [fileUrl, setFileUrl] = useState("");
 
 
-  console.log(userState);
+  // console.log(userState);
+
   useEffect(() => {
     if (postData) {
       setWriteData(postData.content);
@@ -58,24 +63,24 @@ function Ckeditor({ title, postData }) {
       setMessage("내용을 입력해주세요");
       return;
     }
-
+    
     try {
+          
+          setDoc(doc(getFirestore(), "board", userState.uid), {
+            title: title,
+            content: writeData,
+            view: 1,
+            uid: userState.uid,
+            name: userState.data.name,
+            timestamp: serverTimestamp(),
+            file : fileUrl,
+            likes: true,
+          });
+          
+          alert("게시글이 성공적으로 등록되었습니다");
+          navigate(`/board`)
 
-
-      await addDoc(collection(getFirestore(), "board"), {
-        title: title,
-        content: writeData,
-        view: 1,
-        uid: userState.uid,
-        name: userState.uid.name,
-        timestamp: serverTimestamp(),
-        file : fileUrl,
-        likes: true,
-      });
-
-      alert("게시글이 성공적으로 등록되었습니다");
-      navigate(`/board`)
-
+        
     } catch (error) {
       alert(error);
       setIsModal(!isModal);
