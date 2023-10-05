@@ -86,7 +86,8 @@ const Button = styled.button`
     cursor: pointer;
 `
 
-function Sale(props) {
+function Sale({userState}){
+    const [isActive,setIsActive]=useState(false);
 
   const [ID, setID] = useState("판매");
   const [sale, setSale] = useState(0);

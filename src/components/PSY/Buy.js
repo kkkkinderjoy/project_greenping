@@ -56,6 +56,7 @@ const ContentItem = styled.div`
   width: 500px;
   height: 500px;
   flex-basis: 31.5%;
+  margin-bottom: 50px;
   border: 1px solid #ddd;
   border-radius: 10px;
   box-sizing: border-box;
