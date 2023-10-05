@@ -3,7 +3,7 @@ import DatePicker from 'react-datepicker'
 import "react-datepicker/dist/react-datepicker.css"
 import {ko} from 'date-fns/esm/locale'
 import {addDays, subDays} from 'date-fns'
-import { NavLink, useLocation } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import styled from 'styled-components'
 
 const Content = styled.div`
@@ -139,65 +139,42 @@ const NavLinkWrap = styled.div`
         color: #fff;
       }
   }
-`;
 
-
-
-
-
-
-
-
-const Mwrap = styled.div`
-  z-index: 50;
-  background-color: #fff;
-  padding-top: 5px;
-  width: 100%;
-  height: 300px;
-  position: fixed;
-  top: 0;
-  display: flex;
-  justify-content: space-around;
 `
+// const Mwrap = styled.div`
+//   z-index: 50; background-color: #fff; 
+//   padding-top: 5px; width: 100%; height: 300px;
+//   position: fixed; top: 0; display: flex; justify-content: space-around;
+// `
+// const Mwrapper = styled.div`
+//    width: 70%; height:40px;
+//    display: flex; justify-content: space-between; flex-wrap: nowrap; border-radius: 10px;
+//    align-items: center;
+// `
+// const MinputBox = styled.div`
+//   flex-basis: 3/4; 
+//   border: 1px solid #ddd; height: 100%;
+//   border-radius: 5px;
+//   >input{
+//     border: none;
+//     height: 100%;
+//   }
+// `
+// const MbuttonBox = styled.div`
+//   flex-basis: 1/4;
+//   border: 1px solid #ddd; height: 100%;
+//   border-radius: 5px;
+//   >button{
+//     border: 1px solid #ddd;
+//     background-color: #98eecc;
+//     color: #fff;
+//     font-weight: bold;
+//     border-radius: 5px;
+//     font-size: 25px;
+//     right: 0; width: 100%; height: 80%;
+//   }
+// `
 
-const Mwrapper = styled.div`
-  width: 70%;
-  height: 40px;
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: nowrap;
-  border-radius: 10px;
-  align-items: center;
-`
-
-const MinputBox = styled.div`
-  flex-basis: 3/4;
-  border: 1px solid #ddd;
-  height: 100%;
-  border-radius: 5px;
-  > input {
-    border: none;
-    height: 100%;
-  }
-`
-
-const MbuttonBox = styled.div`
-  flex-basis: 1/4;
-  border: 1px solid #ddd;
-  height: 100%;
-  border-radius: 5px;
-  > button {
-    border: 1px solid #ddd;
-    background-color: #98eecc;
-    color: #fff;
-    font-weight: bold;
-    border-radius: 5px;
-    font-size: 25px;
-    right: 0;
-    width: 100%;
-    height: 100%;
-  }
-`
 
 
 function Search() {
@@ -208,13 +185,10 @@ function Search() {
   const [ischoice, setIsChoice] = useState([null,null]);
   const [userInput, setUserInput] = useState('');
   const [optiondonmSelect, setOptionDonmSelect] = useState("");
-
+  //날짜 나오게 하기
   const dateNow = new Date();
   const today = `${dateNow.getMonth() + 1}월 ${dateNow.getDate()}일`;
 
-
-  // const getValue = (e) => {
-  //   setUserInput(e.target.value)};
         useEffect(()=>{
       fetch("https://apis.data.go.kr/B551011/GoCamping/basedList?numOfRows=100&pageNo=1&MobileOS=ETC&MobileApp=project&serviceKey=hQ42F%2BSKq2L%2FUrlhNoGxv63elQn7W8CmL22xl6yXuGk%2BMz0zdU%2Frk2CIdCeX5%2BYPmg39K5QBYCeSgUyqtD7Qdg%3D%3D&_type=json")
       .then((res) =>{return res.json()})
@@ -228,15 +202,17 @@ function Search() {
     const optionDonm = (e) =>{
         const donmValue = e.target.value
         setOptionDonmSelect(donmValue);
-        setUserInput(e.target.value)
       }
     
-      //   const FilterData = donm && donm.filter(e =>{
-      //   return donm === "전체" || donm === e.doNm
-      //  })
+    const InputValue = (e) =>{
+      const ValueI = e.target.value
+      setUserInput(ValueI)
+    }
        const Filterdonm = [...new Set(alldonm && alldonm.map(e=>e.doNm).sort())];
 
-      //스크롤 이벤트
+
+       //스크롤 이벤트
+
       const [ScrollY, setScrollY] = useState(0); // window 의 scrollY값을 저장 
       const [ScrollActive, setScrollActive] = useState(false); 
       function scrollFixed() { 
@@ -248,11 +224,13 @@ function Search() {
               setScrollActive(false);
           }
       }
-      useEffect(() => {
-          function scrollListener() {window.addEventListener("scroll", scrollFixed)}
+      useEffect(() => 
+          function scrollListener() {window.addEventListener("scroll", scrollFixed);}
           scrollListener();
-          return () => { window.removeEventListener("scroll", scrollFixed)}; 
+          return () => { window.removeEventListener("scroll", scrollFixed); }; 
       });
+        
+
 
 
 
@@ -275,11 +253,13 @@ function Search() {
             </div>
           </Mwrapper>
         </Mwrap> */}
+
       {/* 모바일 써치+버튼 끝 */}
       {/* 유리써치 */}
       <Content className={ScrollActive? "on" :""}> 
         <ContentWrap className={ScrollActive? "on" :""} >
           <Inner className={ScrollActive? "on" :""}>
+
           <Select onChange={optionDonm}>
             <option value="" disabled selected>어디로 떠나볼까요</option>
             <Option value="전체">전체</Option>
@@ -317,7 +297,6 @@ function Search() {
           </Inner>
         </ContentWrap>
         </Content>
-
       
     </>
   )
