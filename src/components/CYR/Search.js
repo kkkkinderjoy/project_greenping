@@ -12,6 +12,15 @@ const Content = styled.div`
   height: 496px;
   background: url('/images/main-banner.jpg');
   background-size: cover;
+  &.on{
+    position: fixed;
+    top: -10px;
+    height: 130px;
+    background-color: #fff;
+    background-image: none;
+    z-index: 9000;
+    opacity: 0.95;
+  }
 `
 
 
@@ -19,18 +28,19 @@ const ContentWrap = styled.div`
   max-width: 1200px;
   margin: 0 auto;
   display: flex;
-  transform: translateY(500%);
-  
+  position: relative;
+  top: 80%;
+  left: 32%;
+  transform: translate(-50%,-50%);
   &.on{
     position: fixed;
-    top: 0;
-    left: 0;
-    max-width: 1200px;
-    margin: 0 auto;
-    display: flex;
-    
+    top: 6%;
+    left: 50%;
+    width: 100%;
+    z-index: 10000;
     
   }
+  
 `
 
 const Inner = styled.div`
@@ -43,22 +53,24 @@ const Inner = styled.div`
   background-color: #fff;
   border-radius: 100px;
   box-shadow: rgba(0, 0, 0, 0.2) 0px 20px 30px;
+  &.on{
+    box-shadow: rgba(37, 40, 47, 0.15) 0 0 3px 0;
+  }
 `
 
 const Select = styled.select`
-  width: 10%;
+  width: 17%;
   padding: 2%;
-  font-size: 1.2em;
-  font-weight: bold;
+  font-size: 1em;
   border: none;
   -webkit-appearance:none; //크롬 화살표 없애기
   appearance: none; //화살표 없애기
   -moz-appearance: none; //파이어폭스 화살표 없애기
   text-align: center;
   select:required:invalid{
-    color: #909090;
+    color: red;
   }
-  option[value=""][disabled]{
+  >option[value=""][disabled]{
     display: none;
   }
   &:focus{
@@ -71,14 +83,12 @@ const Option = styled.option`
   font-size: 1em;
   border: none;
   text-align: center;
- 
-
 `
 
 const StyleDate = styled(DatePicker)`
   width: 250px;
   height: 65px;
-  font-size: 1.2em;
+  font-size: 1em;
   font-weight: bold;
   border: 0;
   appearance: none;
@@ -95,7 +105,7 @@ const Input = styled.input`
   border: none;
   width: 30%;
   padding: 2%;
-  font-size: 1.2em;
+  font-size: 1em;
   font-weight: bold;
   border: 0;
   appearance: none;
@@ -189,30 +199,22 @@ const MbuttonBox = styled.div`
   }
 `
 
-// ${scrollPosition > 500 ? "block" : "hidden"}`}
+
 function Search() {
   const [dateRange, setDateRange] = useState([null, null]);
   const [startDate, endDate] = dateRange;
   const [alldonm, setAllDonm] = useState([]);
   const [donm, setDonm] = useState("")
   const [ischoice, setIsChoice] = useState([null,null]);
-
-  // const [page, setPage] = useState(1);
-  // const [Selected, setSelected] = useState("");
   const [userInput, setUserInput] = useState('');
   const [optiondonmSelect, setOptionDonmSelect] = useState("");
 
   const dateNow = new Date();
-  const today = `${dateNow.getFullYear()}년 ${dateNow.getMonth() + 1}월 ${dateNow.getDate()}일`;
+  const today = `${dateNow.getMonth() + 1}월 ${dateNow.getDate()}일`;
 
 
   // const getValue = (e) => {
   //   setUserInput(e.target.value)};
-
-
-
-
-    
         useEffect(()=>{
       fetch("https://apis.data.go.kr/B551011/GoCamping/basedList?numOfRows=100&pageNo=1&MobileOS=ETC&MobileApp=project&serviceKey=hQ42F%2BSKq2L%2FUrlhNoGxv63elQn7W8CmL22xl6yXuGk%2BMz0zdU%2Frk2CIdCeX5%2BYPmg39K5QBYCeSgUyqtD7Qdg%3D%3D&_type=json")
       .then((res) =>{return res.json()})
@@ -222,6 +224,7 @@ function Search() {
       }); 
     },[]);
     
+
     const optionDonm = (e) =>{
         const donmValue = e.target.value
         setOptionDonmSelect(donmValue);
@@ -233,8 +236,23 @@ function Search() {
       //  })
        const Filterdonm = [...new Set(alldonm && alldonm.map(e=>e.doNm).sort())];
 
-      
-        
+      //스크롤 이벤트
+      const [ScrollY, setScrollY] = useState(0); // window 의 scrollY값을 저장 
+      const [ScrollActive, setScrollActive] = useState(false); 
+      function scrollFixed() { 
+          if(ScrollY > 600) {
+              setScrollY(window.scrollY);
+              setScrollActive(true);
+          } else {
+              setScrollY(window.scrollY);
+              setScrollActive(false);
+          }
+      }
+      useEffect(() => {
+          function scrollListener() {window.addEventListener("scroll", scrollFixed)}
+          scrollListener();
+          return () => { window.removeEventListener("scroll", scrollFixed)}; 
+      });
 
 
 
@@ -259,9 +277,9 @@ function Search() {
         </Mwrap> */}
       {/* 모바일 써치+버튼 끝 */}
       {/* 유리써치 */}
-      <Content  > 
-        <ContentWrap>
-          <Inner>
+      <Content className={ScrollActive? "on" :""}> 
+        <ContentWrap className={ScrollActive? "on" :""} >
+          <Inner className={ScrollActive? "on" :""}>
           <Select onChange={optionDonm}>
             <option value="" disabled selected>어디로 떠나볼까요</option>
             <Option value="전체">전체</Option>
@@ -278,7 +296,6 @@ function Search() {
             endDate={endDate}
             onChange={(date,today) => {
               setDateRange(date);
-             
             }}
             dateFormat="yyyy년 MM월 dd"
             minDate={subDays(new Date(), 0)}

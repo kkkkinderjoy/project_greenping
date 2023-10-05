@@ -14,7 +14,7 @@ const ContentWrap = styled.div`
 `
 
 const Title = styled.h3`
-  font-size: 2.2em;
+  font-size: 2.0em;
   text-align: center;
   padding-bottom: 30px;
 `

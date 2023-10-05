@@ -21,7 +21,7 @@ const BorderWrapper = styled.div`
 const Title = styled.div`
   padding: 10px 20px;
   font-weight: bold;
-  font-size: 2.2em;
+  font-size: 2.0em;
   position: relative;
 
   &::after {

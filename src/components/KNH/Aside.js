@@ -23,7 +23,7 @@ const Content = styled.li`
   text-align: center;
   cursor: pointer;
    svg {
-    font-size: 1.3em;
+    font-size: 1.2em;
     color: #98eecc;
    
   }
