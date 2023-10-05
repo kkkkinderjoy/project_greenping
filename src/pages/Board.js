@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import {
   collection,
+  doc,
+  getDoc,
   getDocs,
   getFirestore,
   orderBy,
@@ -11,6 +13,7 @@ import {
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPen } from "@fortawesome/free-solid-svg-icons";
+
 
 
 
@@ -91,13 +94,21 @@ const Button = styled.button`
 `;
 
 function Board() {
+  const userState = useSelector((state) => state.user);
+  
+  
   const [posts, setPosts] = useState([]);
+  
+
   const [likes, setLikes] = useState(Array(posts.length).fill(false));
   const toggleLike = (index) => {
     const newLikes = [...likes];
     newLikes[index] = !newLikes[index];
     setLikes(newLikes);
   };
+  
+  
+
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -123,28 +134,33 @@ function Board() {
     fetchPosts();
   },[]);
 
-  // if (posts.length === 0) {
+   // if (posts.length === 0) {
   //   return <div>잠시만 기다려주세요</div>;
   // }
 
   return (
     <>
+    
       <BorderWrapper>
         <ButtonWrap>
         <Title>그린톡</Title>
-            <Link to="/write">
-              <Button>
-                  <FontAwesomeIcon icon={faPen} />
-              </Button>
-            </Link>
+            { 
+            userState.uid &&
+          
+              <Link to="/write">
+                <Button>
+                    <FontAwesomeIcon icon={faPen} />
+                </Button>
+              </Link>
+              }
         </ButtonWrap>
       
 
-        {posts.map((e, i) => {
+        {posts && posts.map((e, i) => {
           
           return (
             <List key={i}>
-              {/* <ListItem>{e.name}</ListItem> */}
+              <ListItem>{e.name}</ListItem>
               <ListItem>{e.timestamp.toDate().toLocaleDateString()}</ListItem>
               <ListItem>
                 {e.title}
@@ -161,6 +177,8 @@ function Board() {
               >
                 {likes[i] ? "❤️" : "🤍"}
               </ListItem>
+             
+            
             </List>
           );
         })}
