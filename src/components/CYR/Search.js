@@ -20,6 +20,17 @@ const ContentWrap = styled.div`
   margin: 0 auto;
   display: flex;
   transform: translateY(500%);
+  
+  &.on{
+    position: fixed;
+    top: 0;
+    left: 0;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    
+    
+  }
 `
 
 const Inner = styled.div`
@@ -185,7 +196,7 @@ function Search() {
   const [alldonm, setAllDonm] = useState([]);
   const [donm, setDonm] = useState("")
   const [ischoice, setIsChoice] = useState([null,null]);
-  const [scrollPosition, setScrollPosition] = useState(0);
+
   // const [page, setPage] = useState(1);
   // const [Selected, setSelected] = useState("");
   const [userInput, setUserInput] = useState('');
@@ -198,18 +209,6 @@ function Search() {
   // const getValue = (e) => {
   //   setUserInput(e.target.value)};
 
-    const updateScroll = () => {
-        setScrollPosition(window.scrollY || document.documentElement.scrollTop);
-    };
-    
-    useEffect(() => {
-            window.addEventListener("scroll", updateScroll);
-        }, []);
-
-    const searched = alldonm.filter((item) =>
-
-      item.facltNm.includes(userInput)
-    );
 
 
 
@@ -233,6 +232,13 @@ function Search() {
       //   return donm === "전체" || donm === e.doNm
       //  })
        const Filterdonm = [...new Set(alldonm && alldonm.map(e=>e.doNm).sort())];
+
+      
+        
+
+
+
+
   return (
     <>
       
@@ -253,7 +259,7 @@ function Search() {
         </Mwrap> */}
       {/* 모바일 써치+버튼 끝 */}
       {/* 유리써치 */}
-      <Content> 
+      <Content  > 
         <ContentWrap>
           <Inner>
           <Select onChange={optionDonm}>
@@ -278,7 +284,7 @@ function Search() {
             minDate={subDays(new Date(), 0)}
             maxDate={addDays(new Date(), 300)}
             monthsShown={2}
-            placeholderText={today}
+            placeholderText={today} //데이트피커에서만 사용하는 placeholder 같은 기능
           />
           <Input
             type="text"
