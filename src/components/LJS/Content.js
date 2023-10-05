@@ -33,7 +33,7 @@ const MenuList = styled.div`
     li{ 
       width: 100%;
       text-align: center;
-      font-size: 1.2em;
+      font-size: 1em;
       border-bottom: 3px solid #eee;
       height: 100%;
       line-height: 70px;

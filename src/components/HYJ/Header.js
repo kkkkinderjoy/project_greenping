@@ -52,7 +52,7 @@ const ListWrap = styled.div`
    display: flex;
    justify-content: space-between;
    flex-basis: 85%;
-   font-size: 1.2em;
+   font-size: 1.1em;
    @media screen and (max-width:768px) {display: none;}
 `
 
