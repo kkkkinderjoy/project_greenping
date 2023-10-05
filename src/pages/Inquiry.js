@@ -1,8 +1,10 @@
+import { addDoc, collection, deleteDoc, doc, getDoc, getFirestore, increment, onSnapshot, orderBy, query, serverTimestamp, updateDoc } from 'firebase/firestore';
 import styled from 'styled-components';
 import '../index.css'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import React from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const TextContent = styled.div`
     width: 100%;
@@ -24,7 +26,7 @@ const Title = styled.div`
     margin-left: 0.5px;
     background-color: #2ed090;
     position: absolute;
-    top: -10px;
+    top: -15px;
     left: 0;
     border-radius: 2px;
   }
@@ -71,9 +73,40 @@ const Button = styled.button`
 function Inquiry() {
 
     const [comment, setComment] = useState("");
+    const [comments, setComments] = useState("");
+    const userState = useSelector(state => state.user)
+    const {market, inquiry} = useParams();
     const location = useLocation();
     const data = location.state;
     console.log(data)
+    const uid = sessionStorage.getItem("users");
+    const [userUid, setUserUid] = useState(uid)
+    
+    // useEffect(()=>{
+    //   const postRef = doc(getFirestore(), market, inquiry);
+    //   const commentRef = collection(postRef, "comments");
+  
+    //   const q = query(commentRef, orderBy("timestamp", "desc"));
+  
+    //   const dataSnap =  onSnapshot(q, (item)=>{
+    //     const fetchComment = item.docs.map(doc =>({
+    //       id: doc.id,
+    //       ...doc.data()
+    //     }))
+    //     setComments(fetchComment);
+    //   })
+    //   return dataSnap;
+    // },[market, inquiry])
+
+    const addComment = (inquiry) =>{
+        const postRef = doc(getFirestore(), market, inquiry);
+        const commentRef = collection(postRef, "comments");
+        addDoc(commentRef, {
+          text: comment,
+          name: userState&&userState.data.name,
+          timestamp: serverTimestamp()
+        })
+      }
     
   return (
     <>
@@ -86,7 +119,7 @@ function Inquiry() {
                 <Text>
                 <textarea className='textarea' placeholder='댓글을 입력해주세요.' value={comment} onChange={(e)=>{setComment(e.target.value)}}></textarea>
                 </Text>
-                <Button onClick={()=>{}}>댓글달기</Button>
+                <Button onClick={()=>{addComment(market)}}>댓글달기</Button>
             </InputItem>
         </InputWrap>
     </TextContent>

@@ -1,13 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Link, NavLink } from "react-router-dom";
-import {
-  collection,
-  getDocs,
-  getFirestore,
-  orderBy,
-  query,
-} from "firebase/firestore";
+import { NavLink } from "react-router-dom";
+import { collection, getDocs, getFirestore, orderBy, query, where } from "firebase/firestore";
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import styled from "styled-components";
 import data from "./../../data/MarketData"
 
@@ -101,38 +95,97 @@ function Salepage() {
     
     const [sale, setSale] = useState(0);
 
-  const [posts, setPosts] = useState([]);
-  console.log(posts)
-  const [likes, setLikes] = useState(Array(posts.length).fill(false));
-  const toggleLike = (index) => {
-    const newLikes = [...likes];
-    newLikes[index] = !newLikes[index];
-    setLikes(newLikes);
-  };
+    const [posts, setPosts] = useState([]);
+    console.log(posts)
+    const auth = getAuth();
+
+
+  // useEffect(auth, async (user) => {
+  //   const fetchPosts = async () => {
+  //     try {
+  //       const q = query(
+  //         collection(getFirestore(), "market"),
+  //         orderBy("timestamp", "desc")
+  //       );
+ 
+  //       const snapShot = await getDocs(q);
+       
+  //       const postArray = snapShot.docs.map((doc) => ({
+  //         id: doc.id,
+  //         ...doc.data(),
+  //       }));
+    
+  //       setPosts(postArray);
+  //       console.log(postArray);
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   };
+  //   fetchPosts();
+  // },[]);
+
+  // onAuthStateChanged(auth, async (user) => {
+  //   if (user) {
+  //     const userUID = user.uid;
+
+  //     try {
+  //       const q = query(
+  //         collection(getFirestore(), 'market'),
+  //         where('authorUID', '==', userUID),
+  //         orderBy('timestamp', 'desc')
+  //       );
+  
+  //       const snapShot = await getDocs(q);
+  
+  //       const postArray = snapShot.docs.map((doc) => ({
+  //         id: doc.id,
+  //         ...doc.data(),
+  //       }));
+  
+  //       setPosts(postArray);
+  //       console.log(postArray);
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   } else {
+  //     // 사용자가 로그인하지 않았을 때의 처리
+  //   }
+  // });
 
   useEffect(() => {
-    const fetchPosts = async () => {
-      try {
-        const q = query(
-          collection(getFirestore(), "market"),
-          orderBy("timestamp", "desc")
-        );
- 
-        const snapShot = await getDocs(q);
-       
-        const postArray = snapShot.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        }));
-    
-        setPosts(postArray);
-        console.log(postArray);
-      } catch (error) {
-        console.log(error);
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
+      if (user) {
+        const userUID = user.uid;
+
+        try {
+          const q = query(
+            collection(getFirestore(), 'market'),
+            where('authorUID', '==', userUID),
+            orderBy('timestamp', 'desc')
+          );
+  
+          const snapShot = await getDocs(q);
+  
+          const postArray = snapShot.docs.map((doc) => ({
+            id: doc.id,
+            ...doc.data(),
+          }));
+  
+          setPosts(postArray);
+          console.log(postArray);
+        } catch (error) {
+          console.log(error);
+        }
+      } else {
+        // 사용자가 로그인하지 않았을 때의 처리
       }
-    };
-    fetchPosts();
-  },[]);
+    });
+
+    return () => {
+      // 컴포넌트가 언마운트되면 unsubscribe 함수 호출
+      unsubscribe();
+    }
+  }, [auth]); // auth 상태가 변경될 때만 useEffect 실행
 
   return (
     <>
