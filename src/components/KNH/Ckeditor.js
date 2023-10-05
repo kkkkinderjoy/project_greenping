@@ -62,12 +62,12 @@ function Ckeditor({ title, postData }) {
     try {
 
 
-      await addDoc(collection(getFirestore(), "board"), {
+      await (collection(getFirestore(), "board"), {
         title: title,
         content: writeData,
         view: 1,
         uid: userState.uid,
-        name: userState.data?.name,
+        name: userState.uid.name,
         timestamp: serverTimestamp(),
         file : fileUrl,
         likes: true,

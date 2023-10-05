@@ -24,15 +24,20 @@ const ListWrap = styled.ul`
   margin: 30px auto;
   display: flex;
   padding: 0 30px;
-  flex-wrap: wrap;
+  
   justify-content: space-around;
+  @media screen and (max-width: 768px) {
+    flex-wrap: wrap;
+    
+  }
 `;
 
 const List = styled.li`
   flex-basis: 24%;
-  > img {
-    width:280px;
-    height: 220px;
+  overflow: hidden;
+   img {
+    width:100%;
+    height: 230px;
     object-fit: cover;
     margin-bottom: 7px;
     border-radius: 10px;
@@ -42,17 +47,10 @@ const List = styled.li`
   @media screen and (min-width: 641px) and (max-width: 768px) {
     flex-basis: 48%;
     margin-bottom: 20px;
-    > img {
-      width: 300px;
-      height: 400px;
-    }
+ 
   }
   @media screen and (max-width: 640px) {
     flex-basis: 98%;
-    > img {
-      width: 100%;
-      height: 400px;
-    }
     margin-bottom: 20px;
   }
 `;
@@ -110,8 +108,8 @@ function Choice() {
                 return (
                   <React.Fragment key={i}>
                     {
-                      <NavLink to={`desc/${e.contentId}`} state={e}>
                         <List>
+                      <NavLink to={`desc/${e.contentId}`} state={e}>
                           {e.firstImageUrl !== "" && (
                             <img
                               src={e.firstImageUrl}
@@ -128,8 +126,8 @@ function Choice() {
                             </Location>
                             <p>{e.facltNm}</p>
                           </TextWrap>
-                        </List>
                       </NavLink>
+                        </List>
                     }
                   </React.Fragment>
                 );

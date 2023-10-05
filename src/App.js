@@ -27,6 +27,7 @@ import Buy from "./components/PSY/Buy";
 import Assi from "./components/PSY/Assi";
 import Inquiry from "./pages/Inquiry";
 import { useEffect } from "react";
+import MyBoard from "./pages/MyBoard";
 
 
 
@@ -89,7 +90,7 @@ function Inner() {
         <Route path="/desc/:seq" element={<Descpage />} />
         <Route path="/ranking" element={<Ranking />} />
         <Route path="/reviewmore" element={<ReviewMore />}></Route>
-        <Route path="/board" element={<Board />} />
+        <Route path="/board" element={<Board/>}  />
         <Route path="/write" element={<Write />} />
         <Route path="/market" element={<Market />} />
         <Route path="/notice" element={<Notice />}></Route>

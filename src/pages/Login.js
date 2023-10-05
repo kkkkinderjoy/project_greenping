@@ -153,7 +153,7 @@ function Login() {
     }
 
     const LoginForm = async (e)=>{
-      // e.preventDefault();
+      e.preventDefault();
       
       try{
         const userLogin = await signInWithEmailAndPassword(firebaseAuth, email, password);
