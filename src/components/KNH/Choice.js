@@ -9,28 +9,28 @@ import { NavLink } from "react-router-dom";
 const ContentWrap = styled.div`
   width: 100%;
   margin-top: 120px;
-`;
+`
 const Content = styled.div`
   margin: 3px auto;
   max-width: 1200px;
-`;
+`
 const Title = styled.h3`
   text-align: center;
-  font-size: 2.2em;
-`;
+  font-size: 2.0em;
+`
 
 const ListWrap = styled.ul`
   max-width: 1280px;
   margin: 30px auto;
   display: flex;
   padding: 0 30px;
-  
   justify-content: space-around;
   @media screen and (max-width: 768px) {
     flex-wrap: wrap;
     
   }
 `;
+
 
 const List = styled.li`
   flex-basis: 24%;
@@ -60,20 +60,23 @@ const TextWrap = styled.div`
   > p {
     display: flex;
     flex-wrap: nowrap;
-    font-size: 1.1em;
+    font-size: 1em;
   }
 `;
 const Location = styled.div`
   display: flex;
   align-items: center;
-  font-size: 1em;
+  font-size: 0.8em;
   margin-bottom: 4px;
-  > p {
+  >p{
     margin-left: 7px;
     font-size: 1em;
     color: #999999;
   }
-`;
+  >svg{
+    color: #98eecc;
+  }
+`
 
 function Choice() {
   // const [data, setData] = useState();
@@ -90,7 +93,14 @@ function Choice() {
   // });
 
   const [data, setData] = useState(dataList);
-
+  const price = ["50,000","45,000","60,000" ,"65,000"]; //가격은 배열로 지정함(공공데이터에 가격정보가 없기때문에...)
+  // function radomFromArray(array){
+  //   const randomPrice = Math.floor(Math.random() * array.length*4);
+  //   return array[randomPrice]
+  // }
+  
+  // const result =radomFromArray(price);
+  // console.log(result)
   return (
     <>
       {/* Choice */}
@@ -117,14 +127,12 @@ function Choice() {
                             />
                           )}
                           <TextWrap>
-                            <Location>
-                              <FontAwesomeIcon
-                                icon={faLocationDot}
-                                color="#98eecc"
-                              />
-                              <p>{e.doNm + e.sigunguNm}</p>
-                            </Location>
+                          <span>{price[i]}원 부터</span>
                             <p>{e.facltNm}</p>
+                            <Location>
+                              <FontAwesomeIcon icon={faLocationDot}/>
+                              <p>{e.doNm + " "+ e.sigunguNm}</p>
+                            </Location>
                           </TextWrap>
                       </NavLink>
                         </List>

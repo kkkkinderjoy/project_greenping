@@ -17,7 +17,7 @@ const ContentWrap = styled.div`
 const Title = styled.div`
   padding: 10px 20px;
   font-weight: bold;
-  font-size: 2.2em;
+  font-size: 2.0em;
   position: relative;
 
   &::after {
@@ -65,7 +65,7 @@ height: 50px;
   font-weight: bold;
   margin-right: 30px;
   line-height: 50px;
-  font-size: 1.3em;
+  font-size: 1.2em;
   
   
 `
@@ -76,7 +76,7 @@ const RankCon = styled.div`
     margin-bottom: 5px;
   }
   p:nth-child(1){
-    font-size: 1.3em;
+    font-size: 1.2em;
   }
   p:nth-child(2){
     display: flex;
