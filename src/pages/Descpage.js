@@ -24,6 +24,7 @@ const Dwrapper = styled.div`
     justify-content: space-between;
     align-items: center;
     img{
+        width: 60%;
         border: 5px solid #ddd;
         margin: 20px;
         display: inline-block;

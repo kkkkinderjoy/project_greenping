@@ -46,7 +46,7 @@ const Inner = styled.div`
 `
 
 const Select = styled.select`
-  width: 10%;
+  width: 18%;
   padding: 2%;
   font-size: 1.2em;
   font-weight: bold;
@@ -177,7 +177,6 @@ function Search() {
   const [startDate, endDate] = dateRange;
   const [alldonm, setAllDonm] = useState([]);
   const [donm, setDonm] = useState("")
-  const [ischoice, setIsChoice] = useState([null,null]);
   const [userInput, setUserInput] = useState('');
   const [optiondonmSelect, setOptionDonmSelect] = useState("");
   //날짜 나오게 하기
@@ -220,14 +219,9 @@ function Search() {
           scrollListener();
           return () => { window.removeEventListener("scroll", scrollFixed); }; 
       });
-        
-
-
-
 
   return (
-    <>
-      
+    <> 
       {/* 모바일 써치+버튼 시작 */}
         {/* <Mwrap className={scrollPosition > 500 ? ".on" : ""}>
           <Mwrapper>
@@ -266,7 +260,7 @@ function Search() {
               setDateRange(date);
              
             }}
-            dateFormat="yyyy년 MM월 dd"
+            dateFormat="MM월 dd일"
             minDate={subDays(new Date(), 0)}
             maxDate={addDays(new Date(), 300)}
             monthsShown={2}
@@ -275,18 +269,18 @@ function Search() {
           <Input
             type="text"
             placeholder="검색어를 입력하세요"
-            onChange={optionDonm}
+            onChange={InputValue}
           />
           <NavLinkWrap>
-            <NavLink to="/searchd">
-              {/* <FontAwesomeIcon icon={faMagnifyingGlass} /> */}
+            <NavLink to={{
+              pathname: "/searchd",}}
+              state={{optiondonmSelect: optiondonmSelect, userInput: userInput}}>
               <p>검색하기</p>
             </NavLink>
           </NavLinkWrap>
           </Inner>
         </ContentWrap>
         </Content>
-      
     </>
   )
   }
