@@ -117,7 +117,7 @@ function Sale({userState}){
           </ul>
       </TitleWrap>
     {
-      useState.uid ?
+      uid ?
       <li>
         <Write />
       </li>

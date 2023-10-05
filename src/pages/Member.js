@@ -223,6 +223,7 @@ function Member() {
         (firebaseAuth, email, password)
 
       const userProfile = {
+        
         name,
         phoneNumber,
         email,
