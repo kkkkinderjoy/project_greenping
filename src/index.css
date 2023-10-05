@@ -15,6 +15,13 @@
     border-radius: 4px !important;
   }
 
+
+
+  .ck-editor__editable_inline {
+    min-height: 500px;
+  }
+  
+
 .textarea{
   border: 1px solid #ddd;
   width: 600px;
@@ -26,3 +33,4 @@
   border-color: #2ed090;
   outline: none;
 }
+

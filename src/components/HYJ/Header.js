@@ -190,6 +190,7 @@ function Header({userState}){
   
   const [isActive,setIsActive]=useState(false);
   // const userState = useSelector(state => state.user);
+
   return (
     <>
      <Content $isopen={isActive}>
@@ -210,7 +211,9 @@ function Header({userState}){
           <NavMember>
             <ul>
               <li>
+
                 <NavLink to={userState.uid ? "/logout" : "/login" }>{userState.uid ? "로그아웃" : "로그인"} </NavLink>
+
               </li>
               <li>
                 {
@@ -260,7 +263,7 @@ function Header({userState}){
            ListItems.map((e,i)=>{
              return(
                <>
-              <ul>
+              <ul key={i}>
               <li  onClick={()=>{
                 setIsActive(!isActive)
               }}><NavLink to={`/${LinkArray[i]}`}>{e}</NavLink></li>
