@@ -39,11 +39,13 @@ const StyleSwiper = styled(Swiper)`
 const StyleSlide = styled(SwiperSlide)`
     display: flex;
     flex-wrap: wrap;
-    img{width: 100%; height: auto;}
+    img{width: 100%; height: 120px;}
     @media screen and (max-width: 768px) {
       flex-basis: 100%;
+      
     }
 `
+
 
 function Eventbanner() {
   return (
@@ -61,6 +63,7 @@ function Eventbanner() {
           slidesPerView={2}
           slidesPerGroup={2}
           loop={true}
+          
         >
           {
             Array(6).fill().map((_,i)=>{
