@@ -27,8 +27,6 @@ import Buy from "./components/PSY/Buy";
 import Assi from "./components/PSY/Assi";
 import Inquiry from "./pages/Inquiry";
 import { useEffect } from "react";
-import MyBoard from "./pages/MyBoard";
-
 
 
 

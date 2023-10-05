@@ -12,17 +12,34 @@ const Content = styled.div`
   height: 496px;
   background: url('/images/main-banner.jpg');
   background-size: cover;
-  &.on{
+  >p{
+  width: 100%;
+  height: 140px;
+  background-color: #fff;
+  opacity: 0.95;
+  display: none;
+  &.active{
+    display: block;
     position: fixed;
-    top: -10px;
-    height: 130px;
-    background-color: #fff;
-    background-image: none;
+    top: 0;
     z-index: 9000;
-    opacity: 0.95;
+  }
   }
 `
-
+// const ScrollWrap = styled.div`
+//   position: absolute;
+//   top: 0;
+//   width: 100%;
+//   background-color: #ddd;
+//   opacity: 0.95;
+//   &.active{
+//     display: block;
+//     z-index: 7000;
+//     position: absolute;
+//     width: 100%;
+//     background-color: #ddd;
+//   }
+// `
 
 const ContentWrap = styled.div`
   max-width: 1200px;
@@ -38,9 +55,7 @@ const ContentWrap = styled.div`
     left: 50%;
     width: 100%;
     z-index: 10000;
-    
   }
-  
 `
 
 const Inner = styled.div`
@@ -53,9 +68,9 @@ const Inner = styled.div`
   background-color: #fff;
   border-radius: 100px;
   box-shadow: rgba(0, 0, 0, 0.2) 0px 20px 30px;
-  &.on{
+  /* &.on{
     box-shadow: rgba(37, 40, 47, 0.15) 0 0 3px 0;
-  }
+  } */
 `
 
 const Select = styled.select`
@@ -208,14 +223,14 @@ function Search() {
       const ValueI = e.target.value
       setUserInput(ValueI)
     }
-       const Filterdonm = [...new Set(alldonm && alldonm.map(e=>e.doNm).sort())];
+    const Filterdonm = [...new Set(alldonm && alldonm.map(e=>e.doNm).sort())];
 
 
-       //스크롤 이벤트
+    //스크롤 이벤트
 
-      const [ScrollY, setScrollY] = useState(0); // window 의 scrollY값을 저장 
-      const [ScrollActive, setScrollActive] = useState(false); 
-      function scrollFixed() { 
+    const [ScrollY, setScrollY] = useState(0); // window 의 scrollY값을 저장 
+    const [ScrollActive, setScrollActive] = useState(false); 
+    function scrollFixed() { 
           if(ScrollY > 600) {
               setScrollY(window.scrollY);
               setScrollActive(true);
@@ -223,13 +238,13 @@ function Search() {
               setScrollY(window.scrollY);
               setScrollActive(false);
           }
-      }
+    }
       
-      useEffect(() => {
+    useEffect(() => {
           function scrollListener(){window.addEventListener("scroll", scrollFixed)}
           scrollListener();
           return () => { window.removeEventListener("scroll", scrollFixed)}; 
-      });
+    });
         
 
 
@@ -257,10 +272,10 @@ function Search() {
 
       {/* 모바일 써치+버튼 끝 */}
       {/* 유리써치 */}
-      <Content className={ScrollActive? "on" :""}> 
-        <ContentWrap className={ScrollActive? "on" :""} >
-          <Inner className={ScrollActive? "on" :""}>
-
+      <Content> 
+        <p className={ScrollActive? "active" :""}></p>
+        <ContentWrap className={ScrollActive? "on" :""}>
+          <Inner>
           <Select onChange={optionDonm}>
             <option value="" disabled selected>어디로 떠나볼까요</option>
             <Option value="전체">전체</Option>
@@ -297,6 +312,7 @@ function Search() {
           </NavLinkWrap>
           </Inner>
         </ContentWrap>
+        
         </Content>
       
     </>
