@@ -6,15 +6,11 @@ import { styled } from "styled-components";
 
 const Content = styled.div`
   width: 100%;
- 
-  
 `
 const ContentWrap = styled.div`
     max-width: 1200px;
     margin: 100px auto;
     padding: 0 2%;
-    
-    
 `
 
 const Title = styled.h3`
@@ -37,8 +33,9 @@ const ContentItem = styled.div`
       text-align: center;
       cursor: pointer;
       position: relative;
+    }
       svg{
-        color: #DDDDDD;
+        color: #dddddd;
         font-size: 65px;
         padding-top: 50px;
         filter: drop-shadow(3px 3px rgba(127, 138, 140, 0.15));
@@ -59,7 +56,14 @@ const ContentItem = styled.div`
         padding-right: 10px;
       }
     }
-  }
+  @media screen and (max-width: 768px) {
+    ul{
+      li{
+        width: 32.5%;
+        height: auto;
+      }
+    }
+}
 `
 const SvgBox = styled.div`
   background-color: #fff;

@@ -1,20 +1,9 @@
 import React, { useState } from 'react'
-import data from './../data/Data'
+import data from './../../data/MarketData'
 import { styled } from 'styled-components'
 import { NavLink } from 'react-router-dom'
-import Inquiry from '../pages/Inquiry'
 
-const Title = styled.div`
-    width: 100%;
-    ul{
-        margin: 0 auto;
-        display: flex;
-        justify-content: space-between;
-        li{
-          margin-bottom: 7px;
-        }
-    }
-`
+
 const Content = styled.div`
     width: 100%;
 `
@@ -43,21 +32,34 @@ const TitleWrap = styled.div`
 `
 const ContentWrap = styled.div`
     width: 100%;
+    height: 100%;
     gap: 15px;
-    margin: 0 auto;
+    margin-bottom: 50px;
     padding: 0 2%;
     display: flex;
     flex-wrap: wrap;
     justify-content: start;
 `
+const Tomain = styled.div`
+  width: 100%;
+  position: relative;
+  p{
+    position: absolute;
+    font-size: 18px;
+    top: -10px;
+    right: 4%;
+    color: #999;
+  }
+`
+
 const ContentItem = styled.div`
   width: 500px;
   height: 500px;
-  flex-basis: 32.5%;
+  flex-basis: 31.5%;
+  margin-bottom: 50px;
   border: 1px solid #ddd;
   border-radius: 10px;
   box-sizing: border-box;
-  white-space: break-spaces;
   position: relative;
   img{
     width: 300px; 
@@ -89,14 +91,12 @@ const Button = styled.button`
     width: 100px;
     height: 30px;
     background-color: #70e6b7;
+    border: none;
     border-radius: 10px;
     color: #fff;
     right: 10px;
     bottom: 10px;
     cursor: pointer;
-`
-const ment = styled.div`
-  font-size: 20px;
 `
 
 function Buy() {
@@ -116,12 +116,13 @@ function Buy() {
 
     const menu = ["/sale" , "/buy", "/assi"]
 
-    
+    const uid = sessionStorage.getItem("users");
+    const [userUid, setUserUid] = useState(uid);
+    console.log(userUid)
 
   return (
     <>
     <Content>
-    <NavLink to='/'><ment>메인으로 돌아가기</ment></NavLink>
         <TitleWrap>
           <ul>
             {
@@ -134,8 +135,11 @@ function Buy() {
           </ul>
         </TitleWrap>
         <ContentWrap>
+          <Tomain>
+            <NavLink to='/'><p>메인으로 돌아가기</p></NavLink>
+          </Tomain>
             {
-             dataFilter.map((e,i)=>{
+             dataFilter.slice().reverse().map((e,i)=>{
                 return(
                 <ContentItem key={i}>
                     <h3>{e.TITLE}</h3>
@@ -144,7 +148,10 @@ function Buy() {
                         <li>{e.PRICE}</li>
                         <li>업로드일: {e.DATE}</li>
                     </ul>
+                    {
+                      uid &&
                     <NavLink to={`/inquiry/${e.NUM}`} state={e}><Button>문의하기</Button></NavLink>
+                    }
                 </ContentItem>
                 )
               })         

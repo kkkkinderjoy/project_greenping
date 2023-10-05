@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import data from './../data/Data'
+import data from './../../data/MarketData'
 import { styled } from 'styled-components';
 import { NavLink } from 'react-router-dom';
 
@@ -33,16 +33,28 @@ const TitleWrap = styled.div`
 const ContentWrap = styled.div`
     width: 100%;
     gap: 15px;
-    margin: 0 auto;
+    margin-bottom: 50px;
     padding: 0 2%;
     display: flex;
     flex-wrap: wrap;
     justify-content: start;
 `
+const Tomain = styled.div`
+  width: 100%;
+  position: relative;
+  p{
+    position: absolute;
+    font-size: 18px;
+    top: -10px;
+    right: 4%;
+    color: #999;
+  }
+`
+
 const ContentItem = styled.div`
   width: 500px;
   height: 500px;
-  flex-basis: 32.5%;
+  flex-basis: 31.5%;
   border: 1px solid #ddd;
   border-radius: 10px;
   box-sizing: border-box;
@@ -59,7 +71,6 @@ const ContentItem = styled.div`
     flex-wrap: wrap;
     justify-content: space-around;
     li{
-
         margin-bottom: 7px;
         &:nth-child(1){
         font-size: 18px;
@@ -79,14 +90,12 @@ const Button = styled.button`
     width: 100px;
     height: 30px;
     background-color: #70e6b7;
+    border: none;
     border-radius: 10px;
     color: #fff;
     right: 10px;
     bottom: 10px;
     cursor: pointer;
-`
-const ment = styled.div`
-  font-size: 20px;
 `
 
 function Assi() {
@@ -99,16 +108,18 @@ function Assi() {
     console.log(FilterAssi)
     
     const AssiFilter = [...new Set(data.map(e => e.ID))]
-    //console.log(AssiFilter)
 
     const [assi, setAssi] = useState(2);
 
     const menu = ["/sale", "/buy", "/assi"]
 
+    const uid = sessionStorage.getItem("users");
+    const [userUid, setUserUid] = useState(uid);
+    console.log(userUid)
+
   return (
     <>
     <Content>
-    <NavLink to='/'><ment>메인으로 돌아가기</ment></NavLink>
         <TitleWrap>
           <ul>
             {
@@ -121,8 +132,11 @@ function Assi() {
           </ul>
         </TitleWrap>
         <ContentWrap>
+          <Tomain>
+            <NavLink to='/'><p>메인으로 돌아가기</p></NavLink>
+          </Tomain>
           {
-          FilterAssi.map((e,i)=>{
+          FilterAssi.slice().reverse().map((e,i)=>{
             return(
               <ContentItem key={i}>
                 <h3>{e.TITLE}</h3>
@@ -131,7 +145,10 @@ function Assi() {
                   <li>{e.PRICE}</li>
                   <li>업로드일: {e.DATE}</li>
                 </ul>
+                {
+                  uid && 
                 <NavLink to={`/inquiry/${e.NUM}`} state={e}><Button>문의하기</Button></NavLink>
+                }
               </ContentItem>
             )
           })      
