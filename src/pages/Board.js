@@ -50,24 +50,85 @@ height: auto;
    position: relative;
    list-style: none;
    img{
-    width: 400px;
+    width: 450px;
+    border-radius: 10px;
+    object-fit: cover;
    }
 `;
+
+
+
 const ListItem = styled.li`
   padding: 10px 20px;
-  text-align: center;
   flex-basis: 10%;
+  position: relative;
+  &:nth-child(1) {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    >p{
+      color: #999999;
+      font-size: 0.8em;
+    }
+  }
   &:nth-child(2) {
-    flex-basis: 50%;
+    width: 93%;
+    margin: 10px 0;
+    font-size: 1.3em;
+    font-weight: bold;
+    padding-left: 30px;
+    position: relative;
+
+        &::after {
+        content: "";
+        width:  3px;
+        height: 20px;
+        margin-left: 0.5px;
+        background-color: #98eecc;
+        position: absolute;
+        top: 8px;
+        left: 17px;
+        border-radius: 10px;
+        z-index: -1;
+      }
   }
-  &:nth-child(3) {
-    flex-basis: 12%;
-  }
-  &:nth-child(4) {
-    flex-basis: 20%;
-  }
+
   
 `;
+
+const Profile = styled.div`
+  width: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  >img{
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 50%;
+
+  }
+`
+const HeartWrap = styled.div`
+  position: absolute;
+  bottom: 5%;
+  right: 20px;
+  margin-top: 20px;
+  width: 25px;
+  height: 25px;
+  padding: 15px;
+  background-color: white;
+  box-shadow:  0 0 3px gray;
+  border-radius: 50%;
+
+`
+
+const Heart = styled.img`
+cursor: pointer;
+  max-width: 100%;  
+  height: auto;  
+ 
+`
 
 const ButtonWrap = styled.div`
   display: flex;
@@ -134,8 +195,9 @@ function Board() {
     fetchPosts();
   },[]);
 
-   // if (posts.length === 0) {
-  //   return <div>잠시만 기다려주세요</div>;
+  //  if (posts.length === 0) {
+    
+  //   return <div>현재 게시글이 없습니다.</div>;
   // }
 
   return (
@@ -160,22 +222,27 @@ function Board() {
           
           return (
             <List key={i}>
-              <ListItem>{e.name}</ListItem>
-              <ListItem>{e.timestamp.toDate().toLocaleDateString()}</ListItem>
+              <ListItem>
+                <Profile>
+                  <img src="https://via.placeholder.com/50x50" alt="profile" />
+                  {e.name}
+                </Profile>
+                <p>{e.timestamp.toDate().toLocaleDateString()}</p>
+              </ListItem>
               <ListItem>
                 {e.title}
               </ListItem>
               <ListItem>
-                {e.name}
-              </ListItem>
-              <div dangerouslySetInnerHTML={{__html: e.content}}/>
-              
+              <div dangerouslySetInnerHTML={{__html: e.content}}/>  </ListItem>      
               <ListItem
                 onClick={() => {
                   toggleLike(i);
                 }}
               >
-                {likes[i] ? "❤️" : "🤍"}
+                <HeartWrap>
+                  <Heart src={ likes[i]  ? 'images/heart_full.png' : 'images/heart_blank.png'} alt="heart" />
+                </HeartWrap>
+
               </ListItem>
              
             
