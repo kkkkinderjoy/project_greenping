@@ -1,5 +1,9 @@
 @charset "utf-8";
 
+ul{
+  list-style: none;
+}
+
 .swiper-pagination{
     position: absolute;
     bottom: 0px !important;
