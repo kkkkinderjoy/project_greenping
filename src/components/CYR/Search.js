@@ -224,10 +224,11 @@ function Search() {
               setScrollActive(false);
           }
       }
-      useEffect(() => 
-          function scrollListener() {window.addEventListener("scroll", scrollFixed);}
+      
+      useEffect(() => {
+          function scrollListener(){window.addEventListener("scroll", scrollFixed)}
           scrollListener();
-          return () => { window.removeEventListener("scroll", scrollFixed); }; 
+          return () => { window.removeEventListener("scroll", scrollFixed)}; 
       });
         
 
