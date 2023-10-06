@@ -28,8 +28,10 @@ import Buy from "./components/PSY/Buy";
 import Assi from "./components/PSY/Assi";
 import Inquiry from "./pages/Inquiry";
 import { useEffect } from "react";
+import Navsearch from "./pages/Navsearch";
 import Salepage from "./components/PSY/Salepage";
 import Salewrite from "./components/PSY/Salewrite";
+
 
 function App() {
   return (
@@ -82,6 +84,7 @@ function Inner() {
       <Routes>
         <Route path="/" element={<Main />}></Route>
         <Route path="/searchd/" element={<SearchD />} />
+        <Route path="/navsearch/" element={<Navsearch />} />
         <Route path="/searchd/desc/:seq" element={<Descpage />} />
         <Route path="/desc/:seq" element={<Descpage />} />
         <Route path="/ranking" element={<Ranking />} />
@@ -105,6 +108,7 @@ function Inner() {
         <Route path="/buy" element={<Buy />} />
         <Route path="/Assi" element={<Assi />} />
         <Route path="/inquiry/:seq" element={<Inquiry />} />
+        <Route path="/inquiry/:seq/:market" element={<Inquiry />} />
       </Routes>
       <Aside />
       <Footer />

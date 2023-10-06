@@ -44,7 +44,6 @@ const List = styled.li`
     border-radius: 10px;
   }
 
-
   @media screen and (min-width: 641px) and (max-width: 768px) {
     flex-basis: 48%;
     margin-bottom: 20px;

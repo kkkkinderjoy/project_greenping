@@ -40,6 +40,8 @@ const StyleSlide = styled(SwiperSlide)`
 `
 
 
+
+
 function Eventbanner() {
   return (
     <>
