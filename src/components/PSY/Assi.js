@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import data from './../../data/MarketData'
 import { styled } from 'styled-components';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Navigate } from 'react-router-dom';
 
 const Content = styled.div`
     width: 100%;

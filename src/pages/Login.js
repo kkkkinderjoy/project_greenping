@@ -41,6 +41,7 @@ const Input = styled.input`
   height: 40px;
   border: 1px solid #e4e4e4;
   border-radius: 10px;
+  font-size: 1rem;
   &:focus{
     outline: none;
     border-color: #2ed090;
@@ -57,7 +58,7 @@ const InputWrap = styled.div`
   input:not(:placeholder-shown) +label{
     top: 4px;
     left: 4px;
-    font-size: 1em;
+    font-size: 0.8rem;
     color: #2ed090;
   }
 `

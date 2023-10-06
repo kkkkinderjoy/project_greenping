@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
-import { collection, getDocs, getFirestore, orderBy, query, where } from "firebase/firestore";
+import { deleteDoc,collection, getDocs, getDoc, getFirestore, orderBy, query, doc } from "firebase/firestore";
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import styled from "styled-components";
 import data from "./../../data/MarketData"
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 
 const Content = styled.div`
     width: 100%;
@@ -94,74 +96,35 @@ function Salepage() {
     const menu = ["/sale" , "/buy", "/assi"]
     
     const [sale, setSale] = useState(0);
-
+    const userState = useSelector((state) => state.user);
+    const [post, setPost] = useState();
     const [posts, setPosts] = useState([]);
-    console.log(posts)
-    const auth = getAuth();
+    const navigate = useNavigate();
+    const uid = sessionStorage.getItem("users");
+    const [isLogin, setIsLogin] = useState(false);
 
+    useEffect(() => {
+      const fetchData = async () => {
+        const postRef = collection(getFirestore(), "market");
+        const postSnapShot = await getDoc(doc(postRef));
+        const CurrentUser = postSnapShot._firestore._authCredentials.currentUser;
+        console.log(CurrentUser.uid);
+        if (CurrentUser.uid) {
+          console.log("있음?");
+          setPost(CurrentUser.uid);
+        } else {
+          console.log("오류남");
+        }
+      };
+      fetchData();
+    }, []);
 
-  useEffect(auth, async (user) => {
-    const fetchPosts = async () => {
-      try {
-        const q = query(
-          collection(getFirestore(), "market"),
-          orderBy("timestamp", "desc")
-        );
- 
-        const snapShot = await getDocs(q);
-       
-        const postArray = snapShot.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        }));
-    
-        setPosts(postArray);
-        console.log(postArray);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchPosts();
-  },[]);
-
-  // onAuthStateChanged(auth, async (user) => {
-  //   if (user) {
-  //     const userUID = user.uid;
-
-  //     try {
-  //       const q = query(
-  //         collection(getFirestore(), 'market'),
-  //         where('authorUID', '==', userUID),
-  //         orderBy('timestamp', 'desc')
-  //       );
-  
-  //       const snapShot = await getDocs(q);
-  
-  //       const postArray = snapShot.docs.map((doc) => ({
-  //         id: doc.id,
-  //         ...doc.data(),
-  //       }));
-  
-  //       setPosts(postArray);
-  //       console.log(postArray);
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   } else {
-  //     // 사용자가 로그인하지 않았을 때의 처리
-  //   }
-  // });
-
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, async (user) => {
-      if (user) {
-        const userUID = user.uid;
-
+    useEffect(() => {
+      const fetchPosts = async () => {
         try {
           const q = query(
-            collection(getFirestore(), 'market'),
-            where('authorUID', '==', userUID),
-            orderBy('timestamp', 'desc')
+            collection(getFirestore(), "market"),
+            orderBy("timestamp", "desc")
           );
   
           const snapShot = await getDocs(q);
@@ -172,20 +135,21 @@ function Salepage() {
           }));
   
           setPosts(postArray);
-          console.log(postArray);
         } catch (error) {
           console.log(error);
         }
-      } else {
-        // 사용자가 로그인하지 않았을 때의 처리
-      }
-    });
+      };
+      fetchPosts();
+    }, []);
 
-    return () => {
-      // 컴포넌트가 언마운트되면 unsubscribe 함수 호출
-      unsubscribe();
-    }
-  }, [auth]); // auth 상태가 변경될 때만 useEffect 실행
+    const deletePost = async () => {
+      if (window.confirm("정말로 삭제하시겠습니까?")) {
+        const docRef = doc(getFirestore(), "market", "wNUObr3FLD7oJGCWa58C");
+        await deleteDoc(docRef);
+        alert("게시물이 삭제되었습니다");
+        navigate(`/salepage`);
+      }
+    };
 
   return (
     <>
@@ -203,18 +167,19 @@ function Salepage() {
             </ul>
         </TitleWrap>
         {
-            posts.map((e,i)=>{
-                return(
-                    <ContentItem key={i}>
-                    <h3>{e.title}</h3>
-                    <ul>
-                        <li>{e.title}</li>
-                        <li>업로드일: {e.timestamp.toDate().toLocaleDateString()}</li>
-                        <li dangerouslySetInnerHTML={{__html: e.content}}/>
-                    </ul>
-                    </ContentItem>
-                )
-            })
+          posts &&
+          posts.map((e,i)=>{
+            return(
+              <ContentItem key={i}>
+                <h3>{e.title}</h3>
+                <ul>
+                    <li>{e.title}</li>
+                    <li>업로드일: {e.timestamp.toDate().toLocaleDateString()}</li>
+                    <li dangerouslySetInnerHTML={{__html: e.content}}/>
+                </ul>
+              </ContentItem>
+            )
+          })
         }
     </Content>
     </>
