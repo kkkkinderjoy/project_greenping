@@ -105,6 +105,7 @@ function Inner() {
         <Route path="/buy" element={<Buy />} />
         <Route path="/Assi" element={<Assi />} />
         <Route path="/inquiry/:seq" element={<Inquiry />} />
+        <Route path="/inquiry/:seq/:market" element={<Inquiry />} />
       </Routes>
       <Aside />
       <Footer />

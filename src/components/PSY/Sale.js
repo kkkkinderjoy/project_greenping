@@ -57,6 +57,7 @@ const ContentItem = styled.div`
       top: 35%;
       left: 34%;
     }
+    p{position: absolute; bottom: 20px; font-size: 1rem; color: #999999; left: 50%; transform: translateX(-50%)}
     @media screen and (max-width: 768px) {
     width: 100%;
     height: 400px;
@@ -75,7 +76,7 @@ const Button = styled.button`
     position: absolute;
     width: 80%;
     height: 50px;
-    font-size: 18px;
+    font-size: 1.2rem;
     line-height: 30px;
     background-color: #2ed090;
     border-radius: 10px;
@@ -111,8 +112,7 @@ function Sale({userState}){
             {
               Filter.map((e,i)=>{
                 return (
-                  <NavLink to={menu[i]}><li className={sale === i ? 'on' : ''} key={i}>{e}
-                  </li></NavLink>
+                  <NavLink to={menu[i]}><li className={sale === i ? 'on' : ''} key={i}>{e}</li></NavLink>
                 )
               })
             }
@@ -120,15 +120,14 @@ function Sale({userState}){
       </TitleWrap>
     {
       uid ?
-      <li>
-        <Salewrite />
-      </li>
+        <Salewrite /> 
       :
       <>
       <ContentItem>
         <h3>판매를 원한다면 로그인해주세요!</h3>
         <FontAwesomeIcon icon={faCartShopping} />
         <NavLink to='/login'><Button>로그인하기</Button></NavLink>
+        <NavLink to='/'><p>메인으로 돌아가기</p></NavLink>
       </ContentItem>
       </>
     }

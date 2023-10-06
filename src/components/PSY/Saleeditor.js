@@ -9,6 +9,7 @@ import {
   addDoc,
   collection,
   doc,
+  setDoc,
   getFirestore,
   serverTimestamp,
 } from "firebase/firestore";
@@ -60,14 +61,13 @@ function Ckeditor({ title, postData }) {
     }
 
     try {
-
-
-      await addDoc(collection(getFirestore(), "market"), {
+          
+      setDoc(doc(getFirestore(), "market", userState.uid), {
         title: title,
         content: writeData,
         view: 1,
         uid: userState.uid,
-        name: userState.uid.name,
+        name: userState.data.name,
         timestamp: serverTimestamp(),
         file : fileUrl,
         likes: true,
