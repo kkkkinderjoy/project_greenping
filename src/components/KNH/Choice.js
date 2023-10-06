@@ -111,9 +111,12 @@ function Choice() {
 
   const [data, setData] = useState(dataList);
 
-  // const RandomData = ()=>{
-  //     Math.floor(/data.length)
-  // }
+  useEffect (()=>{
+
+        const RandomData = ()=>{
+              const Random = Math.floor(Math.random()*data.length)
+          }
+    })
   
   const price = ["50,000","45,000","60,000" ,"65,000"]; //가격은 배열로 지정함(공공데이터에 가격정보가 없기때문에...)
   // function radomFromArray(array){
