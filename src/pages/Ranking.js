@@ -188,13 +188,12 @@ function Detail() {
               data.slice(0, page).map((e, i) => {
                 return (
                   <>
+                      {e.firstImageUrl !== "" && 
                     <RankList>
                       <NIWrap>
 
                       <Num>{i + 1}</Num>
-                      {e.firstImageUrl !== "" && 
                         <Image src={e.firstImageUrl} alt="{e.firstImageUrl}" />
-                      }
                       </NIWrap>
                       <RankCon>
                         <p>{e.facltNm}</p>
@@ -214,6 +213,7 @@ function Detail() {
                         )}
                       </RankCon>
                     </RankList>
+                      }
                   </>
                 );
               })}

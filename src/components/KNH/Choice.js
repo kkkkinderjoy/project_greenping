@@ -108,7 +108,7 @@ function Choice() {
   //     })
   //     .catch(function (error) {});
   // });
-  
+
  const [data, setData] = useState();
 useEffect(()=>{
   const RandomData = ()=>{
