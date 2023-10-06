@@ -199,7 +199,7 @@ function Header({userState}){
           </LogoWrap>
           <ListWrap>
             <List>
-              <ListItem><NavLink to="/searchd">캠핑장 찾기</NavLink></ListItem>
+              <ListItem><NavLink to="/navsearch">캠핑장 찾기</NavLink></ListItem>
               <ListItem><NavLink to="/ranking">랭킹</NavLink></ListItem>
               <ListItem><NavLink to="/reviewmore">리뷰</NavLink></ListItem>
               <ListItem><NavLink to="/board">그린톡</NavLink></ListItem>

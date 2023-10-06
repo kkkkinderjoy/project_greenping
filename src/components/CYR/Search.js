@@ -12,49 +12,22 @@ const Content = styled.div`
   height: 496px;
   background: url('/images/main-banner.jpg');
   background-size: cover;
-  >p{
-  width: 100%;
-  height: 140px;
-  background-color: #fff;
-  opacity: 0.95;
-  display: none;
-  &.active{
-    display: block;
-    position: fixed;
-    top: 0;
-    z-index: 9000;
-  }
-  }
 `
-// const ScrollWrap = styled.div`
-//   position: absolute;
-//   top: 0;
-//   width: 100%;
-//   background-color: #ddd;
-//   opacity: 0.95;
-//   &.active{
-//     display: block;
-//     z-index: 7000;
-//     position: absolute;
-//     width: 100%;
-//     background-color: #ddd;
-//   }
-// `
+
 
 const ContentWrap = styled.div`
   max-width: 1200px;
   margin: 0 auto;
   display: flex;
-  position: relative;
-  top: 80%;
-  left: 32%;
-  transform: translate(-50%,-50%);
+  transform: translateY(500%);
+  
   &.on{
     position: fixed;
-    top: 6%;
-    left: 50%;
-    width: 100%;
-    z-index: 10000;
+    top: 0;
+    left: 0;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
   }
 `
 
@@ -68,24 +41,22 @@ const Inner = styled.div`
   background-color: #fff;
   border-radius: 100px;
   box-shadow: rgba(0, 0, 0, 0.2) 0px 20px 30px;
-  /* &.on{
-    box-shadow: rgba(37, 40, 47, 0.15) 0 0 3px 0;
-  } */
 `
 
 const Select = styled.select`
   width: 18%;
   padding: 2%;
-  font-size: 1em;
+  font-size: 1.2em;
+  font-weight: bold;
   border: none;
   -webkit-appearance:none; //크롬 화살표 없애기
   appearance: none; //화살표 없애기
   -moz-appearance: none; //파이어폭스 화살표 없애기
   text-align: center;
   select:required:invalid{
-    color: red;
+    color: #909090;
   }
-  >option[value=""][disabled]{
+  option[value=""][disabled]{
     display: none;
   }
   &:focus{
@@ -98,12 +69,14 @@ const Option = styled.option`
   font-size: 1em;
   border: none;
   text-align: center;
+ 
+
 `
 
 const StyleDate = styled(DatePicker)`
   width: 250px;
   height: 65px;
-  font-size: 1em;
+  font-size: 1.2em;
   font-weight: bold;
   border: 0;
   appearance: none;
@@ -120,7 +93,7 @@ const Input = styled.input`
   border: none;
   width: 30%;
   padding: 2%;
-  font-size: 1em;
+  font-size: 1.2em;
   font-weight: bold;
   border: 0;
   appearance: none;
