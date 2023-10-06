@@ -1,21 +1,20 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   collection,
+  deleteDoc,
   doc,
   getDoc,
   getDocs,
   getFirestore,
+  onSnapshot,
   orderBy,
   query,
 } from "firebase/firestore";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPen } from "@fortawesome/free-solid-svg-icons";
-
-
-
 
 const BorderWrapper = styled.div`
   max-width: 1000px;
@@ -24,7 +23,7 @@ const BorderWrapper = styled.div`
 const Title = styled.div`
   padding: 10px 20px;
   font-weight: bold;
-  font-size: 2.0em;
+  font-size: 2em;
   position: relative;
 
   &::after {
@@ -40,23 +39,23 @@ const Title = styled.div`
   }
 `;
 const List = styled.ul`
-width: 100%;
-height: auto;
-   margin-top: 30px;
-   margin-bottom: 4px;
-   border: 1px solid #e5e7eb;
-   border-radius: 0.375rem;
-   padding: 1.25rem;
-   position: relative;
-   list-style: none;
-   img{
-    width: 450px;
+  width: 100%;
+  height: auto;
+  margin-top: 30px;
+  margin-bottom: 4px;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.375rem;
+  padding: 1.25rem;
+  position: relative;
+  list-style: none;
+
+  img {
+    width: 400px;
     border-radius: 10px;
     object-fit: cover;
-   }
+    margin-bottom: 10px;
+  }
 `;
-
-
 
 const ListItem = styled.li`
   padding: 10px 20px;
@@ -66,7 +65,8 @@ const ListItem = styled.li`
     display: flex;
     justify-content: space-between;
     align-items: start;
-    >p{
+
+    > p {
       color: #999999;
       font-size: 0.8em;
     }
@@ -79,36 +79,34 @@ const ListItem = styled.li`
     padding-left: 30px;
     position: relative;
 
-        &::after {
-        content: "";
-        width:  3px;
-        height: 20px;
-        margin-left: 0.5px;
-        background-color: #98eecc;
-        position: absolute;
-        top: 8px;
-        left: 17px;
-        border-radius: 10px;
-        z-index: -1;
-      }
+    &::after {
+      content: "";
+      width: 3px;
+      height: 20px;
+      margin-left: 0.5px;
+      background-color: #98eecc;
+      position: absolute;
+      top: 8px;
+      left: 17px;
+      border-radius: 10px;
+      z-index: -1;
+    }
   }
-
-  
 `;
 
 const Profile = styled.div`
-  width: 120px;
   display: flex;
   align-items: center;
-  justify-content: space-around;
-  >img{
+
+  > img {
+    display: flex;
     width: 50px;
     height: 50px;
     object-fit: cover;
     border-radius: 50%;
-
+    margin-right: 10px;
   }
-`
+`;
 const HeartWrap = styled.div`
   position: absolute;
   bottom: 5%;
@@ -118,17 +116,15 @@ const HeartWrap = styled.div`
   height: 25px;
   padding: 15px;
   background-color: white;
-  box-shadow:  0 0 3px gray;
+  box-shadow: 0 0 3px gray;
   border-radius: 50%;
-
-`
+`;
 
 const Heart = styled.img`
-cursor: pointer;
-  max-width: 100%;  
-  height: auto;  
- 
-`
+  cursor: pointer;
+  max-width: 100%;
+  height: auto;
+`;
 
 const ButtonWrap = styled.div`
   display: flex;
@@ -156,20 +152,23 @@ const Button = styled.button`
 
 function Board() {
   const userState = useSelector((state) => state.user);
-  
-  
   const [posts, setPosts] = useState([]);
-  
+  const [isLogin, setIsLogin] = useState(false);
+  const [post, setPost] = useState();
+  const navigate = useNavigate();
+  const uid = sessionStorage.getItem("users");
+  const [userUid, setUserUid] = useState(userState && userState.uid);
 
+  // console.log(userState.uid);
   const [likes, setLikes] = useState(Array(posts.length).fill(false));
   const toggleLike = (index) => {
     const newLikes = [...likes];
     newLikes[index] = !newLikes[index];
     setLikes(newLikes);
   };
-  
-  
-
+  useEffect(() => {
+    // console.log(userUid);
+  }, []);
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -178,83 +177,143 @@ function Board() {
           collection(getFirestore(), "board"),
           orderBy("timestamp", "desc")
         );
- 
+
         const snapShot = await getDocs(q);
-       
+
         const postArray = snapShot.docs.map((doc) => ({
           id: doc.id,
           ...doc.data(),
         }));
-    
+
         setPosts(postArray);
-        console.log(postArray);
       } catch (error) {
         console.log(error);
       }
     };
     fetchPosts();
-  },[]);
+  }, []);
 
   //  if (posts.length === 0) {
-    
+
   //   return <div>현재 게시글이 없습니다.</div>;
   // }
 
+  const deletePost = async () => {
+    if (window.confirm("정말로 삭제하시겠습니까?")) {
+      const docRef = doc(getFirestore(), "board", "wNUObr3FLD7oJGCWa58C");
+      await deleteDoc(docRef);
+      alert("게시물이 삭제되었습니다");
+      navigate(`/board`);
+    }
+  };
+
+  // useEffect (()=> {
+  //   const fetchData = async () => {
+  //     const postRef = collection(getFirestore(),"board");
+  //     const q = query(postRef, orderBy("timestamp, desc"))
+  //     const postSnapShot = await getDocs(q);
+
+  //     const dataSnap = onSnapshot(q,(item)=>{
+  //       const fetchComment = item.docs.map(doc =>{
+
+  //       })
+  //     })
+  //       console.log(postSnapShot)
+  //       if( uid === postSnapShot?.data().uid){
+  //         setIsLogin(true)
+
+  //     }
+
+  //         setPosts(postSnapShot.data())
+
+  //     }
+
+  // fetchData()
+  // },[])
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const postRef = collection(getFirestore(), "board");
+      const postSnapShot = await getDoc(doc(postRef));
+      const CurrentUser = postSnapShot._firestore._authCredentials.currentUser;
+      console.log(CurrentUser.uid);
+      if (CurrentUser.uid) {
+        console.log("있음?");
+        setPost(CurrentUser.uid);
+      } else {
+        console.log("오류남");
+      }
+    };
+    fetchData();
+  }, []);
+
   return (
     <>
-    
       <BorderWrapper>
         <ButtonWrap>
-        <Title>그린톡</Title>
-            { 
-            userState.uid &&
-          
-              <Link to="/write">
-                <Button>
-                    <FontAwesomeIcon icon={faPen} />
-                </Button>
-              </Link>
-              }
+          <Title>그린톡</Title>
+          {userState.uid && (
+            <Link to="/write">
+              <Button>
+                <FontAwesomeIcon icon={faPen} />
+              </Button>
+            </Link>
+          )}
         </ButtonWrap>
-      
 
-        {posts && posts.map((e, i) => {
-          
-          return (
-            <List key={i}>
-              <ListItem>
-                <Profile>
-                  <img src="https://via.placeholder.com/50x50" alt="profile" />
-                  {e.name}
-                </Profile>
-                <p>{e.timestamp.toDate().toLocaleDateString()}</p>
-              </ListItem>
-              <ListItem>
-                {e.title}
-              </ListItem>
-              <ListItem>
-              <div dangerouslySetInnerHTML={{__html: e.content}}/>  </ListItem>      
-              <ListItem
-                onClick={() => {
-                  toggleLike(i);
-                }}
-              >
-                <HeartWrap>
-                  <Heart src={ likes[i]  ? 'images/heart_full.png' : 'images/heart_blank.png'} alt="heart" />
-                </HeartWrap>
-
-              </ListItem>
-             
-            
-            </List>
-          );
-        })}
-
-       
+        {posts &&
+          posts.map((e, i) => {
+            return (
+              <List key={i}>
+                <ListItem>
+                  <Profile>
+                    <img
+                      src="https://via.placeholder.com/50x50"
+                      alt="profile"
+                    />
+                    {e.name}
+                  </Profile>
+                  {/* <p>{e.timestamp.toDate().toLocaleDateString()}</p> */}
+                </ListItem>
+                <ListItem>{e.title}</ListItem>
+                <ListItem>
+                  <div dangerouslySetInnerHTML={{ __html: e.content }} />{" "}
+                </ListItem>
+                <ListItem
+                  onClick={() => {
+                    toggleLike(i);
+                  }}
+                >
+                  <HeartWrap>
+                    <Heart
+                      src={
+                        likes[i]
+                          ? "images/heart_full.png"
+                          : "images/heart_blank.png"
+                      }
+                      alt="heart"
+                    />
+                  </HeartWrap>
+                </ListItem>
+                {uid && uid === e.uid && (
+                  <ButtonWrap>
+                   
+                    <Button
+                      onClick={() => {
+                        navigate(`/edit`);
+                      }}
+                    >
+                      수정
+                    </Button>
+                    <Button onClick={deletePost}>삭제</Button>
+                  </ButtonWrap>
+                )}
+              </List>
+            );
+          })}
       </BorderWrapper>
     </>
   );
 }
 
 export default Board;
-

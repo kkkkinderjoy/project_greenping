@@ -6,7 +6,7 @@ import "react-datepicker/dist/react-datepicker.css"
 import styled from 'styled-components'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUser } from '@fortawesome/free-regular-svg-icons'
-import { faChevronRight } from '@fortawesome/free-solid-svg-icons'
+import { faChevronDown, faChevronRight } from '@fortawesome/free-solid-svg-icons'
 import Eventbanner from '../PSY/Eventbanner'
 import { useSelector } from 'react-redux'
 import { logIn, loggedIn } from '../../store'
@@ -185,6 +185,8 @@ ul{
 
 
 
+
+
 function Header({userState}){
   
   const [isActive,setIsActive]=useState(false);
@@ -209,6 +211,7 @@ function Header({userState}){
           </ListWrap>
           <NavMember>
             <ul>
+              
               <li>
 
                 <NavLink to={userState.uid ? "/logout" : "/login" }>{userState.uid ? "로그아웃" : "로그인"} </NavLink>

@@ -255,6 +255,7 @@ function Search() {
 
       {/* 모바일 써치+버튼 끝 */}
       {/* 유리써치 */}
+
       <Content>
         <p className={ScrollActive ? "active" : ""}></p>
         <ContentWrap className={ScrollActive ? "on" : ""}>

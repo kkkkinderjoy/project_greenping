@@ -57,17 +57,34 @@ const List = styled.li`
 
 const TextWrap = styled.div`
   margin-top: 3px;
+  
+  >span{
+    
+    font-weight: bolder;
+    color: black;
+    display: flex;
+    align-items: end;
+    margin-bottom: 7px;
+    >p:nth-child(1){
+      font-size: 1.2em;
+    }
+    >p:nth-child(2){
+      margin-left: 4px;
+      font-size: 0.72em;
+    }
+  }
   > p {
     display: flex;
     flex-wrap: nowrap;
-    font-size: 1em;
+    font-size: 0.9em;
+    
   }
 `;
 const Location = styled.div`
   display: flex;
   align-items: center;
   font-size: 0.8em;
-  margin-bottom: 4px;
+  margin: 3px 0;
   >p{
     margin-left: 7px;
     font-size: 1em;
@@ -91,7 +108,8 @@ function Choice() {
   //     })
   //     .catch(function (error) {});
   // });
-  const [data, setData] = useState();
+  
+ const [data, setData] = useState();
 useEffect(()=>{
   const RandomData = ()=>{
     const Array = [];
@@ -135,7 +153,10 @@ useEffect(()=>{
                             />
                           )}
                           <TextWrap>
-                          <span>{price[i]}원 부터</span>
+                            <span>
+                              <p>{price[i]}</p>
+                              <p>원 부터</p>
+                            </span>
                             <p>{e.facltNm}</p>
                             <Location>
                               <FontAwesomeIcon icon={faLocationDot}/>
