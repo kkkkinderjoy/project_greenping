@@ -5,6 +5,8 @@ import { ko } from "date-fns/esm/locale";
 import { addDays, subDays } from "date-fns";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCalendar, faCalendarAlt, faCalendarCheck } from "@fortawesome/free-solid-svg-icons";
 
 const Content = styled.div`
   margin-top: 5px;
@@ -54,12 +56,16 @@ const Inner = styled.div`
   align-items: center;
   flex-wrap: nowrap;
   border-radius: 100px;
+  background-color: #fff;
   box-shadow: rgba(0, 0, 0, 0.2) 0px 20px 30px;
   &.on {
-    border-bottom: 1px solid #eee;
+    box-shadow: none;
+    border: 1px solid #eee;
   }
-`;
+`
+const SearchList = styled.select`
 
+`
 const Select = styled.select`
   width: 18%;
   padding: 2%;
@@ -90,9 +96,8 @@ const Option = styled.option`
 
 const StyleDate = styled(DatePicker)`
   width: 250px;
-  height: 65px;
+  height: 55px;
   font-size: 1em;
-  font-weight: bold;
   border: 0;
   appearance: none;
   -moz-appearance: none;
@@ -109,7 +114,6 @@ const Input = styled.input`
   width: 30%;
   padding: 2%;
   font-size: 1em;
-  font-weight: bold;
   border: 0;
   appearance: none;
   -moz-appearance: none;
@@ -260,15 +264,16 @@ function Search() {
         <p className={ScrollActive ? "active" : ""}></p>
         <ContentWrap className={ScrollActive ? "on" : ""}>
           <Inner className={ScrollActive ? "on" : ""}>
-            <Select onChange={optionDonm} className={ScrollActive ? "on" : ""}>
+            <Select onChange={optionDonm} className={ScrollActive ? "on" : ""} >
               <option value="" disabled selected>
-                어디로 떠나볼까요?
+                지역별
               </option>
               <Option value="전체">전체</Option>
               {Filterdonm.map((e, i) => {
                 return <Option key={i}>{e}</Option>;
               })}
             </Select>
+            {/* <FontAwesomeIcon icon={faCalendarAlt} /> */}
             <StyleDate
               locale={ko}
               selectsRange={true}
@@ -283,6 +288,8 @@ function Search() {
               monthsShown={2}
               placeholderText={today} //데이트피커에서만 사용하는 placeholder 같은 기능
             />
+            
+            
             <Input
               type="text"
               placeholder="검색어를 입력하세요"
@@ -298,7 +305,7 @@ function Search() {
                   userInput: userInput,
                 }}
               >
-                <p>검색하기</p>
+                <p>검색</p>
               </NavLink>
             </NavLinkWrap>
           </Inner>

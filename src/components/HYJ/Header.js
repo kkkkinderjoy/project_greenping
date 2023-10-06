@@ -197,7 +197,7 @@ function Header({userState}){
      <Content $isopen={isActive}>
         <HeaderWrap>
           <LogoWrap>
-            <NavLink to="/"><Logo src={`images/pc_logo.png`} alt='로고' /></NavLink>
+            <NavLink to="/"><Logo src={`images/logo.png`} alt='로고' /></NavLink>
           </LogoWrap>
           <ListWrap>
             <List>
