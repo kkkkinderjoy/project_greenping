@@ -17,6 +17,7 @@ const Content = styled.div`
 const Title = styled.h3`
   text-align: center;
   font-size: 2.0em;
+  margin-bottom: 50px;
 `
 
 const ListWrap = styled.ul`
@@ -69,7 +70,7 @@ const TextWrap = styled.div`
     }
     >p:nth-child(2){
       margin-left: 4px;
-      font-size: 0.72em;
+      font-size: 0.8em;
     }
   }
   > p {
@@ -109,20 +110,21 @@ function Choice() {
   // });
 
  const [data, setData] = useState();
-useEffect(()=>{
-  const RandomData = ()=>{
-    const Array = [];
-    const Result = dataList.filter((e) => e.firstImageUrl !== '')
-    for(let i = 0; i < 4; i++){
-      
-      const Random = Math.floor(Math.random() * Result.length);
-      Array.push(Result[Random])
-      setData(Array)
-      console.log(Array)
+ 
+  useEffect(()=>{
+    const RandomData = ()=>{
+      const Array = [];
+      const Result = dataList.filter((e) => e.firstImageUrl !== '')
+      for(let i = 0; i < 4; i++){
+        
+        const Random = Math.floor(Math.random() * Result.length);
+        Array.push(Result[Random])
+        setData(Array)
+        console.log(Array)
+      }
     }
-  }
-  RandomData()
-}, [])
+    RandomData()
+  }, [])
 
   const price = ["50,000","45,000","60,000" ,"65,000"]; //가격은 배열로 지정함(공공데이터에 가격정보가 없기때문에...)
 
