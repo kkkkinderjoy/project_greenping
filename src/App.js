@@ -93,6 +93,7 @@ function Inner() {
         <Route path="/ranking" element={<Ranking />} />
         <Route path="/reviewmore" element={<ReviewMore />}></Route>
         <Route path="/board" element={<Board/>}  />
+        <Route path="/edit" element={<Write/>}></Route>
         <Route path="/write" element={<Write />} />
         <Route path="/market" element={<Market />} />
         <Route path="/notice" element={<Notice />}></Route>
