@@ -91,16 +91,24 @@ function Choice() {
   //     })
   //     .catch(function (error) {});
   // });
+  const [data, setData] = useState();
+useEffect(()=>{
+  const RandomData = ()=>{
+    const Array = [];
+    const Result = dataList.filter((e) => e.firstImageUrl !== '')
+    for(let i = 0; i < 4; i++){
+      
+      const Random = Math.floor(Math.random() * Result.length);
+      Array.push(Result[Random])
+      setData(Array)
+      console.log(Array)
+    }
+  }
+  RandomData()
+}, [])
 
-  const [data, setData] = useState(dataList);
   const price = ["50,000","45,000","60,000" ,"65,000"]; //가격은 배열로 지정함(공공데이터에 가격정보가 없기때문에...)
-  // function radomFromArray(array){
-  //   const randomPrice = Math.floor(Math.random() * array.length*4);
-  //   return array[randomPrice]
-  // }
-  
-  // const result =radomFromArray(price);
-  // console.log(result)
+
   return (
     <>
       {/* Choice */}
@@ -114,7 +122,7 @@ function Choice() {
           {/* api */}
           <ListWrap>
             {data &&
-              data.slice(0, 4).map((e, i) => {
+              data.map((e, i) => {
                 return (
                   <React.Fragment key={i}>
                     {

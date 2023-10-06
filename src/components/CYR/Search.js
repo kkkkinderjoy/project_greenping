@@ -14,15 +14,16 @@ const Content = styled.div`
   background-size: cover;
   > p {
     width: 100%;
-    height: 140px;
+    height: 100px;
     background-color: #fff;
-    opacity: 0.95;
+    opacity: 1;
     display: none;
     &.active {
       display: block;
       position: fixed;
       top: 0;
       z-index: 9000;
+      box-shadow: rgba(0, 0, 0, 0.2) 0px 3px 20px;
     }
   }
 `;
@@ -38,7 +39,7 @@ const ContentWrap = styled.div`
   &.on {
     position: fixed;
     transform: translate(-50%, -50%);
-    top: 7%;
+    top: 5%;
     left: 50%;
     width: 100%;
     z-index: 10000;
@@ -52,12 +53,11 @@ const Inner = styled.div`
   justify-content: center;
   align-items: center;
   flex-wrap: nowrap;
-  background-color: #fff;
   border-radius: 100px;
   box-shadow: rgba(0, 0, 0, 0.2) 0px 20px 30px;
-  /* &.on{
-    box-shadow: rgba(37, 40, 47, 0.15) 0 0 3px 0;
-  } */
+  &.on {
+    border-bottom: 1px solid #eee;
+  }
 `;
 
 const Select = styled.select`
@@ -81,6 +81,7 @@ const Select = styled.select`
     border: 1px solid #2ed090;
   }
 `;
+
 const Option = styled.option`
   font-size: 1em;
   border: none;
@@ -257,8 +258,8 @@ function Search() {
       <Content>
         <p className={ScrollActive ? "active" : ""}></p>
         <ContentWrap className={ScrollActive ? "on" : ""}>
-          <Inner>
-            <Select onChange={optionDonm}>
+          <Inner className={ScrollActive ? "on" : ""}>
+            <Select onChange={optionDonm} className={ScrollActive ? "on" : ""}>
               <option value="" disabled selected>
                 어디로 떠나볼까요?
               </option>
