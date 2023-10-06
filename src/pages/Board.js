@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   collection,
+  deleteDoc,
   doc,
   getDoc,
   getDocs,
@@ -49,11 +50,14 @@ height: auto;
    padding: 1.25rem;
    position: relative;
    list-style: none;
-   img{
-    width: 450px;
+
+    img{
+     width: 400px;
     border-radius: 10px;
     object-fit: cover;
-   }
+    margin-bottom: 10px;
+    }
+   
 `;
 
 
@@ -66,6 +70,7 @@ const ListItem = styled.li`
     display: flex;
     justify-content: space-between;
     align-items: start;
+    
     >p{
       color: #999999;
       font-size: 0.8em;
@@ -97,15 +102,17 @@ const ListItem = styled.li`
 `;
 
 const Profile = styled.div`
-  width: 120px;
+
   display: flex;
   align-items: center;
-  justify-content: space-around;
+ 
   >img{
+    display: flex;
     width: 50px;
     height: 50px;
     object-fit: cover;
     border-radius: 50%;
+    margin-right: 10px;
 
   }
 `
@@ -156,10 +163,12 @@ const Button = styled.button`
 
 function Board() {
   const userState = useSelector((state) => state.user);
-  
-  
   const [posts, setPosts] = useState([]);
-  
+  const [isLogin, setIsLogin] = useState()
+  const [post, setPost] = useState([]);
+  const navigate = useNavigate();
+  const uid = sessionStorage.getItem("users")
+
 
   const [likes, setLikes] = useState(Array(posts.length).fill(false));
   const toggleLike = (index) => {
@@ -199,6 +208,47 @@ function Board() {
     
   //   return <div>현재 게시글이 없습니다.</div>;
   // }
+
+  const deletePost = async () =>{
+    if(window.confirm("정말로 삭제하시겠습니까?")){
+      
+      const docRef = doc(getFirestore(),"board");
+      await deleteDoc(docRef)
+      alert("게시물이 삭제되었습니다")
+      navigate(`/board`)
+    }
+  }
+
+useEffect (()=> {
+  const fetchData = async () => {
+    const postRef = doc(getFirestore(),"board");
+    const postSnapShot = await getDoc(postRef);
+    if(postSnapShot.exists()){
+
+      
+     // 2.  로그인 uid 값과 포스트 uid값과 일치하지 않으면 수정/삭제 버튼이 사라지게 만든다
+
+      if( uid === postSnapShot.data().uid){
+        setIsLogin(true)
+
+     
+    }
+
+        setPost(postSnapShot.data())
+        
+
+    }else{
+        // setIsModal(true)
+        // setMessage("돌아가라!")
+    }
+
+ 
+
+ 
+}
+
+fetchData()
+},[])
 
   return (
     <>
@@ -244,7 +294,12 @@ function Board() {
                 </HeartWrap>
 
               </ListItem>
-             
+              {isLogin &&
+            <ButtonWrap>
+              <Button onClick={()=>{navigate(`/edit`)}}>수정</Button>
+              <Button onClick={deletePost}>삭제</Button>
+            </ButtonWrap>
+          }
             
             </List>
           );
