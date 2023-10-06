@@ -153,8 +153,8 @@ const Button = styled.button`
 function Board() {
   const userState = useSelector((state) => state.user);
   const [posts, setPosts] = useState([]);
-  const [isLogin, setIsLogin] = useState();
-  // const [post, setPost] = useState([]);
+  const [isLogin, setIsLogin] = useState(false);
+  const [post, setPost] = useState();
   const navigate = useNavigate();
   const uid = sessionStorage.getItem("users");
   const [userUid, setUserUid] = useState(userState && userState.uid);
@@ -170,7 +170,7 @@ function Board() {
     // console.log(userUid);
   }, []);
 
-  const Data = useEffect(() => {
+  useEffect(() => {
     const fetchPosts = async () => {
       try {
         const q = query(
@@ -186,18 +186,12 @@ function Board() {
         }));
 
         setPosts(postArray);
-        
       } catch (error) {
         console.log(error);
       }
     };
     fetchPosts();
   }, []);
-
- 
-  useEffect (()=>{
-      
-  },[Data])
 
   //  if (posts.length === 0) {
 
@@ -213,8 +207,45 @@ function Board() {
     }
   };
 
- 
- 
+  // useEffect (()=> {
+  //   const fetchData = async () => {
+  //     const postRef = collection(getFirestore(),"board");
+  //     const q = query(postRef, orderBy("timestamp, desc"))
+  //     const postSnapShot = await getDocs(q);
+
+  //     const dataSnap = onSnapshot(q,(item)=>{
+  //       const fetchComment = item.docs.map(doc =>{
+
+  //       })
+  //     })
+  //       console.log(postSnapShot)
+  //       if( uid === postSnapShot?.data().uid){
+  //         setIsLogin(true)
+
+  //     }
+
+  //         setPosts(postSnapShot.data())
+
+  //     }
+
+  // fetchData()
+  // },[])
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const postRef = collection(getFirestore(), "board");
+      const postSnapShot = await getDoc(doc(postRef));
+      const CurrentUser = postSnapShot._firestore._authCredentials.currentUser;
+      console.log(CurrentUser.uid);
+      if (CurrentUser.uid) {
+        console.log("있음?");
+        setPost(CurrentUser.uid);
+      } else {
+        console.log("오류남");
+      }
+    };
+    fetchData();
+  }, []);
 
   return (
     <>
@@ -264,8 +295,9 @@ function Board() {
                     />
                   </HeartWrap>
                 </ListItem>
-                {userState.uid && uid === userUid && (
+                {uid && uid === e.uid && (
                   <ButtonWrap>
+                   
                     <Button
                       onClick={() => {
                         navigate(`/edit`);
