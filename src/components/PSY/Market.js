@@ -23,7 +23,6 @@ const ContentItem = styled.div`
   ul{
     display: flex;
     justify-content: space-around; 
-    flex-wrap: wrap;
     li{
       width: 200px;
       height: 200px;
@@ -56,20 +55,27 @@ const ContentItem = styled.div`
         padding-right: 10px;
       }
     }
-  @media screen and (max-width: 768px) {
-    ul{
-      li{
-        width: 32.5%;
-        height: auto;
+    @media screen and (max-width: 768px) {
+    ul {
+      transition: 0.5s;
+      li {
+      scale: 0.7;
+      }
+      svg{
+        font-size: 3rem;
       }
     }
-}
+  }
 `
+
 const SvgBox = styled.div`
   background-color: #fff;
   width: 198px;
   height: 200px;
   border-radius: 20px;
+  @media screen and (max-width: 768px){
+    flex-basis: 23%;
+  }
 `
 
 function Market() {

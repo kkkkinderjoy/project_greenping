@@ -142,7 +142,7 @@ function Assi() {
                 <h3>{e.TITLE}</h3>
                 <img src={e.IMG} alt='양도용품 이미지' />
                 <ul>
-                  <li>{e.PRICE}</li>
+                  {/* <li>{e.PRICE}</li> */}
                   <li>업로드일: {e.DATE}</li>
                 </ul>
                 {

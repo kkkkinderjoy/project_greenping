@@ -43,7 +43,6 @@ const List = styled.li`
     border-radius: 10px;
   }
 
-
   @media screen and (min-width: 641px) and (max-width: 768px) {
     flex-basis: 48%;
     margin-bottom: 20px;
@@ -57,17 +56,34 @@ const List = styled.li`
 
 const TextWrap = styled.div`
   margin-top: 3px;
+  
+  >span{
+    
+    font-weight: bolder;
+    color: black;
+    display: flex;
+    align-items: end;
+    margin-bottom: 7px;
+    >p:nth-child(1){
+      font-size: 1.2em;
+    }
+    >p:nth-child(2){
+      margin-left: 4px;
+      font-size: 0.72em;
+    }
+  }
   > p {
     display: flex;
     flex-wrap: nowrap;
-    font-size: 1em;
+    font-size: 0.9em;
+    
   }
 `;
 const Location = styled.div`
   display: flex;
   align-items: center;
   font-size: 0.8em;
-  margin-bottom: 4px;
+  margin: 3px 0;
   >p{
     margin-left: 7px;
     font-size: 1em;
@@ -92,15 +108,24 @@ function Choice() {
   //     .catch(function (error) {});
   // });
 
-  const [data, setData] = useState(dataList);
+ const [data, setData] = useState();
+useEffect(()=>{
+  const RandomData = ()=>{
+    const Array = [];
+    const Result = dataList.filter((e) => e.firstImageUrl !== '')
+    for(let i = 0; i < 4; i++){
+      
+      const Random = Math.floor(Math.random() * Result.length);
+      Array.push(Result[Random])
+      setData(Array)
+      console.log(Array)
+    }
+  }
+  RandomData()
+}, [])
+
   const price = ["50,000","45,000","60,000" ,"65,000"]; //가격은 배열로 지정함(공공데이터에 가격정보가 없기때문에...)
-  // function radomFromArray(array){
-  //   const randomPrice = Math.floor(Math.random() * array.length*4);
-  //   return array[randomPrice]
-  // }
-  
-  // const result =radomFromArray(price);
-  // console.log(result)
+
   return (
     <>
       {/* Choice */}
@@ -114,7 +139,7 @@ function Choice() {
           {/* api */}
           <ListWrap>
             {data &&
-              data.slice(0, 4).map((e, i) => {
+              data.map((e, i) => {
                 return (
                   <React.Fragment key={i}>
                     {
@@ -127,7 +152,10 @@ function Choice() {
                             />
                           )}
                           <TextWrap>
-                          <span>{price[i]}원 부터</span>
+                            <span>
+                              <p>{price[i]}</p>
+                              <p>원 부터</p>
+                            </span>
                             <p>{e.facltNm}</p>
                             <Location>
                               <FontAwesomeIcon icon={faLocationDot}/>

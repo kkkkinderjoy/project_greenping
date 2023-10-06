@@ -1,14 +1,15 @@
 import React from "react";
 import styled from "styled-components";
-import Ckeditor from "../components/KNH/Ckeditor";
+import Saleeditor from "./Saleeditor";
 import { useState } from "react";
 import {
   useAsyncError,
   useParams,
   Navigate,
   useNavigate,
+  Link,
 } from "react-router-dom";
-import Modal from "../components/Modal";
+import Modal from "./../Modal";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import { doc, getDoc, getFirestore } from "firebase/firestore";
@@ -26,16 +27,18 @@ const InnerContainer = styled.div`
 `;
 
 const Header = styled.div`
+  width: 400px;
   display: flex;
-  align-items: flex-end;
   justify-content: space-between;
   margin-bottom: 50px;
+  p{
+    font-size: 1.5rem;
+  }
 `;
 
 const Heading = styled.h3`
-  font-size: 2em;
+  font-size: 2.2em;
   position: relative;
-
   &::after {
     content: "";
     width: 30px;
@@ -58,6 +61,7 @@ const ContentWrapper = styled.div`
   margin-top: 9px;
   border: 1px solid #e5e7eb;
   border-radius: 0.375rem;
+  background-color: #fff;
 `;
 
 const ContentInner = styled.div`
@@ -90,10 +94,10 @@ const ContentLabel = styled.p`
   margin-bottom: 15px;
 `;
 
-function Write() {
+function Salewrite() {
   const [txtTitle, setTxtTitle] = useState("");
   // 제목데이터를 에디터로 넘겨야 함
-  const { board, view } = useParams();
+  const { market, view } = useParams();
   const [isModal, setIsModal] = useState(view ? false : true);
   const navigate = useNavigate();
 
@@ -107,9 +111,9 @@ function Write() {
   const [userUid, setUserUid] = useState(uid);
 
   useEffect(() => {
-    if (board) {
+    if (market) {
       const fetchData = async () => {
-        const postRef = doc(getFirestore(), "board");
+        const postRef = doc(getFirestore(), "market");
         const postSnapShot = await getDoc(postRef);
         if (postSnapShot.exists()) {
           setPostData(postSnapShot.data());
@@ -128,30 +132,15 @@ function Write() {
     }
   });
 
-  if (!memberProfile.loggedIn) {
-    return (
-      <>
-        {isModal && (
-          <Modal
-            error="로그인 이후 이용해주시기 바랍니다!"
-            onClose={() => {
-              setIsModal(false);
-              navigate("/login");
-            }}
-          />
-        )}
-      </>
-    );
-  }
 
   return (
     <>
       <Container>
         <InnerContainer>
           <Header>
-            <Heading>{board && view ? "글수정" : "글쓰기"}</Heading>
+            <Heading>판매 글쓰기</Heading>
+            <Link to='/salepage'><p>내가 쓴글 보기</p></Link>
           </Header>
-
           <ContentWrapper>
             <ContentInner>
               <Title>제목</Title>
@@ -165,7 +154,7 @@ function Write() {
             </ContentInner>
             <ContentInputWrapper>
               <ContentLabel>내용</ContentLabel>
-              <Ckeditor title={txtTitle} postData={postData} />
+              <Saleeditor title={txtTitle} postData={postData} />
             </ContentInputWrapper>
           </ContentWrapper>
         </InnerContainer>
@@ -174,4 +163,4 @@ function Write() {
   );
 }
 
-export default Write;
+export default Salewrite;
