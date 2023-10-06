@@ -24,15 +24,6 @@ const ContainerTitle = styled.div`
     text-align: center;
     margin-bottom: 1.25rem;
     position: relative;
-    /* &::after{
-        content: "";
-        position: absolute;
-        width: 5%;
-        height: 3px;
-        background-color: #2ed090;
-        left: 45%; top: 0;
-        transform: translate(-50%, -45%);
-    } */
 `
 const Title = styled.h3`
     font-size: 2rem;
