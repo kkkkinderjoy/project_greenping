@@ -28,6 +28,7 @@ const Content = styled.div`
   }
 `;
 
+
 const ContentWrap = styled.div`
   max-width: 1200px;
   margin: 0 auto;
@@ -43,6 +44,7 @@ const ContentWrap = styled.div`
     left: 50%;
     width: 100%;
     z-index: 10000;
+
   }
 `;
 
@@ -63,7 +65,8 @@ const Inner = styled.div`
 const Select = styled.select`
   width: 18%;
   padding: 2%;
-  font-size: 1em;
+  font-size: 1.2em;
+  font-weight: bold;
   border: none;
   -webkit-appearance: none; //크롬 화살표 없애기
   appearance: none; //화살표 없애기
@@ -85,13 +88,14 @@ const Select = styled.select`
 const Option = styled.option`
   font-size: 1em;
   border: none;
-  text-align: center;
+  text-align: center
 `;
+
 
 const StyleDate = styled(DatePicker)`
   width: 250px;
   height: 65px;
-  font-size: 1em;
+  font-size: 1.2em;
   font-weight: bold;
   border: 0;
   appearance: none;
@@ -108,7 +112,7 @@ const Input = styled.input`
   border: none;
   width: 30%;
   padding: 2%;
-  font-size: 1em;
+  font-size: 1.2em;
   font-weight: bold;
   border: 0;
   appearance: none;
