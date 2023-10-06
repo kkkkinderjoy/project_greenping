@@ -100,29 +100,29 @@ function Salepage() {
     const auth = getAuth();
 
 
-  // useEffect(auth, async (user) => {
-  //   const fetchPosts = async () => {
-  //     try {
-  //       const q = query(
-  //         collection(getFirestore(), "market"),
-  //         orderBy("timestamp", "desc")
-  //       );
+  useEffect(auth, async (user) => {
+    const fetchPosts = async () => {
+      try {
+        const q = query(
+          collection(getFirestore(), "market"),
+          orderBy("timestamp", "desc")
+        );
  
-  //       const snapShot = await getDocs(q);
+        const snapShot = await getDocs(q);
        
-  //       const postArray = snapShot.docs.map((doc) => ({
-  //         id: doc.id,
-  //         ...doc.data(),
-  //       }));
+        const postArray = snapShot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
     
-  //       setPosts(postArray);
-  //       console.log(postArray);
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   };
-  //   fetchPosts();
-  // },[]);
+        setPosts(postArray);
+        console.log(postArray);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchPosts();
+  },[]);
 
   // onAuthStateChanged(auth, async (user) => {
   //   if (user) {

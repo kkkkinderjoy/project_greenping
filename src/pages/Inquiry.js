@@ -72,37 +72,44 @@ const Button = styled.button`
 
 function Inquiry() {
 
-    const [comment, setComment] = useState("");
-    const [comments, setComments] = useState("");
     const userState = useSelector(state => state.user)
-    const {market, inquiry} = useParams();
+    const {seq, market} = useParams();
     const location = useLocation();
     const data = location.state;
-    console.log(data)
     const uid = sessionStorage.getItem("users");
     const [userUid, setUserUid] = useState(uid)
-    
-    // useEffect(()=>{
-    //   const postRef = doc(getFirestore(), market, inquiry);
-    //   const commentRef = collection(postRef, "comments");
-  
-    //   const q = query(commentRef, orderBy("timestamp", "desc"));
-  
-    //   const dataSnap =  onSnapshot(q, (item)=>{
-    //     const fetchComment = item.docs.map(doc =>({
-    //       id: doc.id,
-    //       ...doc.data()
-    //     }))
-    //     setComments(fetchComment);
-    //   })
-    //   return dataSnap;
-    // },[market, inquiry])
+    const [post, setPost] = useState();
+    const [Comment, setComment] = useState("");
+    const [Comments, setComments] = useState("");
+    const [InputCnt, setInputCnt] = useState(0);
+    const maxLength = 50;
 
-    const addComment = (inquiry) =>{
-        const postRef = doc(getFirestore(), market, inquiry);
+    const InputText = (Comment, setComment) => {
+      if (Comment.length > maxLength) {
+        setComment(Comment.slice(0, maxLength));
+      }
+      setInputCnt(Comment.length);
+    };
+
+    // useEffect(()=>{
+    //     const fetchData = async () =>{
+    //         const postRef = doc(getFirestore(), seq, market);
+    //         const postSnapShot = await getDoc(postRef);
+    //         if(postSnapShot.exists()){
+    //             setPost(postSnapShot.data())
+    //             setUserUid(postSnapShot.data().uid);
+    //         }else{
+    //             console.log("gg")
+    //         }
+    //     }
+    //     fetchData();
+    // },[seq, market])
+
+    const addComment = (seq) =>{
+        const postRef = doc(getFirestore(), seq, market);
         const commentRef = collection(postRef, "comments");
         addDoc(commentRef, {
-          text: comment,
+          text: Comment,
           name: userState&&userState.data.name,
           timestamp: serverTimestamp()
         })
@@ -117,9 +124,10 @@ function Inquiry() {
                 <h3>{data.TITLE}</h3>
                 <img src={data.IMG} alt='이미지'></img>
                 <Text>
-                <textarea className='textarea' placeholder='댓글을 입력해주세요.' value={comment} onChange={(e)=>{setComment(e.target.value)}}></textarea>
+                <textarea maxLength={maxLength} className='textarea' placeholder='댓글을 입력해주세요.' value={Comment} onChange={(e)=>{setComment(e.target.value)}}></textarea>
                 </Text>
-                <Button onClick={()=>{addComment(market)}}>댓글달기</Button>
+                <p>{Comment.length}/{maxLength}자</p>
+                <Button onClick={()=>{addComment(market)}}> 댓글달기</Button>
             </InputItem>
         </InputWrap>
     </TextContent>
