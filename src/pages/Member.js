@@ -294,9 +294,9 @@ function Member() {
           </Password>
           <p>비밀번호 확인<span>*</span></p>
           <Password>
-            <Input type={eye[0] ? 'text' : 'password'} onChange={(e) => { setPasswordConfirm(e.target.value) }} className='confirm_password' />
-            <FontAwesomeIcon icon={eye[0] ? faEye : faEyeSlash} onClick={() => {
-              toggleEye(0)
+            <Input type={eye[1] ? 'text' : 'password'} onChange={(e) => { setPasswordConfirm(e.target.value) }} className='confirm_password' />
+            <FontAwesomeIcon icon={eye[1] ? faEye : faEyeSlash} onClick={() => {
+              toggleEye(1)
             }} />
           </Password>
 

@@ -43,7 +43,8 @@ const StyleSlide = styled(SwiperSlide)`
     @media screen and (max-width: 768px) {
       flex-basis: 100%;
     }
-`
+
+
 
 
 function Eventbanner() {
@@ -59,9 +60,21 @@ function Eventbanner() {
           pagination={{ clickable: true }}
           grabCursor={false}
           modules={[Autoplay, Pagination]}
-          slidesPerView={2}
-          slidesPerGroup={2}
+          slidesPerView={1}
+          slidesPerGroup={1}
           loop={true}
+          breakpoints= {{
+            768: {
+              slidesPerView : 2,
+              slidesPerGroup : 2
+            }  ,
+            1024:{
+              slidesPerView: 2,
+              slidesPerGroup : 2
+              }
+
+          }
+          }
           
         >
           {
