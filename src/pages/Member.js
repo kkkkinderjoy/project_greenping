@@ -17,17 +17,18 @@ const Container = styled.div`
   justify-content: center;
   height: calc(100vh - 86px);
   align-items: center;
+
   
 `
 const SignUp = styled.div`
     width: 25vw;
-    padding: 20px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    padding: 30px;
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;
     background-color: #fff;
     border-radius: 10px;
     p{
-      font-weight: bold;
-      font-size: 15px;
+      color: #999999;
+      font-size: 0.9em;
       margin-bottom: 2px;
       margin-top: 20px;
       span{
@@ -35,18 +36,20 @@ const SignUp = styled.div`
         color: red;
       }
     }
+    
     @media screen and (max-width: 1024px) {
         width: 60vw;
     } 
-    @media screen and (max-width: 640px) {
-        width: 70vw;
-    } 
+   
 `
-const Title = styled.h1`
-  font-size: 24px;
+const Title = styled.div`
+  color: #333333;
+  font-size: 1.6em;
+  font-weight: 600;
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
 `
+
 const Emailbox = styled.div`
   display: flex;
   justify-content: space-between;
@@ -54,34 +57,34 @@ const Emailbox = styled.div`
     margin-left: 10px;
     border-radius: 10px;
     width: 100px;
-    height: 40px;
-    border: 1px solid #eee;
-    background-color: #A6F4D0;
+    height: 45px;
+    background-color: #2ed090;
+    border: 1px solid #2ed090;
     cursor: pointer;
     p{
-      font-size: 14px;
+      font-size: 1em;
       color: #fff;
-      font-weight: normal;
       margin: 0 auto;
     }
   }
 `
 const Input = styled.input`
   width: 100%;
-  padding: 10px;
+  padding: 13px;
   border: 1px solid #ddd;
   border-radius: 5px;
   box-sizing: border-box;
 `
 const Button = styled.button`
   width: 100%;
+  height: 45px;
   padding: 10px;
-  border-radius: 5px;
-  background-color: #A6F4D0;
+  border-radius: 10px;
+  background-color: #2ed090;
+  border: 1px solid #2ed090;
   border: none;
   color: #fff;
   cursor: pointer;
-  border: 1px solid #eee;
   margin-top: 20px;
 `
 const Password = styled.div`
@@ -94,8 +97,10 @@ svg{
   cursor: pointer;
 }
 `
-function Member() {
 
+
+
+function Member() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -158,7 +163,8 @@ function Member() {
 
   const DateOfBirth = (e) => {
     let value = e.target.value;
-    e.target.value = e.target.value.replace(/[^0-9]/g, '').replace(/^(\d{0,4})(\d{0,2})(\d{0,2})$/g, "$1/$2/$3").replace(/\/{1,2}$/g, "");
+    console.log(e.target.value)
+    e.target.value = e.target.value.replace(/[^0-9]/g, '').replace(/^(\d{0,4})(\d{0,2})(\d{0,2})$/g, "$1-$2-$3").replace(/\/{1,2}$/g, "");
     setDateOfBirth(value)
   };
 
@@ -174,7 +180,7 @@ function Member() {
   }
 
   const isValidDateOfBirth = (dateOfBirth) => {
-    const regex = /^(19[0-9][0-9]|20\d{2})-(0[0-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/
+    const regex = /^(19[0-9][0-9]|20\d{2})(0[0-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])$/
     return regex.test(dateOfBirth)
   }
 
@@ -209,10 +215,12 @@ function Member() {
       errorMessage = "이름"
     } else if (!isValidDateOfBirth(dateOfBirth)) {
       setError("유효하지 않는 생년월일 입니다.")
+      return;
     } else if (!isValidPhone(phoneNumber)) {
       setError("유효한 전화번호를 입력해주세요");
       return;
     }
+
     if (errorMessage) {
       setError(errorMessage + "이(가) 비어있습니다.")
       return;
@@ -223,7 +231,6 @@ function Member() {
         (firebaseAuth, email, password)
 
       const userProfile = {
-        
         name,
         phoneNumber,
         email,
@@ -240,7 +247,6 @@ function Member() {
       setError(errorMsg(error.code))
     }
   }
-
 
   const checkEmail = async (data) => {
    
@@ -260,19 +266,7 @@ function Member() {
       console.log(error)
      }
           //Ref 은 doc까지만 접근한 상태
-          
-
-  
-    // try {
-    //   const signInChk = await fetchSignInMethodsForEmail(firebaseAuth,email);
-    //   if (signInChk === data) {
-    //     setError("입력된 이메일 주소는 이미 사용 중입니다.");
-    //   } else {
-    //     setError("사용가능한 이메일입니다.");
-    //   }
-    // } catch (error) {
-    //   setError(errorMsg(error))
-    // }
+        
   };
   
   return (
@@ -282,7 +276,7 @@ function Member() {
           <Title>회원가입</Title>
           <p>이메일<span>*</span></p>
           <Emailbox>
-          <Input defaultValue={email} onChange={(e) => { setEmail(e.target.value) }} type='email' className='email'/>
+          <Input defaultValue={email} onChange={(e) => { setEmail(e.target.value)}} type='email' className='email'/>
             <button onClick={()=>{checkEmail(email)}} ><p>중복 확인</p></button>
           </Emailbox>
           <p>비밀번호<span>*</span></p>
@@ -304,6 +298,7 @@ function Member() {
           <Input value={name} onChange={(e) => { setName(e.target.value) }} type='text' className='name' />
 
           <p>생년월일</p>
+          {dateOfBirth}
           <Input onInput={DateOfBirth} maxLength={10} type='text' className='birth' />
 
           <p>전화번호<span>*</span></p>

@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { useLocation } from 'react-router-dom'
 
 const Container=styled.div`
- background-color: #f9fcfc;
+ background-color: #fff;
  padding:60px 30px;
 `
 const ContentWrap=styled.div`
@@ -29,15 +29,14 @@ const Content =styled.div`
         &:nth-child(2){
             color:#b6bdbe;
             margin-top: 3px;
-
         }
     }
  }
+ 
  `
 
 function Noticedetail() {
 
-    
     const location = useLocation();
     // console.log(location);
     const data = location.state;

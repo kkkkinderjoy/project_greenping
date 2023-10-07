@@ -34,10 +34,13 @@ const MenuList = styled.div`
       width: 100%;
       text-align: center;
       font-size: 1em;
-      border-bottom: 3px solid #eee;
+      border-bottom: 1px solid #eee;
       height: 100%;
       line-height: 70px;
       cursor: pointer;
+      &:nth-child(1){
+        border-top: 1px solid #eee;
+      }
       @media screen and (max-width: 768px){
         display: flex;
         justify-content: center;
@@ -48,9 +51,11 @@ const MenuList = styled.div`
         font-size: 1em;
         line-height: 40px;
         letter-spacing: -1.55px;
+       
+
       }   
       &.on{
-        background-color: #A6F4D0;
+        background-color: #000;
         color: white;
       }
     }

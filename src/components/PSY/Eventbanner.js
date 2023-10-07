@@ -7,11 +7,9 @@ import { styled } from "styled-components";
 import './../../index.css'
 
 const StyledEventBanner = styled.div`
-  max-width: 90%;
+  max-width: 100%;
   margin: 120px auto;
-  height: 110px;
   position: relative;
-
   .swiper-container {
     margin: 40px auto;
   }
@@ -20,7 +18,6 @@ const StyledEventBanner = styled.div`
     flex-wrap: wrap;
   }
   .image-container {
-    column-gap: 10px;
     flex-basis: 100%;
     display: flex;
     justify-content: space-between;
@@ -35,7 +32,6 @@ const StyleSwiper = styled(Swiper)`
   position: relative;
   padding-bottom: 20px;
 `
-
 const StyleSlide = styled(SwiperSlide)`
     display: flex;
     flex-wrap: wrap;
@@ -44,6 +40,11 @@ const StyleSlide = styled(SwiperSlide)`
       flex-basis: 100%;
     }
 `
+
+//     img{width: 100%; height: 130px;}
+   
+
+
 
 
 

@@ -6,10 +6,13 @@ import { addDays, subDays } from "date-fns";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAngleDown, faCalendar, faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+import { faCalendar, faCalendarAlt, faCalendarCheck, faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+
+
+
 
 const Content = styled.div`
-  margin: 5px auto 0;
+  margin-top: 5px;
   width: 100%;
   height: 496px;
   background: url("/images/main-banner.jpg");
@@ -27,6 +30,9 @@ const Content = styled.div`
       z-index: 9000;
       box-shadow: rgba(0, 0, 0, 0.2) 0px 3px 20px;
     }
+  }
+  @media screen and (max-width: 768px){
+    display: none;
   }
 `;
 
@@ -51,84 +57,120 @@ const ContentWrap = styled.div`
 `;
 
 const Inner = styled.div`
-  flex-basis: 100%;
   height: 75px;
+  width: 80%;
+  padding: 0 1%;
   margin: 0 auto;
   display: flex;
+  justify-content: space-between;
   align-items: center;
   flex-wrap: nowrap;
-  /* border-radius: 100px;
-  box-shadow: rgba(0, 0, 0, 0.2) 0px 20px 30px; */
-  /* @media screen and (max-width: 768px){
-    flex-direction: column;
-  } */
-`;
+  border-radius: 100px;
+  background-color: #fff;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 20px 30px;
+  &.on {
+    box-shadow: none;
+    border: 1px solid #eee;
+  }
+`
 
 const Select = styled.select`
-  width: 18%;
-  height: 75px;
-  padding: 2%;
+  flex-basis: 10%;
+  height: 75%;
+  margin-left: 20px;
+  padding: 0 3%;
+  cursor: pointer;
+  background: none;
   font-size: 1.2em;
   font-weight: bold;
-  border-radius: 10px 0 0 10px;
   border: none;
-  border: 1px solid #ddd;
-  -webkit-appearance: none; //크롬 화살표 없애기
-  appearance: none; //화살표 없애기
-  -moz-appearance: none; //파이어폭스 화살표 없애기
   text-align: center;
   select:required:invalid {
     color: red;
   }
-  &option:disabled{
-    color: #2ed090;
+  > option[value=""][disabled] {
+    display: none;
   }
   &:focus {
     outline: none;
     border-radius: 100px;
     border: 1px solid #2ed090;
   }
-  /* option{
-    font-size: 1em;
-    border: none;
-    text-align: center
-  } */
 `;
 
+const Option = styled.option`
+  font-size: 1em;
+  border: none;
+  text-align: center;
+  background: black;
+  color: #fff;
+  padding: 3px 0;
+`;
 
+const DateWrap = styled.div`
+  flex-basis: 30%;
+  height: 55px;
+  display: flex;
+  background: none;
+  align-items: center;
+  text-align: center;
+  margin: 0 20px;
+  padding-right: 5px;
+  background: none;
+  position: relative;
+  &::after{
+    content: "";
+    position: absolute;
+    top: 17px;
+    right: -6%;
+    width: 1px;
+    height: 23px;
+    background-color: #e6e6e6;
+    z-index: 10;
+  }
+  >svg{
+    padding-left:10%;
+    padding-right: 5px;
+    color: #999999;
+  }
+  &:focus-within {
+    outline: none;
+    border-radius: 100px;
+    border: 1px solid #2ed090;
+  }
+`
 
 const StyleDate = styled(DatePicker)`
   width: 100%;
-  height: 75px;
-  font-size: 1.2em;
+  height: 90%;
+  background: none;
+  font-size: 1em;
   font-weight: bold;
   border: 0;
-  color: #2ed090;
+  padding-right: 15px;
   appearance: none;
   -moz-appearance: none;
   text-align: center;
-  border: 1px solid #ddd;
   &:focus {
     outline: none;
-    border-radius: 100px;
-    border: 1px solid #2ed090;
+ 
   }
+ 
+
 `;
+
 
 const Input = styled.input`
   border: none;
-  width: 30%;
-  line-height: 75px;
-  font-size: 1.5em;
-  font-weight: bold;
+  width: 180px;
+  flex-basis:23%;
+  height: 75%;
+  font-size: 1em;
   border: 0;
+  padding-left :3%;
   appearance: none;
   -moz-appearance: none;
-  text-align: center;
-  border: 1px solid #ddd;
-  &::placeholder{
-    color: #ddd;
-  }
+  border-radius: 100px;
   &:focus {
     outline: none;
     border-radius: 100px;
@@ -137,13 +179,12 @@ const Input = styled.input`
 `;
 
 const NavLinkWrap = styled.div`
-  width: 30%;
   background-color: #98eecc;
   font-weight: bold;
-  border-radius: 0 10px 10px 0;
+  border-radius: 100px;
   right: 0;
-  flex-basis: 15%;
-  height: 75px;
+  width: 90px;
+  height: 75%;
   a {
     display: flex;
     height: 100%;
@@ -157,6 +198,40 @@ const NavLinkWrap = styled.div`
     }
   }
 `;
+
+// const Mwrap = styled.div`
+//   z-index: 50; background-color: #fff;
+//   padding-top: 5px; width: 100%; height: 300px;
+//   position: fixed; top: 0; display: flex; justify-content: space-around;
+// `
+// const Mwrapper = styled.div`
+//    width: 70%; height:40px;
+//    display: flex; justify-content: space-between; flex-wrap: nowrap; border-radius: 10px;
+//    align-items: center;
+// `
+// const MinputBox = styled.div`
+//   flex-basis: 3/4;
+//   border: 1px solid #ddd; height: 100%;
+//   border-radius: 5px;
+//   >input{
+//     border: none;
+//     height: 100%;
+//   }
+// `
+// const MbuttonBox = styled.div`
+//   flex-basis: 1/4;
+//   border: 1px solid #ddd; height: 100%;
+//   border-radius: 5px;
+//   >button{
+//     border: 1px solid #ddd;
+//     background-color: #98eecc;
+//     color: #fff;
+//     font-weight: bold;
+//     border-radius: 5px;
+//     font-size: 25px;
+//     right: 0; width: 100%; height: 80%;
+//   }
+// `
 
 function Search() {
   const [dateRange, setDateRange] = useState([null, null]);
@@ -219,35 +294,57 @@ function Search() {
 
   return (
     <>
+      {/* 모바일 써치+버튼 시작 */}
+      {/* <Mwrap className={scrollPosition > 500 ? ".on" : ""}>
+          <Mwrapper>
+            <MinputBox className='basis-3/4 border h-full rounded'>
+              <input type="text" placeholder='검색어를 입력하세요'/>
+            </MinputBox>
+            <div>
+              <button>
+                <NavLink to='/sdetail'>
+                  <FontAwesomeIcon icon={faMagnifyingGlass} />
+                </NavLink>
+              </button>
+            </div>
+          </Mwrapper>
+        </Mwrap> */}
+
+      {/* 모바일 써치+버튼 끝 */}
+      {/* 유리써치 */}
+
       <Content>
         <p className={ScrollActive ? "active" : ""}></p>
         <ContentWrap className={ScrollActive ? "on" : ""}>
-          <Inner>
-            <Select onChange={optionDonm} className={ScrollActive ? "on" : ""}>
+          <Inner className={ScrollActive ? "on" : ""}>
+            <Select onChange={optionDonm} className={ScrollActive ? "on" : ""} >
               <option value="" disabled selected>
-                어디로 떠나볼까요?
-                <FontAwesomeIcon icon={faAngleDown} />
+                지역별
               </option>
-              <option value="전체">전체</option>
+              <Option value="전체">전체</Option>
               {Filterdonm.map((e, i) => {
-                return <option key={i}>{e}</option>;
+                return <Option key={i}>{e}</Option>;
               })}
             </Select>
-            <StyleDate
-              locale={ko}
-              selectsRange={true}
-              startDate={startDate}
-              endDate={endDate}
-              onChange={(date, today) => {
-                setDateRange(date);
-              }}
-              // showIcon
-              dateFormat={"MM월 dd일"}
-              minDate={subDays(new Date(), 0)}
-              maxDate={addDays(new Date(), 300)}
-              monthsShown={2}
-              placeholderText={today} //데이트피커에서만 사용하는 placeholder 같은 기능
+
+            <DateWrap>
+              {<FontAwesomeIcon icon={faCalendarAlt} />}
+              <StyleDate
+                locale={ko}
+                selectsRange={true}
+                startDate={startDate}
+                endDate={endDate}
+                onChange={(date, today) => {
+                  setDateRange(date);
+                }}
+                dateFormat="MM월 dd일 "
+                minDate={subDays(new Date(), 0)}
+                maxDate={addDays(new Date(), 300)}
+                monthsShown={2}
+                placeholderText={'언제 떠나고 싶나요?'} //데이트피커에서만 사용하는 placeholder 같은 기능
               />
+            
+            </DateWrap>
             <Input
               type="text"
               placeholder="검색어를 입력하세요"
@@ -263,9 +360,7 @@ function Search() {
                   userInput: userInput,
                 }}
               >
-                <p>
-                  <FontAwesomeIcon icon={faMagnifyingGlass} />
-                </p>
+                <p><FontAwesomeIcon icon={faMagnifyingGlass}/></p>
               </NavLink>
             </NavLinkWrap>
           </Inner>
