@@ -174,10 +174,13 @@ const data = [
 
 function Market() {
 
+
   const FilterList = list.filter(e => {
     return e.ID === "판매" || e.ID === "구매" || e.ID === "양도";
   });
   console.log(FilterList)
+
+  
 
   const [isActive, setIsActive] = useState(0);
 
