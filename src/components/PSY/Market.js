@@ -5,7 +5,6 @@ import { NavLink } from "react-router-dom";
 import { styled } from "styled-components";
 import list from './../../data/MarketData'
 
-
 const Container = styled.div`
   width: 100%;
   padding: 48px 0;
@@ -67,7 +66,6 @@ const ContentItem = styled.div`
     flex-basis: 100%;
   }
 `
-
 const ContentDesc = styled.div`
   flex-basis: 100%;
   position: relative;
@@ -77,7 +75,6 @@ const ContentDesc = styled.div`
   display: flex;
   flex-wrap: wrap;
 `
-
 const Card = styled.div`
   flex-basis: 50%;
   padding: 2.5rem;
@@ -157,24 +154,23 @@ const Card2 = styled.div`
     @media screen and (max-width: 640px) {font-size: 2rem;}
   }
   `
-
-  const data = [
-    {
-      ID : "판매",
-      Desc : "판매글 쓰러 가볼까요?",
-      Icon : faCartShopping
-    },
-    {
-      ID : "구매",
-      Desc : "필요한 캠핑용품 구매",
-      Icon : faMoneyCheckDollar
-    },
-    {
-      ID : "양도",
-      Desc : "이웃들에게 양도받기",
-      Icon : faHandshakeAngle
-    }
-  ]
+const data = [
+  {
+    ID : "판매",
+    Desc : "판매글 쓰러 가볼까요?",
+    Icon : faCartShopping
+  },
+  {
+    ID : "구매",
+    Desc : "필요한 캠핑용품 구매",
+    Icon : faMoneyCheckDollar
+  },
+  {
+    ID : "양도",
+    Desc : "이웃들에게 양도받기",
+    Icon : faHandshakeAngle
+  }
+]
 
 function Market() {
 
