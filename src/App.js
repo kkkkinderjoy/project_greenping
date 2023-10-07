@@ -6,7 +6,7 @@ import Footer from "./components/HYJ/Footer";
 import Main from "./pages/Main";
 import SearchD from "./pages/SearchD";
 import Ranking from "./pages/Ranking";
-import RankInfinite from "./pages/RankingInfinite";
+
 import ReviewMore from "./pages/ReviewMore";
 import Board from "./pages/Board";
 import Write from "./pages/Write";
@@ -35,6 +35,7 @@ import Salepage from "./components/PSY/Salepage";
 import Salewrite from "./components/PSY/Salewrite";
 import ReviewCk from "./components/LJS/ReviewCk";
 import ReviewWrite from "./pages/ReviewWrite";
+import Scroll from "./pages/Scroll";
 
 function App() {
   return (
@@ -115,7 +116,7 @@ function Inner() {
         <Route path="/Assi" element={<Assi />} />
         <Route path="/inquiry/:seq" element={<Inquiry />} />
         <Route path="/inquiry/:seq/:market" element={<Inquiry />} />
-
+        <Route path="/scroll" element={<Scroll/>}></Route>
       </Routes>
       <Aside />
       <Footer />
