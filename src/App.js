@@ -9,6 +9,7 @@ import Ranking from "./pages/Ranking";
 import ReviewMore from "./pages/ReviewMore";
 import Board from "./pages/Board";
 import Write from "./pages/Write";
+import Service from "./pages/Service";
 import Market from "./components/PSY/Market";
 import Notice from "./pages/Notice";
 import Noticedetail from "./pages/Noticedetail";
@@ -34,6 +35,10 @@ import Salepage from "./components/PSY/Salepage";
 import Salewrite from "./components/PSY/Salewrite";
 import ReviewCk from "./components/LJS/ReviewCk";
 import ReviewWrite from "./pages/ReviewWrite";
+import Scroll from "./pages/Scroll";
+
+import FAQ from "./pages/FAQ";
+
 
 function App() {
   return (
@@ -99,8 +104,8 @@ function Inner() {
         <Route path="/reviewwrite" element={<ReviewWrite/>}></Route>
         <Route path="/write" element={<Write />} />
         <Route path="/market" element={<Market />} />
-        <Route path="/notice" element={<Notice />}></Route>
-        {/* <Route path="/noticedetail/:seq" element={<Noticedetail />}></Route> */}
+        <Route path="/service" element={<Service />}></Route>
+        <Route path="/faq" element={<FAQ />}></Route>
         <Route path="/login" element={<Login />}></Route>
         <Route path="/logout" element={<Logout />}></Route>
         <Route path="/member" element={<Member />}></Route>
@@ -114,7 +119,7 @@ function Inner() {
         <Route path="/Assi" element={<Assi />} />
         <Route path="/inquiry/:seq" element={<Inquiry />} />
         <Route path="/inquiry/:seq/:market" element={<Inquiry />} />
-
+        <Route path="/scroll" element={<Scroll/>}></Route>
       </Routes>
       <Aside />
       <Footer />

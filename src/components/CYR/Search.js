@@ -326,6 +326,7 @@ function Search() {
                 return <Option key={i}>{e}</Option>;
               })}
             </Select>
+
             <DateWrap>
               {<FontAwesomeIcon icon={faCalendarAlt} />}
               <StyleDate
@@ -344,9 +345,6 @@ function Search() {
               />
             
             </DateWrap>
-
-            
-            
             <Input
               type="text"
               placeholder="검색어를 입력하세요"
