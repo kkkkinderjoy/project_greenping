@@ -91,8 +91,7 @@ function Aside() {
     <>
         <Wrap isActive={isActive}>
       {isActive && 
-        <>
-     
+       
             <Link id="kakao-talk-channel-chat-button"></Link>
           {/* <Content isKakao>
           </Content> */}
