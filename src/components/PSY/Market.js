@@ -49,7 +49,7 @@ const ContentItem = styled.div`
     transform: translateX(-50%);
     margin-bottom: 24px;
     padding-top: 24px; 
-    font-size: 22px;}
+    font-size: 20px;}
   ul{
     li{
       font-size: 1rem;

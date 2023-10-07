@@ -64,6 +64,7 @@ const ContentItem = styled.div`
     width: 300px; 
     height:300px; 
     display: block; margin: 0 auto; margin-bottom: 24px;
+    border: 1px solid #f2f2f2;
     }
   h3{
     margin-bottom: 24px;
