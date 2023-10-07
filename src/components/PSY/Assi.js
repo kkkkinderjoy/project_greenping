@@ -87,7 +87,7 @@ const ContentItem = styled.div`
   @media screen and (max-width: 640px){
     flex-basis: 100%;
   }
-`  
+` 
 const Button = styled.button`
   position: absolute;
   width: 100px;
@@ -112,6 +112,7 @@ function Assi() {
     console.log(FilterAssi)
     
     const AssiFilter = [...new Set(data.map(e => e.ID))]
+    console.log(AssiFilter)
 
     const [assi, setAssi] = useState(2);
 
@@ -146,6 +147,7 @@ function Assi() {
                   <h3>{e.TITLE}</h3>
                   <img src={e.IMG} alt='양도용품 이미지' />
                   <ul>
+                    <li>{e.ID}</li>
                     <li>작성자: {e.NAME}</li>
                     <li>업로드일: {e.DATE}</li>
                   </ul>
