@@ -2,11 +2,12 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import {
+  addDoc,
   collection,deleteDoc,doc,getDoc,getDocs,
   getFirestore,onSnapshot,orderBy,query} from "firebase/firestore";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPen } from "@fortawesome/free-solid-svg-icons";
+import { faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
 import TimeGap from "./../components/KNH/TimeGap.js"
 
 const BorderWrapper = styled.div`
@@ -39,17 +40,28 @@ const Title = styled.div`
     border-radius: 2px;
   }
 `;
+
+const ListWrap = styled.div`
+    width: 80%;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    
+
+`
 const List = styled.ul`
   margin: 0 auto;
-  width: 80%;
+  flex-basis: 29%;
   margin-top: 27px;
   margin-bottom: 4px;
   border: 1px solid #e5e7eb;
   border-radius: 1rem;
-  padding: 1.25rem;
+  padding: 1rem;
   position: relative;
   list-style: none;
-
+  position: relative;
+  padding-bottom: 95px;
   img {
     width: 100%;
     max-height:400px; 
@@ -57,12 +69,20 @@ const List = styled.ul`
     object-fit: cover;
     margin-bottom: 10px;
   }
+  @media screen and (min-width: 641px) and (max-width: 786px){
+    flex-basis: 40%;
+
+
+  }
+  @media screen and (max-width: 640px){
+    flex-basis: 100%;
+  }
 `;
 
 const ListItem = styled.li`
   padding: 5px 30px;
   flex-basis: 10%;
-  position: relative;
+
   &:nth-child(1) {
     display: flex;
     justify-content: space-between;
@@ -100,8 +120,9 @@ const ListItem = styled.li`
     }
   }
   &:nth-child(4){
-    padding-right: 80px;
-    padding-bottom: 50px;
+    padding-bottom: 10px;
+    color: #555;
+    
   }
 `;
 
@@ -119,11 +140,12 @@ const Profile = styled.div`
     margin-right: 10px;
   }
 `;
+
 const HeartWrap = styled.div`
   position: absolute;
-  bottom: 3%;
-  right: 1%;
-  margin-top: 20px;
+  bottom: 20px;
+  right: 7%;
+  margin-top: 30px;
   width: 25px;
   height: 25px;
   padding: 15px;
@@ -136,6 +158,7 @@ const HeartWrap = styled.div`
 `;
 
 const Heart = styled.img`
+  
   cursor:pointer ; 
   width:auto; 
   height:auto; 
@@ -144,10 +167,7 @@ const Heart = styled.img`
   max-height :100% ; 
 `;
 
-const ButtonWrap = styled.div`
-  display: flex;
-  justify-content: space-between;
-`;
+
 
 const Button = styled.button`
   margin: 20px 12px;
@@ -175,7 +195,7 @@ const UserBtnWrap = styled.div`
 `
 
 const UserBtn = styled.button`
-  padding: 10px 20px;
+  padding: 10px 10px;
   background-color: #fff;
   color: #555555;
   border: none;
@@ -207,6 +227,79 @@ const UserBtn = styled.button`
 
 
 
+const Comment = styled.ul`
+  width: 80%;
+  margin: auto;
+  margin-top: 35px;
+  margin-bottom: 7px;
+  >h3{
+    font-size: 0.9em;
+    padding-bottom: 6px;
+    border-bottom: 1px solid #eee;
+  }
+  >span{
+    font-size: 0.7em;
+  }
+  button{
+    background: none;
+    border: none;
+
+  }
+  svg{
+    color: coral;
+    cursor: pointer;
+  }
+`
+
+const ConWrap = styled.div`
+  width:100%;
+  height: 40px;
+  margin: 8px auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`
+
+const Textarea = styled.textarea`
+    width: 74%;
+    margin-left: 9%;
+    padding-left: 4%;
+    padding-top: 2%;
+    height: 2em;
+    border: 1px solid #eee;
+    outline: none;
+    resize: none;
+    &:focus{
+      border: 1px solid  #98eecc;;
+    }
+    border-radius: 10px;
+`
+
+const Div = styled.div`
+  width: 80%;
+  margin: auto;
+  padding: 0 2%;
+  padding-top: 2%;
+  height: 2em;
+  border: none;
+  font-size: 0.8em;
+  color: #999;
+  border: 1px solid #eee;
+  border-radius: 10px;
+`;
+
+
+const CommentBtn = styled.button`
+  width: 43px;
+  height: 90%;
+  margin-bottom: 3px;
+  border: none;
+  background-color: #333333;
+  color: white;
+  margin-top: 10px;
+  cursor: pointer;
+  border-radius: 12px;
+`
 
 
 const TopContent = styled.div`
@@ -214,6 +307,8 @@ width: 100%;
   display: flex;
   justify-content: space-between;
 `
+
+
 
 function Board() {
   const userState = useSelector((state) => state.user);
@@ -281,7 +376,7 @@ function Board() {
         const updatedPosts = posts.filter((post) => post.id !== uid);
         setPosts(updatedPosts);
         
-        console.log("삭제가 완료되었습니다.");
+      
       });
     }
 };
@@ -306,7 +401,57 @@ function Board() {
 
 
 
- 
+
+  // 댓글
+
+  const [comments, setComments] = useState([]); 
+  const [newComment, setNewComment] = useState("");
+
+  const addNewComment = async (postId) => {
+    const firestore = getFirestore();
+    
+    try {
+      const docRef = await addDoc(collection(firestore, "comments"), {
+        uid: userState.uid,
+        name: userState.data.name,
+        content: newComment,
+        postId: postId,
+      });
+
+
+        const commentData = {
+          id: docRef.id,
+          uid: userState.uid,
+          name: userState.data.name,
+          content: newComment,
+          postId: postId,
+        };
+        
+        setComments([...comments, commentData]);
+        setNewComment("");
+      } catch (error) {
+        console.error("댓글 추가 에러:", error);
+      }
+    };
+
+
+
+    
+    const deleteCo = async (uid) => {
+      const firestore = getFirestore();
+      const docRef = doc(firestore, "comments", uid);
+    
+      try {
+        await deleteDoc(docRef);
+        alert("삭제가 완료되었습니다");
+       
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+
+  
 
   return (
     <>
@@ -321,6 +466,7 @@ function Board() {
             </Link>
           )}
         </HeadWrap>
+        <ListWrap>
 
         {posts &&
           posts.map((e, i) => {
@@ -332,14 +478,14 @@ function Board() {
                     <img
                       src="https://via.placeholder.com/40x40"
                       alt="profile"
-                    />
+                      />
                     {e.name}
                   </Profile>
                   {uid && uid === e.uid && (
                     <UserBtnWrap>
                       <UserBtn onClick={() => {
-                          navigate(`/edit`);
-                        }}>
+                        navigate(`/edit`);
+                      }}>
                         수정
                       </UserBtn> 
                       <UserBtn onClick={()=>handleDelete(e.id)}>삭제</UserBtn>
@@ -352,26 +498,54 @@ function Board() {
                 <ListItem>
                   <div dangerouslySetInnerHTML={{ __html: e.content }} />{" "}
                 </ListItem>
+
+          <Comment>
+            <h3>댓글</h3>
+                {comments.map((comment, commentIndex) => (
+                  
+                  <li key={comment.id}>
+                    <span>{comment.name}: {comment.content}</span>
+                    {userState.uid === comment.uid && (
+                      <button onClick={deleteCo}>
+                        <FontAwesomeIcon icon={faTrash}/>
+                      </button>
+                    )}
+                  </li>
+                ))}
+              </Comment>
+              {uid ? (
+              <ConWrap>
+                  <Textarea
+                    value={newComment}
+                    onChange={(e) => setNewComment(e.target.value)}
+                    placeholder="댓글을 남겨보세요!"
+                  />
+                  <CommentBtn onClick={() => addNewComment(e.id)}>등록</CommentBtn>
+              </ConWrap>
+      ) : (
+        <Div onClick={()=>{navigate('/login')}}>로그인 이후 이용해주세요</Div>
+      )}
+             
                 <ListItem
                   onClick={() => {
                     toggleLike(i);
                   }}
-                >
+                  >
                   <HeartWrap>
                     <Heart
                       src={
                         likes[i]
-                          ? "images/heart_full.png"
-                          : "images/heart-full.png"
+                        ? "images/heart_full.png"
+                        : "images/heart-full.png"
                       }
                       alt="heart"
-                    />
+                      />
                   </HeartWrap>
                 </ListItem>
-               
               </List>
             );
           })}
+        </ListWrap>
       </BorderWrapper>
     </>
   );

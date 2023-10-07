@@ -27,6 +27,7 @@ const MenuList = styled.div`
     height: 452px;
    
     @media screen and (max-width: 768px) {
+      height: 70px;
       display: flex;
       flex-direction: row;
       width: 100%;
@@ -34,6 +35,7 @@ const MenuList = styled.div`
     }
     li{ 
       width: 100%;
+     
       text-align: center;
       font-size: 1em;
       border-bottom: 1px solid #eee;
@@ -71,6 +73,7 @@ width: 1200px;
         margin-top: 1px;
         width: 100%;
         height: 450px;
+      
       }
     }
   }
