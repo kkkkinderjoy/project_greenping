@@ -67,7 +67,7 @@ const ContentVideo = styled.div`
     li{
       iframe{
         width: 100%;
-        height: 400px;
+        height: 500px;
       }
     }
   }

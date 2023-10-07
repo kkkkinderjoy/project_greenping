@@ -28,6 +28,11 @@ const Title = styled.h2`
 const List = styled.ul`
     display: flex;
     justify-content: flex-end;
+    position: relative;
+    left: 120px;
+    @media screen and (max-width: 768px) {
+        left: -20px;
+    }
 `
 
 const ListItem = styled.li`
@@ -119,7 +124,6 @@ const CardTitle = styled.p`
   color: #333333;
   @media (max-width: 768px) {
     margin-bottom: 15px;
-    
   }
 `
 
@@ -182,8 +186,9 @@ const Btn = styled.div`
     font-size: 1.2em;
     svg{
       font-size: 1.2em;
+      transition: 3s;
       &:hover{
-        transform: translateX(10px);}
+        transform: translateX(15px);}
     }
   }
 `
