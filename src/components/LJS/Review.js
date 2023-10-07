@@ -9,61 +9,66 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 
-const Content = styled.div`
+const ContentWrap = styled.div`
   width: 100%;
+  margin-top: 120px;
 `
 
-const ContentWrap= styled.div`
-  max-width: 1280px;
+const Content= styled.div` 
   margin: 0 auto;
 `
 
-const Title = styled.h2`
+const Title = styled.h3`
   text-align: center;
-  margin-bottom: 40px;
   font-size: 2.0em;
+  margin-bottom: 60px;
   
 `
 
-const List = styled.ul`
+const List = styled.ul` //왼쪽으로 이동해야함
     display: flex;
     justify-content: flex-end;
-    position: relative;
-    left: 120px;
+    margin-right: 6%;
+    margin-bottom: 25px;
     @media screen and (max-width: 768px) {
         left: -20px;
+        flex-wrap: wrap;
+        
     }
 `
 
 const ListItem = styled.li`
-  margin: 10px 4px 0;
+  position: relative;
   cursor: pointer;
+  margin-left: 6px;
+  >span::after{
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 18px;
+    width: 1px;
+    background-color: #e6e6e6;
+  }
   &.active {
         color: lightgreen;
         font-weight: bold;
     }
-
-  &:nth-child(1)::before{
-    position: absolute;
-    top: 0;
-    right: 0;
-    height: 10px;
-    width: 1px;
-  }
 `
 
 const CardWrapper = styled.div`
-  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
-  margin-top: 20px;
+  justify-content: space-around;
   @media (max-width: 768px) {
       display: flex;
       flex-direction: column;
+      flex-wrap: wrap;
     }
   ul {
-    width: 43%;
+    width: 42%;
     margin-top: 10px;
     display: flex;
     justify-content: center;
@@ -84,14 +89,13 @@ const CardItem = styled.li`
   height: 240px;
   @media (max-width: 768px) {
     width: 90%;
-    margin: auto;
+    margin: 0 auto;
   }
 `
 
 const CardImage = styled.img`
   height: 100%;
   width: 90%;
-  margin: auto;
   border-radius: 10px;
   object-fit: cover;
   @media (max-width: 768px) {
@@ -100,13 +104,11 @@ const CardImage = styled.img`
 `
 
 const CardTextWrapper = styled.li`
-  margin-bottom: 5px;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
-  margin-top: 20px;
-  width: 45%;
-
+  width: 48%;
+  margin-top: 30px;
+  gap: 20px;
   @media (max-width: 768px) {
     width: 100%;
     margin: 0 auto;
@@ -120,17 +122,18 @@ const CardTextWrapper = styled.li`
 
 const CardTitle = styled.p`
   font-weight: 600;
-  font-size: 1.2em;
+  font-size: 1.1em;
   color: #333333;
   @media (max-width: 768px) {
-    margin-bottom: 15px;
+    margin-bottom: 5px;
   }
 `
 
 const CardDescription = styled.p`
+  
   width: 300px;
   color: #666666;
-  font-size: 1em;
+  font-size: 0.9em;
   overflow: hidden;
 	text-overflow: ellipsis;
 	word-wrap: break-word;
@@ -148,6 +151,7 @@ const CardDescription = styled.p`
 `
 
 const HashWrapper = styled.div`
+  margin-top: 60px;
   display: flex;
   font-size: 0.8em;
   text-align: center;
@@ -156,7 +160,7 @@ const HashWrapper = styled.div`
   color: #666666;
   div {
     padding: 10px;
-    width: 100px;
+    width: 100%;
     border-radius: 10px;
     border: 1px solid #ddd;
     @media (max-width: 768px) {
@@ -164,16 +168,15 @@ const HashWrapper = styled.div`
     }
   }
 `
+
 const Btn = styled.div`
   font-size: 1.4em;
-  text-align: center;
-  width: 20%;
+  max-width: 1280px;
   margin: 0 auto;
-  margin-top: 100px;
+  margin-top: 80px;
   @media (max-width: 768px) {
      margin: 0 auto;
-     width: 30%;
-     font-size: 20px;
+     font-size: 1.1em;
      margin-top: 20px;
     }
   p{
@@ -186,7 +189,7 @@ const Btn = styled.div`
     font-size: 1.2em;
     svg{
       font-size: 1.2em;
-      transition: 3s;
+      transition: 0.3s;
       &:hover{
         transform: translateX(15px);}
     }
@@ -217,11 +220,12 @@ function Review() {
  
   return (
     <>
-      <Content>
-        <ContentWrap>
+      <ContentWrap>
+        <Content>
         <Title>리뷰</Title>
           <List>
-            <ListItem className={type === "best" ? 'active' : ""} onClick={() => setType("best")} >인기순 </ListItem> 
+            <ListItem className={type === "best" ? 'active' : ""} onClick={() => setType("best")} >인기순 </ListItem>
+            <ListItem><span></span></ListItem> 
             <ListItem className={type === "recent" ? 'active' : ""} onClick={() => setType("recent")}> 최신순</ListItem>
           </List>
        
@@ -252,12 +256,12 @@ function Review() {
           }
             <Btn>
               <NavLink to="/reviewmore">
-              <p>전체 보기 <FontAwesomeIcon icon={faArrowRight} /></p>
-            </NavLink>
+              <p>전체 리뷰 보기 <FontAwesomeIcon icon={faArrowRight} /></p>
+              </NavLink>
             </Btn>
         </CardWrapper>
-        </ContentWrap>
-      </Content>
+        </Content>
+      </ContentWrap>
     </>
   );
 }
