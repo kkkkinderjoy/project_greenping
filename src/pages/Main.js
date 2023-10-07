@@ -15,8 +15,8 @@ function Main() {
         <Choice />
         <Eventbanner />
         <Review />
-        <Content />
         <Market />
+        <Content />
 
     </>
   )

@@ -173,8 +173,6 @@ function Salepage() {
               <ContentItem key={i}>
                 <h3>{e.title}</h3>
                 <ul>
-                    <li>{e.title}</li>
-                    <li>업로드일: {e.timestamp.toDate().toLocaleDateString()}</li>
                     <li dangerouslySetInnerHTML={{__html: e.content}}/>
                 </ul>
               </ContentItem>

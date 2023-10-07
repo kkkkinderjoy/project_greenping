@@ -136,7 +136,7 @@ function Inquiry() {
       <InputItem>
         <h3><p>{data.ID}</p>{data.TITLE}</h3>
         <img src={data.IMG} alt='이미지'></img>
-        <textarea maxLength={maxLength} className='textarea' placeholder='댓글을 입력해주세요.' value={Comment} onChange={(e)=>{setComment(e.target.value)}}></textarea>
+        <textarea rows='3' cols='33' maxLength={maxLength} className='textarea' placeholder='댓글을 입력해주세요.' value={Comment} onChange={(e)=>{setComment(e.target.value)}}></textarea>
       </InputItem>
       <ButtonItem>
         <p>{Comment.length}/{maxLength}자</p>

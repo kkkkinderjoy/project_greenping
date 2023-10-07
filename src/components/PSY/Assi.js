@@ -72,9 +72,12 @@ const ContentItem = styled.div`
     justify-content: space-around;
     li{
         margin-bottom: 7px;
+        font-size: 13px;
+        color: rgb(153, 153, 153);
         &:nth-child(1){
         font-size: 18px;
         font-weight: bold;
+        color: #000;
         }
     }
   }
@@ -86,16 +89,16 @@ const ContentItem = styled.div`
   }
 `  
 const Button = styled.button`
-    position: absolute;
-    width: 100px;
-    height: 30px;
-    background-color: #70e6b7;
-    border: none;
-    border-radius: 10px;
-    color: #fff;
-    right: 10px;
-    bottom: 10px;
-    cursor: pointer;
+  position: absolute;
+  width: 100px;
+  height: 30px;
+  background-color: #70e6b7;
+  border: none;
+  border-radius: 10px;
+  color: #fff;
+  right: 10px;
+  bottom: 10px;
+  cursor: pointer;
 `
 
 function Assi() {
@@ -136,23 +139,23 @@ function Assi() {
             <NavLink to='/'><p>메인으로 돌아가기</p></NavLink>
           </Tomain>
           {
-          FilterAssi.slice().reverse().map((e,i)=>{
-            return(
-              <ContentItem key={i}>
-                <h3>{e.TITLE}</h3>
-                <img src={e.IMG} alt='양도용품 이미지' />
-                <ul>
-                  {/* <li>{e.PRICE}</li> */}
-                  <li>업로드일: {e.DATE}</li>
-                </ul>
-                {
-                  uid && 
-                <NavLink to={`/inquiry/${e.NUM}`} state={e}><Button>문의하기</Button></NavLink>
-                }
-              </ContentItem>
-            )
-          })      
-         }          
+            FilterAssi.slice().reverse().map((e,i)=>{
+              return(
+                <ContentItem key={i}>
+                  <h3>{e.TITLE}</h3>
+                  <img src={e.IMG} alt='양도용품 이미지' />
+                  <ul>
+                    <li>작성자</li>
+                    <li>업로드일: {e.DATE}</li>
+                  </ul>
+                  {
+                    uid && 
+                  <NavLink to={`/inquiry/${e.NUM}`} state={e}><Button>문의하기</Button></NavLink>
+                  }
+                </ContentItem>
+              )
+            })      
+          }            
         </ContentWrap>
     </Content>
     </>

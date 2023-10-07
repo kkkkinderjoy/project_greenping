@@ -72,9 +72,12 @@ const ContentItem = styled.div`
     justify-content: space-around;
     li{
         margin-bottom: 7px;
+        font-size: 13px;
+        color: rgb(153, 153, 153);
         &:nth-child(1){
         font-size: 18px;
         font-weight: bold;
+        color: #000;
         }
     }
   }
