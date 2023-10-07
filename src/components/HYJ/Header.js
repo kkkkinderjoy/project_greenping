@@ -232,9 +232,9 @@ function Header({userState}){
     <>
      <Content $isopen={isActive}>
         <HeaderWrap>
-          <Logo>
-            <NavLink to="/">greenping</NavLink>
-          </Logo>
+          <LogoWrap>
+            <NavLink to="/"><Logo src={`images/greenping-logo.png`} alt='로고' /></NavLink>
+          </LogoWrap>
           <ListWrap>
             <List>
               <ListItem><NavLink to="/navsearch">캠핑장 찾기</NavLink></ListItem>

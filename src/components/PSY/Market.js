@@ -172,11 +172,17 @@ const Card2 = styled.div`
 
 function Market() {
   
+  
   const [id, setId] = useState("판매");
 
   const FilterList = list.filter(e =>{
     return id === "판매" || id === e.ID
   })
+  console.log(FilterList)
+
+  // const FilterData = data && data.filter(e =>{
+  //   return gugun === "전체" || gugun === e.GUGUN_NM
+  // })
   console.log(FilterList)
 
   const [isActive, setIsActive] = useState(0);
@@ -188,9 +194,9 @@ function Market() {
       <ContainerWrap>
         <ContentItem>
         {
-          FilterList.slice().reverse().map((e,i)=>{
+          FilterList.map((e,i)=>{
             return(
-              isActive === i &&
+                isActive === i &&
               <ul key={i}>
                 <h3>{e.ID}</h3>
                 <li>{e.TITLE}</li>
@@ -206,6 +212,7 @@ function Market() {
               return(
                 <Card key={i} className={isActive === i ? 'on' : ''} onClick={()=>{
                   setIsActive(i);
+                  
                   }}>
                   <h3>{e.ID}</h3>
                   <p>{e.Desc}</p>
