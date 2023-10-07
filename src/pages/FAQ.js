@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
+import React, { Fragment, useState } from 'react'
 import { styled } from 'styled-components'
 import datalist from './../data/FAQData'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faArrowDown, faArrowUp } from '@fortawesome/free-solid-svg-icons'
+import { faArrowDown, faArrowUp, faChevronDown, faDownload } from '@fortawesome/free-solid-svg-icons'
 
 const FAQContent = styled.div`
  padding: 60px 50px;
@@ -13,40 +13,63 @@ const FAQWrap = styled.div`
  flex-wrap: wrap;
 
 `
+const TotalCnt = styled.div`
+  display: flex;
+  margin-bottom: 10px;
+  display: flex;
+  gap: 2px;
+  margin-left: 10px;
+  p{
+      color: orangered;
+   }
+      
+`
+
+const Container =styled.div`
+ position: relative;
+ width: 55vw;
+ border-top: 2px solid #474747;
+ font-size: 1em;
+  
+`
+
 
 const StyledIcon = styled(FontAwesomeIcon)`
     transition: all 0.5s;
-    font-size: 12px;
-    vertical-align: baseline;
+    font-size: 1em;
     transform: rotate(${({$isopen})=> $isopen === "true" ? "180deg" : "0"});
 
 `
 
 const List =styled.ul`
- gap: 15px;
- position: relative;
+ font-size: 1em;
+ flex-basis: 100%;
  
 `
 
-const ListItem =styled.li`
-   
-  &:nth-child(odd){
-    padding: 20px 15px; 
-    cursor: pointer;
-  }
-  &:nth-child(even){
-    padding-left: 20px;
-    line-height: 60px;
-    background-color: #f2efef;
-    border-bottom: 1px solid #e1e1e1;
-    height: 0; 
-    overflow: hidden; 
-    transition: 0.5s;
-    &.on{
-      height: 180px;
-    }
-  }
 
+const ListItem =styled.li`
+  
+  padding: 20px 15px; 
+  cursor: pointer;
+   display: flex;
+   justify-content: space-between;
+   border-bottom: 1px solid #e5e5e5;
+   
+  &:nth-child(even){
+    padding-top: 1rem;
+    padding-bottom: 1.5rem;
+    padding-right: 2rem;
+    line-height: 1.4;
+    background-color: #e5e5e5;
+    transition: 0.3s ease-in-out;
+    height: 0;
+    display: none;
+     &.active{
+      display: block;
+      height: 100%;
+     }
+  }
 
 `
 
@@ -56,25 +79,32 @@ const ListItem =styled.li`
 function FAQ() {
 
   const[data,setData]=useState(datalist);
-  const[IsActive,setIsActive]=useState(true);
-
+  const [activeIndex, setActiveIndex] = useState(-1);
+  
+ 
   return (
     <>
       <FAQContent>
         <FAQWrap>
+          <TotalCnt>총<p>{datalist.length}</p>건</TotalCnt>
+         <Container>
           <List>
             {
-              datalist.map((e,i)=>{
-                
+              datalist.map((e,index)=>{
                 return(
-                    <>
-                      <ListItem onClick={()=>setIsActive(true)}>{e.question}</ListItem>
-                      <ListItem className={IsActive ? "on" :""}>{e.answer}</ListItem>
-                    </>
+                  <Fragment key={index}>
+                    <ListItem onClick={()=>{
+                      let tempCard = data;
+                      tempCard[index].show = !tempCard[index].show; //토글
+                      setData([...tempCard]);
+                    }}>Q. {e.question}<StyledIcon icon={faChevronDown} $isopen={datalist[index].show ? "true" :"false"}/></ListItem>
+                    <ListItem className={datalist[index].show ? "active" :""}>A. {e.answer}</ListItem>  
+                  </Fragment>
                 )
               })
             }
           </List>
+         </Container>
         </FAQWrap>
       </FAQContent>
     </>
