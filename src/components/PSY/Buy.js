@@ -127,11 +127,8 @@ function Buy() {
     const dataFilter =  data.filter(e =>{
         return (e.ID === "구매" || e.ID === ID)
       })
-      //console.log(dataFilter)
-      console.log(dataFilter)
 
     const FilterItem = [...new Set(data.map(e => e.ID))]
-    //console.log(FilterItem)
 
     const [buy, setBuy] = useState(1);
 

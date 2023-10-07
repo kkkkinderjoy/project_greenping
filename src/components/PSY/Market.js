@@ -183,7 +183,6 @@ function Market() {
   });
   console.log(FilterList)
 
-
   const [isActive, setIsActive] = useState(0);
 
   return (
