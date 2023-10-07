@@ -105,7 +105,7 @@ return(
                     <p>주변이용가능시설 : {posblFcltyCl}</p>
                     <NavLink to={homepage} target='_blank'>
                         {
-                            homepage != "" && <p>홈페이지 : {homepage}</p> 
+                            homepage !== "" && <p>홈페이지 : {homepage}</p> 
                         }
                     </NavLink>
                     <Dbutton className={isActive === true ? "on" : ""} onClick={()=>{setIsActive(true); 
@@ -115,7 +115,7 @@ return(
             <SearchLine />
             <Ddesc>
                 {
-                    intro != "" 
+                    intro !== "" 
                     && 
                     <>
                         <FontAwesomeIcon icon={faCircleRight} />
