@@ -8,8 +8,8 @@ const Container= styled.div`
 `
 const ContentWrap = styled.div`
   display: flex;
-  justify-content: center;
-  
+  width: 100%;
+  justify-content: space-between;
   @media screen and (max-width: 768px) {
     display: flex;
     flex-direction: column;
@@ -19,11 +19,13 @@ const ContentWrap = styled.div`
 const MenuList = styled.div`
     display: flex;
     justify-content: center;
-    align-content: center;  
+    align-content: start;  
   ul{
     display: flex;
     flex-direction: column;
-    width: 300px;
+    width: 290px;
+    height: 452px;
+   
     @media screen and (max-width: 768px) {
       display: flex;
       flex-direction: row;
@@ -36,7 +38,7 @@ const MenuList = styled.div`
       font-size: 1em;
       border-bottom: 1px solid #eee;
       height: 100%;
-      line-height: 70px;
+      line-height: 90px;
       cursor: pointer;
       &:nth-child(1){
         border-top: 1px solid #eee;
@@ -45,7 +47,7 @@ const MenuList = styled.div`
         display: flex;
         justify-content: center;
         width: 100%;
-        border: 1px solid gray;
+        border: 1px solid #eee;
         text-align: center;
         align-items: center;
         font-size: 1em;
@@ -62,12 +64,14 @@ const MenuList = styled.div`
   }
 `
 const ContentVideo = styled.div`
-  flex-basis: 60%;
+width: 1200px;
   ul{
     li{
       iframe{
+        margin-top: 1px;
         width: 100%;
-        height: 500px;
+        height: 450px;
+
       }
     }
   }
