@@ -17,17 +17,18 @@ const Container = styled.div`
   justify-content: center;
   height: calc(100vh - 86px);
   align-items: center;
+
   
 `
 const SignUp = styled.div`
     width: 25vw;
-    padding: 20px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    padding: 30px;
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;
     background-color: #fff;
     border-radius: 10px;
     p{
-      font-weight: bold;
-      font-size: 15px;
+      color: #999999;
+      font-size: 0.9em;
       margin-bottom: 2px;
       margin-top: 20px;
       span{
@@ -35,18 +36,20 @@ const SignUp = styled.div`
         color: red;
       }
     }
+    
     @media screen and (max-width: 1024px) {
         width: 60vw;
     } 
-    @media screen and (max-width: 640px) {
-        width: 70vw;
-    } 
+   
 `
-const Title = styled.h1`
-  font-size: 24px;
+const Title = styled.div`
+  color: #333333;
+  font-size: 1.6em;
+  font-weight: 600;
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
 `
+
 const Emailbox = styled.div`
   display: flex;
   justify-content: space-between;
@@ -54,34 +57,34 @@ const Emailbox = styled.div`
     margin-left: 10px;
     border-radius: 10px;
     width: 100px;
-    height: 40px;
-    border: 1px solid #eee;
-    background-color: #A6F4D0;
+    height: 45px;
+    background-color: #2ed090;
+    border: 1px solid #2ed090;
     cursor: pointer;
     p{
-      font-size: 14px;
+      font-size: 1em;
       color: #fff;
-      font-weight: normal;
       margin: 0 auto;
     }
   }
 `
 const Input = styled.input`
   width: 100%;
-  padding: 10px;
+  padding: 13px;
   border: 1px solid #ddd;
   border-radius: 5px;
   box-sizing: border-box;
 `
 const Button = styled.button`
   width: 100%;
+  height: 45px;
   padding: 10px;
-  border-radius: 5px;
-  background-color: #A6F4D0;
+  border-radius: 10px;
+  background-color: #2ed090;
+  border: 1px solid #2ed090;
   border: none;
   color: #fff;
   cursor: pointer;
-  border: 1px solid #eee;
   margin-top: 20px;
 `
 const Password = styled.div`
@@ -94,8 +97,10 @@ svg{
   cursor: pointer;
 }
 `
-function Member() {
 
+
+
+function Member() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -223,7 +228,6 @@ function Member() {
         (firebaseAuth, email, password)
 
       const userProfile = {
-        
         name,
         phoneNumber,
         email,

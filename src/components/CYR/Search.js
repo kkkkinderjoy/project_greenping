@@ -28,6 +28,9 @@ const Content = styled.div`
       box-shadow: rgba(0, 0, 0, 0.2) 0px 3px 20px;
     }
   }
+  @media screen and (max-width: 768px){
+    display: none;
+  }
 `;
 
 
@@ -65,9 +68,7 @@ const Inner = styled.div`
     border: 1px solid #eee;
   }
 `
-const SearchList = styled.select`
 
-`
 const Select = styled.select`
   width: 18%;
   padding: 2%;
