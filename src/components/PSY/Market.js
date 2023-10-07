@@ -7,15 +7,23 @@ import list from './../../data/MarketData'
 
 const Container = styled.div`
   width: 100%;
-  padding: 48px 0;
+  margin-top: 120px;
+  
 `
 const ContainerWrap = styled.div`
   max-width: 1280px;
   height: 500px;
-  margin: 0 auto;
   display: flex;
+  margin: 0 auto;
   flex-wrap: wrap;
   padding: 0 2%;
+`
+
+const Title = styled.h3`
+  text-align: center;
+  font-size: 2.0em;
+  margin-bottom: 90px;
+  
 `
 const ContentItem = styled.div`
   flex-basis: 50%;
@@ -78,9 +86,6 @@ const Card = styled.div`
   &:nth-last-child(1){
     background-color: #e0fff3;
   }
-  &.on{
-    background-color: #98eecc;
-  }
   &.on svg{
     scale: 1.2;
   }
@@ -101,7 +106,7 @@ const Card = styled.div`
     border-right: 1px solid #ddd;
   }
   h3{
-    font-size: 2rem;
+    font-size: 1.5rem;
     font-weight: bold;
     @media screen and (max-width: 640px) {font-size: 1.5rem;}
   }
@@ -120,36 +125,23 @@ const Card2 = styled.div`
   flex-basis: 50%;
   padding: 2.5rem;
   box-sizing: border-box;
-  cursor: pointer;
   position: relative;
-  transition: 0.7s;
-  &.on{
-    background-color: #98eecc;
-  }
-  &.on svg{
-    scale: 1.2;
-  }
-  &:hover svg{
-  left: 3rem;
-  }
   @media screen and (max-width: 640px) {
     padding: 1rem;
   }
-  h3{
-    font-size: 2rem;
-    font-weight: bold;
-    @media screen and (max-width: 640px) {font-size: 1.5rem;}
-  }
-  p{margin: 1rem 0;}
+  p{line-height: 1.7;}
   svg{
     position: absolute;
     left: 1rem;
     top: 13rem;
     font-size: 2.5rem;
     color: rgba(0,0,0,0.3);
-    transition: 0.7s;
+    transition: 0.3s;
+    &:hover{
+        transform: translateX(15px);}
     @media screen and (max-width: 640px) {font-size: 2rem;}
-  }
+    }
+
   `
 
   const data = [
@@ -191,8 +183,10 @@ function Market() {
   return (
     <>
     <Container>
+      <Title>그린마켓</Title>
       <ContainerWrap>
         <ContentItem>
+        
         {
           FilterList.map((e,i)=>{
             return(
@@ -210,25 +204,24 @@ function Market() {
           { 
             data.map((e,i)=>{
               return(
-                <Card key={i} className={isActive === i ? 'on' : ''} onClick={()=>{
+                <Card key={i}  onClick={()=>{
                   setIsActive(i);
                   
                   }}>
                   <h3>{e.ID}</h3>
                   <p>{e.Desc}</p>
-                  <FontAwesomeIcon icon={e.Icon} />
+                  <FontAwesomeIcon icon={e.Icon}  className={isActive === i ? 'on' : ''}/>
                 </Card>
               )
             })
           }
-          <NavLink to='/buy'>
+          
             <Card2>
-              <h3></h3>
               <p>더 많은 용품을 보기 원한다면</p>
               <p>마켓 페이지로 이동</p>
-              <FontAwesomeIcon icon={faArrowRight} />
+              <NavLink to='/buy'><FontAwesomeIcon icon={faArrowRight}  /> </NavLink>
             </Card2>
-          </NavLink>
+         
         </ContentDesc>
       </ContainerWrap>
     </Container>
