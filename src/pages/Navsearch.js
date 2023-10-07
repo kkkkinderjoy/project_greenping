@@ -123,11 +123,8 @@ function Navsearch() {
   const [searchTerm, setSearchTerm] = useState("");
   const [searchKeyword, setSearchKeyword] = useState("");
   const [Selected, setSelected] = useState("");
-  const location = useLocation();
-  const stateData = location.state;
-  // console.log(location.state.optiondonmSelect)
-  // // console.log(location.state.userinput)
-  // console.log(stateData)
+  const [selectvalue, setSelectvalue] = useState()
+
   const SbrsCl = ["전기","장작판매","물놀이장","놀이터","산책로","운동시설","무선인터넷","트렘폴린","마트.편의점","온수","운동장"]
 
   useEffect(() => {
@@ -157,7 +154,6 @@ function Navsearch() {
       )
     );
   };
-
   const optionDonm = (e) => {
     const donmValue = e.target.value;
     setSelected(donmValue)
@@ -184,7 +180,7 @@ function Navsearch() {
                 <button onClick={handleSearch}>검색하기</button>
               </Searchbar>
               <Searchbar>
-                <select onChange={optionDonm}>
+                <select onChange={optionDonm} value={Selected}>
                   <option value="전체">전체</option>
                   {Filterdonm.map((e, i) => {
                     return <option key={i}>{e}</option>;
@@ -221,7 +217,7 @@ function Navsearch() {
                 <React.Fragment key={i}>
                   {
                     searchKeyword === searchTerm && 
-                      <NavLink to={`desc/${e.contentId}`} state={{e}}>
+                      <NavLink to={`navdesc/${e.contentId}`} state={{e}}>
                         <ul key={i}>
                           <li>
                             <img src={e.firstImageUrl} />

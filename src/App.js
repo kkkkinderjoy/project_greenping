@@ -33,10 +33,11 @@ import { useEffect } from "react";
 import Navsearch from "./pages/Navsearch";
 import Salepage from "./components/PSY/Salepage";
 import Salewrite from "./components/PSY/Salewrite";
+
+import Navdescpage from "./pages/Navdescpage";
 import ReviewCk from "./components/LJS/ReviewCk";
 import ReviewWrite from "./pages/ReviewWrite";
 import Scroll from "./pages/Scroll";
-
 import FAQ from "./pages/FAQ";
 
 
@@ -93,6 +94,8 @@ function Inner() {
         <Route path="/searchd/" element={<SearchD />} />
         <Route path="/navsearch/" element={<Navsearch />} />
         <Route path="/searchd/desc/:seq" element={<Descpage />} />
+        <Route path="/navsearch/navdesc/:seq" element={<Navdescpage />} />
+        <Route path="/navdesc/:seq" element={<Navdescpage />} />
         <Route path="/desc/:seq" element={<Descpage />} />
         <Route path="/ranking" element={<Ranking />} />
         <Route path="/reviewmore" element={<ReviewMore />}></Route>
@@ -120,6 +123,7 @@ function Inner() {
         <Route path="/inquiry/:seq" element={<Inquiry />} />
         <Route path="/inquiry/:seq/:market" element={<Inquiry />} />
         <Route path="/scroll" element={<Scroll/>}></Route>
+
       </Routes>
       <Aside />
       <Footer />
