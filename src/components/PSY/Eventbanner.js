@@ -43,7 +43,7 @@ const StyleSlide = styled(SwiperSlide)`
     @media screen and (max-width: 768px) {
       flex-basis: 100%;
     }
-
+`
 
 
 

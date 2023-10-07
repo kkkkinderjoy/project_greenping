@@ -5,9 +5,11 @@ import { ko } from "date-fns/esm/locale";
 import { addDays, subDays } from "date-fns";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faAngleDown, faCalendar, faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 
 const Content = styled.div`
-  margin-top: 5px;
+  margin: 5px auto 0;
   width: 100%;
   height: 496px;
   background: url("/images/main-banner.jpg");
@@ -49,25 +51,28 @@ const ContentWrap = styled.div`
 `;
 
 const Inner = styled.div`
+  flex-basis: 100%;
   height: 75px;
-  width: 100%;
+  margin: 0 auto;
   display: flex;
-  justify-content: center;
   align-items: center;
   flex-wrap: nowrap;
-  border-radius: 100px;
-  box-shadow: rgba(0, 0, 0, 0.2) 0px 20px 30px;
-  &.on {
-    border-bottom: 1px solid #eee;
-  }
+  /* border-radius: 100px;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 20px 30px; */
+  /* @media screen and (max-width: 768px){
+    flex-direction: column;
+  } */
 `;
 
 const Select = styled.select`
   width: 18%;
+  height: 75px;
   padding: 2%;
   font-size: 1.2em;
   font-weight: bold;
+  border-radius: 10px 0 0 10px;
   border: none;
+  border: 1px solid #ddd;
   -webkit-appearance: none; //크롬 화살표 없애기
   appearance: none; //화살표 없애기
   -moz-appearance: none; //파이어폭스 화살표 없애기
@@ -75,32 +80,34 @@ const Select = styled.select`
   select:required:invalid {
     color: red;
   }
-  > option[value=""][disabled] {
-    display: none;
+  &option:disabled{
+    color: #2ed090;
   }
   &:focus {
     outline: none;
     border-radius: 100px;
     border: 1px solid #2ed090;
   }
+  /* option{
+    font-size: 1em;
+    border: none;
+    text-align: center
+  } */
 `;
 
-const Option = styled.option`
-  font-size: 1em;
-  border: none;
-  text-align: center
-`;
 
 
 const StyleDate = styled(DatePicker)`
-  width: 250px;
-  height: 65px;
+  width: 100%;
+  height: 75px;
   font-size: 1.2em;
   font-weight: bold;
   border: 0;
+  color: #2ed090;
   appearance: none;
   -moz-appearance: none;
   text-align: center;
+  border: 1px solid #ddd;
   &:focus {
     outline: none;
     border-radius: 100px;
@@ -111,13 +118,17 @@ const StyleDate = styled(DatePicker)`
 const Input = styled.input`
   border: none;
   width: 30%;
-  padding: 2%;
-  font-size: 1.2em;
+  line-height: 75px;
+  font-size: 1.5em;
   font-weight: bold;
   border: 0;
   appearance: none;
   -moz-appearance: none;
   text-align: center;
+  border: 1px solid #ddd;
+  &::placeholder{
+    color: #ddd;
+  }
   &:focus {
     outline: none;
     border-radius: 100px;
@@ -126,12 +137,13 @@ const Input = styled.input`
 `;
 
 const NavLinkWrap = styled.div`
+  width: 30%;
   background-color: #98eecc;
   font-weight: bold;
-  border-radius: 100px;
+  border-radius: 0 10px 10px 0;
   right: 0;
   flex-basis: 15%;
-  height: 75%;
+  height: 75px;
   a {
     display: flex;
     height: 100%;
@@ -145,40 +157,6 @@ const NavLinkWrap = styled.div`
     }
   }
 `;
-
-// const Mwrap = styled.div`
-//   z-index: 50; background-color: #fff;
-//   padding-top: 5px; width: 100%; height: 300px;
-//   position: fixed; top: 0; display: flex; justify-content: space-around;
-// `
-// const Mwrapper = styled.div`
-//    width: 70%; height:40px;
-//    display: flex; justify-content: space-between; flex-wrap: nowrap; border-radius: 10px;
-//    align-items: center;
-// `
-// const MinputBox = styled.div`
-//   flex-basis: 3/4;
-//   border: 1px solid #ddd; height: 100%;
-//   border-radius: 5px;
-//   >input{
-//     border: none;
-//     height: 100%;
-//   }
-// `
-// const MbuttonBox = styled.div`
-//   flex-basis: 1/4;
-//   border: 1px solid #ddd; height: 100%;
-//   border-radius: 5px;
-//   >button{
-//     border: 1px solid #ddd;
-//     background-color: #98eecc;
-//     color: #fff;
-//     font-weight: bold;
-//     border-radius: 5px;
-//     font-size: 25px;
-//     right: 0; width: 100%; height: 80%;
-//   }
-// `
 
 function Search() {
   const [dateRange, setDateRange] = useState([null, null]);
@@ -241,36 +219,18 @@ function Search() {
 
   return (
     <>
-      {/* 모바일 써치+버튼 시작 */}
-      {/* <Mwrap className={scrollPosition > 500 ? ".on" : ""}>
-          <Mwrapper>
-            <MinputBox className='basis-3/4 border h-full rounded'>
-              <input type="text" placeholder='검색어를 입력하세요'/>
-            </MinputBox>
-            <div>
-              <button>
-                <NavLink to='/sdetail'>
-                  <FontAwesomeIcon icon={faMagnifyingGlass} />
-                </NavLink>
-              </button>
-            </div>
-          </Mwrapper>
-        </Mwrap> */}
-
-      {/* 모바일 써치+버튼 끝 */}
-      {/* 유리써치 */}
-
       <Content>
         <p className={ScrollActive ? "active" : ""}></p>
         <ContentWrap className={ScrollActive ? "on" : ""}>
-          <Inner className={ScrollActive ? "on" : ""}>
+          <Inner>
             <Select onChange={optionDonm} className={ScrollActive ? "on" : ""}>
               <option value="" disabled selected>
                 어디로 떠나볼까요?
+                <FontAwesomeIcon icon={faAngleDown} />
               </option>
-              <Option value="전체">전체</Option>
+              <option value="전체">전체</option>
               {Filterdonm.map((e, i) => {
-                return <Option key={i}>{e}</Option>;
+                return <option key={i}>{e}</option>;
               })}
             </Select>
             <StyleDate
@@ -281,12 +241,13 @@ function Search() {
               onChange={(date, today) => {
                 setDateRange(date);
               }}
-              dateFormat="MM월 dd일"
+              // showIcon
+              dateFormat={"MM월 dd일"}
               minDate={subDays(new Date(), 0)}
               maxDate={addDays(new Date(), 300)}
               monthsShown={2}
               placeholderText={today} //데이트피커에서만 사용하는 placeholder 같은 기능
-            />
+              />
             <Input
               type="text"
               placeholder="검색어를 입력하세요"
@@ -302,7 +263,9 @@ function Search() {
                   userInput: userInput,
                 }}
               >
-                <p>검색하기</p>
+                <p>
+                  <FontAwesomeIcon icon={faMagnifyingGlass} />
+                </p>
               </NavLink>
             </NavLinkWrap>
           </Inner>

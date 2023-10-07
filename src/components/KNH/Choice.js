@@ -144,7 +144,7 @@ useEffect(()=>{
                   <React.Fragment key={i}>
                     {
                         <List>
-                      <NavLink to={`desc/${e.contentId}`} state={e}>
+                      <NavLink to={`navdesc/${e.contentId}`} state={e}>
                           {e.firstImageUrl !== "" && (
                             <img
                               src={e.firstImageUrl}
