@@ -223,7 +223,7 @@ function Header({userState}){
      <Content $isopen={isActive}>
         <HeaderWrap>
           <LogoWrap>
-            <NavLink to="/"><Logo src={`images/Greenping.png`} alt='로고' /></NavLink>
+            <NavLink to="/"><Logo src={`images/greenping-logo.png`} alt='로고' /></NavLink>
           </LogoWrap>
           <ListWrap>
             <List>
