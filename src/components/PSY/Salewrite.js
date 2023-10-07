@@ -7,6 +7,7 @@ import {
   useParams,
   Navigate,
   useNavigate,
+  Link,
 } from "react-router-dom";
 import Modal from "./../Modal";
 import { useSelector } from "react-redux";
@@ -26,16 +27,18 @@ const InnerContainer = styled.div`
 `;
 
 const Header = styled.div`
+  width: 400px;
   display: flex;
-  align-items: flex-end;
   justify-content: space-between;
   margin-bottom: 50px;
+  p{
+    font-size: 1.5rem;
+  }
 `;
 
 const Heading = styled.h3`
   font-size: 2.2em;
   position: relative;
-
   &::after {
     content: "";
     width: 30px;
@@ -136,6 +139,7 @@ function Salewrite() {
         <InnerContainer>
           <Header>
             <Heading>판매 글쓰기</Heading>
+            <Link to='/salepage'><p>내가 쓴글 보기</p></Link>
           </Header>
           <ContentWrapper>
             <ContentInner>

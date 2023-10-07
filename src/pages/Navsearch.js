@@ -1,63 +1,51 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { NavLink, useLocation } from "react-router-dom";
+import axios from "axios";
+import { eachDayOfInterval } from "date-fns";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLocationDot, faPhoneVolume, faUser } from "@fortawesome/free-solid-svg-icons";
-
 
 const Wrap = styled.div`
   width: 100%;
 `;
 const Searchwrap = styled.div`
-  max-width: 1200px;
+  width: 1280px;
   height: 400px;
   margin: 0 auto;
   border: 5px solid #ddd;
   border-radius: 10px;
-  @media screen and (max-width: 768px){
-    flex-basis: 70%;
-    margin: 0 auto;
-  }
 `;
 const SearchForm = styled.div`
   width: 80%;
   height: 300px;
-  margin: 50px auto;
+  margin: 0 auto;
   border: 1px solid #ddd;
   border-radius: 10px;
-  @media screen and (max-width: 768px){
-    flex-basis: 80%;
-    margin: 0 auto;
-  }
 `;
 const Searchbar = styled.div`
   all: unset;
   height: 45px;
   width: 70%;
-  margin: 50px auto;
+  margin: 20px auto;
   display: flex;
   justify-content: center;
   > input {
     flex-basis: 80%;
     border: 1px solid #ddd;
-    border-radius: 10px;
+    border-radius: 10px 0 0 10px;
   }
   > button {
-    flex-basis: 30%;
     background-color: #98eecc;
-    border-radius: 10px;
-    @media screen and (max-width: 768px){
-    flex-direction: column;
-    }
+    border-radius: 0 10px 10px 0;
   }
   > select {
-    flex-basis: 80%;
+    width: 50%;
   }
-
 `;
 const SearchLine = styled.div`
   margin: 40px auto;
-  max-width: 1200px;
+  width: 1280px;
   border: 1px solid #ddd;
 `;
 const Content = styled.div`
@@ -97,31 +85,31 @@ const ContentItem = styled.div`
         flex-direction: column;
         justify-content: center;
         li{
-          margin-top: 5px;
           text-align: left;
           display: flex;
           flex-wrap: wrap;
           >svg{
             color: #98eecc;
           }
-            img{ 
-              display: block;
-              max-width: 36px;
-              height: 28px;
-              flex-direction: column;
-            }
-            p{
-              margin-top: 20px;
-              font-size: 10px;
-            }   
+          img{ 
+            display: block;
+            width: 30px;
+            height: 28px;
+
+            
           }
-        li:nth-last-child(1){
-          margin-top: 20px;
-          border: 1px solid #ddd;
-        }
+          >p{
+            row-gap:100%;
+            display: block;
+            font-size: 10px;
+
+          }
+          &:nth-last-child(1){
+
+          }  
       }
   }
-
+}
   /* @media screen and (max-width: 1200px){
     flex-basis: 100%;
   }
@@ -130,24 +118,19 @@ const ContentItem = styled.div`
   } */
 `;
 
-function SearchD() {
+function Navsearch() {
+  const [data, setData] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [searchKeyword, setSearchKeyword] = useState("");
+  const [Selected, setSelected] = useState("");
   const location = useLocation();
   const stateData = location.state;
-  const [data, setData] = useState([]);
-  const [searchTerm, setSearchTerm] = useState(stateData.optiondonmSelect);
-  const [searchKeyword, setSearchKeyword] = useState(stateData.optiondonmSelect);
-  const [Selected, setSelected] = useState(stateData.optiondonmSelect);
-  const [Inputv, setInputv] = useState(stateData.userinput)
   // console.log(location.state.optiondonmSelect)
-  // console.log(location.state.userinput)
+  // // console.log(location.state.userinput)
   // console.log(stateData)
-  
   const SbrsCl = ["전기","장작판매","물놀이장","놀이터","산책로","운동시설","무선인터넷","트렘폴린","마트.편의점","온수","운동장"]
 
   useEffect(() => {
-    setSearchTerm(stateData.optiondonmSelect);
-    setSelected(stateData.optiondonmSelect);
-    setSearchKeyword(stateData.optiondonmSelect);
     fetch(
       "https://apis.data.go.kr/B551011/GoCamping/basedList?numOfRows=100&pageNo=1&MobileOS=ETC&MobileApp=project&serviceKey=hQ42F%2BSKq2L%2FUrlhNoGxv63elQn7W8CmL22xl6yXuGk%2BMz0zdU%2Frk2CIdCeX5%2BYPmg39K5QBYCeSgUyqtD7Qdg%3D%3D&_type=json"
     )
@@ -155,13 +138,15 @@ function SearchD() {
         return res.json();
       })
       .then((data) => {
-        const result = data.response.body.items.item
- 
+        setData(data.response.body.items.item);
       });
   }, []);
 
-  const handleSearch = () => {
+  const handleSearch = (el) => {
+    const donmValue = el.target.value;
     setSearchKeyword(searchTerm);
+    // stateData(searchTerm);
+    setSelected(donmValue);
     setData(
       data.filter(
         (e) =>
@@ -169,13 +154,9 @@ function SearchD() {
           e.addr1.includes(searchTerm) ||
           e.induty.toLowerCase().includes(searchTerm.toLowerCase()) ||
           e.doNm.includes(searchTerm)
-          // ||
-          // e.donm.includes(donmValue) ||
-          // e.sigunguNm.includes(donmValue)
       )
     );
   };
-
 
   const optionDonm = (e) => {
     const donmValue = e.target.value;
@@ -188,6 +169,7 @@ function SearchD() {
     return Selected === e.doNm
   }).map((e)=> e.sigunguNm))]
   // 필터를 돌려서 중복제거함
+  // console.log(searchKeyword)
   return (
     <>
       <Wrap>
@@ -197,28 +179,36 @@ function SearchD() {
                 <input
                   type="text"
                   placeholder="검색어를 입력하세요"
-                  onChange={(e) => {setSearchTerm(e.target.value); setSearchKeyword(e.target.value)}}
+                  onChange={(e) => setSearchTerm(e.target.value)}
                 />
+                <button onClick={handleSearch}>검색하기</button>
               </Searchbar>
               <Searchbar>
-                <select onChange={optionDonm} value={Selected}>
+                <select onChange={optionDonm}>
                   <option value="전체">전체</option>
-                  {
-                    Filterdonm.map((e, i) => {
-                    return <option key={i}>{e}</option>;})
-                  }
+                  {Filterdonm.map((e, i) => {
+                    return <option key={i}>{e}</option>;
+                  })}
                 </select>
                 <select>
                   <option value="전체">전체</option>
                   {
                     FilterSigun.map((e, i) => {
-                    return <option key={i}>{e}</option>;})
-                  }
+                    return <option key={i}>{e}</option>;
+                  })}
                 </select>
               </Searchbar>
-              <Searchbar>
-                <button onClick={handleSearch}>검색하기</button>
-              </Searchbar>
+              {/* <Searchbar>
+                <ul>
+                  {
+                    data.map((e,i)=>{
+                      return (
+                        <li key={i}>#{e.themaEnvrnCl}</li>
+                      )
+                    })
+                  }
+                </ul>
+              </Searchbar> */}
           </SearchForm>
         </Searchwrap>
         <SearchLine />
@@ -231,7 +221,7 @@ function SearchD() {
                 <React.Fragment key={i}>
                   {
                     searchKeyword === searchTerm && 
-                      <NavLink to={`desc/${e.contentId}`} state={e}>
+                      <NavLink to={`desc/${e.contentId}`} state={{e}}>
                         <ul key={i}>
                           <li>
                             <img src={e.firstImageUrl} />
@@ -247,10 +237,10 @@ function SearchD() {
                                   {
                                     listArray.map((el,index)=>{
                                       return (
-                                          <div key={index}>
-                                            <img src={`images/ico_${imgUrl[index]}.png`} alt="이미지파일" />
-                                            <p>{el}</p> 
-                                          </div>
+                                            <React.Fragment key={index}>
+                                              <img width="50" src={`images/ico_${imgUrl[index]}.png`} alt="" />
+                                              <p>{el}</p> 
+                                            </React.Fragment>
                                       )
                                     })
                                   }
@@ -270,4 +260,4 @@ function SearchD() {
   );
 }
 
-export default SearchD;
+export default Navsearch;

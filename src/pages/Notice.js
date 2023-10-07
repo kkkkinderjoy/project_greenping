@@ -8,9 +8,7 @@ import { current } from '@reduxjs/toolkit';
 
 
 const NoticeContent = styled.div`
- background-color: #f9fcfc;
  padding:60px 30px;
-
 `
 
 const NoticeWrap = styled.div`
