@@ -135,7 +135,7 @@ function Choice() {
         <Content>
           {/* 주제 */}
           <div >
-            <Title>그린핑 PICK!</Title>
+            <Title>그린핑 PICK</Title>
           </div>
 
           {/* api */}

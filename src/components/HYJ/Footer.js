@@ -9,7 +9,7 @@ const FooterContent = styled.div`
   padding: 10px 0;
   @media (min-width: 768px) {
     height: 220px;
-    font-size: 16px;
+    font-size: 1.1em;
   }
 `
 const FooterWrap = styled.div`
@@ -17,17 +17,15 @@ const FooterWrap = styled.div`
 
  @media (min-width: 768px) { 
     margin:50px auto;
-    font-size: 15px;
+    font-size: 0.9em;
     display: flex;
     justify-content: space-between;
   }
 `
 const Container = styled.div`
-
     display: flex;
     justify-content: center;
-    font-size: 1em;
-   
+    
 `
 
 
@@ -82,10 +80,10 @@ const CustomerService = styled.div`
     display: block; 
       li{
         line-height: 1.3;
-        font-size: 1.5em;
+        margin-bottom: 2px;
         &:nth-child(1){
           font-weight: bold;
-          font-size: 2em;
+          font-size: 1.3em;
         }
       
     }
