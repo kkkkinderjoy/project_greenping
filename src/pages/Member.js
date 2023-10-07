@@ -163,7 +163,8 @@ function Member() {
 
   const DateOfBirth = (e) => {
     let value = e.target.value;
-    e.target.value = e.target.value.replace(/[^0-9]/g, '').replace(/^(\d{0,4})(\d{0,2})(\d{0,2})$/g, "$1-$2-$3").replace(/-{1,2}$/g, "");
+    console.log(e.target.value)
+    e.target.value = e.target.value.replace(/[^0-9]/g, '').replace(/^(\d{0,4})(\d{0,2})(\d{0,2})$/g, "$1-$2-$3").replace(/\/{1,2}$/g, "");
     setDateOfBirth(value)
   };
 
@@ -179,7 +180,7 @@ function Member() {
   }
 
   const isValidDateOfBirth = (dateOfBirth) => {
-    const regex = /^(19[0-9][0-9]|20\d{2})-(0[0-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/
+    const regex = /^(19[0-9][0-9]|20\d{2})(0[0-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])$/
     return regex.test(dateOfBirth)
   }
 
@@ -214,10 +215,12 @@ function Member() {
       errorMessage = "이름"
     } else if (!isValidDateOfBirth(dateOfBirth)) {
       setError("유효하지 않는 생년월일 입니다.")
+      return;
     } else if (!isValidPhone(phoneNumber)) {
       setError("유효한 전화번호를 입력해주세요");
       return;
     }
+
     if (errorMessage) {
       setError(errorMessage + "이(가) 비어있습니다.")
       return;
@@ -245,7 +248,6 @@ function Member() {
     }
   }
 
-
   const checkEmail = async (data) => {
    
     if (!isValidEmail(data)) {
@@ -264,19 +266,7 @@ function Member() {
       console.log(error)
      }
           //Ref 은 doc까지만 접근한 상태
-          
-
-  
-    // try {
-    //   const signInChk = await fetchSignInMethodsForEmail(firebaseAuth,email);
-    //   if (signInChk === data) {
-    //     setError("입력된 이메일 주소는 이미 사용 중입니다.");
-    //   } else {
-    //     setError("사용가능한 이메일입니다.");
-    //   }
-    // } catch (error) {
-    //   setError(errorMsg(error))
-    // }
+        
   };
   
   return (
@@ -286,7 +276,7 @@ function Member() {
           <Title>회원가입</Title>
           <p>이메일<span>*</span></p>
           <Emailbox>
-          <Input defaultValue={email} onChange={(e) => { setEmail(e.target.value) }} type='email' className='email'/>
+          <Input defaultValue={email} onChange={(e) => { setEmail(e.target.value)}} type='email' className='email'/>
             <button onClick={()=>{checkEmail(email)}} ><p>중복 확인</p></button>
           </Emailbox>
           <p>비밀번호<span>*</span></p>
@@ -308,6 +298,7 @@ function Member() {
           <Input value={name} onChange={(e) => { setName(e.target.value) }} type='text' className='name' />
 
           <p>생년월일</p>
+          {dateOfBirth}
           <Input onInput={DateOfBirth} maxLength={10} type='text' className='birth' />
 
           <p>전화번호<span>*</span></p>

@@ -35,7 +35,10 @@ import Salepage from "./components/PSY/Salepage";
 import Salewrite from "./components/PSY/Salewrite";
 import ReviewCk from "./components/LJS/ReviewCk";
 import ReviewWrite from "./pages/ReviewWrite";
+import Scroll from "./pages/Scroll";
+
 import FAQ from "./pages/FAQ";
+
 
 function App() {
   return (
@@ -116,7 +119,7 @@ function Inner() {
         <Route path="/Assi" element={<Assi />} />
         <Route path="/inquiry/:seq" element={<Inquiry />} />
         <Route path="/inquiry/:seq/:market" element={<Inquiry />} />
-
+        <Route path="/scroll" element={<Scroll/>}></Route>
       </Routes>
       <Aside />
       <Footer />
