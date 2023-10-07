@@ -108,6 +108,7 @@ function Assi() {
     const FilterAssi = data.filter(e =>{
       return(e.ID === "양도" || e.ID === ID)
     })
+    
     console.log(FilterAssi)
     
     const AssiFilter = [...new Set(data.map(e => e.ID))]
@@ -145,7 +146,7 @@ function Assi() {
                   <h3>{e.TITLE}</h3>
                   <img src={e.IMG} alt='양도용품 이미지' />
                   <ul>
-                    <li>작성자</li>
+                    <li>작성자: {e.NAME}</li>
                     <li>업로드일: {e.DATE}</li>
                   </ul>
                   {
