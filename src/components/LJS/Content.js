@@ -42,6 +42,7 @@ const MenuList = styled.div`
     width: 100%;
     height: 550px;
     @media screen and (max-width: 768px) {
+      height: 70px;
       display: flex;
       flex-direction: row;
       height: 100px;
@@ -50,6 +51,7 @@ const MenuList = styled.div`
     }
     li{ 
       width: 100%;
+     
       text-align: center;
       font-size: 1em;
       border-bottom: 1px solid #eee;
@@ -82,7 +84,7 @@ const ContentVideo = styled.div`
       iframe{
         margin-top: 1px;
         width: 100%;
-        height: 550px;
+        height: 450px;
       }
     }
   }

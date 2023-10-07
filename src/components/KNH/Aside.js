@@ -6,15 +6,27 @@ import { faMessage } from "@fortawesome/free-regular-svg-icons";
 import { styled } from "styled-components";
 import { Link } from "react-router-dom";
 
-const Wrap = styled.ul`
+const Wrap = styled.div`
   position: fixed;
-  bottom: 4px;
+  bottom: 3%;
   right: 3%;
   align-items: center;
   z-index: 500;
   opacity: ${({ isActive }) => (isActive ? "1" : "0")}; 
   transition: opacity 1.5s ease;
+  @media screen and (max-width: 640px){
+    bottom: 3%;
+  }
 `;
+
+
+const ContentWrap = styled.ul`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+`
+
 const Content = styled.li`
   width: 25px;
   height: 25px;
@@ -27,15 +39,41 @@ const Content = styled.li`
   text-align: center;
   cursor: pointer;
   font-size: 1.2em;
-   img {
+  img {
     width: 23px;
     height:23px;
   }
+  
+  
   a{
     width: 20px;
     height: 20px;
   }
+  @media screen and (max-width: 640px){
+    &:nth-child(2){
+      display: none;
+    }
+    &:nth-last-child(1){
+        cursor: pointer;
+        padding: 10px;
+        opacity: 0.8;
+        background: #efefef;
+        border-radius: 50%;
+        color: #999999;
+        border: 2px solid #e6e6e6;
+        box-shadow: none;
+       
+    }
+    
+  }
+  
 `;
+
+const Kakao = styled.li`
+  @media screen and (max-width: 640px){
+    display: none;
+  }
+`
 
 function Aside() {
   const [isActive, setIsActive] = useState(false);
@@ -91,6 +129,8 @@ function Aside() {
     <>
         <Wrap isActive={isActive}>
       {isActive && 
+        <ContentWrap>
+           <Kakao isKakao> <Link id="kakao-talk-channel-chat-button"></Link></Kakao>
           <>
             <Link id="kakao-talk-channel-chat-button"></Link>
           {/* <Content isKakao>
@@ -103,7 +143,7 @@ function Aside() {
           <Content onClick={moveToTop}>
             <FontAwesomeIcon className="mt-5" icon={faChevronUp} />
           </Content>
-        </>
+        </ContentWrap>
         }
         </Wrap>
     </>

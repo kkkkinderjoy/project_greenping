@@ -246,7 +246,7 @@ function Search() {
 
   useEffect(() => {
     fetch(
-      "https://apis.data.go.kr/B551011/GoCamping/basedList?numOfRows=100&pageNo=1&MobileOS=ETC&MobileApp=project&serviceKey=hQ42F%2BSKq2L%2FUrlhNoGxv63elQn7W8CmL22xl6yXuGk%2BMz0zdU%2Frk2CIdCeX5%2BYPmg39K5QBYCeSgUyqtD7Qdg%3D%3D&_type=json"
+      `https://apis.data.go.kr/B551011/GoCamping/basedList?numOfRows=4&pageNo=1&MobileOS=etc&MobileApp=greening&serviceKey=lA%2F36BqhoS35mYzf3EZzLo2KLC5gDVFwwaFcoUlJQzYHjIu8Nw49aRKPcVduNL28I3Y340jOtnBjINAbVuZGrA%3D%3D&_type=json`
     )
       .then((res) => {
         return res.json();
