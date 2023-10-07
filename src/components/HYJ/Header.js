@@ -35,19 +35,23 @@ const HeaderWrap = styled.div`
 `
 
 
-const Logo = styled.div`
+const LogoWrap = styled.div`
   display: flex;
-  margin: 55px 0;
-  flex-basis: 15%;
-  a{
+  margin:10px auto;
+  /* a{
     font-family: 'Bagel Fat One', cursive;
     display: inline-block;
     font-size: 3em;
     font-weight: 800;
     color: #23D384;
-  }
+  } */
 
 `
+const Logo = styled.img`
+  width: 100%;
+  height: 100px;
+`
+
 
 
 const ListWrap = styled.div`
