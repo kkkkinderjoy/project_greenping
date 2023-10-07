@@ -3,9 +3,12 @@ import dataList from "./../data/Choicedata";
 import { styled } from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
+  faArrowDown,
+  faChevronCircleDown,
   faHome,
   faLocationDot,
   faPlusCircle,
+  faScroll,
 } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import axios from "axios";
@@ -221,7 +224,7 @@ function Detail() {
           <AddPage>
             <FontAwesomeIcon
               onClick={() => setPage(page*2)}
-              icon={faPlusCircle} 
+              icon={faChevronCircleDown} 
             />
           </AddPage>
         </ContentWrap>

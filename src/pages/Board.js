@@ -2,24 +2,25 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import {
-  collection,
-  deleteDoc,
-  doc,
-  getDoc,
-  getDocs,
-  getFirestore,
-  onSnapshot,
-  orderBy,
-  query,
-} from "firebase/firestore";
+  collection,deleteDoc,doc,getDoc,getDocs,
+  getFirestore,onSnapshot,orderBy,query} from "firebase/firestore";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPen } from "@fortawesome/free-solid-svg-icons";
+import TimeGap from "./../components/KNH/TimeGap.js"
 
 const BorderWrapper = styled.div`
-  max-width: 1000px;
+  max-width: 1280px;
   margin: 50px auto;
 `;
+
+const  HeadWrap = styled.div`
+  width: 83%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+
+`
 const Title = styled.div`
   padding: 10px 20px;
   font-weight: bold;
@@ -39,18 +40,19 @@ const Title = styled.div`
   }
 `;
 const List = styled.ul`
-  width: 100%;
-  height: auto;
-  margin-top: 30px;
+  margin: 0 auto;
+  width: 80%;
+  margin-top: 27px;
   margin-bottom: 4px;
   border: 1px solid #e5e7eb;
-  border-radius: 0.375rem;
+  border-radius: 1rem;
   padding: 1.25rem;
   position: relative;
   list-style: none;
 
   img {
-    width: 400px;
+    width: 100%;
+    max-height:400px; 
     border-radius: 10px;
     object-fit: cover;
     margin-bottom: 10px;
@@ -58,26 +60,31 @@ const List = styled.ul`
 `;
 
 const ListItem = styled.li`
-  padding: 10px 20px;
+  padding: 5px 30px;
   flex-basis: 10%;
   position: relative;
   &:nth-child(1) {
     display: flex;
     justify-content: space-between;
-    align-items: start;
-
-    > p {
-      color: #999999;
-      font-size: 0.8em;
-    }
+    align-items: flex-end;
+    border-bottom: 0.9px solid #e5e5e5;
   }
-  &:nth-child(2) {
+  &:nth-child(2){
+    position: absolute;
+    top: 17px;
+    right: 20px;
+    color: #999999;
+    font-size: 0.8em;
+  }
+  &:nth-child(3) {
     width: 93%;
-    margin: 10px 0;
+    margin-top: 30px;
+    margin-bottom: 20px;
     font-size: 1.3em;
     font-weight: bold;
     padding-left: 30px;
     position: relative;
+   
 
     &::after {
       content: "";
@@ -86,22 +93,27 @@ const ListItem = styled.li`
       margin-left: 0.5px;
       background-color: #98eecc;
       position: absolute;
-      top: 8px;
+      top: 5px;
       left: 17px;
       border-radius: 10px;
       z-index: -1;
     }
+  }
+  &:nth-child(4){
+    padding-right: 80px;
+    padding-bottom: 50px;
   }
 `;
 
 const Profile = styled.div`
   display: flex;
   align-items: center;
+  margin-top: 16px;
 
   > img {
     display: flex;
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
     object-fit: cover;
     border-radius: 50%;
     margin-right: 10px;
@@ -109,8 +121,8 @@ const Profile = styled.div`
 `;
 const HeartWrap = styled.div`
   position: absolute;
-  bottom: 5%;
-  right: 20px;
+  bottom: 3%;
+  right: 1%;
   margin-top: 20px;
   width: 25px;
   height: 25px;
@@ -118,12 +130,18 @@ const HeartWrap = styled.div`
   background-color: white;
   box-shadow: 0 0 3px gray;
   border-radius: 50%;
+  display: flex; 
+   justify-content: center; 
+   align-items: center; 
 `;
 
 const Heart = styled.img`
-  cursor: pointer;
-  max-width: 100%;
-  height: auto;
+  cursor:pointer ; 
+  width:auto; 
+  height:auto; 
+  margin-top: 8px;
+  max-width :100% ; 
+  max-height :100% ; 
 `;
 
 const ButtonWrap = styled.div`
@@ -133,13 +151,12 @@ const ButtonWrap = styled.div`
 
 const Button = styled.button`
   margin: 20px 12px;
-  background-color: #98eecc;
+  background-color:  #98eecc;
   padding: 20px;
   border-radius: 50%;
   font-size: 1.1em;
   line-height: 1.25rem;
   font-weight: bold;
-
   display: flex;
   align-items: center;
   outline: none;
@@ -150,25 +167,67 @@ const Button = styled.button`
   }
 `;
 
+const UserBtnWrap = styled.div`
+  display: flex;
+  align-items: center;
+  margin-top: 31px;
+  color: #999999;
+`
+
+const UserBtn = styled.button`
+  padding: 10px 20px;
+  background-color: #fff;
+  color: #555555;
+  border: none;
+  cursor: pointer;
+  transition: 0.4s;
+  &:nth-child(1){
+    position: relative;
+    &:hover{
+      font-weight: bold;
+    }
+    &::after{
+        content: "";
+        position: absolute;
+        top: 12px;
+        right: 0;
+        width: 1px;
+        height: 15px;
+        background-color: #999999;
+      }
+  }
+  
+  &:nth-child(2):hover{
+      color: coral;
+      font-weight: bold;    
+
+    }
+
+`
+
+
+
+
+
+const TopContent = styled.div`
+width: 100%;
+  display: flex;
+  justify-content: space-between;
+`
+
 function Board() {
   const userState = useSelector((state) => state.user);
   const [posts, setPosts] = useState([]);
-  const [isLogin, setIsLogin] = useState(false);
   const [post, setPost] = useState();
   const navigate = useNavigate();
-  const uid = sessionStorage.getItem("users");
-  const [userUid, setUserUid] = useState(userState && userState.uid);
-
-  // console.log(userState.uid);
+  const uid = sessionStorage.getItem("users")
   const [likes, setLikes] = useState(Array(posts.length).fill(false));
   const toggleLike = (index) => {
     const newLikes = [...likes];
     newLikes[index] = !newLikes[index];
     setLikes(newLikes);
   };
-  useEffect(() => {
-    // console.log(userUid);
-  }, []);
+
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -183,8 +242,9 @@ function Board() {
         const postArray = snapShot.docs.map((doc) => ({
           id: doc.id,
           ...doc.data(),
+          isLiked: doc.data().likes
         }));
-
+        
         setPosts(postArray);
       } catch (error) {
         console.log(error);
@@ -193,64 +253,65 @@ function Board() {
     fetchPosts();
   }, []);
 
-  //  if (posts.length === 0) {
+  
+    
 
-  //   return <div>현재 게시글이 없습니다.</div>;
-  // }
+   
 
-  const deletePost = async () => {
-    if (window.confirm("정말로 삭제하시겠습니까?")) {
-      const docRef = doc(getFirestore(), "board", "wNUObr3FLD7oJGCWa58C");
+
+
+
+
+  const deletePost = async (uid) => {
+    const firestore = getFirestore();
+    const docRef = doc(firestore, "board", uid);
+  
+    try {
       await deleteDoc(docRef);
-      alert("게시물이 삭제되었습니다");
-      navigate(`/board`);
+      alert("삭제가 완료되었습니다");
+     
+    } catch (error) {
+      console.log(error);
     }
   };
+  
+  const handleDelete = (uid) => {
+    if (window.confirm("정말로 삭제하시겠습니까?")) {
+      deletePost(uid).then(() => {
+        const updatedPosts = posts.filter((post) => post.id !== uid);
+        setPosts(updatedPosts);
+        
+        console.log("삭제가 완료되었습니다.");
+      });
+    }
+};
 
-  // useEffect (()=> {
-  //   const fetchData = async () => {
-  //     const postRef = collection(getFirestore(),"board");
-  //     const q = query(postRef, orderBy("timestamp, desc"))
-  //     const postSnapShot = await getDocs(q);
+  
 
-  //     const dataSnap = onSnapshot(q,(item)=>{
-  //       const fetchComment = item.docs.map(doc =>{
 
-  //       })
-  //     })
-  //       console.log(postSnapShot)
-  //       if( uid === postSnapShot?.data().uid){
-  //         setIsLogin(true)
-
-  //     }
-
-  //         setPosts(postSnapShot.data())
-
-  //     }
-
-  // fetchData()
-  // },[])
 
   useEffect(() => {
     const fetchData = async () => {
       const postRef = collection(getFirestore(), "board");
       const postSnapShot = await getDoc(doc(postRef));
       const CurrentUser = postSnapShot._firestore._authCredentials.currentUser;
-      console.log(CurrentUser.uid);
+      console.log(postSnapShot);
       if (CurrentUser.uid) {
-        console.log("있음?");
         setPost(CurrentUser.uid);
       } else {
-        console.log("오류남");
       }
     };
     fetchData();
   }, []);
 
+
+
+ 
+
   return (
     <>
       <BorderWrapper>
-        <ButtonWrap>
+        <HeadWrap>
           <Title>그린톡</Title>
           {userState.uid && (
             <Link to="/write">
@@ -259,22 +320,34 @@ function Board() {
               </Button>
             </Link>
           )}
-        </ButtonWrap>
+        </HeadWrap>
 
         {posts &&
           posts.map((e, i) => {
             return (
               <List key={i}>
                 <ListItem>
+                  <TopContent>
                   <Profile>
                     <img
-                      src="https://via.placeholder.com/50x50"
+                      src="https://via.placeholder.com/40x40"
                       alt="profile"
                     />
                     {e.name}
                   </Profile>
-                  {/* <p>{e.timestamp.toDate().toLocaleDateString()}</p> */}
+                  {uid && uid === e.uid && (
+                    <UserBtnWrap>
+                      <UserBtn onClick={() => {
+                          navigate(`/edit`);
+                        }}>
+                        수정
+                      </UserBtn> 
+                      <UserBtn onClick={()=>handleDelete(e.id)}>삭제</UserBtn>
+                    </UserBtnWrap>
+                )}
+                </TopContent>
                 </ListItem>
+                <ListItem><TimeGap timestamp={e.timestamp} /></ListItem>
                 <ListItem>{e.title}</ListItem>
                 <ListItem>
                   <div dangerouslySetInnerHTML={{ __html: e.content }} />{" "}
@@ -289,25 +362,13 @@ function Board() {
                       src={
                         likes[i]
                           ? "images/heart_full.png"
-                          : "images/heart_blank.png"
+                          : "images/heart-full.png"
                       }
                       alt="heart"
                     />
                   </HeartWrap>
                 </ListItem>
-                {uid && uid === e.uid && (
-                  <ButtonWrap>
-                   
-                    <Button
-                      onClick={() => {
-                        navigate(`/edit`);
-                      }}
-                    >
-                      수정
-                    </Button>
-                    <Button onClick={deletePost}>삭제</Button>
-                  </ButtonWrap>
-                )}
+               
               </List>
             );
           })}

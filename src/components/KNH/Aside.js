@@ -12,6 +12,8 @@ const Wrap = styled.ul`
   right: 30px;
   align-items: center;
   z-index: 500;
+  opacity: ${({ isActive }) => (isActive ? "1" : "0")}; 
+  transition: opacity 1.5s ease;
 `;
 const Content = styled.li`
   width: 30px;
@@ -44,6 +46,9 @@ function Aside() {
       }
     };
     window.addEventListener("scroll", isActiveClick);
+    return () => {
+      window.removeEventListener("scroll", isActiveClick); 
+    };
   }, []);
 
   const moveToTop = () =>
@@ -54,8 +59,9 @@ function Aside() {
 
   return (
     <>
-      {isActive && (
-        <Wrap>
+        <Wrap isActive={isActive}>
+      {isActive && 
+        <>
           <Content>
             <img src={`images/chat (1).png`} alt="" />
           </Content>
@@ -67,8 +73,9 @@ function Aside() {
           <Content onClick={moveToTop}>
             <FontAwesomeIcon className="mt-5" icon={faChevronUp} />
           </Content>
+        </>
+        }
         </Wrap>
-      )}
     </>
   );
 }
