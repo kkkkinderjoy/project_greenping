@@ -6,7 +6,7 @@ import {
   getFirestore,onSnapshot,orderBy,query} from "firebase/firestore";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPen } from "@fortawesome/free-solid-svg-icons";
+import { faArrowRight, faPen, faRunning } from "@fortawesome/free-solid-svg-icons";
 import TimeGap from "./../components/KNH/TimeGap.js"
 
 const BorderWrapper = styled.div`
@@ -119,35 +119,7 @@ const Profile = styled.div`
     margin-right: 10px;
   }
 `;
-const HeartWrap = styled.div`
-  position: absolute;
-  bottom: 3%;
-  right: 1%;
-  margin-top: 20px;
-  width: 25px;
-  height: 25px;
-  padding: 15px;
-  background-color: white;
-  box-shadow: 0 0 3px gray;
-  border-radius: 50%;
-  display: flex; 
-   justify-content: center; 
-   align-items: center; 
-`;
 
-const Heart = styled.img`
-  cursor:pointer ; 
-  width:auto; 
-  height:auto; 
-  margin-top: 8px;
-  max-width :100% ; 
-  max-height :100% ; 
-`;
-
-const ButtonWrap = styled.div`
-  display: flex;
-  justify-content: space-between;
-`;
 
 const Button = styled.button`
   margin: 20px 12px;
@@ -207,12 +179,43 @@ const UserBtn = styled.button`
 
 
 
-
-
 const TopContent = styled.div`
 width: 100%;
   display: flex;
   justify-content: space-between;
+`
+
+const Nopost = styled.div`
+  width: 60%;
+  margin: 30px auto;
+  height: 280px;
+  border: 1px solid #eee;
+  border-radius: 20px;
+  text-align: center;
+  >h3{
+    margin-top: 80px;
+    font-size: 4em;
+
+  }
+  >p{
+    margin-top: 40px;
+    color: #999999;
+  }
+`
+const NoPtext = styled.div`
+  margin-top: 50px;
+  cursor: pointer;
+  transition: 0.7s; 
+  svg{
+    margin-left: 8px;
+     transition: 0.7s; 
+  }
+  &:hover{
+    font-weight: bold;
+    svg{
+    transform: translateX(10px);
+    }
+  }
 `
 
 function Board() {
@@ -221,13 +224,8 @@ function Board() {
   const [post, setPost] = useState();
   const navigate = useNavigate();
   const uid = sessionStorage.getItem("users")
-  const [likes, setLikes] = useState(Array(posts.length).fill(false));
-  const toggleLike = (index) => {
-    const newLikes = [...likes];
-    newLikes[index] = !newLikes[index];
-    setLikes(newLikes);
-  };
-
+  let hasPosts = false;
+  const nav = useNavigate()
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -309,10 +307,12 @@ function Board() {
  
 
   return (
+
     <>
+    userState.uid && {
       <BorderWrapper>
         <HeadWrap>
-          <Title>그린톡</Title>
+          <Title>나의 활동</Title>
           {userState.uid && (
             <Link to="/write">
               <Button>
@@ -323,58 +323,57 @@ function Board() {
         </HeadWrap>
 
         {posts &&
-          posts.map((e, i) => {
-            return (
-              <List key={i}>
-                <ListItem>
-                  <TopContent>
-                  <Profile>
-                    <img
-                      src="https://via.placeholder.com/50x50"
-                      alt="profile"
-                    />
-                    {e.name}
-                  </Profile>
-                  {uid && uid === e.uid && (
-                    <UserBtnWrap>
-                      <UserBtn onClick={() => {
-                          navigate(`/edit`);
-                        }}>
-                        수정
-                      </UserBtn> 
-                      <UserBtn onClick={()=>handleDelete(e.id)}>삭제</UserBtn>
-                    </UserBtnWrap>
-                )}
-                </TopContent>
-                </ListItem>
-                <ListItem><TimeGap timestamp={e.timestamp} /></ListItem>
-                <ListItem>{e.title}</ListItem>
-                <ListItem>
-                  <div dangerouslySetInnerHTML={{ __html: e.content }} />{" "}
-                </ListItem>
-                <ListItem
-                  onClick={() => {
-                    toggleLike(i);
-                  }}
-                >
-                  <HeartWrap>
-                    <Heart
-                      src={
-                        likes[i]
-                          ? "images/heart_full.png"
-                          : "images/heart_blank.png"
-                      }
-                      alt="heart"
-                    />
-                  </HeartWrap>
-                </ListItem>
-               
-              </List>
-            );
-          })}
+            posts.map((e, i) => {
+              if (uid === e.uid) {
+                hasPosts = true; 
+                return (
+                  <>
+                    <List key={i}>
+                 
+                          <ListItem>
+                            <TopContent>
+                              <Profile>
+                                <img src="https://via.placeholder.com/50x50" alt="profile" />
+                                {e.name}
+                              </Profile>
+                              <UserBtnWrap>
+                                <UserBtn onClick={() => navigate(`/edit`)}>수정</UserBtn>
+                                <UserBtn onClick={() => handleDelete(e.id)}>삭제</UserBtn>
+                              </UserBtnWrap>
+                            </TopContent>
+                          </ListItem>
+                          <ListItem><TimeGap timestamp={e.timestamp} /></ListItem>
+                          <ListItem>{e.title}</ListItem>
+                          <ListItem>
+                          <div dangerouslySetInnerHTML={{ __html: e.content }} />{" "}
+                          </ListItem>
+                    </List>
+                  </>
+                );
+              }
+              return null;
+  })}
+
+    {!hasPosts && 
+        <Nopost>
+          <h3>텅</h3>
+          <p>그린핑 회원들이 회원님을 기다리고 있어요 !</p>
+          <NoPtext onClick={()=>{nav('/write')}}>캠핑 얘기 하러 가기
+            <FontAwesomeIcon icon={faRunning}></FontAwesomeIcon>
+          </NoPtext>
+        </Nopost>
+      }
+
+  
+
+        
       </BorderWrapper>
+  }
     </>
   );
 }
+
+
+
 
 export default Board;

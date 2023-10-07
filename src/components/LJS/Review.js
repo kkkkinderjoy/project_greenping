@@ -14,7 +14,7 @@ const Content = styled.div`
 `
 
 const ContentWrap= styled.div`
- max-width: 1200px;
+  max-width: 1280px;
   margin: 0 auto;
 `
 

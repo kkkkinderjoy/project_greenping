@@ -27,7 +27,7 @@ const Content = styled.div`
 
 
 const HeaderWrap = styled.div`
-  max-width: 1200px;
+  max-width: 1280px;
   margin: 0 auto;
   position: relative;
   align-items: center;
@@ -37,31 +37,40 @@ const HeaderWrap = styled.div`
 
 const LogoWrap = styled.div`
   display: flex;
-  margin: 10px;
+  margin:10px auto;
+  /* a{
+    font-family: 'Bagel Fat One', cursive;
+    display: inline-block;
+    font-size: 3em;
+    font-weight: 800;
+    color: #23D384;
+  } */
+
+`
+const Logo = styled.img`
+  width: 100%;
+  height: 100px;
 `
 
-const Logo = styled.img`
-  width: 0;
-  @media (min-width: 768px){
-    width: 150px;
-    height: 120px;
-  }
-`
+
 
 const ListWrap = styled.div`
    display: flex;
-   justify-content: space-between;
    flex-basis: 85%;
    font-size: 1.1em;
    @media screen and (max-width:768px) {display: none;}
 `
 
 
+
 const List = styled.ul`
+  
   flex-basis: 100%;
   display: flex;
   font-weight: bold;
+
 `
+
 
 const ListItem = styled.li`
   flex-basis: 25%;
@@ -73,6 +82,7 @@ const ListItem = styled.li`
     }
   }
 `
+
 
 const Input = styled.input`
   border: none;
@@ -88,7 +98,8 @@ const Input = styled.input`
     border-radius: 100px;
     border: 1px solid #2ed090;
   }
-`;
+`
+
 
 const NavMember = styled.div`
   font-size: 0.8em;
@@ -107,6 +118,7 @@ const NavMember = styled.div`
   @media screen and (max-width: 768px){display: none;}
 `
 
+
 const Hamburger= styled.div`
   right: 0;
   top: 20px;
@@ -122,6 +134,7 @@ const Hamburger= styled.div`
   &.on div:nth-child(3){transform:rotate(-45deg) translateY(-12px)}
   @media screen and (min-width: 768px){display: none;}
 `
+
 
 const Mnav = styled.div` //모바일 네비
   width: 100%;
@@ -146,6 +159,7 @@ const Mnav = styled.div` //모바일 네비
   }
   }
 `
+
 const MnavTitle = styled.div`
       display: flex;
       flex-direction: column;
@@ -223,7 +237,7 @@ function Header({userState}){
      <Content $isopen={isActive}>
         <HeaderWrap>
           <LogoWrap>
-            <NavLink to="/"><Logo src={`images/Greenping.png`} alt='로고' /></NavLink>
+            <NavLink to="/"><Logo src={`images/greenping-logo.png`} alt='로고' /></NavLink>
           </LogoWrap>
           <ListWrap>
             <List>
@@ -244,11 +258,8 @@ function Header({userState}){
           </ListWrap>
           <NavMember>
             <ul>
-              
               <li>
-
                 <NavLink to={userState.uid ? "/logout" : "/login" }>{userState.uid ? "로그아웃" : "로그인"} </NavLink>
-
               </li>
               <li>
                 {
@@ -264,17 +275,15 @@ function Header({userState}){
               </li>
             </ul>
           </NavMember>
-           <Mnav $isopen={isActive} $height={isActive}>
+          <Mnav $isopen={isActive} $height={isActive}>
           <MnavTitle>
           <MnavLogo>
           <FontAwesomeIcon icon={faUser}></FontAwesomeIcon>                       
           </MnavLogo>
-          
             {
               userState.uid
               ?
               <>
-             
               <NavLink to ='/modify'><span onClick={()=>{
                             setIsActive(!isActive)
               }}>{userState.uid.name}님 안녕하세요.</span></NavLink>

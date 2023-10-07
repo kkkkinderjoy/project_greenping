@@ -9,15 +9,15 @@ import { Link } from "react-router-dom";
 const Wrap = styled.ul`
   position: fixed;
   bottom: 4px;
-  right: 30px;
+  right: 3%;
   align-items: center;
   z-index: 500;
   opacity: ${({ isActive }) => (isActive ? "1" : "0")}; 
   transition: opacity 1.5s ease;
 `;
 const Content = styled.li`
-  width: 30px;
-  height: 30px;
+  width: 25px;
+  height: 25px;
   padding: 15px;
   border-radius: 22px;
   background-color: #ffffff;
@@ -28,9 +28,12 @@ const Content = styled.li`
   cursor: pointer;
   font-size: 1.2em;
    img {
-    width: 30px;
-    height: 30px;
-    color: #98eecc;
+    width: 23px;
+    height:23px;
+  }
+  a{
+    width: 20px;
+    height: 20px;
   }
 `;
 
@@ -51,6 +54,33 @@ function Aside() {
     };
   }, []);
 
+  useEffect(()=>{
+    const script = document.createElement('script');
+    script.async = true;
+    try{
+      if (window.Kakao) {
+        const kakao = window.Kakao;
+        if (!kakao.isInitialized()) {
+          kakao.init(process.env.REACT_APP_KakaoKey);
+        }
+      }
+
+    window.Kakao.Channel.createChatButton({
+      container: '#kakao-talk-channel-chat-button',
+      channelPublicId: '_dxlaCG',
+      title: 'consult',
+      size: 'small',
+      color: 'yellow',
+      shape: 'pc',
+      supportMultipleDensities: true,
+    });
+    document.body.appendChild(script);
+    document.body.removeChild(script);
+  } catch (err){
+    
+  }
+  })
+
   const moveToTop = () =>
     window.scrollTo({
       top: 0,
@@ -61,10 +91,10 @@ function Aside() {
     <>
         <Wrap isActive={isActive}>
       {isActive && 
-        <>
-          <Content>
-            {/* <img src={`images/chat (1).png`} alt="" /> */}
-          </Content>
+       
+            <Link id="kakao-talk-channel-chat-button"></Link>
+          {/* <Content isKakao>
+          </Content> */}
           <Content>
             <Link to="https://instagram.com/green_ping2023?igshid=MzRlODBiNWFlZA==">
               <img src={`images/instagram.png`} alt="instagram" />
