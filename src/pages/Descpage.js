@@ -1,9 +1,8 @@
 import { faCircleRight } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React, { useState } from 'react'
-import { NavLink, useLocation, useNavigate } from 'react-router-dom'
+import { NavLink, useLocation } from 'react-router-dom'
 import { styled } from 'styled-components'
-import Modal from './../components/Modal'
 import Reserve from '../components/CYR/Reserve'
 
 
@@ -20,7 +19,6 @@ const Dwrapper = styled.div`
     height: 100%;
     margin: 0 auto;
     display: flex; 
-    flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
     img{
@@ -82,8 +80,8 @@ const SearchLine = styled.div`
 `
 function Descpage() {
     const location = useLocation()
-    const data = location.state;
-    // console.log(data)
+    const data = location.state.e;
+    const {facltNm, firstImageUrl, addr1, lctCl, facltDivNm, induty, operDeCl, posblFcltyCl, homepage, intro} = data
     const [isActive, setIsActive] = useState(false);
     const [isModal, setIsModal] = useState(false);
 return(
@@ -92,23 +90,22 @@ return(
              isModal && <Reserve onClose={()=>{setIsModal(false)}}/>
         }
         <Dwrap>
-            <h2>{data.facltNm}</h2>
+            <h2>{facltNm}</h2>
             <Dwrapper>
                 {
                     data.firstImageUrl === "" ? <img src='https://www.placeholder.com/100x100' alt='img' /> : 
-                    <img src={data.firstImageUrl} alt={data.facltNm} title={data.facltNm} /> 
+                    <img src={firstImageUrl} alt={facltNm} title={facltNm} /> 
                 }
-                
                 <Imgdesc>
-                    <p>주소 : {data.addr1}</p>
-                    <p>캠핑장 환경 : {data.lctCl} / {data.facltDivNm}</p>
-                    <p>캠핑장 유형 : {data.induty}</p>
-                    <p>운영기간 : {data.induty}</p>
-                    <p>운영일 : {data.operDeCl}</p>
-                    <p>주변이용가능시설 : {data.posblFcltyCl}</p>
-                    <NavLink to={data.homepage} target='_blank'>
+                    <p>주소 : {addr1}</p>
+                    <p>캠핑장 환경 : {lctCl} / {facltDivNm}</p>
+                    <p>캠핑장 유형 : {induty}</p>
+                    <p>운영기간 : {induty}</p>
+                    <p>운영일 : {operDeCl}</p>
+                    <p>주변이용가능시설 : {posblFcltyCl}</p>
+                    <NavLink to={homepage} target='_blank'>
                         {
-                            data.homepage != "" && <p>홈페이지 : {data.homepage}</p> 
+                            homepage != "" && <p>홈페이지 : {homepage}</p> 
                         }
                     </NavLink>
                     <Dbutton className={isActive === true ? "on" : ""} onClick={()=>{setIsActive(true); 
@@ -118,11 +115,11 @@ return(
             <SearchLine />
             <Ddesc>
                 {
-                    data.intro != "" 
+                    intro != "" 
                     && 
                     <>
                         <FontAwesomeIcon icon={faCircleRight} />
-                        <p>{data.intro}</p>
+                        <p>{intro}</p>
                     </>
                 }
             </Ddesc>

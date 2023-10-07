@@ -20,8 +20,9 @@ const ContentWrap= styled.div`
 
 const Title = styled.h2`
   text-align: center;
+  margin-bottom: 40px;
   font-size: 2.0em;
-  margin: 0 auto;
+  
 `
 
 const List = styled.ul`
@@ -33,7 +34,7 @@ const ListItem = styled.li`
   margin: 10px 4px 0;
   cursor: pointer;
   &.active {
-        color: hotpink;
+        color: lightgreen;
         font-weight: bold;
     }
 
@@ -178,6 +179,12 @@ const Btn = styled.div`
     align-items: center;
     justify-content: center;
     column-gap: 10px;
+    font-size: 1.2em;
+    svg{
+      font-size: 1.2em;
+      &:hover{
+        transform: translateX(10px);}
+    }
   }
 `
 

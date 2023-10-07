@@ -9,6 +9,7 @@ import Ranking from "./pages/Ranking";
 import ReviewMore from "./pages/ReviewMore";
 import Board from "./pages/Board";
 import Write from "./pages/Write";
+import Service from "./pages/Service";
 import Market from "./components/PSY/Market";
 import Notice from "./pages/Notice";
 import Noticedetail from "./pages/Noticedetail";
@@ -27,9 +28,18 @@ import Sale from "./components/PSY/Sale";
 import Buy from "./components/PSY/Buy";
 import Assi from "./components/PSY/Assi";
 import Inquiry from "./pages/Inquiry";
+import Myboard from "./pages/Myboard";
 import { useEffect } from "react";
+import Navsearch from "./pages/Navsearch";
 import Salepage from "./components/PSY/Salepage";
 import Salewrite from "./components/PSY/Salewrite";
+
+import Navdescpage from "./pages/Navdescpage";
+import ReviewCk from "./components/LJS/ReviewCk";
+import ReviewWrite from "./pages/ReviewWrite";
+import Scroll from "./pages/Scroll";
+import FAQ from "./pages/FAQ";
+
 
 function App() {
   return (
@@ -82,17 +92,23 @@ function Inner() {
       <Routes>
         <Route path="/" element={<Main />}></Route>
         <Route path="/searchd/" element={<SearchD />} />
+        <Route path="/navsearch/" element={<Navsearch />} />
         <Route path="/searchd/desc/:seq" element={<Descpage />} />
+        <Route path="/navsearch/navdesc/:seq" element={<Navdescpage />} />
+        <Route path="/navdesc/:seq" element={<Navdescpage />} />
         <Route path="/desc/:seq" element={<Descpage />} />
         <Route path="/ranking" element={<Ranking />} />
         <Route path="/reviewmore" element={<ReviewMore />}></Route>
+        <Route path="/reviewck" element={<ReviewCk />}></Route>
         <Route path="/board" element={<Board/>}  />
+        <Route path="/myboard" element={<Myboard/>}  />
         <Route path="/edit" element={<Write/>}></Route>
-
+        <Route path="/reviewmore" element={<ReviewMore />}></Route>
+        <Route path="/reviewwrite" element={<ReviewWrite/>}></Route>
         <Route path="/write" element={<Write />} />
         <Route path="/market" element={<Market />} />
-        <Route path="/notice" element={<Notice />}></Route>
-        {/* <Route path="/noticedetail/:seq" element={<Noticedetail />}></Route> */}
+        <Route path="/service" element={<Service />}></Route>
+        <Route path="/faq" element={<FAQ />}></Route>
         <Route path="/login" element={<Login />}></Route>
         <Route path="/logout" element={<Logout />}></Route>
         <Route path="/member" element={<Member />}></Route>
@@ -105,6 +121,9 @@ function Inner() {
         <Route path="/buy" element={<Buy />} />
         <Route path="/Assi" element={<Assi />} />
         <Route path="/inquiry/:seq" element={<Inquiry />} />
+        <Route path="/inquiry/:seq/:market" element={<Inquiry />} />
+        <Route path="/scroll" element={<Scroll/>}></Route>
+
       </Routes>
       <Aside />
       <Footer />

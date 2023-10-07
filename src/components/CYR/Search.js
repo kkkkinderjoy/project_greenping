@@ -5,6 +5,11 @@ import { ko } from "date-fns/esm/locale";
 import { addDays, subDays } from "date-fns";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCalendar, faCalendarAlt, faCalendarCheck, faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+
+
+
 
 const Content = styled.div`
   margin-top: 5px;
@@ -26,7 +31,11 @@ const Content = styled.div`
       box-shadow: rgba(0, 0, 0, 0.2) 0px 3px 20px;
     }
   }
+  @media screen and (max-width: 768px){
+    display: none;
+  }
 `;
+
 
 const ContentWrap = styled.div`
   max-width: 1200px;
@@ -43,31 +52,38 @@ const ContentWrap = styled.div`
     left: 50%;
     width: 100%;
     z-index: 10000;
+
   }
 `;
 
 const Inner = styled.div`
   height: 75px;
-  width: 100%;
+  width: 80%;
+  padding: 0 1%;
+  margin: 0 auto;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   flex-wrap: nowrap;
   border-radius: 100px;
+  background-color: #fff;
   box-shadow: rgba(0, 0, 0, 0.2) 0px 20px 30px;
   &.on {
-    border-bottom: 1px solid #eee;
+    box-shadow: none;
+    border: 1px solid #eee;
   }
-`;
+`
 
 const Select = styled.select`
-  width: 18%;
-  padding: 2%;
-  font-size: 1em;
+  flex-basis: 10%;
+  height: 75%;
+  margin-left: 20px;
+  padding: 0 3%;
+  cursor: pointer;
+  background: none;
+  font-size: 1.2em;
+  font-weight: bold;
   border: none;
-  -webkit-appearance: none; //크롬 화살표 없애기
-  appearance: none; //화살표 없애기
-  -moz-appearance: none; //파이어폭스 화살표 없애기
   text-align: center;
   select:required:invalid {
     color: red;
@@ -86,34 +102,75 @@ const Option = styled.option`
   font-size: 1em;
   border: none;
   text-align: center;
+  background: black;
+  color: #fff;
+  padding: 3px 0;
 `;
 
+const DateWrap = styled.div`
+  flex-basis: 30%;
+  height: 55px;
+  display: flex;
+  background: none;
+  align-items: center;
+  text-align: center;
+  margin: 0 20px;
+  padding-right: 5px;
+  background: none;
+  position: relative;
+  &::after{
+    content: "";
+    position: absolute;
+    top: 17px;
+    right: -6%;
+    width: 1px;
+    height: 23px;
+    background-color: #e6e6e6;
+    z-index: 10;
+  }
+  >svg{
+    padding-left:10%;
+    padding-right: 5px;
+    color: #999999;
+  }
+  &:focus-within {
+    outline: none;
+    border-radius: 100px;
+    border: 1px solid #2ed090;
+  }
+`
+
 const StyleDate = styled(DatePicker)`
-  width: 250px;
-  height: 65px;
+  width: 100%;
+  height: 90%;
+  background: none;
   font-size: 1em;
   font-weight: bold;
   border: 0;
+  padding-right: 15px;
   appearance: none;
   -moz-appearance: none;
   text-align: center;
   &:focus {
     outline: none;
-    border-radius: 100px;
-    border: 1px solid #2ed090;
+ 
   }
+ 
+
 `;
+
 
 const Input = styled.input`
   border: none;
-  width: 30%;
-  padding: 2%;
+  width: 180px;
+  flex-basis:23%;
+  height: 75%;
   font-size: 1em;
-  font-weight: bold;
   border: 0;
+  padding-left :3%;
   appearance: none;
   -moz-appearance: none;
-  text-align: center;
+  border-radius: 100px;
   &:focus {
     outline: none;
     border-radius: 100px;
@@ -126,7 +183,7 @@ const NavLinkWrap = styled.div`
   font-weight: bold;
   border-radius: 100px;
   right: 0;
-  flex-basis: 15%;
+  width: 90px;
   height: 75%;
   a {
     display: flex;
@@ -260,29 +317,34 @@ function Search() {
         <p className={ScrollActive ? "active" : ""}></p>
         <ContentWrap className={ScrollActive ? "on" : ""}>
           <Inner className={ScrollActive ? "on" : ""}>
-            <Select onChange={optionDonm} className={ScrollActive ? "on" : ""}>
+            <Select onChange={optionDonm} className={ScrollActive ? "on" : ""} >
               <option value="" disabled selected>
-                어디로 떠나볼까요?
+                지역별
               </option>
               <Option value="전체">전체</Option>
               {Filterdonm.map((e, i) => {
                 return <Option key={i}>{e}</Option>;
               })}
             </Select>
-            <StyleDate
-              locale={ko}
-              selectsRange={true}
-              startDate={startDate}
-              endDate={endDate}
-              onChange={(date, today) => {
-                setDateRange(date);
-              }}
-              dateFormat="MM월 dd일"
-              minDate={subDays(new Date(), 0)}
-              maxDate={addDays(new Date(), 300)}
-              monthsShown={2}
-              placeholderText={today} //데이트피커에서만 사용하는 placeholder 같은 기능
-            />
+
+            <DateWrap>
+              {<FontAwesomeIcon icon={faCalendarAlt} />}
+              <StyleDate
+                locale={ko}
+                selectsRange={true}
+                startDate={startDate}
+                endDate={endDate}
+                onChange={(date, today) => {
+                  setDateRange(date);
+                }}
+                dateFormat="MM월 dd일 "
+                minDate={subDays(new Date(), 0)}
+                maxDate={addDays(new Date(), 300)}
+                monthsShown={2}
+                placeholderText={'언제 떠나고 싶나요?'} //데이트피커에서만 사용하는 placeholder 같은 기능
+              />
+            
+            </DateWrap>
             <Input
               type="text"
               placeholder="검색어를 입력하세요"
@@ -298,7 +360,7 @@ function Search() {
                   userInput: userInput,
                 }}
               >
-                <p>검색하기</p>
+                <p><FontAwesomeIcon icon={faMagnifyingGlass}/></p>
               </NavLink>
             </NavLinkWrap>
           </Inner>

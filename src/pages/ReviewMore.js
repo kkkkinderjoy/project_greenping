@@ -1,125 +1,245 @@
-import React, { useState } from "react";
+
+import React, { useCallback, useEffect, useState } from 'react'
+
 import styled from "styled-components";
-import Card from "../data/ReviewData.js";
 import Pagenation from "../components/LJS/Pagenation";
+import { faPen, faUser } from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useSelector } from 'react-redux';
+import { collection, doc, getDocs, getFirestore, orderBy, query } from 'firebase/firestore';
+import Scroll from './Scroll';
 
-const Header = styled.div`
-  margin-top: 80px;
+
+
+
+
+
+
+
+const PagenationContent = styled.div`
+  display: flex;
+  justify-content: space-between;
   width: 100%;
-  background-color: #f9fcfc;
-`;
+  padding: 20px;
+  @media screen and (max-width: 768px) {
+     display: none;
+  }
+`
 
-const Container = styled.ul`
-  max-width: 1200px;
-  margin: 0 auto;
+const ReviewContent = styled.div`
+  width: 90%;
   display: flex;
   flex-wrap: wrap;
-  grid-gap: 15px;
-
+  gap: 20px;
+  margin: 0 auto;
   @media screen and (max-width: 768px) {
-    width: 90%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    ul {
+      display: flex;
+      flex-direction: column;
+      flex-wrap: nowrap;
       width: 100%;
-    }
+      
   }
-`;
+`
 
-const CardItem = styled.li`
-  border: 1px solid #ccc;
-  justify-content: space-between;
-  border-radius: 8px;
-  margin-bottom: 12px;
-  padding: 10px;
-  background-color: mintcream;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  flex-basis: 30%;
-  @media screen and (max-width: 768px) {
-    max-width: 483px;
-  }
-`;
-
-const ImageContainer = styled.div`
-  width: 100%;
-  height: 300px;
-  padding: 2px;
-  background-image: url(${(props) => props.img});
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-  margin-bottom: 1rem;
-`;
-
-const CardInfo = styled.div`
+const Container = styled.div`
+  width: 28%;
+  margin: 0 auto;
+  border: 1px solid #eee;
+  padding: 25px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding-top: 1rem;
-  @media (max-width: 768px) {
-    height: auto;
+  height: auto;
+  box-shadow: 0 0 10px #d7d7d7;
+ 
+
+  img{ 
+    width: 100%;
+    height: 300px;
+    border-radius: 10px;
+    background-image:  url(https://media.istockphoto.com/id/1055079680/ko/%EB%B2%A1%ED%84%B0/%EC%82%AC%EC%9A%A9%ED%95%A0-%EC%88%98-%EC%97%86%EB%8A%94-%EC%9D%B4%EB%AF%B8%EC%A7%80-%EC%B2%98%EB%9F%BC-%EA%B2%80%EC%9D%80-%EC%84%A0%ED%98%95-%EC%82%AC%EC%A7%84-%EC%B9%B4%EB%A9%94%EB%9D%BC.jpg?s=612x612&w=0&k=20&c=6lBCS8H2OQDQA_v38ZBOuuKTxKwN3OvYe1xinb7wTb8=);
+    background-size: contain;
+    background-repeat:  no-repeat;
+    background-position: center;
+    margin-top: 20px;
   }
-`;
-
-const CardTitle = styled.div`
-  font-weight: bold;
-  font-size: 16px;
-  margin-bottom: 1rem;
-`;
-
-const CardDesc = styled.div`
-  font-size: 14px;
-  margin-bottom: 0.5rem;
-  height: 140px;
-  @media (max-width: 768px) {
-    height: auto;
-  }
-`;
-
-const CardFooter = styled.div`
-  display: flex;
-  justify-content: space-between;
-  font-size: 12px;
-  p {
-    cursor: pointer;
-    span {
-      margin-left: 10px;
+  @media screen and (max-width: 768px) {
+    width: 85%;
+    height: 550px;
+    padding: 20px;
+    img{
+      margin-top: 10px;
     }
   }
+ `
+const ContainerWrap = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  div{
+    p{
+      height: 30px;
+    }
+  }
+`
+
+const UserInfo = styled.div`
+  display: flex;
+  margin-bottom: 20px;
+  flex-basis: 20%;
+`
+
+const ContentTitle = styled.div`
+    font-weight: bold;
+    font-size: 18px;
+    margin-bottom: 10px;
+    flex-basis: 30%;
+`
+const UserName = styled.div`
+    font-size: 14px;
+    margin-left: 10px;
+   
+`
+const UserDate = styled.div`
+  text-align: right;
+  margin-top: 10px;
+  font-size: 12px;
+`
+
+const ButtonWrap = styled.div`
+  width: 90%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+  margin-top: 50px;
 `;
 
-function GreenTalk() {
+const Button = styled.button`
+   margin-bottom: 20px;
+  background-color: #98eecc;
+  padding: 20px;
+  border-radius: 50%;
+  font-size: 1.1em;
+  line-height: 1.25rem;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  svg {
+    color: #fff;
+  }
+`;
+
+const Title = styled.div`
+  padding: 10px 20px;
+  font-weight: bold;
+  font-size: 2.2em;
+  position: relative;
+  line-height: 45px;
+  margin-bottom: 20px;
+
+  &::after {
+    content: "";
+    width: 35px;
+    height: 5px;
+    margin-left: 0.5px;
+    background-color: #2ed090;
+    position: absolute;
+    top: 3px;
+    left: 18px;
+    border-radius: 2px;
+  }
+`;
+
+
+
+function ReviewMore() {
+  
+  const userState = useSelector((state) => state.user);
+  const [posts, setPosts] = useState([]);
+  
+  useEffect(() => {
+    const fetchPosts = async () => {
+      try {
+        const q = query(
+          collection(getFirestore(), "review"),
+          orderBy("timestamp", "desc")
+        );
+ 
+        const snapShot = await getDocs(q);
+       
+       const postArray = snapShot.docs.map((doc) => ({
+           id: doc.id,
+          ...doc.data(),
+        }));
+    
+        setPosts(postArray);
+        console.log(postArray);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchPosts();
+  },[]);
+  
+
   const [limit, setLimit] = useState(10);
   const [page, setPage] = useState(1);
   const offset = (page - 1) * limit;
-
+  
   return (
-    <Header>
-      <Container>
-        {Card.slice(offset, offset + limit).map((e, i) => {
+    <>
+     <ButtonWrap>
+        <Title>리뷰</Title>
+        {
+            <Link to="/ReviewWrite">
+              <Button>
+                  <FontAwesomeIcon icon={faPen} /> 
+              </Button>
+            </Link>
+        }
+        </ButtonWrap>
+
+        <ReviewContent>
+        {posts && posts.map((e, i) => {
+        
           return (
-            <React.Fragment key={i}>
-              <CardItem>
-                <ImageContainer img={e.img}></ImageContainer>
-                <CardInfo>
-                  <CardTitle>{e.title}</CardTitle>
-                  <CardDesc>{e.desc}</CardDesc>
-                </CardInfo>
-                <CardFooter></CardFooter>
-              </CardItem>
-            </React.Fragment>
+            <>
+            <Container>
+              <ContainerWrap>
+                  <UserInfo>
+                  <FontAwesomeIcon icon={faUser}></FontAwesomeIcon>
+                  <UserName>{e.name}</UserName>
+                  </UserInfo>
+                  <ContentTitle>{e.title}</ContentTitle>
+                  <div dangerouslySetInnerHTML={{__html: e.content}}/>            
+              </ContainerWrap>
+              <UserDate>{e.timestamp.toDate().toLocaleDateString()}</UserDate>
+            </Container>
+            </>
           );
         })}
-      </Container>
+
+
+
+
+
+          {/* <PagenationContent>
       <Pagenation
-        total={Card.length}
+        total={posts.length}    
         limit={limit}
         page={page}
         setPage={setPage}
       />
-    </Header>
+       </PagenationContent> */}
+        </ReviewContent>
+    </> 
   );
 }
 
-export default GreenTalk;
+export default ReviewMore

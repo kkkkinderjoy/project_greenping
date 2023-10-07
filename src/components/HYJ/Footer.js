@@ -3,45 +3,49 @@ import styled from 'styled-components'
 import { NavLink } from 'react-router-dom'
 
 const FooterContent = styled.div`
-  height: 180px;
+  width: 100%;
+  height: 200px;
+  text-align: center;
   border-top: 1px solid #ddd;
   background-color: #f9f9f9;
   padding: 10px 0;
+  >p{
+    color: #ddd;
+  }
   @media (min-width: 768px) {
     height: 220px;
-    font-size: 16px;
+    font-size: 1.1em;
   }
 `
 const FooterWrap = styled.div`
  max-width: 1200px;
-
+ display: flex;
+ justify-content:space-around;
  @media (min-width: 768px) { 
-    margin:50px auto;
-    font-size: 15px;
+    margin: 50px auto;
+    font-size: 0.9em;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
   }
 `
-const Container = styled.div`
 
+const Container = styled.div`
     display: flex;
     justify-content: center;
-    font-size: 1em;
-   
+    
 `
+
 
 
 const LinksContainer = styled.div`
   color: #999999;
   position: relative;
+  height: 100%;
   ul{
     display: flex;
     justify-content: center;
-    
     @media (min-width: 768px) {
-    border-bottom: none;
-    border-color: transparent;
-    font-size: 1em;
+      font-size: 1em;
     }
     li{
     &:nth-child(2){margin-left:8px;}  
@@ -51,12 +55,14 @@ const LinksContainer = styled.div`
   }
 `
 const CompanyInfo = styled.div`
-margin-bottom: 10px;
-text-align: center;
-border-bottom: 1px solid #ddd;
-
+  text-align: center;
+  height: 100%;
+  margin-bottom: 20px;
   p{
-    line-height: 1.3;
+    line-height: 1.5em;
+    &:nth-child(1){
+      margin-top: 20px;
+    }
   }
 @media (min-width: 768px) {
     text-align: left;
@@ -65,11 +71,34 @@ border-bottom: 1px solid #ddd;
 `
 const ServiceInfo = styled.div`
  ul{
+  margin-top: 30px 0;
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
   li{
     font-size: 1em;
     font-weight: 500;
+    position: relative;
+    a{
+      color: #595959
+    }
+    &:not(:nth-last-child(1))::before{
+      content: "";
+      position: absolute;
+      width: 1px;
+      height: 14px;
+      right: -4%;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: #000;
+    }
+    }
   }
- }
+`
+const line = styled.div`
+  width: 80%;
+  height: 1px;
+  color: #000;
 `
 
 const CustomerService = styled.div`
@@ -82,10 +111,10 @@ const CustomerService = styled.div`
     display: block; 
       li{
         line-height: 1.3;
-        font-size: 1.5em;
+        margin-bottom: 2px;
         &:nth-child(1){
           font-weight: bold;
-          font-size: 2em;
+          font-size: 1.3em;
         }
       
     }
@@ -105,15 +134,8 @@ function Footer(){
     <>
     <FooterContent>
       <FooterWrap>
-        <Container>
+        {/* <Container> */}
           <LinksContainer>
-            <CompanyInfo>
-              <p>(주)그린핑</p>
-              <p>대표이사 : ooo </p>
-              <p>사업자등록번호 : 504-85-25999</p>
-              <p>주소 : 대구광역시 중구 중앙대로 394, 제일빌딩 5F</p>
-              <p>전화 : 053-123-4567</p>
-            </CompanyInfo>
             <ServiceInfo>
               <ul>
                 <li><NavLink to="/">서비스 이용약관</NavLink></li>
@@ -122,16 +144,25 @@ function Footer(){
                 <li><NavLink to="/">제휴 문의</NavLink></li>
               </ul>
             </ServiceInfo>
+            <line />  
+            <CompanyInfo>
+              <p>(주)그린핑</p>
+              <p>대표이사 : ooo </p>
+              <p>사업자등록번호 : 504-85-25999</p>
+              <p>주소 : 대구광역시 중구 중앙대로 394, 제일빌딩 5F</p>
+              <p>전화 : 053-123-4567</p>
+            </CompanyInfo>
           </LinksContainer>
-        </Container> 
+        {/* </Container>  */}
         <CustomerService>
                 <ul>
                   <li><NavLink to="/">고객센터1500-6000</NavLink></li>
                   <li><NavLink to="/">평일 09:00 - 18:00</NavLink></li>
                   <li><NavLink to="/">점심시간 11:30 - 12:30</NavLink></li>
                 </ul>
-          </CustomerService>
+        </CustomerService>
       </FooterWrap>
+      <p>Copyright ⓒ2023 GREENPING All right reserved</p>
     </FooterContent>
     
             

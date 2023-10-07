@@ -11,18 +11,22 @@ const LoginContent = styled.div`
   background-color: #f9fcfc;
   padding-top: 60px;
   padding-bottom: 140px;
+  
 `
 
 const Content = styled.div`
   position: relative;
   margin: 0 auto;
-  width: 450px;
+  width: 25vw;
   padding: 30px;
-  background-color: white;
+  background-color: #fff;
   border-radius: 10px;
   /* box-shadow: 0px 5px 14px rgba(127, 138, 140, 0.09);
    */
   box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;
+  @media screen and (max-width: 1024px) {
+        width: 60vw;
+    } 
 `
 
 const Title = styled.div`
@@ -30,7 +34,7 @@ const Title = styled.div`
   font-size: 1.6em;
   font-weight: 600;
   color: #333333;
-  margin-bottom: 12px;
+  margin-bottom: 30px;
 `
 
 
@@ -38,7 +42,7 @@ const Input = styled.input`
   padding: 13px;
   width: 95%;
   margin-bottom: 10px;
-  height: 40px;
+  height: 30px;
   border: 1px solid #e4e4e4;
   border-radius: 10px;
   font-size: 1rem;
@@ -52,6 +56,7 @@ const Input = styled.input`
 `
 
 const InputWrap = styled.div`
+  width: 100%;
   position: relative;
   margin-bottom: 15px;
   input:focus +label,
@@ -94,11 +99,10 @@ const Checkbox = styled.input`
 const Button = styled.button`
   font-size: 1em;
   background-color: #2ed090;
-  color: #fff;
   border: 1px solid #2ed090;
+  color: #fff;
   width: 100%;
-  height: 50px;
-  font-weight: bold;
+  height: 45px;
   border-radius: 10px;
   text-align: center;
   line-height: 1.3;
@@ -116,22 +120,6 @@ const LinkItem = styled.ul`
   color: #999;
   font-size: 1em;
   display: flex; gap: 12px;
-  /* li{
-    margin-bottom: 0; margin-top: 20px;
-    display: flex; justify-content: space-between;
-    column-gap: 20px;
-    a{
-      background-color: #D0EDA4;
-      font-size: 14px;
-      text-align: center;
-      padding: 5px 15px;
-      border-radius: 5px;
-      color: #fff;
-      &:last-child{
-        background-color: #036;
-      }
-    }
-  } */
 `
 
 

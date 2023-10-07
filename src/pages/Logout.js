@@ -26,11 +26,7 @@ function Logout() {
 
   return (
     <>
-        
           <Modal error="로그아웃이 되었습니다." onClose={()=>{setIsModal(false); navigate("/")}} />
-           
-            
-        
     </>
   )
 }

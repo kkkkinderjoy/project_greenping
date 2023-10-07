@@ -17,7 +17,7 @@ const LinkArray = ['main','review','ranking','greentalk','greenmarket','notice']
 
 
 const Content = styled.div`
-  padding: 10px;
+  margin-top: 10px;
   width: 100%;
   background-color: #fff;
   z-index: 30;
@@ -66,10 +66,32 @@ const List = styled.ul`
 const ListItem = styled.li`
   flex-basis: 25%;
   text-align: center;
+  &:last-child{
+    display: none;
+    @media screen and (max-width:768px){
+      display: block;
+    }
+  }
 `
 
+const Input = styled.input`
+  border: none;
+  width: 30%;
+  padding: 2%;
+  font-size: 1em;
+  border: 0;
+  appearance: none;
+  -moz-appearance: none;
+  text-align: center;
+  &:focus {
+    outline: none;
+    border-radius: 100px;
+    border: 1px solid #2ed090;
+  }
+`;
+
 const NavMember = styled.div`
-  font-size: 13.5px;
+  font-size: 0.8em;
   position: absolute;
   top: 10px;
   right: 50px;
@@ -191,22 +213,33 @@ function Header({userState}){
   
   const [isActive,setIsActive]=useState(false);
   // const userState = useSelector(state => state.user);
-
+  const [userInput, setUserInput] = useState("");
+  const InputValue = (e) => {
+    const ValueI = e.target.value;
+    setUserInput(ValueI);
+  };
   return (
     <>
      <Content $isopen={isActive}>
         <HeaderWrap>
           <LogoWrap>
-            <NavLink to="/"><Logo src={`images/pc_logo.png`} alt='로고' /></NavLink>
+            <NavLink to="/"><Logo src={`images/Greenping.png`} alt='로고' /></NavLink>
           </LogoWrap>
           <ListWrap>
             <List>
-              <ListItem><NavLink to="/searchd">캠핑장 찾기</NavLink></ListItem>
+              <ListItem><NavLink to="/navsearch">캠핑장 찾기</NavLink></ListItem>
               <ListItem><NavLink to="/ranking">랭킹</NavLink></ListItem>
               <ListItem><NavLink to="/reviewmore">리뷰</NavLink></ListItem>
               <ListItem><NavLink to="/board">그린톡</NavLink></ListItem>
               <ListItem><NavLink to="/buy">그린마켓</NavLink></ListItem>
-              <ListItem><NavLink to="/notice">고객센터</NavLink></ListItem>
+              <ListItem><NavLink to="/service">고객센터</NavLink></ListItem>
+              <ListItem>
+                  <Input
+                  type="text"
+                  placeholder="검색어를 입력하세요"
+                  onChange={InputValue}
+                />
+              </ListItem>
             </List>
           </ListWrap>
           <NavMember>
