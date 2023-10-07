@@ -11,13 +11,12 @@ function Main() {
 
   return (
     <>
-        <Search />
-        <Choice />
-        <Eventbanner />
-        <Review />
-        <Content />
-        <Market />
-
+      <Search />
+      <Choice />
+      <Eventbanner />
+      <Review />
+      <Market />
+      <Content />
     </>
   )
 }

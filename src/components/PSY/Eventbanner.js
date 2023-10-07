@@ -39,6 +39,7 @@ const StyleSlide = styled(SwiperSlide)`
     @media screen and (max-width: 768px) {
       flex-basis: 100%;
     }
+
 `
 
 //     img{width: 100%; height: 130px;}

@@ -72,9 +72,12 @@ const ContentItem = styled.div`
     justify-content: space-around;
     li{
         margin-bottom: 7px;
+        font-size: 13px;
+        color: rgb(153, 153, 153);
         &:nth-child(1){
         font-size: 18px;
         font-weight: bold;
+        color: #000;
         }
     }
   }
@@ -106,7 +109,7 @@ function Buy() {
         return (e.ID === "구매" || e.ID === ID)
       })
       //console.log(dataFilter)
-      console.log(data)
+      console.log(dataFilter)
 
     const FilterItem = [...new Set(data.map(e => e.ID))]
     //console.log(FilterItem)
@@ -144,7 +147,8 @@ function Buy() {
                     <h3>{e.TITLE}</h3>
                     <img src={e.IMG} alt="구매용품 이미지들" />
                     <ul>
-                        <li>{e.PRICE}</li>
+                        <li>작성자: {e.NAME}</li>
+                        <li>가격: {e.PRICE}</li>
                         <li>업로드일: {e.DATE}</li>
                     </ul>
                     {
