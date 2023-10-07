@@ -1,18 +1,13 @@
 
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 
 import styled from "styled-components";
-import Pagenation from "../components/LJS/Pagenation";
+
 import { faPen, faUser } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useSelector } from 'react-redux';
 import { collection, doc, getDocs, getFirestore, orderBy, query } from 'firebase/firestore';
-import Scroll from './Scroll';
-
-
-
-
 
 
 
@@ -159,10 +154,32 @@ const Title = styled.div`
 
 
 function ReviewMore() {
+
+  const [current, SetCurrent] = useState()
   
+
+  useEffect(() => {
+    const Scroll = () => {
+      let pos = window.scrollY;
+      if (pos + window.innerHeight === document.documentElement.scrollHeight) {
+       console.log("도착")
+       
+      }else{
+        console.log("미도착")
+      }
+    };
+    window.addEventListener('scroll', Scroll);
+
+  
+  }, []);
+
+
+
+
+
   const userState = useSelector((state) => state.user);
   const [posts, setPosts] = useState([]);
-  
+
   useEffect(() => {
     const fetchPosts = async () => {
       try {
@@ -172,7 +189,7 @@ function ReviewMore() {
         );
  
         const snapShot = await getDocs(q);
-       
+          
        const postArray = snapShot.docs.map((doc) => ({
            id: doc.id,
           ...doc.data(),
@@ -194,6 +211,7 @@ function ReviewMore() {
   
   return (
     <>
+    
      <ButtonWrap>
         <Title>리뷰</Title>
         {
@@ -202,6 +220,7 @@ function ReviewMore() {
                   <FontAwesomeIcon icon={faPen} /> 
               </Button>
             </Link>
+          
         }
         </ButtonWrap>
 
@@ -210,6 +229,9 @@ function ReviewMore() {
         
           return (
             <>
+            {
+
+            }
             <Container>
               <ContainerWrap>
                   <UserInfo>
@@ -224,9 +246,6 @@ function ReviewMore() {
             </>
           );
         })}
-
-
-
 
 
           {/* <PagenationContent>
