@@ -6,7 +6,6 @@ import Footer from "./components/HYJ/Footer";
 import Main from "./pages/Main";
 import SearchD from "./pages/SearchD";
 import Ranking from "./pages/Ranking";
-import RankInfinite from "./pages/RankingInfinite";
 import ReviewMore from "./pages/ReviewMore";
 import Board from "./pages/Board";
 import Write from "./pages/Write";
