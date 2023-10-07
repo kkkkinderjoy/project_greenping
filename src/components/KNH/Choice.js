@@ -101,7 +101,7 @@ function Choice() {
   // useEffect(() => {
   //   axios
   //     .get(
-  //       "https://apis.data.go.kr/B551011/GoCamping/basedList?numOfRows=4&pageNo=1&MobileOS=etc&MobileApp=greening&serviceKey=R%2Fe6huREBYwbBicPUN2vK6fCZ3CLJi%2FuKHSWCg%2BDVaxqS0Yqck%2BgJ7yUGTTYUVYaDAbsRm8fOjLOzIpbGQaKmA%3D%3D&_type=json"
+  //       `https://apis.data.go.kr/B551011/GoCamping/basedList?numOfRows=4&pageNo=1&MobileOS=etc&MobileApp=greening&serviceKey=${process.env.REACT_APP_publicDataKey}&_type=json`
   //     )
   //     .then(function (res) {
   //       setData(res.data.response.body.items.item);
@@ -111,21 +111,10 @@ function Choice() {
 
   const [data, setData] = useState(dataList);
 
-  useEffect (()=>{
 
-        const RandomData = ()=>{
-              const Random = Math.floor(Math.random()*data.length)
-          }
-    })
   
   const price = ["50,000","45,000","60,000" ,"65,000"]; //가격은 배열로 지정함(공공데이터에 가격정보가 없기때문에...)
-  // function radomFromArray(array){
-  //   const randomPrice = Math.floor(Math.random() * array.length*4);
-  //   return array[randomPrice]
-  // }
-  
-  // const result =radomFromArray(price);
-  // console.log(result)
+
   return (
     <>
       {/* Choice */}

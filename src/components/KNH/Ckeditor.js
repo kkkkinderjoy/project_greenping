@@ -3,7 +3,7 @@ import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPen } from "@fortawesome/free-solid-svg-icons";
+import { faPaperPlane, faPen } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
 import {
   addDoc,
@@ -21,28 +21,34 @@ import {
   uploadBytesResumable,
   getDownloadURL,
 } from "firebase/storage";
-import {
-  createUserWithEmailAndPassword,
-  getAuth,
-  signInWithEmailAndPassword,
-} from "firebase/auth";
+
 import { firebaseAuth } from "../../firebase";
 // import { fireStore } from './../firebase';
 
 const Button = styled.button`
-  border-radius: 0.5rem;
+  position: absolute;
+  top : 200px;
+  right: 4%;
   margin: 20px 12px;
-  background-color: #5fe2ae;
-  padding: 0.625rem 1.25rem;
-  font-size: 0.875rem;
+  background-color:  #98eecc;
+  padding: 20px;
+  border-radius: 50%;
+  font-size: 1.1em;
   line-height: 1.25rem;
   font-weight: bold;
-  color: #fff;
   display: flex;
   align-items: center;
   outline: none;
   border: none;
   cursor: pointer;
+  svg {
+    color: #fff;
+  }
+  font-weight: bold;
+  color: #fff;
+  @media screen and (max-width: 768px){
+    top : 123px;
+  }
 `;
 
 function Ckeditor({ title, postData }) {
@@ -62,15 +68,10 @@ function Ckeditor({ title, postData }) {
   }, [postData]);
 
   const dataSubmit = async () => {
-    if (title.length === 0) {
-      setIsModal(!isModal);
-      setMessage("제목을 입력해주세요");
+    if (title.length === 0 || writeData.length === 0) {
+      alert("제목 혹은 내용을 입력해주세요");
       return;
-    } else if (writeData.length === 0) {
-      setIsModal(!isModal);
-      setMessage("내용을 입력해주세요");
-      return;
-    }
+    } 
 
     try {
       addDoc(collection(getFirestore(), "board"), {
@@ -126,15 +127,26 @@ function Ckeditor({ title, postData }) {
       };
     };
   }
+
+  
   return (
     <>
-      <Button onClick={dataSubmit}>업로드</Button>
+      <Button onClick={dataSubmit}>
+          <FontAwesomeIcon icon={faPaperPlane}/>
+      </Button>
       <CKEditor
         editor={ClassicEditor}
         data={writeData}
         config={{
           placeholder: "내용을 입력하세요.",
           extraPlugins: [UploadAdapter],
+          resizeOptions: [
+            {
+              name: "resizeImage",
+              label: "Resize Image",
+              value: "300px",
+            },
+          ],
         }}
         onReady={(editor) => {
           // You can store the "editor" and use when it is needed.

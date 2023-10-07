@@ -23,8 +23,11 @@ ul{
 
   .ck-editor__editable_inline {
     min-height: 500px;
+    img{
+      width: 300px;
+    }
   }
-  
+   
 
 .textarea{
   border: 1px solid #ddd;

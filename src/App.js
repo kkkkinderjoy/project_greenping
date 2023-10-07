@@ -6,6 +6,7 @@ import Footer from "./components/HYJ/Footer";
 import Main from "./pages/Main";
 import SearchD from "./pages/SearchD";
 import Ranking from "./pages/Ranking";
+import RankInfinite from "./pages/RankingInfinite";
 import ReviewMore from "./pages/ReviewMore";
 import Board from "./pages/Board";
 import Write from "./pages/Write";
@@ -26,6 +27,7 @@ import Sale from "./components/PSY/Sale";
 import Buy from "./components/PSY/Buy";
 import Assi from "./components/PSY/Assi";
 import Inquiry from "./pages/Inquiry";
+import Myboard from "./pages/Myboard";
 import { useEffect } from "react";
 import Salepage from "./components/PSY/Salepage";
 import Salewrite from "./components/PSY/Salewrite";
@@ -93,6 +95,7 @@ function Inner() {
         <Route path="/ranking" element={<Ranking />} />
         <Route path="/reviewmore" element={<ReviewMore />}></Route>
         <Route path="/board" element={<Board/>}  />
+        <Route path="/myboard" element={<Myboard/>}  />
         <Route path="/edit" element={<Write/>}></Route>
         <Route path="/write" element={<Write />} />
         <Route path="/market" element={<Market />} />
@@ -109,6 +112,8 @@ function Inner() {
         <Route path="/buy" element={<Buy />} />
         <Route path="/Assi" element={<Assi />} />
         <Route path="/inquiry/:seq" element={<Inquiry />} />
+
+        <Route path="/infinite" element={<RankInfinite/>}/>
       </Routes>
       <Aside/>
       <Footer />
