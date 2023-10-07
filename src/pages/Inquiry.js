@@ -6,8 +6,6 @@ import React from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { comment } from 'postcss';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCartShopping, faHandshakeAngle, faMoneyCheckDollar } from "@fortawesome/free-solid-svg-icons";
 
 const Content = styled.div`
   width: 700px;
@@ -18,10 +16,13 @@ const Content = styled.div`
   margin: 30px auto;
   position: relative;
   img{
-  width: 300px; 
-  height: 300px; 
-  display: block;
-  margin: 0 auto;
+    width: 300px; 
+    height: 300px; 
+    display: block;
+    margin: 0 auto;
+  }
+  @media screen and (max-width: 640px){
+    width: 80%;
   }
 `
 const Title = styled.div`
@@ -45,6 +46,10 @@ const InputItem = styled.div`
   width: 400px;
   margin: 0 auto;
   position: relative;
+  @media screen and (max-width: 640px){
+    width: 80%;
+    height: 60%;
+  }
   h3{
     font-size: 20px;
     text-align: center;
@@ -103,8 +108,6 @@ function Inquiry() {
   const navigate = useNavigate();
   const maxLength = 150;
 
-  
-
   //댓글 글자수 제한
   const InputText = (Comment, setComment) => {
     if (Comment.length > maxLength) {
@@ -112,7 +115,7 @@ function Inquiry() {
     }
     setInputCnt(Comment.length);
   };
-
+  
   //댓글 작성
   const addComment = () =>{
     if(Comment.length === 0){

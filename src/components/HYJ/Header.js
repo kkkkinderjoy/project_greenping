@@ -56,7 +56,6 @@ const ListWrap = styled.div`
    @media screen and (max-width:768px) {display: none;}
 `
 
-
 const List = styled.ul`
   flex-basis: 100%;
   display: flex;

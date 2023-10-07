@@ -42,6 +42,7 @@ const ContentWrap = styled.div`
     display: flex;
     flex-wrap: wrap;
     justify-content: start;
+    margin: 0 auto;
 `
 const Tomain = styled.div`
   width: 100%;
@@ -56,6 +57,7 @@ const Tomain = styled.div`
 `
 
 const ContentItem = styled.div`
+  margin: 0 auto;
   width: 500px;
   height: 500px;
   flex-basis: 31.5%;

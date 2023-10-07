@@ -5,12 +5,18 @@ import { NavLink } from "react-router-dom";
 import { styled } from "styled-components";
 import list from './../../data/MarketData'
 
+
 const Container = styled.div`
   width: 100%;
   padding: 48px 0;
+  `
+const Title = styled.div`
+  text-align: center;
+  margin-bottom: 40px;
+  font-size: 2.0em;
 `
 const ContainerWrap = styled.div`
-  max-width: 1280px;
+  max-width: 1200px;
   height: 500px;
   margin: 0 auto;
   display: flex;
@@ -23,27 +29,35 @@ const ContentItem = styled.div`
   position: relative;
   display: none;
   @media screen and (min-width: 1024px){
-      display: block;
+    display: block;
   }
   img{
-    width: 200px; 
-    height:200px; 
-    display: block; margin: 0 auto; margin-bottom: 24px;
+    width: 300px; 
+    height: 300px; 
+    display: block; 
+    margin: 0 auto; 
+    margin-bottom: 24px;
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translateX(-50%);
     }
-  h3{margin-bottom: 24px; text-align: center; padding-top: 24px; font-size: 22px;}
+  h3{
+    position: absolute;
+    top: 7%;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-bottom: 24px;
+    padding-top: 24px; 
+    font-size: 22px;}
   ul{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
     li{
-        margin-bottom: 7px;
-        font-size: 13px;
-        color: rgb(153, 153, 153);
-        &:nth-child(1){
-        font-size: 18px;
-        font-weight: bold;
-        color: #000;
-        }
+      font-size: 1rem;
+      color: rgb(153, 153, 153);
+      position: absolute;
+      bottom: 10%;
+      left: 50%;
+      transform: translateX(-50%);
     }
   }
   @media screen and (max-width: 1200px){
@@ -63,10 +77,6 @@ const ContentDesc = styled.div`
   display: flex;
   flex-wrap: wrap;
 `
-const Navk = styled.div`
-  position: absolute;
-  
-`
 
 const Card = styled.div`
   flex-basis: 50%;
@@ -75,6 +85,7 @@ const Card = styled.div`
   cursor: pointer;
   position: relative;
   transition: 0.7s;
+  background-color: #fff;
   &:nth-last-child(1){
     background-color: #e0fff3;
   }
@@ -101,14 +112,14 @@ const Card = styled.div`
     border-right: 1px solid #ddd;
   }
   h3{
-    font-size: 2rem;
+    font-size: 1.5rem;
     font-weight: bold;
     @media screen and (max-width: 640px) {font-size: 1.5rem;}
   }
   p{margin: 1rem 0;}
   svg{
     position: absolute;
-    left: 1rem;
+    left: 1.2rem;
     bottom: 1rem;
     font-size: 2.5rem;
     color: rgba(0,0,0,0.3);
@@ -134,11 +145,6 @@ const Card2 = styled.div`
   }
   @media screen and (max-width: 640px) {
     padding: 1rem;
-  }
-  h3{
-    font-size: 2rem;
-    font-weight: bold;
-    @media screen and (max-width: 640px) {font-size: 1.5rem;}
   }
   p{margin: 1rem 0;}
   svg{
@@ -171,35 +177,28 @@ const Card2 = styled.div`
   ]
 
 function Market() {
-  
-  
-  const [id, setId] = useState("판매");
 
-  const FilterList = list.filter(e =>{
-    return id === "판매" || id === e.ID
-  })
+  const FilterList = list.filter(e => {
+    return e.ID === "판매" || e.ID === "구매" || e.ID === "양도";
+  });
   console.log(FilterList)
 
-  // const FilterData = data && data.filter(e =>{
-  //   return gugun === "전체" || gugun === e.GUGUN_NM
-  // })
-  console.log(FilterList)
 
   const [isActive, setIsActive] = useState(0);
-
 
   return (
     <>
     <Container>
+      <Title>그린마켓</Title>
       <ContainerWrap>
         <ContentItem>
-        {
-          FilterList.map((e,i)=>{
+          {
+            FilterList.map((e,i)=>{
             return(
-                isActive === i &&
+              isActive === i &&
               <ul key={i}>
-                <h3>{e.ID}</h3>
-                <li>{e.TITLE}</li>
+                <h3>{e.TITLE}</h3>
+                <li>{e.PRICE}</li>
                 <img src={e.IMG} alt="마켓 이미지들" /> 
               </ul>
             )
@@ -212,7 +211,6 @@ function Market() {
               return(
                 <Card key={i} className={isActive === i ? 'on' : ''} onClick={()=>{
                   setIsActive(i);
-                  
                   }}>
                   <h3>{e.ID}</h3>
                   <p>{e.Desc}</p>
@@ -223,7 +221,6 @@ function Market() {
           }
           <NavLink to='/buy'>
             <Card2>
-              <h3></h3>
               <p>더 많은 용품을 보기 원한다면</p>
               <p>마켓 페이지로 이동</p>
               <FontAwesomeIcon icon={faArrowRight} />

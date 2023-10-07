@@ -65,7 +65,26 @@ const ContentItem = styled.div`
     height:300px; 
     display: block; margin: 0 auto; margin-bottom: 24px;
     }
-  h3{margin-bottom: 24px; text-align: center; padding-top: 24px; font-size: 22px;}
+  h3{
+    margin-bottom: 24px;
+    font-size: 22px;
+    text-align: center;
+    padding: 30px 5px;
+    position: relative;
+  }
+  p{
+    position: absolute;
+    text-align: center;
+    top: 75px;
+    left: 40px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #ddd;
+    line-height: 50px;
+    font-size: 1rem;
+    color: #fff;
+  }
   ul{
     display: flex;
     flex-wrap: wrap;
@@ -145,11 +164,12 @@ function Buy() {
                 return(
                 <ContentItem key={i}>
                     <h3>{e.TITLE}</h3>
+                    <p>{e.ID}</p>
                     <img src={e.IMG} alt="구매용품 이미지들" />
                     <ul>
-                        <li>작성자: {e.NAME}</li>
                         <li>가격: {e.PRICE}</li>
                         <li>업로드일: {e.DATE}</li>
+                        <li>작성자: {e.NAME}</li>
                     </ul>
                     {
                       uid &&
