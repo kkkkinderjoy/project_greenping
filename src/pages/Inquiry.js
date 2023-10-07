@@ -143,7 +143,7 @@ function Inquiry() {
       </InputItem>
       <ButtonItem>
         <p>{Comment.length}/{maxLength}자</p>
-        <Button onClick={()=>{addComment(uid)}}> 댓글달기</Button>
+        <Button onClick={() =>{addComment(uid)}}> 댓글달기</Button>
         <Button onClick={() => navigate(-1)}> 돌아가기</Button>
       </ButtonItem>
     </Content>
