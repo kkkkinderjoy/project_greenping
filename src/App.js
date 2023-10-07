@@ -6,10 +6,10 @@ import Footer from "./components/HYJ/Footer";
 import Main from "./pages/Main";
 import SearchD from "./pages/SearchD";
 import Ranking from "./pages/Ranking";
-
 import ReviewMore from "./pages/ReviewMore";
 import Board from "./pages/Board";
 import Write from "./pages/Write";
+import Service from "./pages/Service";
 import Market from "./components/PSY/Market";
 import Notice from "./pages/Notice";
 import Noticedetail from "./pages/Noticedetail";
@@ -36,6 +36,9 @@ import Salewrite from "./components/PSY/Salewrite";
 import ReviewCk from "./components/LJS/ReviewCk";
 import ReviewWrite from "./pages/ReviewWrite";
 import Scroll from "./pages/Scroll";
+
+import FAQ from "./pages/FAQ";
+
 
 function App() {
   return (
@@ -101,8 +104,8 @@ function Inner() {
         <Route path="/reviewwrite" element={<ReviewWrite/>}></Route>
         <Route path="/write" element={<Write />} />
         <Route path="/market" element={<Market />} />
-        <Route path="/notice" element={<Notice />}></Route>
-        {/* <Route path="/noticedetail/:seq" element={<Noticedetail />}></Route> */}
+        <Route path="/service" element={<Service />}></Route>
+        <Route path="/faq" element={<FAQ />}></Route>
         <Route path="/login" element={<Login />}></Route>
         <Route path="/logout" element={<Logout />}></Route>
         <Route path="/member" element={<Member />}></Route>

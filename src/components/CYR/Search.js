@@ -279,7 +279,7 @@ function Search() {
                 return <Option key={i}>{e}</Option>;
               })}
             </Select>
-            {/* <FontAwesomeIcon icon={faCalendarAlt} /> */}
+            <FontAwesomeIcon icon={faCalendarAlt} />
             <StyleDate
               locale={ko}
               selectsRange={true}

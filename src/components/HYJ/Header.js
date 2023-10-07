@@ -232,7 +232,7 @@ function Header({userState}){
               <ListItem><NavLink to="/reviewmore">리뷰</NavLink></ListItem>
               <ListItem><NavLink to="/board">그린톡</NavLink></ListItem>
               <ListItem><NavLink to="/buy">그린마켓</NavLink></ListItem>
-              <ListItem><NavLink to="/notice">고객센터</NavLink></ListItem>
+              <ListItem><NavLink to="/service">고객센터</NavLink></ListItem>
               <ListItem>
                   <Input
                   type="text"
