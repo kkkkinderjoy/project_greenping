@@ -63,7 +63,7 @@ function Aside() {
       {isActive && 
         <>
           <Content>
-            <img src={`images/chat (1).png`} alt="" />
+            {/* <img src={`images/chat (1).png`} alt="" /> */}
           </Content>
           <Content>
             <Link to="https://instagram.com/green_ping2023?igshid=MzRlODBiNWFlZA==">
