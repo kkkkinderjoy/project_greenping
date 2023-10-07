@@ -163,7 +163,7 @@ function Member() {
 
   const DateOfBirth = (e) => {
     let value = e.target.value;
-    e.target.value = e.target.value.replace(/[^0-9]/g, '').replace(/^(\d{0,4})(\d{0,2})(\d{0,2})$/g, "$1/$2/$3").replace(/\/{1,2}$/g, "");
+    e.target.value = e.target.value.replace(/[^0-9]/g, '').replace(/^(\d{0,4})(\d{0,2})(\d{0,2})$/g, "$1-$2-$3").replace(/-{1,2}$/g, "");
     setDateOfBirth(value)
   };
 
