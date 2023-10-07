@@ -8,22 +8,15 @@ import { current } from '@reduxjs/toolkit';
 
 
 const NoticeContent = styled.div`
- padding:60px 30px;
+ padding: 60px 50px;
 `
 
 const NoticeWrap = styled.div`
- margin: 40px auto;
- max-width: 1000px;
+ max-width: 1280px;
  flex-wrap: wrap;
 
 `
-const Title= styled.div`
-    text-align: left;
-    font-size: 23px;
-    font-weight: bold;
-    color: #333;
-    margin-bottom: 36px;
-`
+
 const TotalCnt = styled.div`
   display: flex;
   justify-content: space-between;
@@ -64,9 +57,9 @@ const Listitem = styled.li`
 
 const Container =styled.div`
  position: relative;
- width: 100%;
+ width: 55vw;
  border-top: 2px solid #474747;
- font-size: 15px;
+ font-size: 1em;
   ul{
   margin-top: 8px;
   div{
@@ -79,37 +72,21 @@ const Container =styled.div`
         padding: 10px;
         font-size: 13px;
         line-height: 18px;
+        text-align: left;
         font-weight: 500;
         color: #666666;
         flex-basis: 15%;
+        padding: 15px 15px;
         @media screen and (min-width:768px){
-          padding: 27px 15px;
           font-size: 15px;
-          flex-basis: 10%;
+          flex-basis: 20%;
         }
-        &:nth-child(1){
-            display: none;
-            
-            @media screen and (min-width:768px){
-            display: block;
-            }
-        }
-       
-        &:nth-child(3){
+        &:nth-child(2){
           cursor: pointer;
-          text-align: left;
-          flex-basis: 70%;
-          @media screen and (min-width:768px){
-            padding: 27px 15px; 
-            flex-basis: 45%; 
-            }
+          flex-basis: 60%;
         }
-        &:nth-child(5){
-          display: none;
-          @media screen and (min-width:768px){
-            margin-left: 80px;  
-            display: block;
-            }
+        &:nth-child(3){
+          text-align: center;
         }
      }
      
@@ -137,7 +114,6 @@ function Notice(){
     <>
     <NoticeContent>
       <NoticeWrap>
-        <Title>공지사항</Title>
         <TotalCnt>
           <div>총<p>{dataFilter.length}</p>건</div>
           <List>
@@ -158,11 +134,9 @@ function Notice(){
             dataFilter.slice().reverse().map((e,i)=>{
               return(
                 <div key={i}>
-                  <li>{e.num}</li>
                   <li>{e.type}</li>
                   <li><NavLink to={`/noticedetail/${e.SEQ}`} state={e}>{e.title}</NavLink></li>
                   <li>{e.date}</li>
-                  <li>조회수:{e.clicks}</li>
                 </div>
               )
             })
