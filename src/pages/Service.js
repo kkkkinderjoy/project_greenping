@@ -83,7 +83,10 @@ function Service() {
                 </LinkListItem>
       </LinkList>
         <ContainerWrap>
-              <Outlet />
+              {
+                isActive ? <Notice /> : <FAQ />  
+                //isActive가 참일때는 Notice 컴포넌트, 거짓일때는 FAQ 컴포넌트
+              }
         </ContainerWrap>
       </Container>
       
