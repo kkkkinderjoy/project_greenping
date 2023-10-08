@@ -80,10 +80,11 @@ const SearchLine = styled.div`
 `
 function Descpage() {
     const location = useLocation()
-    const data = location.state.e;
-    const {facltNm, firstImageUrl, addr1, lctCl, facltDivNm, induty, operDeCl, posblFcltyCl, homepage, intro} = data
+    const sdata = location.state.e;
+    const {facltNm, firstImageUrl, addr1, lctCl, facltDivNm, induty, operDeCl, posblFcltyCl, homepage, intro} = sdata
     const [isActive, setIsActive] = useState(false);
     const [isModal, setIsModal] = useState(false);
+
 return(
     <>
         {
@@ -93,7 +94,7 @@ return(
             <h2>{facltNm}</h2>
             <Dwrapper>
                 {
-                    data.firstImageUrl === "" ? <img src='https://www.placeholder.com/100x100' alt='img' /> : 
+                    sdata.firstImageUrl === "" ? <img src='https://www.placeholder.com/100x100' alt='img' /> : 
                     <img src={firstImageUrl} alt={facltNm} title={facltNm} /> 
                 }
                 <Imgdesc>
