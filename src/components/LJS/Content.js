@@ -1,42 +1,62 @@
 
 import styled from 'styled-components'
 import { useState } from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faYoutube } from '@fortawesome/free-brands-svg-icons'
 
 const Container= styled.div`
   width: 100%;
-  margin: 160px 0;
+  margin-top: 120px;
 `
+
 const ContentWrap = styled.div`
   display: flex;
-  justify-content: center;
-  
+  flex-basis: 100%;
   @media screen and (max-width: 768px) {
     display: flex;
     flex-direction: column;
   }
 `
 
+const Title = styled.div`
+  font-size: 2em;
+  font-weight: bold;
+  margin-bottom: 90px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 7px;
+`
+const Youtube= styled(FontAwesomeIcon)`
+    font-size: 1.6em;
+    color: #ff0000;
+    
+`
+
 const MenuList = styled.div`
+    flex-basis: 15%;
     display: flex;
-    justify-content: center;
-    align-content: center;  
   ul{
     display: flex;
     flex-direction: column;
-    width: 300px;
+    width: 100%;
+    height: 550px;
     @media screen and (max-width: 768px) {
+      height: 70px;
       display: flex;
       flex-direction: row;
-      width: 100%;
+      height: 100px;
       justify-content: space-between;
+      font-size: 0.9em;
     }
     li{ 
       width: 100%;
+     
       text-align: center;
       font-size: 1em;
       border-bottom: 1px solid #eee;
       height: 100%;
-      line-height: 70px;
+      line-height: 90px;
       cursor: pointer;
       &:nth-child(1){
         border-top: 1px solid #eee;
@@ -44,15 +64,11 @@ const MenuList = styled.div`
       @media screen and (max-width: 768px){
         display: flex;
         justify-content: center;
-        width: 100%;
-        border: 1px solid gray;
-        text-align: center;
+        border: 1px solid #eee;
         align-items: center;
         font-size: 1em;
         line-height: 40px;
         letter-spacing: -1.55px;
-       
-
       }   
       &.on{
         background-color: #000;
@@ -62,12 +78,13 @@ const MenuList = styled.div`
   }
 `
 const ContentVideo = styled.div`
-  flex-basis: 60%;
+  flex-basis: 85%;
   ul{
     li{
       iframe{
+        margin-top: 1px;
         width: 100%;
-        height: 400px;
+        height: 450px;
       }
     }
   }
@@ -83,6 +100,7 @@ function Content() {
   return (
     <>
   <Container>
+    <Title>캠핑을 위한<Youtube icon={faYoutube}/></Title>
     <ContentWrap>
       <MenuList>
       <ul>

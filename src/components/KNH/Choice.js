@@ -11,16 +11,17 @@ const ContentWrap = styled.div`
   margin-top: 120px;
 `
 const Content = styled.div`
+  max-width: 1280px;
   margin: 3px auto;
-  max-width: 1200px;
 `
+
 const Title = styled.h3`
   text-align: center;
   font-size: 2.0em;
-  margin-bottom: 50px;
+  margin-bottom: 90px;
 `
 
-const ListWrap = styled.ul`
+const List = styled.ul`
   max-width: 1280px;
   margin: 30px auto;
   display: flex;
@@ -33,7 +34,7 @@ const ListWrap = styled.ul`
 `;
 
 
-const List = styled.li`
+const ListItem = styled.li`
   flex-basis: 24%;
   overflow: hidden;
    img {
@@ -140,13 +141,13 @@ function Choice() {
           </div>
 
           {/* api */}
-          <ListWrap>
+          <List>
             {data &&
               data.map((e, i) => {
                 return (
                   <React.Fragment key={i}>
                     {
-                        <List>
+                        <ListItem>
                       <NavLink to={`navdesc/${e.contentId}`} state={e}>
                           {e.firstImageUrl !== "" && (
                             <img
@@ -166,12 +167,12 @@ function Choice() {
                             </Location>
                           </TextWrap>
                       </NavLink>
-                        </List>
+                        </ListItem>
                     }
                   </React.Fragment>
                 );
               })}
-          </ListWrap>
+          </List>
         </Content>
       </ContentWrap>
     </>

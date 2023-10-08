@@ -9,9 +9,7 @@ const FooterContent = styled.div`
   border-top: 1px solid #ddd;
   background-color: #f9f9f9;
   padding: 10px 0;
-  >p{
-    color: #ddd;
-  }
+  
   @media (min-width: 768px) {
     height: 220px;
     font-size: 1.1em;
@@ -26,6 +24,10 @@ const FooterWrap = styled.div`
     font-size: 0.9em;
     display: flex;
     justify-content: space-around;
+  }
+  >p{
+    color: #ddd;
+    
   }
 `
 
@@ -161,8 +163,8 @@ function Footer(){
                   <li><NavLink to="/">점심시간 11:30 - 12:30</NavLink></li>
                 </ul>
         </CustomerService>
+        
       </FooterWrap>
-      <p>Copyright ⓒ2023 GREENPING All right reserved</p>
     </FooterContent>
     
             
