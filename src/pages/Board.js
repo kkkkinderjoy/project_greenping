@@ -387,6 +387,7 @@ function Board() {
                   <div dangerouslySetInnerHTML={{ __html: e.content }} />{" "}
                 </ListItem>       
              <Comments/>
+             {userState.uid &&
                 <ListItem
                   onClick={() => {
                     toggleLike(i);
@@ -403,6 +404,7 @@ function Board() {
                       />
                   </HeartWrap>
                 </ListItem>
+                }
               </List>
             );
           })}
