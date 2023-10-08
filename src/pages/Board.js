@@ -12,15 +12,15 @@ import TimeGap from "./../components/KNH/TimeGap.js"
 import Comments from "../components/KNH/Comments.js";
 
 const BorderWrapper = styled.div`
-  max-width: 1280px;
-  margin: 50px auto;
-`;
+  width: 100%;
+  
+`
 
 const  HeadWrap = styled.div`
-  width: 83%;
+  max-width: 1280px;
   margin: 0 auto;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
 
 `
 const Title = styled.div`

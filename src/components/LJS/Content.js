@@ -34,7 +34,7 @@ const Youtube= styled(FontAwesomeIcon)`
 `
 
 const MenuList = styled.div`
-    flex-basis: 15%;
+    flex-basis: 20%;
     display: flex;
   ul{
     display: flex;
@@ -51,7 +51,6 @@ const MenuList = styled.div`
     }
     li{ 
       width: 100%;
-     
       text-align: center;
       font-size: 1em;
       border-bottom: 1px solid #eee;
@@ -84,7 +83,8 @@ const ContentVideo = styled.div`
       iframe{
         margin-top: 1px;
         width: 100%;
-        height: 450px;
+        height: 549px;
+
       }
     }
   }
