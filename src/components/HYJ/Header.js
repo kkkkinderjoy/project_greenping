@@ -50,6 +50,10 @@ const LogoWrap = styled.div`
 const Logo = styled.img`
   width: 100%;
   height: 100px;
+  display: block;
+  @media screen and (max-width:768px){
+    display: none;
+  }
 `
 
 
