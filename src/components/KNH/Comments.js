@@ -16,9 +16,10 @@ const Comment = styled.ul`
     margin-bottom: 20px;
     border-bottom: 1px solid #eee;
   }
-  >span
+  >span{
     font-size: 0.7em;
   }
+
   button{
     background: none;
     border: none;
@@ -29,7 +30,6 @@ const Comment = styled.ul`
     cursor: pointer;
   }
 `
-
 
 const ConWrap = styled.div`
   width:100%;
