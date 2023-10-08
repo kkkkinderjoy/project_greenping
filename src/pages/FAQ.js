@@ -22,12 +22,16 @@ const TotalCnt = styled.div`
   p{
       color: orangered;
    }
+   @media screen and (max-width:768px){
+          font-size: 0.9em;
+          
+    }
       
 `
 
 const Container =styled.div`
  position: relative;
- width: 55vw;
+ width: 100%;
  border-top: 2px solid #474747;
  font-size: 1em;
   
@@ -49,19 +53,17 @@ const List =styled.ul`
 
 
 const ListItem =styled.li`
-  
-  padding: 20px 15px; 
+  padding: 20px; 
   cursor: pointer;
    display: flex;
    justify-content: space-between;
-   border-bottom: 1px solid #e5e5e5;
-   
+   border-bottom: 1px solid #eee;
   &:nth-child(even){
     padding-top: 1rem;
     padding-bottom: 1.5rem;
     padding-right: 2rem;
     line-height: 1.4;
-    background-color: #e5e5e5;
+    background-color: #eee;
     transition: 0.3s ease-in-out;
     height: 0;
     display: none;
@@ -70,7 +72,10 @@ const ListItem =styled.li`
       height: 100%;
      }
   }
-
+  @media screen and (max-width:768px){
+     font-size: 0.9em;
+          
+    }
 `
 
 

@@ -9,13 +9,13 @@ import { current } from '@reduxjs/toolkit';
 
 const NoticeContent = styled.div`
  padding: 60px 50px;
+
+ @media screen and(max-width: 768px){
+    padding:0;
+ }
 `
 
-const NoticeWrap = styled.div`
- max-width: 1280px;
- flex-wrap: wrap;
 
-`
 
 const TotalCnt = styled.div`
   display: flex;
@@ -29,6 +29,10 @@ const TotalCnt = styled.div`
           color: orangered;
         }
       }
+      @media screen and (max-width:768px){
+          font-size: 0.9em;
+          
+    }
 `
 
 const List = styled.ul`
@@ -39,9 +43,9 @@ const List = styled.ul`
 `
 
 const Listitem = styled.li`
-  
   cursor: pointer;
   font-size: 1em;
+  position: relative;
   /* &::before{
     content: "";
     position: absolute;
@@ -53,43 +57,66 @@ const Listitem = styled.li`
     z-index: 50;
   } */
  
+  >span::after{
+    content: "";
+    position: absolute;
+    top: 1px;
+    left: -10px;
+    width: 1px;
+    height: 17px;
+    background-color: #666;
+
+  }
+ 
 `
 
 const Container =styled.div`
  position: relative;
- width: 55vw;
+ width: 100%;
  border-top: 2px solid #474747;
- font-size: 1em;
+ font-size: 1.2em;
   ul{
   margin-top: 8px;
   div{
     display: flex;
     border-bottom: 1px solid #e5e5e5;
     flex-basis: 100%;
+    
     li{
-        margin-top: 20px;
+        margin-top: 3px;
         text-align: center;
-        padding: 10px;
-        font-size: 13px;
-        line-height: 18px;
+        font-size: 0.9em;
+        line-height: 1;
         text-align: left;
         font-weight: 500;
         color: #666666;
         flex-basis: 15%;
         padding: 15px 15px;
-        @media screen and (min-width:768px){
-          font-size: 15px;
-          flex-basis: 20%;
+        @media screen and (max-width:768px){
+          font-size: 0.7em;
+          
+        }
+        &:nth-child(1){
+          text-align: center;
+          @media screen and (max-width:768px){
+          display: none;
+        }
         }
         &:nth-child(2){
           cursor: pointer;
-          flex-basis: 60%;
+          flex-basis: 70%;
+          @media screen and (max-width:768px){
+          font-size: 0.7em;
         }
         &:nth-child(3){
           text-align: center;
+          @media screen and (max-width:768px){
+            flex-basis: 20%;
+        }
         }
      }
      
+    }
   }
 }
 `
@@ -113,7 +140,7 @@ function Notice(){
   return (
     <>
     <NoticeContent>
-      <NoticeWrap>
+     
         <TotalCnt>
           <div>총<p>{dataFilter.length}</p>건</div>
           <List>
@@ -122,7 +149,9 @@ function Notice(){
               
               FilterType.map((e,i)=>{
                 return(
-                  <Listitem key={i} onClick={()=>{setType(e)}}>{e}</Listitem>
+                  <Listitem key={i} onClick={()=>{setType(e)}}>
+                  <span>{e}</span>
+                  </Listitem>
                 )
               })
             }
@@ -143,7 +172,6 @@ function Notice(){
           }
           </ul>
         </Container>
-      </NoticeWrap>
     </NoticeContent>
     </>
   )

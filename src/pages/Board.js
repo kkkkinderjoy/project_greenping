@@ -330,17 +330,6 @@ function Board() {
 
 
 
-
-
-  
-
-
-
-
-
-
-  
-
   return (
     <>
       <BorderWrapper>
