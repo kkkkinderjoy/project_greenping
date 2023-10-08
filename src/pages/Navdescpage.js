@@ -80,8 +80,8 @@ const SearchLine = styled.div`
 `
 function Descpage() {
     const location = useLocation()
-    const sdata = location.state.e;
-    const {facltNm, firstImageUrl, addr1, lctCl, facltDivNm, induty, operDeCl, posblFcltyCl, homepage, intro} = sdata
+    const data = location.state.e;
+    const {facltNm, firstImageUrl, addr1, lctCl, facltDivNm, induty, operDeCl, posblFcltyCl, homepage, intro} = data
     const [isActive, setIsActive] = useState(false);
     const [isModal, setIsModal] = useState(false);
 
@@ -94,19 +94,19 @@ return(
             <h2>{facltNm}</h2>
             <Dwrapper>
                 {
-                    sdata.firstImageUrl === "" ? <img src='https://www.placeholder.com/100x100' alt='img' /> : 
-                    <img src={firstImageUrl} alt={facltNm} title={facltNm} /> 
+                    data.firstImageUrl === "" ? <img src='https://www.placeholder.com/100x100' alt='img' /> : 
+                    <img src={data.firstImageUrl} alt={data.facltNm} title={data.facltNm} /> 
                 }
                 <Imgdesc>
-                    <p>주소 : {addr1}</p>
-                    <p>캠핑장 환경 : {lctCl} / {facltDivNm}</p>
-                    <p>캠핑장 유형 : {induty}</p>
-                    <p>운영기간 : {induty}</p>
-                    <p>운영일 : {operDeCl}</p>
-                    <p>주변이용가능시설 : {posblFcltyCl}</p>
-                    <NavLink to={homepage} target='_blank'>
+                    <p>주소 : {data.addr1}</p>
+                    <p>캠핑장 환경 : {data.lctCl} / {data.facltDivNm}</p>
+                    <p>캠핑장 유형 : {data.induty}</p>
+                    <p>운영기간 : {data.induty}</p>
+                    <p>운영일 : {data.operDeCl}</p>
+                    <p>주변이용가능시설 : {data.posblFcltyCl}</p>
+                    <NavLink to={data.homepage} target='_blank'>
                         {
-                            homepage !== "" && <p>홈페이지 : {homepage}</p> 
+                            data.homepage !== "" && <p>홈페이지 : {data.homepage}</p> 
                         }
                     </NavLink>
                     <Dbutton className={isActive === true ? "on" : ""} onClick={()=>{setIsActive(true); 
@@ -116,11 +116,11 @@ return(
             <SearchLine />
             <Ddesc>
                 {
-                    intro !== "" 
+                    data.intro !== "" 
                     && 
                     <>
-                        <FontAwesomeIcon icon={faCircleRight} />
-                        <p>{intro}</p>
+                        <FontAwesomeIcon icon={data.faCircleRight} />
+                        <p>{data.intro}</p>
                     </>
                 }
             </Ddesc>
