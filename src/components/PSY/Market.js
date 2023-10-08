@@ -133,11 +133,13 @@ const Card2 = styled.div`
   padding: 2.5rem;
   box-sizing: border-box;
   position: relative;
+  background-color: #fff;
+  &:hover svg{
+    transform: translateX(15px);
+  }
   @media screen and (max-width: 640px) {
     padding: 1rem;
   }
-
-
   p{line-height: 1.7;}
   svg{
     position: absolute;
@@ -146,11 +148,8 @@ const Card2 = styled.div`
     font-size: 2.5rem;
     color: rgba(0,0,0,0.3);
     transition: 0.3s;
-    &:hover{
-        transform: translateX(15px);}
     @media screen and (max-width: 640px) {font-size: 2rem;}
-    }
-
+  }
   `
 const data = [
   {
@@ -188,10 +187,8 @@ function Market() {
       <Title>그린마켓</Title>
       <ContainerWrap>
         <ContentItem>
-        
         {
           FilterList.map((e,i)=>{
-
             return(
               isActive === i &&
               <ul key={i}>
@@ -217,13 +214,13 @@ function Market() {
               )
             })
           }
-          
-            <Card2>
-              <p>더 많은 용품을 보기 원한다면</p>
-              <p>마켓 페이지로 이동</p>
-              <NavLink to='/buy'><FontAwesomeIcon icon={faArrowRight}  /> </NavLink>
-            </Card2>
-         
+          <NavLink to='/buy'>
+          <Card2>
+            <p>더 많은 용품을 보기 원한다면</p>
+            <p>마켓 페이지로 이동</p>
+            <FontAwesomeIcon icon={faArrowRight} />
+          </Card2>
+          </NavLink>
         </ContentDesc>
       </ContainerWrap>
     </Container>
