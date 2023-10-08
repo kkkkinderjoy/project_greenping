@@ -22,6 +22,7 @@ const ContentWrap = styled.ul`
   >span{
     font-size: 0.7em;
   }
+
   button{
     background: none;
     border: none;
@@ -32,7 +33,6 @@ const ContentWrap = styled.ul`
     cursor: pointer;
   }
 `
-
 
 const ConWrap = styled.div`
   width:100%;

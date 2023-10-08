@@ -1,96 +1,114 @@
-import React, { useState } from 'react'
-import { NavLink, useNavigate, useParams } from 'react-router-dom';
+import React, { useMemo, useState } from 'react'
+import { NavLink, Outlet, useNavigate, useParams } from 'react-router-dom';
 import { styled } from 'styled-components'
-import Notice from './Notice';
-import FAQ from './FAQ';
+import Notice from './../components/HYJ/Notice';
+import FAQ from './../components/HYJ/FAQ';
 
 
 
 const Container = styled.div`
-  max-width: 1280px;
-  margin: 60px auto;
-  padding-bottom: 100px;
-`;
-
-const  ContainerWrap = styled.div`
-  width: 83%;
-  margin: 0 auto;
-  display: flex;
-  
+  width: 100%;
+  margin-top: 60px;
 `
 
 const Title = styled.div`
-  padding: 10px 20px;
   font-weight: bold;
   font-size: 2em;
-  position: relative;
-
-  &::after {
-    content: "";
-    width: 30px;
-    height: 5px;
-    margin-left: 0.5px;
-    background-color: #2ed090;
-    position: absolute;
-    top: -8px;
-    left: 18px;
-    border-radius: 2px;
+  text-align: center;
+  @media screen and (max-width:768px){
+      font-size: 1.5em;
   }
 `
 
-const ContentWrap = styled.div`
-display: flex;
-justify-content: flex-start;
-
-`
-const LinkWrap = styled.div`
-  width: 180px;
-
+const  ContainerWrap = styled.div`
+  max-width: 1280px;
+  margin: 0 auto;
+  flex-wrap: wrap;
 `
 
-const LinkList = styled.ul`
-  position: relative;
+
+const LinkList = styled.ul`  
+  display: flex;
+  gap: 10px;
   margin-top: 30px;
-`
-const LinkListItem = styled.li`
-  font-weight: bold;
-  font-size: 1.1em;
-  padding: 20px;
-  border-top: 1px solid rgb(211,211,211);
-  &:nth-child(1){
-    border: none;
+  justify-content: center; 
+  @media screen and (max-width:768px){
+      margin-top: 20;
   }
 `
 
+
+const LinkListItem = styled.li`
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  text-align: center;
+  color: #666;
+    span{
+      cursor: pointer;
+      display: block;
+      padding: 20px 0px;
+      font-size: 1.1em;
+    }
+  &:hover{font-weight: bold;}
+  @media screen and (max-width:768px){
+      font-size: 0.9em;
+  }
+`
 
 
 function Service() {
   const navigate = useNavigate();
-  const [viewNotice,setViewNotice] =useState(true);
- 
+  const[isActive,setIsActive]= useState(true);
+
+  const data = [
+    {
+      "title":"공지사항",
+      "link":"/service/notice"
+    },
+    {
+      "title":"자주 묻는 질문",
+      "link":"/service/faq"
+    }
+  ]
+
+  const currentUrl = window.location.href; 
+
+  useMemo(()=>{
+    if(currentUrl === "http://localhost:3000/service/notice"){
+      setIsActive(true)
+      return;
+    }
+    if(currentUrl === "http://localhost:3000/service/faq"){
+      setIsActive(false)
+      return;
+    }
+    if(currentUrl === "http://localhost:3000/service"){
+      setIsActive(true)
+    }
+  },[currentUrl])
+
   return (
     <>
       <Container>
+      <Title>고객센터</Title>
+      <LinkList>
+      
+                <LinkListItem onClick={()=>{setIsActive(true); navigate("/service/notice")}}>
+                  <span>공지사항</span>
+                </LinkListItem>
+                <LinkListItem onClick={()=>{setIsActive(false); navigate("/service/faq")}}>
+                  <span>자주 묻는 질문</span>
+                </LinkListItem>
+      </LinkList>
         <ContainerWrap>
-          <Title>고객센터</Title>
+              {
+                isActive ? <Notice /> : <FAQ />  
+                //isActive가 참일때는 Notice 컴포넌트, 거짓일때는 FAQ 컴포넌트
+              }
+
         </ContainerWrap>
-        <ContentWrap>
-        <LinkWrap>
-            <LinkList>
-              <LinkListItem onClick={()=>setViewNotice(true)}>
-                 공지사항
-              </LinkListItem>
-              <LinkListItem onClick={()=>setViewNotice(false)}>
-                  자주 묻는 질문
-              </LinkListItem>
-            </LinkList>
-        </LinkWrap>
-          {
-            viewNotice ? <Notice /> : <FAQ />
-          }
-        </ContentWrap>
-        
       </Container>
+      
     </>
   )
 }

@@ -84,6 +84,7 @@ function Descpage() {
     const {facltNm, firstImageUrl, addr1, lctCl, facltDivNm, induty, operDeCl, posblFcltyCl, homepage, intro} = data
     const [isActive, setIsActive] = useState(false);
     const [isModal, setIsModal] = useState(false);
+
 return(
     <>
         {

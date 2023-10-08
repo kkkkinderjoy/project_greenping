@@ -2,7 +2,6 @@ import { Route, Routes, useNavigate } from "react-router-dom";
 import GlobalStyle from "./components/GlobalStyle";
 import Header from "./components/HYJ/Header";
 import Footer from "./components/HYJ/Footer";
-
 import Main from "./pages/Main";
 import SearchD from "./pages/SearchD";
 import Ranking from "./pages/Ranking";
@@ -11,8 +10,9 @@ import Board from "./pages/Board";
 import Write from "./pages/Write";
 import Service from "./pages/Service";
 import Market from "./components/PSY/Market";
-import Notice from "./pages/Notice";
-import Noticedetail from "./pages/Noticedetail";
+import Notice from './components/HYJ/Notice';
+import FAQ from './components/HYJ/FAQ';
+import Noticedetail from "./components/HYJ/Noticedetail";
 import Login from "./pages/Login";
 import Logout from "./pages/Logout";
 import Member from "./pages/Member";
@@ -33,12 +33,10 @@ import { useEffect } from "react";
 import Navsearch from "./pages/Navsearch";
 import Salepage from "./components/PSY/Salepage";
 import Salewrite from "./components/PSY/Salewrite";
-
 import Navdescpage from "./pages/Navdescpage";
 import ReviewCk from "./components/LJS/ReviewCk";
 import ReviewWrite from "./pages/ReviewWrite";
-import Scroll from "./pages/Scroll";
-import FAQ from "./pages/FAQ";
+import Msearchd from "./pages/Msearchd";
 
 
 function App() {
@@ -53,12 +51,12 @@ function App() {
 
 function Inner() {
   const userState = useSelector((state) => state.user);
-  console.log(userState);
+  //console.log(userState);
 
   const dispatch = useDispatch();
   const uid = sessionStorage.getItem("users");
 
-  console.log(uid);
+  //console.log(uid);
 
   useEffect(() => {
     if (uid) {
@@ -67,10 +65,10 @@ function Inner() {
     const fetchUser = async () => {
       if (!uid) return;
       const userDoc = doc(collection(getFirestore(), "users"), uid);
-      console.log(userDoc);
+      //console.log(userDoc);
       try {
         const docSnapshot = await getDoc(userDoc);
-        console.log(docSnapshot);
+        //console.log(docSnapshot);
         if (docSnapshot.exists()) {
           const userData = docSnapshot.data();
           dispatch(loggedIn(userData));
@@ -93,6 +91,7 @@ function Inner() {
         <Route path="/" element={<Main />}></Route>
         <Route path="/searchd/" element={<SearchD />} />
         <Route path="/navsearch/" element={<Navsearch />} />
+        <Route path="/msearch/" element={<Msearchd />} />
         <Route path="/searchd/desc/:seq" element={<Descpage />} />
         <Route path="/navsearch/navdesc/:seq" element={<Navdescpage />} />
         <Route path="/navdesc/:seq" element={<Navdescpage />} />
@@ -107,12 +106,15 @@ function Inner() {
         <Route path="/reviewwrite" element={<ReviewWrite/>}></Route>
         <Route path="/write" element={<Write />} />
         <Route path="/market" element={<Market />} />
-        <Route path="/service" element={<Service />}></Route>
-        <Route path="/faq" element={<FAQ />}></Route>
+        <Route path="/service" element={<Service />}>
+          <Route path="notice" element={<Notice />} />
+          <Route path="faq" element={<FAQ />} />
+        </Route>
+        <Route path="service/notice/:id" element={<Noticedetail />}></Route>
         <Route path="/login" element={<Login />}></Route>
         <Route path="/logout" element={<Logout />}></Route>
         <Route path="/member" element={<Member />}></Route>
-        <Route path="/modify" element={<Modify />}></Route>
+        <Route path="/modify" element={<Member />}></Route>
         <Route path="/findemail" element={<Findemail />}></Route>
         {/* <Route path="/*" element={<Notfound />}></Route> */}
         <Route path="/sale" element={<Sale />} />
@@ -122,9 +124,6 @@ function Inner() {
         <Route path="/Assi" element={<Assi />} />
         <Route path="/inquiry/:seq" element={<Inquiry />} />
         <Route path="/inquiry/:seq/:market" element={<Inquiry />} />
-        <Route path="/scroll" element={<Scroll/>}></Route>
-
-      </Routes>
       <Aside />
       <Footer />
     </>

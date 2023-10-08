@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { createUserWithEmailAndPassword, firebaseAuth } from './../firebase'
-import { doc, setDoc, getFirestore, Firestore, getDoc, query, collection, where, getDocs } from 'firebase/firestore'
+import { doc, setDoc, getFirestore, Firestore, getDoc, query, collection, where, getDocs, updateDoc } from 'firebase/firestore'
 import { useNavigate } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons'
@@ -164,7 +164,7 @@ function Member() {
   const DateOfBirth = (e) => {
     let value = e.target.value;
     console.log(e.target.value)
-    e.target.value = e.target.value.replace(/[^0-9]/g, '').replace(/^(\d{0,4})(\d{0,2})(\d{0,2})$/g, "$1-$2-$3").replace(/\/{1,2}$/g, "");
+    e.target.value = e.target.value.replace(/[^0-9]/g, '').replace(/^(\d{0,4})(\d{0,2})(\d{0,2})$/g, "$1-$2-$3").replace(/-{1,2}$/g, "");
     setDateOfBirth(value)
   };
 
@@ -180,7 +180,7 @@ function Member() {
   }
 
   const isValidDateOfBirth = (dateOfBirth) => {
-    const regex = /^(19[0-9][0-9]|20\d{2})(0[0-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])$/
+    const regex = /^(19[0-9][0-9]|20\d{2})-(0[0-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/
     return regex.test(dateOfBirth)
   }
 
@@ -204,9 +204,9 @@ function Member() {
       setError("유효한 이메일 주소를 입력해주세요");
       return;
     }
-    else if (password.length === 0) {
+    else if (password.length === 0 && initialMode) {
       errorMessage("비밀번호")
-    } else if (passwordConfirm.length === 0) {
+    } else if (passwordConfirm.length === 0 && initialMode) {
       errorMessage = "비밀번호 확인";
     } else if (password !== passwordConfirm) {
       setError("비밀번호가 일치하지 않습니다.")
@@ -227,27 +227,40 @@ function Member() {
     }
 
     try {
-      const { user } = await createUserWithEmailAndPassword
-        (firebaseAuth, email, password)
-
+   
       const userProfile = {
         name,
         phoneNumber,
         email,
         dateOfBirth
       }
-      await setDoc(doc(getFirestore(), "users", user.uid), userProfile)
-     
-      sessionStorage.setItem("user", user.uid)
-      dispatch(logIn(user.uid));
-      alert("회원가입이 완료 되었습니다.");
-      navigate('/');
+
+    if(initialMode){
+                const {user} = await createUserWithEmailAndPassword(firebaseAuth, email, password);
+                await setDoc(doc(getFirestore(), "users", user.uid), userProfile)
+
+                sessionStorage.setItem("users", user.uid)
+                dispatch(logIn(user.uid));
+    
+                alert("회원가입이 완료 되었습니다.")
+            }else{
+                if(userUid){
+                    const userRef = doc(getFirestore(), "users", userUid);
+                    await updateDoc(userRef, userProfile);
+                    // updateDoc(선택자, 바꿀부분);
+                    alert("정보 수정이 완료되었습니다.")
+                }else{
+                    setError("회원 정보가 없습니다.")
+                    return;
+                }
+            }
+            navigate('/');
 
     } catch (error) {
       setError(errorMsg(error.code))
     }
   }
-
+ 
   const checkEmail = async (data) => {
    
     if (!isValidEmail(data)) {
@@ -266,19 +279,23 @@ function Member() {
       console.log(error)
      }
           //Ref 은 doc까지만 접근한 상태
-        
   };
-  
+
   return (
     <>
+    {
+           userState.loggedIn && initialMode ?  navigate('/') : 
       <Container>
         <SignUp>
-          <Title>회원가입</Title>
-          <p>이메일<span>*</span></p>
-          <Emailbox>
-          <Input defaultValue={email} onChange={(e) => { setEmail(e.target.value)}} type='email' className='email'/>
-            <button onClick={()=>{checkEmail(email)}} ><p>중복 확인</p></button>
-          </Emailbox>
+          <Title>{initialMode ? "회원가입" : "정보수정"}</Title>
+              <p>이메일<span>*</span></p>
+            <Emailbox>
+            <Input defaultValue={email} onChange={(e) => { setEmail(e.target.value)}} type='email' className='email'/>
+             {initialMode  && <button onClick={()=>{checkEmail(email)}} ><p>중복 확인</p></button> } 
+              </Emailbox>
+            {
+              initialMode  &&
+              <>
           <p>비밀번호<span>*</span></p>
           <Password>
             <Input type={eye[0] ? 'text' : 'password'} className='password' onChange={(e) => { setPassword(e.target.value) }} />
@@ -293,22 +310,23 @@ function Member() {
               toggleEye(1)
             }} />
           </Password>
+            </>
+            }
 
           <p>이름<span>*</span></p>
           <Input value={name} onChange={(e) => { setName(e.target.value) }} type='text' className='name' />
 
           <p>생년월일</p>
-          {dateOfBirth}
           <Input onInput={DateOfBirth} maxLength={10} type='text' className='birth' />
 
           <p>전화번호<span>*</span></p>
           <Input onInput={PhoneNumber} maxLength={13} type='text' className='phone' />
 
-          <Button onClick={signUp}>가입</Button>
+          <Button onClick={signUp}>{initialMode ? "가입" : "수정"}</Button>
           <p>{error}</p>
         </SignUp>
       </Container>
-
+      }  
       {/* {
       userState.loggedIn ? <Modal error="개인정보 수정을 할 수 없습니다." onClose={()=>{navigate('/login')}}/> : ""
     } */}

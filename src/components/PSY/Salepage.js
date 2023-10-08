@@ -98,12 +98,13 @@ function Salepage() {
     const menu = ["/sale" , "/buy", "/assi"]
     
     const [sale, setSale] = useState(0);
-    const userState = useSelector((state) => state.user);
     const [post, setPost] = useState();
     const [posts, setPosts] = useState([]);
     const navigate = useNavigate();
-    const uid = sessionStorage.getItem("users");
     const [isLogin, setIsLogin] = useState(false);
+    const userState = useSelector((state) => state.user);
+    const uid = sessionStorage.getItem("users");
+    const [userUid, setUserUid] = useState(uid)
 
     useEffect(() => {
       const fetchData = async () => {
@@ -157,16 +158,17 @@ function Salepage() {
     <>
     <Content>
         <TitleWrap>
-            <ul>
-                {
-                    Filter.map((e,i)=>{
-                        return(
-                            <NavLink to={menu[i]}><li className={sale === i ? 'on' : ''} key={i}>{e}
-                            </li></NavLink>
-                        )
-                    })
-                }
-            </ul>
+          <ul>
+            {
+              uid && uid === userUid &&
+              Filter.map((e,i)=>{
+                return(
+                  <NavLink to={menu[i]}><li className={sale === i ? 'on' : ''} key={i}>{e}
+                  </li></NavLink>
+                )
+              })
+            }
+          </ul>
         </TitleWrap>
         {
           posts &&

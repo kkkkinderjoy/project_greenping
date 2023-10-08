@@ -5,7 +5,9 @@ import { useEffect, useState } from 'react';
 import React from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { comment } from 'postcss';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUser } from '@fortawesome/free-solid-svg-icons';
+
 
 
 const Content = styled.div`
@@ -21,6 +23,7 @@ const Content = styled.div`
     height: 300px; 
     display: block;
     margin: 0 auto;
+    margin-top: 30px;
   }
   @media screen and (max-width: 640px){
     width: 80%;
@@ -52,7 +55,7 @@ const InputItem = styled.div`
     height: 60%;
   }
   h3{
-    font-size: 20px;
+    font-size: 25px;
     text-align: center;
     padding: 30px 5px;
     position: relative;
@@ -69,6 +72,17 @@ const InputItem = styled.div`
     font-size: 1rem;
     color: #fff;
   }
+  span{
+    margin-left: 40%;
+  }
+`
+
+const ItemTitle = styled.div`
+  color: #999;
+  position: absolute;
+  top: 16px;
+  left: 50%; 
+  transform: translateX(-50%)
 `
 const ButtonItem = styled.div`
   position: absolute;
@@ -101,6 +115,7 @@ function Inquiry() {
   const [posts, setPosts] = useState([]);
   const [post, setPost] = useState();
   const uid = sessionStorage.getItem("users")
+  const [userUid, setUserUid] = useState(uid)
   const location = useLocation();
   const data = location.state;
   const [InputCnt, setInputCnt] = useState(0);
@@ -158,6 +173,7 @@ function Inquiry() {
     <Content>
       <InputItem>
         <h3><p>{data.ID}</p>{data.TITLE}</h3>
+        <span>{data.PRICE}</span>
         <img src={data.IMG} alt='이미지'></img>
         <textarea rows='3' cols='33' maxLength={maxLength} className='textarea' placeholder='문의사항을 남겨주세요.' value={Comment} onChange={(e)=>{setComment(e.target.value)}}></textarea>
       </InputItem>
@@ -168,6 +184,18 @@ function Inquiry() {
             </li>
           </ul>
         ))}
+
+        {
+          inquiring.map((comment, commentIndex) => (
+            <ul>
+             <FontAwesomeIcon icon={faUser} />
+              <FontAwesomeIcon icon={faUser} /><li key={comment.id}>
+                <span>{comment.name}: {comment.content}</span>
+              </li>
+            </ul>    
+            ))
+        }
+
       <ButtonItem>
         <p>{Comment.length}/{maxLength}자</p>
         <Button onClick={() =>{addComment(uid)}}> 댓글달기</Button>
