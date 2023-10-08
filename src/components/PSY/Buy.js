@@ -3,7 +3,6 @@ import data from './../../data/MarketData'
 import { styled } from 'styled-components'
 import { NavLink } from 'react-router-dom'
 
-
 const Content = styled.div`
     width: 100%;
 `
@@ -51,7 +50,6 @@ const Tomain = styled.div`
     color: #999;
   }
 `
-
 const ContentItem = styled.div`
   width: 500px;
   height: 500px;
