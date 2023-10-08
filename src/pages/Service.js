@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useMemo, useState } from 'react'
 import { NavLink, Outlet, useNavigate, useParams } from 'react-router-dom';
 import { styled } from 'styled-components'
 import Notice from './../components/HYJ/Notice';
@@ -58,7 +58,8 @@ const LinkListItem = styled.li`
 
 function Service() {
   const navigate = useNavigate();
-  const[isActive,setIsActive]= useState(false);
+  const[isActive,setIsActive]= useState(true);
+
   const data = [
     {
       "title":"공지사항",
@@ -69,17 +70,34 @@ function Service() {
       "link":"/service/faq"
     }
   ]
+
+  const currentUrl = window.location.href; 
+
+  useMemo(()=>{
+    if(currentUrl === "http://localhost:3000/service/notice"){
+      setIsActive(true)
+      return;
+    }
+    if(currentUrl === "http://localhost:3000/service/faq"){
+      setIsActive(false)
+      return;
+    }
+    if(currentUrl === "http://localhost:3000/service"){
+      setIsActive(true)
+    }
+  },[currentUrl])
+
   return (
     <>
       <Container>
       <Title>고객센터</Title>
       <LinkList>
       
-                <LinkListItem onClick={()=>setIsActive(true)}>
-                  <NavLink to="/service/notice"><span>공지사항</span></NavLink>
+                <LinkListItem onClick={()=>{setIsActive(true); navigate("/service/notice")}}>
+                  <span>공지사항</span>
                 </LinkListItem>
-                <LinkListItem onClick={()=>setIsActive(false)}>
-                <NavLink to="/service/faq"><span>자주 묻는 질문</span></NavLink>
+                <LinkListItem onClick={()=>{setIsActive(false); navigate("/service/faq")}}>
+                  <span>자주 묻는 질문</span>
                 </LinkListItem>
       </LinkList>
         <ContainerWrap>
@@ -87,6 +105,7 @@ function Service() {
                 isActive ? <Notice /> : <FAQ />  
                 //isActive가 참일때는 Notice 컴포넌트, 거짓일때는 FAQ 컴포넌트
               }
+
         </ContainerWrap>
       </Container>
       
