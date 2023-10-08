@@ -9,12 +9,12 @@ const Container = styled.div`
   width: 100%;
   padding: 48px 0;
   `
-const Title = styled.div`
-  text-align: center;
-  margin-bottom: 40px;
-  font-size: 2.0em;
-  margin-top: 120px;
+const Title = styled.h3`
+text-align: center;
+font-size: 2.0em;
+margin-bottom: 90px;
 `
+
 const ContainerWrap = styled.div`
   max-width: 1200px;
   height: 500px;
