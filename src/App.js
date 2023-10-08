@@ -124,7 +124,6 @@ function Inner() {
         <Route path="/inquiry/:seq" element={<Inquiry />} />
         <Route path="/inquiry/:seq/:market" element={<Inquiry />} />
         <Route path="/scroll" element={<Scroll/>}></Route>
-
       </Routes>
       <Aside />
       <Footer />
