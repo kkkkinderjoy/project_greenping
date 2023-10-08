@@ -10,6 +10,7 @@ import {
   collection,
   doc,
   setDoc,
+  getDoc,
   getFirestore,
   serverTimestamp,
 } from "firebase/firestore";
@@ -33,7 +34,7 @@ const Button = styled.button`
   cursor: pointer;
 `;
 
-function Ckeditor({ title, postData }) {
+function Saleeditor({ title, postData }) {
   const [isModal, setIsModal] = useState(false);
   const navigate = useNavigate();
   const userState = useSelector((state) => state.user);
@@ -41,8 +42,8 @@ function Ckeditor({ title, postData }) {
   const [message, setMessage] = useState("");
   const [fileUrl, setFileUrl] = useState("");
 
+  // console.log(userState);
 
-  console.log(userState);
   useEffect(() => {
     if (postData) {
       setWriteData(postData.content);
@@ -61,21 +62,19 @@ function Ckeditor({ title, postData }) {
     }
 
     try {
-          
-      setDoc(doc(getFirestore(), "market", userState.uid), {
+      addDoc(collection(getFirestore(), "market"), {
         title: title,
         content: writeData,
         view: 1,
         uid: userState.uid,
         name: userState.data.name,
         timestamp: serverTimestamp(),
-        file : fileUrl,
+        file: fileUrl,
         likes: true,
       });
 
       alert("게시글이 성공적으로 등록되었습니다");
-      navigate(`/Salepage`)
-
+      navigate(`/salepage`);
     } catch (error) {
       alert(error);
       setIsModal(!isModal);
@@ -83,53 +82,48 @@ function Ckeditor({ title, postData }) {
     }
   };
 
-  const uploadToFirebase = async (file) =>{
-    const storageRef = ref(getStorage(), 'images/' + file.name)
-    // 만들 폴더명 써주기 
+  const uploadToFirebase = async (file) => {
+    const storageRef = ref(getStorage(), "marketimg/" + file.name);
+    // 만들 폴더명 써주기
     const upload = uploadBytesResumable(storageRef, file);
 
-    return new Promise((resolve, reject)=>{
-            upload.on('state_changed',
-            (snapshot)=>{
-                
-            },
-            (error) =>{
-                    reject(error)
-
-                },
-                ()=>{
-                    getDownloadURL(upload.snapshot.ref).then(result=>{
-                        resolve(result)
-                        setFileUrl(result);
-
-                    })
-                }
-            )
-    })
-}
-// 사진 넣는 기능
-function UploadAdapter(editor){
-        editor.plugins.get("FileRepository").createUploadAdapter = (loader) => {
-            return { 
-                upload: async ()=>{
-                    const file = await loader.file;
-                    const downURL = await uploadToFirebase(file);
-                    return {default : downURL}
-
-                }
-
-            }
+    return new Promise((resolve, reject) => {
+      upload.on(
+        "state_changed",
+        (snapshot) => {},
+        (error) => {
+          reject(error);
+        },
+        () => {
+          getDownloadURL(upload.snapshot.ref).then((result) => {
+            resolve(result);
+            setFileUrl(result);
+          });
         }
-}
+      );
+    });
+  };
+  // 사진 넣는 기능
+  function UploadAdapter(editor) {
+    editor.plugins.get("FileRepository").createUploadAdapter = (loader) => {
+      return {
+        upload: async () => {
+          const file = await loader.file;
+          const downURL = await uploadToFirebase(file);
+          return { default: downURL };
+        },
+      };
+    };
+  }
   return (
     <>
-        <Button onClick={dataSubmit}>업로드</Button>
+      <Button onClick={dataSubmit}>업로드</Button>
       <CKEditor
         editor={ClassicEditor}
         data={writeData}
         config={{
           placeholder: "내용을 입력하세요.",
-          extraPlugins: [UploadAdapter]
+          extraPlugins: [UploadAdapter],
         }}
         onReady={(editor) => {
           // You can store the "editor" and use when it is needed.
@@ -151,4 +145,4 @@ function UploadAdapter(editor){
   );
 }
 
-export default Ckeditor;
+export default Saleeditor;

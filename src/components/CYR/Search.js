@@ -242,6 +242,7 @@ function Search() {
   const dateNow = new Date();
   const today = `${dateNow.getMonth() + 1}월 ${dateNow.getDate()}일`;
 
+
   // useEffect(() => {
   //   fetch(
   //     "https://apis.data.go.kr/B551011/GoCamping/basedList?numOfRows=100&pageNo=1&MobileOS=ETC&MobileApp=project&serviceKey=hQ42F%2BSKq2L%2FUrlhNoGxv63elQn7W8CmL22xl6yXuGk%2BMz0zdU%2Frk2CIdCeX5%2BYPmg39K5QBYCeSgUyqtD7Qdg%3D%3D&_type=json"
@@ -253,6 +254,8 @@ function Search() {
   //       setDonm(data.response.body.items.item);
   //     });
   // }, []);
+
+
 
   const optionDonm = (e) => {
     const donmValue = e.target.value;

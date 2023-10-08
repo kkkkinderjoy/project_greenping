@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import data from './../../data/MarketData'
 import { styled } from 'styled-components';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Navigate } from 'react-router-dom';
 
 const Content = styled.div`
     width: 100%;
@@ -65,16 +65,38 @@ const ContentItem = styled.div`
     height:300px; 
     display: block; margin: 0 auto; margin-bottom: 24px;
     }
-  h3{margin-bottom: 24px; text-align: center; padding-top: 24px; font-size: 22px;}
+  h3{
+    margin-bottom: 24px;
+    font-size: 22px;
+    text-align: center;
+    padding: 30px 5px;
+    position: relative;
+  }
+  p{
+    position: absolute;
+    text-align: center;
+    top: 75px;
+    left: 40px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #ddd;
+    line-height: 50px;
+    font-size: 1rem;
+    color: #fff;
+  }
   ul{
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
     li{
         margin-bottom: 7px;
+        font-size: 13px;
+        color: rgb(153, 153, 153);
         &:nth-child(1){
         font-size: 18px;
         font-weight: bold;
+        color: #000;
         }
     }
   }
@@ -84,18 +106,18 @@ const ContentItem = styled.div`
   @media screen and (max-width: 640px){
     flex-basis: 100%;
   }
-`  
+` 
 const Button = styled.button`
-    position: absolute;
-    width: 100px;
-    height: 30px;
-    background-color: #70e6b7;
-    border: none;
-    border-radius: 10px;
-    color: #fff;
-    right: 10px;
-    bottom: 10px;
-    cursor: pointer;
+  position: absolute;
+  width: 100px;
+  height: 30px;
+  background-color: #70e6b7;
+  border: none;
+  border-radius: 10px;
+  color: #fff;
+  right: 10px;
+  bottom: 10px;
+  cursor: pointer;
 `
 
 function Assi() {
@@ -105,9 +127,11 @@ function Assi() {
     const FilterAssi = data.filter(e =>{
       return(e.ID === "양도" || e.ID === ID)
     })
+    
     console.log(FilterAssi)
     
     const AssiFilter = [...new Set(data.map(e => e.ID))]
+    console.log(AssiFilter)
 
     const [assi, setAssi] = useState(2);
 
@@ -136,23 +160,24 @@ function Assi() {
             <NavLink to='/'><p>메인으로 돌아가기</p></NavLink>
           </Tomain>
           {
-          FilterAssi.slice().reverse().map((e,i)=>{
-            return(
-              <ContentItem key={i}>
-                <h3>{e.TITLE}</h3>
-                <img src={e.IMG} alt='양도용품 이미지' />
-                <ul>
-                  {/* <li>{e.PRICE}</li> */}
-                  <li>업로드일: {e.DATE}</li>
-                </ul>
-                {
-                  uid && 
-                <NavLink to={`/inquiry/${e.NUM}`} state={e}><Button>문의하기</Button></NavLink>
-                }
-              </ContentItem>
-            )
-          })      
-         }          
+            FilterAssi.slice().reverse().map((e,i)=>{
+              return(
+                <ContentItem key={i}>
+                  <h3>{e.TITLE}</h3>
+                  <p>{e.ID}</p>
+                  <img src={e.IMG} alt='양도용품 이미지' />
+                  <ul>
+                    <li>작성자: {e.NAME}</li>
+                    <li>업로드일: {e.DATE}</li>
+                  </ul>
+                  {
+                    uid && 
+                  <NavLink to={`/inquiry/${e.NUM}`} state={e}><Button>문의하기</Button></NavLink>
+                  }
+                </ContentItem>
+              )
+            })      
+          }            
         </ContentWrap>
     </Content>
     </>
