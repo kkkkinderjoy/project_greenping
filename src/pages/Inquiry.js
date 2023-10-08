@@ -1,4 +1,4 @@
-import { addDoc, collection, deleteDoc, doc, getDoc, getFirestore, increment, onSnapshot, orderBy, query, serverTimestamp, updateDoc } from 'firebase/firestore';
+import { addDoc, collection, deleteDoc, doc, getDoc, getFirestore, increment, getDocs, onSnapshot, orderBy, query, serverTimestamp, updateDoc } from 'firebase/firestore';
 import styled from 'styled-components';
 import '../index.css'
 import { useEffect, useState } from 'react';
@@ -8,8 +8,8 @@ import { useSelector } from 'react-redux';
 import { comment } from 'postcss';
 
 const Content = styled.div`
-  width: 700px;
-  height: 650px;
+  width: 800px;
+  height: 750px;
   border: 1px solid #ddd;
   border-radius: 10px;
   box-sizing: border-box;
@@ -96,14 +96,12 @@ const Button = styled.button`
 
 function Inquiry() {
 
-  const userState = useSelector(state => state.user)
+  const userState = useSelector((state) => state.user);
+  const [posts, setPosts] = useState([]);
+  const [post, setPost] = useState();
+  const uid = sessionStorage.getItem("users")
   const location = useLocation();
   const data = location.state;
-  const uid = sessionStorage.getItem("users");
-  const [userUid, setUserUid] = useState(uid)
-  const [post, setPost] = useState();
-  const [Comment, setComment] = useState("");
-  const [Comments, setComments] = useState("");
   const [InputCnt, setInputCnt] = useState(0);
   const navigate = useNavigate();
   const maxLength = 150;
@@ -117,20 +115,42 @@ function Inquiry() {
   };
   
   //댓글 작성
-  const addComment = () =>{
-    if(Comment.length === 0){
-      alert("댓글을 작성해주세요.")
-    }else{
-      alert("댓글이 작성되었습니다.")
-    }
-    const postRef = doc(collection(getFirestore(), "users"), uid);
-    const commentRef = collection(postRef, "comments");
-    addDoc(commentRef, {
-      text: Comment,
-      name: userState&&userState.data.name,
-      timestamp: serverTimestamp()
-      })
-    }
+  const [inquiring, setInquiring] = useState([]); 
+  const [Comment, setComment] = useState("");
+
+  const addComment = async (postId) => {
+    const firestore = getFirestore();
+    
+      if(Comment.length === 0){
+        alert("댓글을 작성해주세요.")
+        return(addComment);
+      }else{
+        alert("댓글이 작성되었습니다.")
+      }
+      
+    try {
+      const docRef = await addDoc(collection(firestore, "inquiring"), {
+        uid: userState.uid,
+        name: userState.data.name,
+        content: Comment,
+        postId: postId,
+      });
+
+      const commentData = {
+        id: docRef.id,
+        uid: userState.uid,
+        name: userState.data.name,
+        content: Comment,
+        postId: postId,
+      };
+        
+      setInquiring([...inquiring, commentData]);
+        setComment("");
+      } catch (error) {
+        console.error("댓글 추가 에러:", error);
+      }
+    };
+ 
     
   return (
     <>
@@ -139,8 +159,14 @@ function Inquiry() {
       <InputItem>
         <h3><p>{data.ID}</p>{data.TITLE}</h3>
         <img src={data.IMG} alt='이미지'></img>
-        <textarea rows='3' cols='33' maxLength={maxLength} className='textarea' placeholder='댓글을 입력해주세요.' value={Comment} onChange={(e)=>{setComment(e.target.value)}}></textarea>
+        <textarea rows='3' cols='33' maxLength={maxLength} className='textarea' placeholder='문의사항을 남겨주세요.' value={Comment} onChange={(e)=>{setComment(e.target.value)}}></textarea>
       </InputItem>
+      {inquiring.map((comment, commentIndex) => (
+                  
+                  <li key={comment.id}>
+                    <span>{comment.name}: {comment.content}</span>
+                  </li>
+                ))}
       <ButtonItem>
         <p>{Comment.length}/{maxLength}자</p>
         <Button onClick={() =>{addComment(uid)}}> 댓글달기</Button>
