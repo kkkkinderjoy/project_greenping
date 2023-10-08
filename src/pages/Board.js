@@ -13,35 +13,32 @@ import Comments from "../components/KNH/Comments.js";
 import Chat from './../components/KNH/Chatting.js';
 
 
-const BorderWrapper = styled.div`
+const Wrapper = styled.div`
   width: 100%;
+  margin-top: 60px;
+  
+`
+const Content = styled.div`
+  max-width: 1280px;
   
 `
 
 const  HeadWrap = styled.div`
-  max-width: 1280px;
-  margin: 0 auto;
+  width: 100%;
+  margin: 60px auto;
   display: flex;
-  justify-content: space-around;
+  text-align: center;
+  justify-content: center;
+  position: relative;
+
 
 `
 const Title = styled.div`
   padding: 10px 20px;
   font-weight: bold;
-  font-size: 2em;
-  position: relative;
+  font-size: 2.2em;
 
-  &::after {
-    content: "";
-    width: 30px;
-    height: 5px;
-    margin-left: 0.5px;
-    background-color: #2ed090;
-    position: absolute;
-    top: -8px;
-    left: 18px;
-    border-radius: 2px;
-  }
+
 `;
 
 const ListWrap = styled.div`
@@ -68,10 +65,12 @@ const List = styled.ul`
   padding-bottom: 95px;
   img {
     width: 100%;
-    max-height:400px; 
+    max-height:500px; 
     border-radius: 10px;
     object-fit: cover;
     margin-bottom: 10px;
+    margin-bottom: 20px;
+    
   }
 
 
@@ -153,6 +152,8 @@ const HeartWrap = styled.div`
   display: flex; 
    justify-content: center; 
    align-items: center; 
+
+   
 `;
 const MasWrap = styled.div`
   position: absolute;
@@ -173,13 +174,17 @@ const MasWrap = styled.div`
       font-size: 1.1em;
       color: #333;
    }
+   @media screen and (max-width: 768px) {
+    position: absolute;
+    right:90px;
+    }
 `;
 
 const Heart = styled.img`
   cursor:pointer ; 
   width:auto; 
   height:auto; 
-  margin-top: 8px;
+  margin-top: 17px;
   max-width :100% ; 
   max-height :100% ; 
 `;
@@ -187,6 +192,9 @@ const Heart = styled.img`
 
 
 const Button = styled.button`
+  position: absolute;
+  bottom: -70px;
+  right: 13%;
   margin: 20px 12px;
   background-color:  #98eecc;
   padding: 20px;
@@ -292,7 +300,7 @@ function Board() {
         const postArray = snapShot.docs.map((doc) => ({
           id: doc.id,
           ...doc.data(),
-          isLiked: doc.data().likes
+  
         }));
         
         setPosts(postArray);
@@ -362,16 +370,18 @@ function Board() {
         {
              isModal && <Chat onClose={()=>{setIsModal(false)}}/>
         }
-      <BorderWrapper>
+
+      <Wrapper>
+        <Content>
         <HeadWrap>
           <Title>그린톡</Title>
-          {userState.uid && (
+      
             <Link to="/write">
               <Button>
                 <FontAwesomeIcon icon={faPen} />
               </Button>
             </Link>
-          )}
+         
         </HeadWrap>
         <ListWrap>
 
@@ -410,7 +420,7 @@ function Board() {
 
 
 
-             {userState.uid &&
+           
              <>
                 <ListItem
                   onClick={() => {
@@ -437,12 +447,13 @@ function Board() {
 
                 </ListItem>
                 </>
-                }
+                
               </List>
             );
           })}
         </ListWrap>
-      </BorderWrapper>
+        </Content>
+      </Wrapper>
     </>
   );
 }
