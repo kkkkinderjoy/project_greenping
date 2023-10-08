@@ -35,6 +35,7 @@ const LinkList = styled.ul`
 const LinkListItem = styled.li`
   
   border-top: 1px solid rgb(211,211,211);
+  color: #666;
     span{
       cursor: pointer;
       display: block;

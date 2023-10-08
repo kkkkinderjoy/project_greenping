@@ -33,7 +33,6 @@ import { useEffect } from "react";
 import Navsearch from "./pages/Navsearch";
 import Salepage from "./components/PSY/Salepage";
 import Salewrite from "./components/PSY/Salewrite";
-
 import Navdescpage from "./pages/Navdescpage";
 import ReviewCk from "./components/LJS/ReviewCk";
 import ReviewWrite from "./pages/ReviewWrite";

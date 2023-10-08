@@ -94,7 +94,6 @@ return(
                     data.firstImageUrl === "" ? <img src='https://via.placeholder.com/100x100' alt='img' /> 
                     : <img src={data.firstImageUrl} alt={data.facltNm} title={data.facltNm} /> 
                 }
-                
                 <Imgdesc>
                     <p>주소 : {data.addr1}</p>
                     <p>캠핑장 환경 : {data.lctCl} / {data.facltDivNm}</p>
@@ -104,7 +103,7 @@ return(
                     <p>주변이용가능시설 : {data.posblFcltyCl}</p>
                     <NavLink to={data.homepage} target='_blank'>
                         {
-                            data.homepage != "" && <p>홈페이지 : {data.homepage}</p> 
+                            data.homepage !== "" && <p>홈페이지 : {data.homepage}</p> 
                         }
                     </NavLink>
                     <Dbutton className={isActive === true ? "on" : ""} onClick={()=>{setIsActive(true); setIsModal(true);}}> 예약하기</Dbutton>
@@ -113,7 +112,7 @@ return(
             <SearchLine />
             <Ddesc>
                 {
-                    data.intro != "" 
+                    data.intro !== "" 
                     && 
                         <>
                             <FontAwesomeIcon icon={faCircleRight} />
