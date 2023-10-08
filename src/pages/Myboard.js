@@ -310,7 +310,8 @@ function Board() {
   return (
 
     <>
-    userState.uid && {
+    {
+    userState.uid && 
       <BorderWrapper>
         <HeadWrap>
           <Title>나의 활동</Title>
@@ -369,7 +370,8 @@ function Board() {
 
         
       </BorderWrapper>
-  }
+  
+}
     </>
   );
 }

@@ -110,11 +110,18 @@ const NavMember = styled.div`
   right: 50px;
   z-index: 50;
  ul{
+
   display: flex;
   column-gap: 20px;
   a.active{
     font-weight: bold;
     color: lightgreen;
+  }
+  >li{
+    cursor: pointer;
+    &:nth-child(2){
+      position: relative;
+    }
   }
  }
   @media screen and (max-width: 768px){display: none;}
@@ -222,6 +229,39 @@ ul{
 `
 
 
+const MPWrap = styled.div`
+  display: ${(props) => (props.isActive ? 'block' : 'none')};
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 0;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 1;
+  border-radius: 10px;
+`
+
+const MyPage = styled.ul`
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+`
+const MPList = styled.li`
+   padding: 8px 13px;
+  &:hover {
+    background-color: #f0f0f0;
+  }
+
+`
+
+const MyPageIcon = styled(FontAwesomeIcon)`
+  margin-right: 5px;
+  transition: transform 0.5s; 
+  transform: rotate(${(props) => (props.isActive ? '180deg' : '0')});
+   
+`;
 
 
 
@@ -237,6 +277,11 @@ function Header({userState}){
     const ValueI = e.target.value;
     setUserInput(ValueI);
   };
+
+  const Dropdown = () => {
+    setIsActive(!isActive);
+  };
+
 
   return (
     <>
@@ -270,8 +315,14 @@ function Header({userState}){
               <li>
                 {
                   userState.uid ?
-                  <li>
-                    <NavLink to="/modify">정보수정</NavLink>
+                  <li onClick={Dropdown}>
+                    마이페이지  <MyPageIcon icon={faChevronDown} isActive={isActive}/>
+                    <MPWrap isActive={isActive}>
+                      <MyPage>
+                          <NavLink to="/modify"><MPList>정보수정</MPList></NavLink>
+                          <NavLink to="/myboard"><MPList>나의 활동</MPList></NavLink>
+                      </MyPage>
+                    </MPWrap>        
                   </li>
                   :
                   <li>
@@ -292,7 +343,7 @@ function Header({userState}){
               <>
               <NavLink to ='/modify'><span onClick={()=>{
                             setIsActive(!isActive)
-              }}>{userState.uid.name}님 안녕하세요.</span></NavLink>
+              }}>{userState.data?.name}님 안녕하세요.</span></NavLink>
               <MyList>
                 <ul>
                   <li>회원정보수정</li>
