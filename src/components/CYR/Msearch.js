@@ -25,12 +25,22 @@ const Msearchbar = styled.div`
   background-color: #fff;
 `
 
-const Msearchinput = styled.div`
-    &input{
-        width: 70%;
-        height: 100%;
-        color: #ddd;
-    }
+const Msearchinput = styled.input`
+ border: none;
+  width: 180px;
+  flex-basis:23%;
+  height: 75%;
+  font-size: 1em;
+  border: 0;
+  padding-left :3%;
+  appearance: none;
+  -moz-appearance: none;
+  border-radius: 100px;
+  &:focus {
+    outline: none;
+    border-radius: 100px;
+    border: 1px solid #2ed090;
+  }
 `
 
 const NavLinkWrap = styled.div`
@@ -53,6 +63,9 @@ const NavLinkWrap = styled.div`
     }
   }
 `;
+
+
+
 function Msearch() {
     const [userInput, setUserInput] = useState("");
 
@@ -66,8 +79,10 @@ function Msearch() {
     <>
         <Wrapper>
             <Msearchbar>
-                <Msearchinput>
-                    <input type="text" placeholder="검색어를 입력하세요" onChange={InputValue}></input>
+                <Msearchinput
+                    type="text" 
+                    placeholder="검색어를 입력하세요" 
+                    onChange={InputValue}/>
                     <NavLinkWrap>
                         <NavLink
                             to={{
@@ -75,12 +90,10 @@ function Msearch() {
                             }}
                             state={{
                             userInput: userInput,
-                            }}
-                        >
+                            }}>
                             <p><FontAwesomeIcon icon={faMagnifyingGlass}/></p>
                         </NavLink>
                     </NavLinkWrap>
-                </Msearchinput>
             </Msearchbar>
         </Wrapper>
     </>

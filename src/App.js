@@ -2,7 +2,6 @@ import { Route, Routes, useNavigate } from "react-router-dom";
 import GlobalStyle from "./components/GlobalStyle";
 import Header from "./components/HYJ/Header";
 import Footer from "./components/HYJ/Footer";
-
 import Main from "./pages/Main";
 import SearchD from "./pages/SearchD";
 import Ranking from "./pages/Ranking";
@@ -11,8 +10,9 @@ import Board from "./pages/Board";
 import Write from "./pages/Write";
 import Service from "./pages/Service";
 import Market from "./components/PSY/Market";
-import Notice from "./pages/Notice";
-import Noticedetail from "./pages/Noticedetail";
+import Notice from './components/HYJ/Notice';
+import FAQ from './components/HYJ/FAQ';
+import Noticedetail from "./components/HYJ/Noticedetail";
 import Login from "./pages/Login";
 import Logout from "./pages/Logout";
 import Member from "./pages/Member";
@@ -36,7 +36,6 @@ import Salewrite from "./components/PSY/Salewrite";
 import Navdescpage from "./pages/Navdescpage";
 import ReviewCk from "./components/LJS/ReviewCk";
 import ReviewWrite from "./pages/ReviewWrite";
-import FAQ from "./pages/FAQ";
 import Msearchd from "./pages/Msearchd";
 
 
@@ -111,7 +110,7 @@ function Inner() {
           <Route path="notice" element={<Notice />} />
           <Route path="faq" element={<FAQ />} />
         </Route>
-        <Route path="/noticedetail/:seq" element={<Noticedetail />}></Route>
+        <Route path="notice/:id" element={<Noticedetail />}></Route>
         <Route path="/login" element={<Login />}></Route>
         <Route path="/logout" element={<Logout />}></Route>
         <Route path="/member" element={<Member />}></Route>

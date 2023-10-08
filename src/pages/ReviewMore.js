@@ -11,7 +11,6 @@ import { collection, deleteDoc, doc, getDocs, getFirestore, orderBy, query } fro
 
 
 
-
 const PagenationContent = styled.div`
   display: flex;
   justify-content: space-between;
@@ -23,10 +22,10 @@ const PagenationContent = styled.div`
 `
 
 const ReviewContent = styled.div`
-  width: 90%;
+  width: 80%;
   display: flex;
   flex-wrap: wrap;
-  gap: 20px;
+  gap: 25px;
   margin: 0 auto;
   @media screen and (max-width: 768px) {
       display: flex;
@@ -38,7 +37,7 @@ const ReviewContent = styled.div`
 `
 
 const Container = styled.div`
-  width: 28%;
+  flex-basis: 28%;
   margin: 0 auto;
   border: 1px solid #eee;
   padding: 25px;
@@ -91,6 +90,7 @@ const ContentTitle = styled.div`
     font-size: 18px;
     margin-bottom: 10px;
     flex-basis: 30%;
+    border-bottom: 1px solid #e5e7eb;
 `
 const UserName = styled.div`
     font-size: 14px;

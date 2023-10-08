@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import { NavLink, Outlet, useNavigate, useParams } from 'react-router-dom';
 import { styled } from 'styled-components'
-import Notice from './Notice';
-import FAQ from './FAQ';
+import Notice from './../components/HYJ/Notice';
+import FAQ from './../components/HYJ/FAQ';
 
 
 
@@ -74,7 +74,7 @@ function Service() {
       <Container>
       <Title>고객센터</Title>
       <LinkList>
-        
+      
                 <LinkListItem onClick={()=>{setIsActive(true); navigate("/service/notice")}}>
                   <span>공지사항</span>
                 </LinkListItem>
@@ -83,10 +83,7 @@ function Service() {
                 </LinkListItem>
       </LinkList>
         <ContainerWrap>
-              {
-                isActive ? <Notice /> : <FAQ />  
-                //isActive가 참일때는 Notice 컴포넌트, 거짓일때는 FAQ 컴포넌트
-              }
+              <Outlet />
         </ContainerWrap>
       </Container>
       

@@ -19,6 +19,7 @@ const Searchwrap = styled.div`
     margin: 0 auto;
   }
 `;
+
 const SearchForm = styled.div`
   width: 80%;
   height: 300px;
@@ -134,26 +135,26 @@ function Msearchd() {
   const location = useLocation();
   const stateData = location.state;
   const [data, setData] = useState(dataList);
-  const [searchTerm, setSearchTerm] = useState(stateData.userinput);
-  const [searchKeyword, setSearchKeyword] = useState(stateData.userinput);
-  const [Selected, setSelected] = useState(stateData.userinput);
+  const [searchTerm, setSearchTerm] = useState(stateData.userInput);
+  const [searchKeyword, setSearchKeyword] = useState(stateData.userInput);
+  const [Selected, setSelected] = useState(stateData.userInput);
 //   const [Inputv, setInputv] = useState(stateData.userinput)
   // console.log(location.state.optiondonmSelect)
-  // console.log(location.state.userinput)
-  // console.log(stateData)
+  console.log(location.state.userInput)
+
   
   const SbrsCl = ["전기","장작판매","물놀이장","놀이터","산책로","운동시설","무선인터넷","트렘폴린","마트.편의점","온수","운동장"]
 
   useEffect(() => {
-    setSearchTerm(stateData.userinput);
-    setSelected(stateData.userinput);
-    setSearchKeyword(stateData.userinput);
+    setSearchTerm(Selected);
+    setSearchKeyword(Selected);
+    console.log(searchTerm, searchKeyword)
         setData(
           dataList.filter(
             (e) =>
-              e.facltNm.toLowerCase().includes(searchTerm.toLowerCase()) ||
+              e.facltNm.includes(searchTerm) ||
               e.addr1.includes(searchTerm) ||
-              e.induty.toLowerCase().includes(searchTerm.toLowerCase()) ||
+              e.induty.includes(searchTerm) ||
               e.doNm.includes(searchTerm)
           ))
     }, []);
@@ -164,9 +165,9 @@ function Msearchd() {
     setData(
       data.filter(
         (e) =>
-          e.facltNm.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          e.facltNm.includes(searchTerm) ||
           e.addr1.includes(searchTerm) ||
-          e.induty.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          e.induty.includes(searchTerm) ||
           e.doNm.includes(searchTerm)
           // ||
           // e.donm.includes(donmValue) ||
@@ -196,8 +197,9 @@ function Msearchd() {
                 <input
                   type="text"
                   placeholder="검색어를 입력하세요"
-                  value={Selected}
-                  onChange={(e) => {setSearchTerm(e.target.value); setSearchKeyword(e.target.value)}}
+                  value={searchTerm}
+                  onChange={
+                  (e) => setSearchTerm(e.target.value)}
                 />
               </Searchbar>
               <Searchbar>

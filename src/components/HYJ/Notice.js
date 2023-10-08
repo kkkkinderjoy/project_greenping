@@ -1,6 +1,6 @@
 import React from 'react'
-import { NavLink, Route, Routes } from 'react-router-dom';
-import datalist from './../data/NoticeData'
+import { NavLink, Outlet, Route, Routes } from 'react-router-dom';
+import datalist from './../../data/NoticeData'
 import { useLocation } from 'react-router-dom';
 import { useState } from 'react';
 import styled from 'styled-components';
@@ -158,13 +158,14 @@ function Notice(){
           </List>
         </TotalCnt>
         <Container>
+         <Outlet />
           <ul>
           { 
             dataFilter.slice().reverse().map((e,i)=>{
               return(
                 <div key={i}>
                   <li>{e.type}</li>
-                  <li><NavLink to={`/noticedetail/${e.SEQ}`} state={e}>{e.title}</NavLink></li>
+                  <li><NavLink to={`notice/${i+1}`} state={e}>{e.title}</NavLink></li>
                   <li>{e.date}</li>
                 </div>
               )

@@ -1,8 +1,7 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 import { useLocation } from 'react-router-dom'
-
-import data from "./../data/NoticeData"
+import data from "./../../data/NoticeData"
 
 const Container=styled.div`
  background-color: #fff;
