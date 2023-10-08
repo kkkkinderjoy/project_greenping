@@ -43,7 +43,7 @@ const Title = styled.div`
 const SearchForm = styled.div`
   width: 80%;
   height: 300px;
-  margin: 0 auto;
+  margin: 50px auto;
   border: 1px solid #ddd;
   border-radius: 10px;
 `;
@@ -66,10 +66,11 @@ const Searchbar = styled.div`
     border-radius: 10px;
     margin: 0 auto;
     @media screen and (max-width: 768px){
+
     }
   }
   > select {
-    flex-basis: 80%;
+    flex-basis: 40%;
   }
 
 `;
@@ -150,7 +151,7 @@ const ContentItem = styled.div`
 
 function Navsearch() {
   const [data, setData] = useState(dataList);
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm, setSearchTerm] = useState([]);
   const [searchKeyword, setSearchKeyword] = useState("");
   const [Selected, setSelected] = useState("");
   const [selectvalue, setSelectvalue] = useState()
@@ -169,11 +170,28 @@ function Navsearch() {
   //     });
   // }, []);
 
+
+
+  useEffect(() => {
+    setSearchTerm(Selected);
+    setSelected(Selected);
+    setSearchKeyword(Selected);
+    console.log(searchTerm, searchKeyword)
+    setData(
+      dataList.filter(
+        (e) =>
+          e.facltNm.toLowerCase().includes(searchTerm.toLowerCase) ||
+          e.addr1.includes(searchTerm) ||
+          e.induty.toLowerCase().includes(searchTerm.toLowerCase) ||
+          e.doNm.includes(searchTerm)
+      )
+    );
+  }, []);
+  
   const handleSearch = (el) => {
-    const donmValue = el.target.value;
     setSearchKeyword(searchTerm);
     // stateData(searchTerm);
-    setSelected(donmValue);
+    setSelected();
     setData(
       data.filter(
         (e) =>
@@ -184,10 +202,10 @@ function Navsearch() {
       )
     );
   };
-  const optionDonm = (e) => {
-    const donmValue = e.target.value;
-    setSelected(donmValue)
-  };
+  // const optionDonm = (e) => {
+  //   const donmValue = e.target.value;
+  //   setSelected(donmValue)
+  // };
 
   
   const Filterdonm = [...new Set(data && data.map((e) => e.doNm).sort())];
@@ -211,7 +229,7 @@ function Navsearch() {
                   />
                 </Searchbar>
                 <Searchbar>
-                  <select onChange={optionDonm} value={Selected}>
+                  <select onChange={(e)=> setSearchTerm(e.target.value)} value={Selected}>
                   {/* <select onChange={optionDonm} value={Selected}> */}
                     <option value="전체">전체</option>
                     {Filterdonm.map((e, i) => {
@@ -226,9 +244,8 @@ function Navsearch() {
                       })}
                   </select>
                 </Searchbar>
-                  <button onClick={handleSearch}>검색하기</button>
                 <Searchbar>
-
+                  <button onClick={handleSearch}>검색하기</button>
                 </Searchbar>
                 {/* <Searchbar>
                   <ul>

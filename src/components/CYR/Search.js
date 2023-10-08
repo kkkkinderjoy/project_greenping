@@ -146,6 +146,7 @@ const StyleDate = styled(DatePicker)`
   font-weight: bold;
   border: 0;
   padding-right: 15px;
+  cursor: pointer;
   appearance: none;
   -moz-appearance: none;
   text-align: center;
