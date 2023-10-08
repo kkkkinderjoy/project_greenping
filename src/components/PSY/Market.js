@@ -24,14 +24,6 @@ const ContainerWrap = styled.div`
   padding: 0 2%;
 `
 
-const Title = styled.h3`
-  text-align: center;
-  font-size: 2.0em;
-  margin-bottom: 90px;
-  
-`
-
-
 const ContentItem = styled.div`
   flex-basis: 50%;
   background-color: #f5f5f5;
