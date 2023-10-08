@@ -6,7 +6,7 @@ import { faYoutube } from '@fortawesome/free-brands-svg-icons'
 
 const Container= styled.div`
   width: 100%;
-  margin-top: 120px;
+  margin: 120px 0 200px;
 `
 
 const ContentWrap = styled.div`
