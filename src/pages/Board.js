@@ -236,6 +236,15 @@ width: 100%;
 `
 
 
+const CommentWrap = styled.div`
+
+`
+const Comment = styled.div`
+  display: flex;
+
+`
+
+
 
 function Board() {
   const userState = useSelector((state) => state.user);
@@ -278,10 +287,39 @@ function Board() {
   
     
 
+    const [comment, setComment] = useState("");
+    const [comments, setComments] = useState("");
+
+
+    useEffect((uid)=>{
+      const postRef = doc(getFirestore(),"board",uid);
+      console.log(postRef)
+      const commentRef = collection(postRef, uid, "comments");
+      const q = query(commentRef, orderBy("timestamp", "desc"));
+
+      const dataSnap = onSnapshot(q, (item)=>{
+        const fetchComment = item.docs.map(doc =>({
+          id: doc.id,
+          ...doc.data()
+        }))
+        setComments(fetchComment)
+      })
+      return dataSnap
+    },[])
+
+    const addComment = (uid) =>{
+      const firestore = getFirestore();
+      const postRef = doc(firestore,"board", uid);
+      console.log(postRef)
+      const commentRef = collection(postRef, "comments");
+          addDoc(commentRef,{
+            text : comments,
+            name : userState&&userState.data?.name
+          })
+
+  }
+  
    
-
-
-
 
 
   const deletePost = async (uid) => {
@@ -386,7 +424,34 @@ function Board() {
                 <ListItem>
                   <div dangerouslySetInnerHTML={{ __html: e.content }} />{" "}
                 </ListItem>       
-             <Comments/>
+             {/* <Comments/> */}
+              
+             <CommentWrap>
+                {
+                  uid && 
+                  <Comment>
+                    <textarea value={comment} onChange={e=>{setComment(e.target.value)}}></textarea>
+                    <Button onClick={()=>{addComment(e.uid)}}>댓글 달기</Button>
+                  </Comment>
+                  }
+                </CommentWrap>
+
+                <CommentWrap>
+                  <ul>
+                        {
+                          comments.map((e,i)=>{
+                            return(
+                              <li key={i}>{e.nickname} {e.text}</li>
+                            )
+                          })
+                        }
+
+                    </ul>
+                </CommentWrap>
+
+
+
+
              {userState.uid &&
                 <ListItem
                   onClick={() => {

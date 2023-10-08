@@ -147,13 +147,15 @@ function Comments() {
 
     useEffect(() => {
   
-      const savedCommentsFromLocalStorage = localStorage.getItem('savedComments');
-      if (savedCommentsFromLocalStorage) {
-        setSavedComments(JSON.parse(savedCommentsFromLocalStorage));
+      const savedCommentsFromStorage = sessionStorage.getItem('savedComments');
+      if (savedCommentsFromStorage) {
+        setSavedComments(JSON.parse(savedCommentsFromStorage));
       }
     }, []);
+
+
   useEffect(() => {
-    localStorage.setItem('savedComment', newComment);
+    sessionStorage.setItem('savedComment', newComment);
   }, [newComment]);
  
 
@@ -190,7 +192,7 @@ function Comments() {
                     <>
                       {savedComments.map((comment, index) => (
                         <UpComments>
-                              <p>{userState.name}</p>
+                              <p>{userState.data.name}</p>
                               <p key={index}>{comment}</p>  
                               <button onClick={CommentDel}>
                               <FontAwesomeIcon icon={faX}/>
@@ -212,8 +214,8 @@ function Comments() {
                     onChange={(e) => setNewComment(e.target.value)}
                     onKeyDown={(e) => {
                       if (e.key === 'Enter') {
-                        if (e.isComposing) return 
-                        CommentSubmit();
+                          e.preventDefault();
+                          CommentSubmit();
                       }
                     }}
                     placeholder="댓글을 남겨보세요!"
