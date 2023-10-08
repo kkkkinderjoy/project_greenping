@@ -7,11 +7,16 @@ import list from './../../data/MarketData'
 
 const Container = styled.div`
   width: 100%;
-  margin-top: 120px;
-  
+  padding: 48px 0;
+  `
+const Title = styled.h3`
+text-align: center;
+font-size: 2.0em;
+margin-bottom: 90px;
 `
+
 const ContainerWrap = styled.div`
-  max-width: 1280px;
+  max-width: 1200px;
   height: 500px;
   display: flex;
   margin: 0 auto;
@@ -19,39 +24,41 @@ const ContainerWrap = styled.div`
   padding: 0 2%;
 `
 
-const Title = styled.h3`
-  text-align: center;
-  font-size: 2.0em;
-  margin-bottom: 90px;
-  
-`
 const ContentItem = styled.div`
   flex-basis: 50%;
   background-color: #f5f5f5;
   position: relative;
   display: none;
   @media screen and (min-width: 1024px){
-      display: block;
+    display: block;
   }
   img{
-    width: 200px; 
-    height:200px; 
-    display: block; margin: 0 auto; margin-bottom: 24px;
+    width: 300px; 
+    height: 300px; 
+    display: block; 
+    margin: 0 auto; 
+    margin-bottom: 24px;
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translateX(-50%);
     }
-  h3{margin-bottom: 24px; text-align: center; padding-top: 24px; font-size: 22px;}
+  h3{
+    position: absolute;
+    top: 7%;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-bottom: 24px;
+    padding-top: 24px; 
+    font-size: 20px;}
   ul{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
     li{
-        margin-bottom: 7px;
-        font-size: 13px;
-        color: rgb(153, 153, 153);
-        &:nth-child(1){
-        font-size: 18px;
-        font-weight: bold;
-        color: #000;
-        }
+      font-size: 1rem;
+      color: rgb(153, 153, 153);
+      position: absolute;
+      bottom: 10%;
+      left: 50%;
+      transform: translateX(-50%);
     }
   }
   @media screen and (max-width: 1200px){
@@ -61,7 +68,6 @@ const ContentItem = styled.div`
     flex-basis: 100%;
   }
 `
-
 const ContentDesc = styled.div`
   flex-basis: 100%;
   position: relative;
@@ -71,11 +77,6 @@ const ContentDesc = styled.div`
   display: flex;
   flex-wrap: wrap;
 `
-const Navk = styled.div`
-  position: absolute;
-  
-`
-
 const Card = styled.div`
   flex-basis: 50%;
   padding: 2.5rem;
@@ -83,6 +84,7 @@ const Card = styled.div`
   cursor: pointer;
   position: relative;
   transition: 0.7s;
+  background-color: #fff;
   &:nth-last-child(1){
     background-color: #e0fff3;
   }
@@ -113,7 +115,7 @@ const Card = styled.div`
   p{margin: 1rem 0;}
   svg{
     position: absolute;
-    left: 1rem;
+    left: 1.2rem;
     bottom: 1rem;
     font-size: 2.5rem;
     color: rgba(0,0,0,0.3);
@@ -129,6 +131,8 @@ const Card2 = styled.div`
   @media screen and (max-width: 640px) {
     padding: 1rem;
   }
+
+
   p{line-height: 1.7;}
   svg{
     position: absolute;
@@ -143,42 +147,35 @@ const Card2 = styled.div`
     }
 
   `
-
-  const data = [
-    {
-      ID : "판매",
-      Desc : "판매글 쓰러 가볼까요?",
-      Icon : faCartShopping
-    },
-    {
-      ID : "구매",
-      Desc : "필요한 캠핑용품 구매",
-      Icon : faMoneyCheckDollar
-    },
-    {
-      ID : "양도",
-      Desc : "이웃들에게 양도받기",
-      Icon : faHandshakeAngle
-    }
-  ]
+const data = [
+  {
+    ID : "판매",
+    Desc : "판매글 쓰러 가볼까요?",
+    Icon : faCartShopping
+  },
+  {
+    ID : "구매",
+    Desc : "필요한 캠핑용품 구매",
+    Icon : faMoneyCheckDollar
+  },
+  {
+    ID : "양도",
+    Desc : "이웃들에게 양도받기",
+    Icon : faHandshakeAngle
+  }
+]
 
 function Market() {
-  
-  
-  const [id, setId] = useState("판매");
 
-  const FilterList = list.filter(e =>{
-    return id === "판매" || id === e.ID
-  })
+
+  const FilterList = list.filter(e => {
+    return e.ID === "판매" || e.ID === "구매" || e.ID === "양도";
+  });
   console.log(FilterList)
 
-  // const FilterData = data && data.filter(e =>{
-  //   return gugun === "전체" || gugun === e.GUGUN_NM
-  // })
-  console.log(FilterList)
+  
 
   const [isActive, setIsActive] = useState(0);
-
 
   return (
     <>
@@ -189,11 +186,12 @@ function Market() {
         
         {
           FilterList.map((e,i)=>{
+
             return(
-                isActive === i &&
+              isActive === i &&
               <ul key={i}>
-                <h3>{e.ID}</h3>
-                <li>{e.TITLE}</li>
+                <h3>{e.TITLE}</h3>
+                <li>{e.PRICE}</li>
                 <img src={e.IMG} alt="마켓 이미지들" /> 
               </ul>
             )
@@ -206,7 +204,6 @@ function Market() {
               return(
                 <Card key={i}  onClick={()=>{
                   setIsActive(i);
-                  
                   }}>
                   <h3>{e.ID}</h3>
                   <p>{e.Desc}</p>

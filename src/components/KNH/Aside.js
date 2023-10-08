@@ -134,11 +134,11 @@ function Aside() {
             <Link id="kakao-talk-channel-chat-button"></Link>
           {/* <Content isKakao>
           </Content> */}
-          <Content>
+          {/* <Content>
             <Link to="https://instagram.com/green_ping2023?igshid=MzRlODBiNWFlZA==">
               <img src={`images/instagram.png`} alt="instagram" />
             </Link>
-          </Content>
+          </Content> */}
           <Content onClick={moveToTop}>
             <FontAwesomeIcon className="mt-5" icon={faChevronUp} />
           </Content>

@@ -33,13 +33,18 @@ ul{
   height: 150px;
   font-size: 1rem;
   border-radius: 10px;
-  /* padding-inline-start: 10px; */
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
   margin-top: 45px;
-  @media screen and (max-width: 600px) {
+}
+
+@media (max-width: 640px) {
+  .textarea {
     width: 80%;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
   }
 }
 
