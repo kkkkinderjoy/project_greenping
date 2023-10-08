@@ -6,12 +6,14 @@ import Search from '../components/CYR/Search';
 import Choice from '../components/KNH/Choice';
 import Eventbanner from '../components/PSY/Eventbanner';
 import Market from '../components/PSY/Market';
+import Msearch from '../components/CYR/Msearch';
 
 function Main() {
 
   return (
     <>
         <Search />
+        {/* <Msearch /> */}
         <Choice />
         <Eventbanner />
         <Review />
