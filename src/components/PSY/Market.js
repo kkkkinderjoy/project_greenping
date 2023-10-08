@@ -26,11 +26,13 @@ const ContainerWrap = styled.div`
 
 const ContentItem = styled.div`
   flex-basis: 50%;
-  background-color: #f5f5f5;
+  background-color: #fff;
+  
   position: relative;
   display: none;
   @media screen and (min-width: 1024px){
     display: block;
+    
   }
   img{
     width: 300px; 

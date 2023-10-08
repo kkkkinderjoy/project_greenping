@@ -8,8 +8,7 @@ import FAQ from './FAQ';
 
 const Container = styled.div`
   width: 100%;
-  margin: 60px;
- 
+  margin-top: 60px;
 `
 
 const Title = styled.div`
@@ -22,7 +21,7 @@ const  ContainerWrap = styled.div`
   max-width: 1280px;
   margin: 0 auto;
   display: flex;
-  
+  flex-wrap: wrap;
 `
 
 
@@ -56,6 +55,7 @@ function Service() {
       <Container>
       <Title>고객센터</Title>
         <ContainerWrap>
+
               <LinkList>
                 <LinkListItem onClick={()=>setViewNotice(true)}>
                   <span>공지사항</span>

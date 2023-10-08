@@ -59,6 +59,7 @@ const List = styled.ul`
   }
 `;
 
+
 const ListItem = styled.li`
   padding: 5px 30px;
   flex-basis: 10%;
