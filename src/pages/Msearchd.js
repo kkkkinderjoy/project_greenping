@@ -155,9 +155,6 @@ function Msearchd() {
               e.addr1.includes(searchTerm) ||
               e.induty.toLowerCase().includes(searchTerm.toLowerCase()) ||
               e.doNm.includes(searchTerm)
-              // ||
-              // e.donm.includes(donmValue) ||
-              // e.sigunguNm.includes(donmValue)
           ))
     }, []);
     
