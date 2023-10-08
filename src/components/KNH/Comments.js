@@ -127,6 +127,11 @@ const UpComments = styled.div`
 
 `
 
+const Message = styled.p`
+    font-size: 0.9em;
+    color: #333;
+    margin-bottom: 20px;
+`
 
 function Comments() {
 
@@ -147,8 +152,6 @@ function Comments() {
         setSavedComments(JSON.parse(savedCommentsFromLocalStorage));
       }
     }, []);
-
-  // 텍스트 에어리어의 내용이 변경될 때마다 저장합니다.
   useEffect(() => {
     localStorage.setItem('savedComment', newComment);
   }, [newComment]);
@@ -179,13 +182,15 @@ function Comments() {
 
   return (
     <>
+
         <Comment>
             <h3>댓글</h3>      
+                { uid ?
                   
                     <>
                       {savedComments.map((comment, index) => (
                         <UpComments>
-                              <p>{userState.data.name}</p>
+                              <p>{userState.name}</p>
                               <p key={index}>{comment}</p>  
                               <button onClick={CommentDel}>
                               <FontAwesomeIcon icon={faX}/>
@@ -195,8 +200,10 @@ function Comments() {
                           ))}
                           
                       </>
-                  
+                :
+                <Message>로그인 후 리뷰를 감상할 수 있습니다</Message>
                 
+                }
               </Comment>
               {uid ? (
               <ConWrap>
@@ -214,7 +221,7 @@ function Comments() {
                   <CommentBtn onClick={CommentSubmit}>등록</CommentBtn>
               </ConWrap>
       ) : (
-        <Div onClick={()=>{navigate('/login')}}>로그인 이후 이용해주세요</Div>
+        <Div onClick={()=>{navigate('/login')}}>로그인하면 지금 당장 그린퍼들과 대화할 수 있어요!</Div>
       )}
     </>
   )
