@@ -1,15 +1,14 @@
 
-import React, { useCallback, useEffect, useRef, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 
 import styled from "styled-components";
-
+import Pagenation from "../components/LJS/Pagenation";
 import { faPen, faUser } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useSelector } from 'react-redux';
 import { collection, doc, getDocs, getFirestore, orderBy, query } from 'firebase/firestore';
-
-
+import Scroll from './Scroll';
 
 
 const PagenationContent = styled.div`
@@ -33,7 +32,6 @@ const ReviewContent = styled.div`
       flex-direction: column;
       flex-wrap: nowrap;
       width: 100%;
-      
   }
 `
 
@@ -48,10 +46,9 @@ const Container = styled.div`
   height: auto;
   box-shadow: 0 0 10px #d7d7d7;
  
-
   img{ 
     width: 100%;
-    height: 300px;
+    height: 350px;
     border-radius: 10px;
     background-image:  url(https://media.istockphoto.com/id/1055079680/ko/%EB%B2%A1%ED%84%B0/%EC%82%AC%EC%9A%A9%ED%95%A0-%EC%88%98-%EC%97%86%EB%8A%94-%EC%9D%B4%EB%AF%B8%EC%A7%80-%EC%B2%98%EB%9F%BC-%EA%B2%80%EC%9D%80-%EC%84%A0%ED%98%95-%EC%82%AC%EC%A7%84-%EC%B9%B4%EB%A9%94%EB%9D%BC.jpg?s=612x612&w=0&k=20&c=6lBCS8H2OQDQA_v38ZBOuuKTxKwN3OvYe1xinb7wTb8=);
     background-size: contain;
@@ -61,7 +58,7 @@ const Container = styled.div`
   }
   @media screen and (max-width: 768px) {
     width: 85%;
-    height: 550px;
+    height: 600px;
     padding: 20px;
     img{
       margin-top: 10px;
@@ -73,11 +70,7 @@ const ContainerWrap = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  div{
-    p{
-      height: 30px;
-    }
-  }
+
 `
 
 const UserInfo = styled.div`
@@ -152,35 +145,24 @@ const Title = styled.div`
 `;
 
 
-
 function ReviewMore() {
-
-  const [current, SetCurrent] = useState()
   
-
-  useEffect(() => {
-    const Scroll = () => {
-      let pos = window.scrollY;
-      if (pos + window.innerHeight === document.documentElement.scrollHeight) {
-       console.log("도착")
-       
-      }else{
-        console.log("미도착")
-      }
-    };
-    window.addEventListener('scroll', Scroll);
-
-  
-  }, []);
-
-
-
-
-
-  const userState = useSelector((state) => state.user);
+const userState = useSelector((state) => state.user);
   const [posts, setPosts] = useState([]);
+ 
 
   useEffect(() => {
+   
+  },[]);
+  
+
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(false);
+  let page = 1;
+
+  const fetchData = async (currentPage) => {
+    setLoading(true);
+    
     const fetchPosts = async () => {
       try {
         const q = query(
@@ -188,8 +170,8 @@ function ReviewMore() {
           orderBy("timestamp", "desc")
         );
  
-        const snapShot = await getDocs(q);
-          
+      const snapShot = await getDocs(q);
+       
        const postArray = snapShot.docs.map((doc) => ({
            id: doc.id,
           ...doc.data(),
@@ -202,16 +184,34 @@ function ReviewMore() {
       }
     };
     fetchPosts();
-  },[]);
+
+    const response = await fetch(`https://jsonplaceholder.typicode.com/photos?albumId=${currentPage}`);
+    const result = await response.json();
+
+    setData(prevData => [...prevData, ...result]);
+    setLoading(false);
+};
+  // 최초 마운트가 되었을때는 스크롤유무와 관계 없이 1회가 시작되어야 하므로 fetch를 마운트 되었을 때 실행  
+useEffect(() => {
+    fetchData(page);
+}, [page]);
+
+
+useEffect(() => {
+  const scrollEvent = () => {
+      if (window.scrollY + window.innerHeight !== document.documentElement.scrollHeight || loading) return;
+      fetchData(page + 1); 
+  };
   
 
-  const [limit, setLimit] = useState(10);
-  const [page, setPage] = useState(1);
-  const offset = (page - 1) * limit;
-  
+  window.addEventListener('scroll', scrollEvent);
+  return () => window.removeEventListener('scroll', scrollEvent);
+}, [loading, page]);
+
+
   return (
-    <>
     
+    <>
      <ButtonWrap>
         <Title>리뷰</Title>
         {
@@ -220,18 +220,13 @@ function ReviewMore() {
                   <FontAwesomeIcon icon={faPen} /> 
               </Button>
             </Link>
-          
         }
         </ButtonWrap>
 
         <ReviewContent>
-        {posts && posts.map((e, i) => {
-        
+        { posts && posts.map((e, i) => {
           return (
             <>
-            {
-
-            }
             <Container>
               <ContainerWrap>
                   <UserInfo>
@@ -239,14 +234,14 @@ function ReviewMore() {
                   <UserName>{e.name}</UserName>
                   </UserInfo>
                   <ContentTitle>{e.title}</ContentTitle>
-                  <div dangerouslySetInnerHTML={{__html: e.content}}/>            
+                  <div dangerouslySetInnerHTML={{__html: e.content}}/>          
               </ContainerWrap>
               <UserDate>{e.timestamp.toDate().toLocaleDateString()}</UserDate>
+              {loading && <div>Loading...</div>}    
             </Container>
             </>
           );
         })}
-
 
           {/* <PagenationContent>
       <Pagenation
