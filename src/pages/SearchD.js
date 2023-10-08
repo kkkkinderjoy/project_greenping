@@ -110,16 +110,14 @@ const ContentItem = styled.div`
               display: block;
               max-width: 36px;
               height: 28px;
-              
-              
+              flex-direction: column;
             }
             p{
               font-size: 10px;
-              
+              margin-top: 20px;
             }   
           }
         li:nth-last-child(1){
-          flex-direction: column;
           margin-top: 20px;
           border: 1px solid #ddd;
         }
