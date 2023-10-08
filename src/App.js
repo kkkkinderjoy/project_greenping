@@ -39,6 +39,7 @@ import ReviewCk from "./components/LJS/ReviewCk";
 import ReviewWrite from "./pages/ReviewWrite";
 import Scroll from "./pages/Scroll";
 import FAQ from "./pages/FAQ";
+import Msearchd from "./pages/Msearchd";
 
 
 function App() {
@@ -93,6 +94,7 @@ function Inner() {
         <Route path="/" element={<Main />}></Route>
         <Route path="/searchd/" element={<SearchD />} />
         <Route path="/navsearch/" element={<Navsearch />} />
+        <Route path="/msearch/" element={<Msearchd />} />
         <Route path="/searchd/desc/:seq" element={<Descpage />} />
         <Route path="/navsearch/navdesc/:seq" element={<Navdescpage />} />
         <Route path="/navdesc/:seq" element={<Navdescpage />} />
@@ -112,7 +114,7 @@ function Inner() {
         <Route path="/login" element={<Login />}></Route>
         <Route path="/logout" element={<Logout />}></Route>
         <Route path="/member" element={<Member />}></Route>
-        <Route path="/modify" element={<Modify />}></Route>
+        <Route path="/modify" element={<Member />}></Route>
         <Route path="/findemail" element={<Findemail />}></Route>
         {/* <Route path="/*" element={<Notfound />}></Route> */}
         <Route path="/sale" element={<Sale />} />

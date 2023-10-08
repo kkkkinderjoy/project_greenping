@@ -5,6 +5,8 @@ import axios from "axios";
 import { eachDayOfInterval } from "date-fns";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLocationDot, faPhoneVolume, faUser } from "@fortawesome/free-solid-svg-icons";
+import dataList from './../data/Choicedata'
+
 
 const Wrap = styled.div`
   width: 100%;
@@ -23,25 +25,31 @@ const SearchForm = styled.div`
   border: 1px solid #ddd;
   border-radius: 10px;
 `;
+
 const Searchbar = styled.div`
   all: unset;
   height: 45px;
   width: 70%;
-  margin: 20px auto;
+  margin: 50px auto;
   display: flex;
   justify-content: center;
   > input {
     flex-basis: 80%;
     border: 1px solid #ddd;
-    border-radius: 10px 0 0 10px;
+    border-radius: 10px;
   }
   > button {
+    flex-basis: 30%;
     background-color: #98eecc;
-    border-radius: 0 10px 10px 0;
+    border-radius: 10px;
+    @media screen and (max-width: 768px){
+    flex-direction: column;
+    }
   }
   > select {
-    width: 50%;
+    flex-basis: 80%;
   }
+
 `;
 const SearchLine = styled.div`
   margin: 40px auto;
@@ -85,41 +93,41 @@ const ContentItem = styled.div`
         flex-direction: column;
         justify-content: center;
         li{
+          margin-top: 5px;
           text-align: left;
           display: flex;
           flex-wrap: wrap;
           >svg{
             color: #98eecc;
           }
-          img{ 
-            display: block;
-            width: 30px;
-            height: 28px;
-
-            
+            img{ 
+              display: block;
+              max-width: 36px;
+              height: 28px;
+              flex-direction: column;
+            }
+            p{
+              margin-top: 20px;
+              font-size: 10px;
+            }   
           }
-          >p{
-            row-gap:100%;
-            display: block;
-            font-size: 10px;
-
-          }
-          &:nth-last-child(1){
-
-          }  
+        li:nth-last-child(1){
+          margin-top: 20px;
+          border: 1px solid #ddd;
+        }
       }
   }
-}
+  `;
   /* @media screen and (max-width: 1200px){
     flex-basis: 100%;
   }
   @media screen and (max-width: 640px){
     flex-basis: 100%;
   } */
-`;
+
 
 function Navsearch() {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState(dataList);
   const [searchTerm, setSearchTerm] = useState("");
   const [searchKeyword, setSearchKeyword] = useState("");
   const [Selected, setSelected] = useState("");
@@ -127,17 +135,17 @@ function Navsearch() {
 
   const SbrsCl = ["전기","장작판매","물놀이장","놀이터","산책로","운동시설","무선인터넷","트렘폴린","마트.편의점","온수","운동장"]
 
-  useEffect(() => {
-    fetch(
-      "https://apis.data.go.kr/B551011/GoCamping/basedList?numOfRows=100&pageNo=1&MobileOS=ETC&MobileApp=project&serviceKey=hQ42F%2BSKq2L%2FUrlhNoGxv63elQn7W8CmL22xl6yXuGk%2BMz0zdU%2Frk2CIdCeX5%2BYPmg39K5QBYCeSgUyqtD7Qdg%3D%3D&_type=json"
-    )
-      .then((res) => {
-        return res.json();
-      })
-      .then((data) => {
-        setData(data.response.body.items.item);
-      });
-  }, []);
+  // useEffect(() => {
+  //   fetch(
+  //     "https://apis.data.go.kr/B551011/GoCamping/basedList?numOfRows=100&pageNo=1&MobileOS=ETC&MobileApp=project&serviceKey=hQ42F%2BSKq2L%2FUrlhNoGxv63elQn7W8CmL22xl6yXuGk%2BMz0zdU%2Frk2CIdCeX5%2BYPmg39K5QBYCeSgUyqtD7Qdg%3D%3D&_type=json"
+  //   )
+  //     .then((res) => {
+  //       return res.json();
+  //     })
+  //     .then((data) => {
+  //       setData(data.response.body.items.item);
+  //     });
+  // }, []);
 
   const handleSearch = (el) => {
     const donmValue = el.target.value;
@@ -177,10 +185,10 @@ function Navsearch() {
                   placeholder="검색어를 입력하세요"
                   onChange={(e) => setSearchTerm(e.target.value)}
                 />
-                <button onClick={handleSearch}>검색하기</button>
               </Searchbar>
               <Searchbar>
                 <select onChange={optionDonm} value={Selected}>
+                {/* <select onChange={optionDonm} value={Selected}> */}
                   <option value="전체">전체</option>
                   {Filterdonm.map((e, i) => {
                     return <option key={i}>{e}</option>;
@@ -190,9 +198,13 @@ function Navsearch() {
                   <option value="전체">전체</option>
                   {
                     FilterSigun.map((e, i) => {
-                    return <option key={i}>{e}</option>;
-                  })}
+                      return <option key={i}>{e}</option>;
+                    })}
                 </select>
+              </Searchbar>
+                <button onClick={handleSearch}>검색하기</button>
+              <Searchbar>
+
               </Searchbar>
               {/* <Searchbar>
                 <ul>
@@ -220,23 +232,23 @@ function Navsearch() {
                       <NavLink to={`navdesc/${e.contentId}`} state={{e}}>
                         <ul key={i}>
                           <li>
-                            <img src={e.firstImageUrl} />
+                            <img src={e.firstImageUrl} alt={e.facltNm}/>
                           </li>
                           <li>
                             <ul>
                               <li><FontAwesomeIcon icon={faUser}/> : {e.facltNm}</li>
                               <li><FontAwesomeIcon icon={faLocationDot}/> : {e.addr1}</li>
                               {
-                                e.tel != "" && <li><FontAwesomeIcon icon={faPhoneVolume} /> : {e.tel}</li>
+                                e.tel !== "" && <li><FontAwesomeIcon icon={faPhoneVolume} /> : {e.tel}</li>
                               }
                               <li>
                                   {
                                     listArray.map((el,index)=>{
                                       return (
-                                            <React.Fragment key={index}>
-                                              <img width="50" src={`images/ico_${imgUrl[index]}.png`} alt="" />
+                                            <div key={index}>
+                                              <img src={`images/ico_${imgUrl[index]}.png`} alt="" />
                                               <p>{el}</p> 
-                                            </React.Fragment>
+                                            </div>
                                       )
                                     })
                                   }
