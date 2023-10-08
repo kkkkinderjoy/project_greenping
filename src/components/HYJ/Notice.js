@@ -122,6 +122,7 @@ const Container =styled.div`
 `
 
 function Notice(){
+    
     //datalist.reverse(); //datalist 배열 역순으로 만들기
     const[data,setData] = useState(datalist);
     const[type,setType] = useState("전체");
