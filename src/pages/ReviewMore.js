@@ -9,9 +9,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useSelector } from 'react-redux';
 import { collection, doc, getDocs, getFirestore, orderBy, query } from 'firebase/firestore';
 
-
 const ReviewContent = styled.div`
-  width: 80%;
+  max-width: 1280px;
   display: flex;
   flex-wrap: wrap;
   gap: 25px;
@@ -27,7 +26,6 @@ const ReviewContent = styled.div`
     flex-direction: row;
     width: 50%;
   } 
- 
 `
 
 const Container = styled.div`
@@ -146,7 +144,6 @@ const Title = styled.div`
   }
 `;
 
-
 function ReviewMore() {
   
 const userState = useSelector((state) => state.user);
@@ -196,7 +193,6 @@ useEffect(() => {
         setTimeout(() => {
           setLoading(loading + 9)
         }, 1000);
-          
     }
 }
   
@@ -237,10 +233,8 @@ useEffect(() => {
             </>
           );
         })}
-
         </ReviewContent>
     </> 
   );
 }
-
 export default ReviewMore
