@@ -157,7 +157,7 @@ const HeartWrap = styled.div`
 const MasWrap = styled.div`
   position: absolute;
   bottom: 20px;
-  right: 13%;
+  right:110px;
   margin-top: 30px;
   cursor: pointer;
   width: 22px;
@@ -271,6 +271,7 @@ function Board() {
   const navigate = useNavigate();
   const uid = sessionStorage.getItem("users")
   const [likes, setLikes] = useState(Array(posts.length).fill(false));
+
   const toggleLike = (index) => {
     const newLikes = [...likes];
     newLikes[index] = !newLikes[index];

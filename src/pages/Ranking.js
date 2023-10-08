@@ -115,13 +115,15 @@ const RankCon = styled.div`
     margin-bottom: 12px;
   }
   p:nth-child(1) {
-    font-size: 1.1em;
+    font-size: 1.4em;
+    margin-bottom: 15px;
   }
   p:nth-child(2) {
     display: flex;
     align-items: center;
     font-size: 0.9em;
     color: #999999;
+    margin-bottom: 18px;
     > svg {
       padding-right: 3px;
       color: "black";
