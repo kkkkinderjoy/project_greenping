@@ -314,7 +314,6 @@ function Header({userState}){
                     <MPWrap isActive={isActive}>
                       <MyPage>
                           <NavLink to="/modify"><MPList>정보수정</MPList></NavLink>
-                          <NavLink to="/"><MPList>예약 내역</MPList></NavLink>
                           <NavLink to="/myboard"><MPList>나의 활동</MPList></NavLink>
                       </MyPage>
                     </MPWrap>        
