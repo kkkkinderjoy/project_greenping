@@ -9,7 +9,6 @@ import Eventbanner from '../PSY/Eventbanner'
 import { useSelector } from 'react-redux'
 
 
-
 const Content = styled.div`
   margin-top: 10px;
   width: 100%;
