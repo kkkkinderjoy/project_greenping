@@ -145,7 +145,57 @@ const Title = styled.div`
 `;
 
 function ReviewMore() {
+
+
+  const [current, SetCurrent] = useState()
   
+
+  useEffect(() => {
+    const Scroll = () => {
+      let pos = window.scrollY;
+      if (pos + window.innerHeight === document.documentElement.scrollHeight) {
+      //  console.log("도착")
+       
+      }else{
+        // console.log("미도착")
+      }
+    };
+    window.addEventListener('scroll', Scroll);
+
+  
+  }, []);
+
+  const UserBtnWrap = styled.div`
+  display: flex;
+  align-items: center;
+  margin-top: 31px;
+  color: #999999;
+`
+
+const UserBtn = styled.button`
+  padding: 10px 10px;
+  background-color: #fff;
+  color: #555555;
+  border: none;
+  cursor: pointer;
+  transition: 0.4s;
+  &:nth-child(1){
+    position: relative;
+    &:hover{
+      font-weight: bold;
+    }
+    &::after{
+        content: "";
+        position: absolute;
+        top: 12px;
+        right: 0;
+        width: 1px;
+        height: 15px;
+        background-color: #999999;
+      }
+  }
+`
+
 const userState = useSelector((state) => state.user);
   const [posts, setPosts] = useState([]);
   const [data, setData] = useState([]);

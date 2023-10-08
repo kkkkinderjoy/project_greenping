@@ -85,7 +85,6 @@ function Inner() {
   return (
     <>
       <GlobalStyle />
-
       <Header userState={userState} />
       <Routes>
         <Route path="/" element={<Main />}></Route>
@@ -124,7 +123,6 @@ function Inner() {
         <Route path="/Assi" element={<Assi />} />
         <Route path="/inquiry/:seq" element={<Inquiry />} />
         <Route path="/inquiry/:seq/:market" element={<Inquiry />} />
-        
       </Routes>
       <Aside />
       <Footer />

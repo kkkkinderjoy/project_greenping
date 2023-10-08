@@ -5,6 +5,7 @@ import styled from 'styled-components'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUser } from '@fortawesome/free-regular-svg-icons'
 import { faChevronDown, faChevronRight } from '@fortawesome/free-solid-svg-icons'
+
 import Eventbanner from '../PSY/Eventbanner'
 import { useSelector } from 'react-redux'
 
@@ -315,7 +316,7 @@ function Header({userState}){
                 {
                   userState.uid ?
                   <li onClick={Dropdown}>
-                    마이페이지  <MyPageIcon icon={faChevronDown} isActive={isActive}/>
+                    마이페이지  <MyPageIcon icon={faChevronRight} isActive={isActive}/>
                     <MPWrap isActive={isActive}>
                       <MyPage>
                           <NavLink to="/modify"><MPList>정보수정</MPList></NavLink>
@@ -355,7 +356,6 @@ function Header({userState}){
               <NavLink to ='/login'><span onClick={()=>{
                 setIsActive(!isActive)
                }}>로그인이 필요합니다.</span></NavLink>
-               
           }
         </MnavTitle>
         <MnavList>

@@ -7,9 +7,11 @@ import {
   getFirestore,onSnapshot,orderBy,query} from "firebase/firestore";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPen, faTrash, faX } from "@fortawesome/free-solid-svg-icons";
+import { faChartArea, faComment, faMessage, faPen, faTrash, faX } from "@fortawesome/free-solid-svg-icons";
 import TimeGap from "./../components/KNH/TimeGap.js"
 import Comments from "../components/KNH/Comments.js";
+import Chat from './../components/KNH/Chatting.js';
+
 
 const BorderWrapper = styled.div`
   width: 100%;
@@ -142,8 +144,24 @@ const HeartWrap = styled.div`
   bottom: 20px;
   right: 4%;
   margin-top: 30px;
-  width: 25px;
-  height: 25px;
+  width: 23px;
+  height: 23px;
+  padding: 14px;
+  background-color: none;
+  box-shadow: 0 0 3px gray;
+  border-radius: 50%;
+  display: flex; 
+   justify-content: center; 
+   align-items: center; 
+`;
+const MasWrap = styled.div`
+  position: absolute;
+  bottom: 20px;
+  right:110px;
+  margin-top: 30px;
+  cursor: pointer;
+  width: 22px;
+  height: 22px;
   padding: 15px;
   background-color: white;
   box-shadow: 0 0 3px gray;
@@ -151,10 +169,13 @@ const HeartWrap = styled.div`
   display: flex; 
    justify-content: center; 
    align-items: center; 
+   >svg{
+      font-size: 1.1em;
+      color: #333;
+   }
 `;
 
 const Heart = styled.img`
-  
   cursor:pointer ; 
   width:auto; 
   height:auto; 
@@ -227,8 +248,6 @@ const UserBtn = styled.button`
 
 
 
-
-
 const TopContent = styled.div`
 width: 100%;
   display: flex;
@@ -236,13 +255,7 @@ width: 100%;
 `
 
 
-const CommentWrap = styled.div`
 
-`
-const Comment = styled.div`
-  display: flex;
-
-`
 
 
 
@@ -250,9 +263,15 @@ function Board() {
   const userState = useSelector((state) => state.user);
   const [posts, setPosts] = useState([]);
   const [post, setPost] = useState();
+
+  const [isActive, setIsActive] = useState(false);
+  const [isModal, setIsModal] = useState(false);
+
+
   const navigate = useNavigate();
   const uid = sessionStorage.getItem("users")
   const [likes, setLikes] = useState(Array(posts.length).fill(false));
+
   const toggleLike = (index) => {
     const newLikes = [...likes];
     newLikes[index] = !newLikes[index];
@@ -284,42 +303,12 @@ function Board() {
     fetchPosts();
   }, []);
 
-  
+
+
+
+
+
     
-
-    const [comment, setComment] = useState("");
-    const [comments, setComments] = useState("");
-
-
-    useEffect((uid)=>{
-      const postRef = doc(getFirestore(),"board",uid);
-      console.log(postRef)
-      const commentRef = collection(postRef, uid, "comments");
-      const q = query(commentRef, orderBy("timestamp", "desc"));
-
-      const dataSnap = onSnapshot(q, (item)=>{
-        const fetchComment = item.docs.map(doc =>({
-          id: doc.id,
-          ...doc.data()
-        }))
-        setComments(fetchComment)
-      })
-      return dataSnap
-    },[])
-
-    const addComment = (uid) =>{
-      const firestore = getFirestore();
-      const postRef = doc(firestore,"board", uid);
-      console.log(postRef)
-      const commentRef = collection(postRef, "comments");
-          addDoc(commentRef,{
-            text : comments,
-            name : userState&&userState.data?.name
-          })
-
-  }
-  
-   
 
 
   const deletePost = async (uid) => {
@@ -367,9 +356,12 @@ function Board() {
   }, []);
 
 
-
   return (
     <>
+
+        {
+             isModal && <Chat onClose={()=>{setIsModal(false)}}/>
+        }
       <BorderWrapper>
         <HeadWrap>
           <Title>그린톡</Title>
@@ -413,35 +405,13 @@ function Board() {
                 <ListItem>
                   <div dangerouslySetInnerHTML={{ __html: e.content }} />{" "}
                 </ListItem>       
-             {/* <Comments/> */}
-              
-             <CommentWrap>
-                {
-                  uid && 
-                  <Comment>
-                    <textarea value={comment} onChange={e=>{setComment(e.target.value)}}></textarea>
-                    <Button onClick={()=>{addComment(e.uid)}}>댓글 달기</Button>
-                  </Comment>
-                  }
-                </CommentWrap>
-
-                <CommentWrap>
-                  <ul>
-                        {
-                          comments.map((e,i)=>{
-                            return(
-                              <li key={i}>{e.nickname} {e.text}</li>
-                            )
-                          })
-                        }
-
-                    </ul>
-                </CommentWrap>
-
+             
+             
 
 
 
              {userState.uid &&
+             <>
                 <ListItem
                   onClick={() => {
                     toggleLike(i);
@@ -457,7 +427,16 @@ function Board() {
                       alt="heart"
                       />
                   </HeartWrap>
+                
                 </ListItem>
+                <ListItem>
+                    <MasWrap onClick={()=>{setIsActive(true); 
+                        setIsModal(true);}} >
+                      <FontAwesomeIcon  icon={faMessage}></FontAwesomeIcon>
+                  </MasWrap>
+
+                </ListItem>
+                </>
                 }
               </List>
             );
