@@ -1,19 +1,13 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { NavLink, Route, Routes, useLocation, useNavigate } from 'react-router-dom'
-import { Link } from 'react-router-dom'
-// import mobilelogo from import pclogo from '../../../public/images/mobile_logo.png'
 import "react-datepicker/dist/react-datepicker.css"
 import styled from 'styled-components'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUser } from '@fortawesome/free-regular-svg-icons'
-import { faChevronDown, faChevronRight } from '@fortawesome/free-solid-svg-icons'
+import { faChevronRight } from '@fortawesome/free-solid-svg-icons'
 import Eventbanner from '../PSY/Eventbanner'
 import { useSelector } from 'react-redux'
-import { logIn, loggedIn } from '../../store'
 
-
-const ListItems = ['캠핑장 예약', '후기', '랭킹','그린톡','그린마켓','고객센터'] 
-const LinkArray = ['main','review','ranking','greentalk','greenmarket','notice']
 
 
 const Content = styled.div`
@@ -50,6 +44,10 @@ const LogoWrap = styled.div`
 const Logo = styled.img`
   width: 100%;
   height: 100px;
+  display: block;
+  @media screen and (max-width:768px){
+    display: none;
+  }
 `
 
 
@@ -68,19 +66,23 @@ const List = styled.ul`
   flex-basis: 100%;
   display: flex;
   font-weight: bold;
-
+  
 `
 
 
 const ListItem = styled.li`
   flex-basis: 25%;
   text-align: center;
+  .active{
+    color: #23D384;
+  }
   &:last-child{
     display: none;
     @media screen and (max-width:768px){
       display: block;
     }
   }
+ 
 `
 
 
@@ -224,7 +226,10 @@ ul{
 
 
 function Header({userState}){
-  
+  const ListItems = ['캠핑장 찾기','랭킹','리뷰', '그린톡','그린마켓','고객센터'] 
+  const LinkArray = ['','ranking','reviewmore','board','buy','service']
+
+
   const [isActive,setIsActive]=useState(false);
   // const userState = useSelector(state => state.user);
   const [userInput, setUserInput] = useState("");
@@ -232,6 +237,7 @@ function Header({userState}){
     const ValueI = e.target.value;
     setUserInput(ValueI);
   };
+
   return (
     <>
      <Content $isopen={isActive}>

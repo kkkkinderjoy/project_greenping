@@ -9,12 +9,12 @@ const Container = styled.div`
   width: 100%;
   padding: 48px 0;
   `
-const Title = styled.div`
-  text-align: center;
-  margin-bottom: 40px;
-  font-size: 2.0em;
-  margin-top: 120px;
+const Title = styled.h3`
+text-align: center;
+font-size: 2.0em;
+margin-bottom: 90px;
 `
+
 const ContainerWrap = styled.div`
   max-width: 1200px;
   height: 500px;
@@ -24,21 +24,18 @@ const ContainerWrap = styled.div`
   padding: 0 2%;
 `
 
-// const Title = styled.h3`
-//   text-align: center;
-//   font-size: 2.0em;
-//   margin-bottom: 90px;
-  
-// `
+
 
 
 const ContentItem = styled.div`
   flex-basis: 50%;
-  background-color: #f5f5f5;
+  background-color: #fff;
+  
   position: relative;
   display: none;
   @media screen and (min-width: 1024px){
     display: block;
+    
   }
   img{
     width: 300px; 

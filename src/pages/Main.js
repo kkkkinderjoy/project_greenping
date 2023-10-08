@@ -6,12 +6,15 @@ import Search from '../components/CYR/Search';
 import Choice from '../components/KNH/Choice';
 import Eventbanner from '../components/PSY/Eventbanner';
 import Market from '../components/PSY/Market';
+import Msearch from '../components/CYR/Msearch';
 import Story from '../components/HYJ/Story';
+
 
 function Main() {
 
   return (
     <>
+       {/* <Msearch /> */}
       <Search />
       <Choice />
       <Review />
@@ -19,6 +22,7 @@ function Main() {
       <Market />
       <Story />
       <Content />
+
     </>
   )
 }
