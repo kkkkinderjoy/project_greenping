@@ -59,6 +59,7 @@ const List = styled.ul`
   }
 `;
 
+
 const ListItem = styled.li`
   padding: 5px 30px;
   flex-basis: 10%;
@@ -309,7 +310,8 @@ function Board() {
   return (
 
     <>
-    userState.uid && {
+    {
+    userState.uid && 
       <BorderWrapper>
         <HeadWrap>
           <Title>나의 활동</Title>
@@ -368,7 +370,8 @@ function Board() {
 
         
       </BorderWrapper>
-  }
+  
+}
     </>
   );
 }

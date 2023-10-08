@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 import { useLocation } from 'react-router-dom'
+import data from "./../../data/NoticeData"
 
 const Container=styled.div`
  background-color: #fff;
@@ -50,13 +51,14 @@ function Noticedetail() {
                 <Title>공지사항</Title>
                 <Container>
                     <ul>
-                        <li>{data.title}</li>
-                        <li>등록일자:{data.date}</li>
-                        <li>{data.desc.split('\n').map(e=>{
+                        <li>{data?.title}</li>
+                        <li>등록일자:{data?.date}</li>
+                        <li>{data?.desc.split('\n').map(e=>{
                             return(
                                 <span>{e}<br /></span>
                             )
-                        })}</li>
+                        })}
+                        </li>
                     </ul>
                     <div>
 

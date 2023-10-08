@@ -169,6 +169,24 @@ function Navsearch() {
   //       setData(data.response.body.items.item);
   //     });
   // }, []);
+
+
+  useEffect(() => {
+    setSearchTerm(Selected);
+    setSelected(Selected);
+    setSearchKeyword(Selected);
+    console.log(searchTerm, searchKeyword)
+    setData(
+      dataList.filter(
+        (e) =>
+          e.facltNm.toLowerCase().includes(searchTerm.toLowerCase) ||
+          e.addr1.includes(searchTerm) ||
+          e.induty.toLowerCase().includes(searchTerm.toLowerCase) ||
+          e.doNm.includes(searchTerm)
+      )
+    );
+  }, []);
+
   
 
   const handleSearch = (el) => {

@@ -70,9 +70,9 @@ const Content = styled.li`
 `;
 
 const Kakao = styled.li`
-  @media screen and (max-width: 640px){
+  /* @media screen and (max-width: 640px){
     display: none;
-  }
+  } */
 `
 
 function Aside() {
@@ -131,6 +131,7 @@ function Aside() {
       {isActive && 
         <ContentWrap>
            <Kakao isKakao> <Link id="kakao-talk-channel-chat-button"></Link></Kakao>
+
             <Link id="kakao-talk-channel-chat-button"></Link>
           {/* <Content isKakao>
           </Content> */}
@@ -140,7 +141,7 @@ function Aside() {
             </Link>
           </Content> */}
           <Content onClick={moveToTop}>
-            <FontAwesomeIcon className="mt-5" icon={faChevronUp} />
+            <FontAwesomeIcon icon={faChevronUp} />
           </Content>
         </ContentWrap>
         }
