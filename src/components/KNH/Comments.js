@@ -1,11 +1,14 @@
 import { faX } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { addDoc, collection, doc, getFirestore } from 'firebase/firestore';
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { styled } from 'styled-components';
 
-const Comment = styled.ul`
+
+
+const ContentWrap = styled.ul`
   width: 80%;
   margin: auto;
   margin-top: 35px;
@@ -133,98 +136,74 @@ const Message = styled.p`
     margin-bottom: 20px;
 `
 
+
+
+
 function Comments() {
 
+  const navigate = useNavigate()
+  const [comment, setComment] = useState("");
+  const [comments, setComments] = useState([]);
+  const userState = useSelector((state) => state.user);
+  const uid = sessionStorage.getItem("users")
 
-    // 댓글
-
-    const navigate = useNavigate()
-    const [newComment, setNewComment] = useState("");
-    const [savedComments, setSavedComments] = useState([]);
-    const uid = sessionStorage.getItem("users")
-    const userState = useSelector((state) => state.user);
-
-
-    useEffect(() => {
-  
-      const savedCommentsFromStorage = sessionStorage.getItem('savedComments');
-      if (savedCommentsFromStorage) {
-        setSavedComments(JSON.parse(savedCommentsFromStorage));
+    const addComment = () =>{
+      if(comment.length === 0){
+        alert("댓글을 작성해주세요.")
+      }else{
+        alert("댓글이 작성되었습니다.")
       }
-    }, []);
+      const postRef = doc(collection(getFirestore(), "board"), uid);
+      const commentRef = collection(postRef, "comments");
+          addDoc(commentRef, {
+            text: comment,
+            name: userState&&userState.data.name,
+            uid: userState.uid,
 
+        })
+      }
 
-  useEffect(() => {
-    sessionStorage.setItem('savedComment', newComment);
-  }, [newComment]);
+      
  
 
-
-
-
-  const CommentSubmit = () => {
-    if (newComment.trim() !== '') {
-      const updatedComments = [...savedComments, newComment];
-      setSavedComments(updatedComments);
-      localStorage.setItem('savedComments', JSON.stringify(updatedComments));
-      setNewComment('');
-    }
-  };
-    
- 
-
-    const CommentDel = (index) => {
+    // const CommentDel = (index) => {
   
-      const updatedComments = [...savedComments];
-      updatedComments.splice(index, 1);
-      setSavedComments(updatedComments);
-    
-      localStorage.setItem('savedComments', JSON.stringify(updatedComments));
-    };
+   
+    // };
 
   return (
     <>
 
-        <Comment>
+        <ContentWrap>
             <h3>댓글</h3>      
-                { uid ?
+
+
+                <UpComments>
+                    
+                  </UpComments>
+
                   
-                    <>
-                      {savedComments.map((comment, index) => (
-                        <UpComments>
-                              <p>{userState.data.name}</p>
-                              <p key={index}>{comment}</p>  
-                              <button onClick={CommentDel}>
-                              <FontAwesomeIcon icon={faX}/>
-                            </button>
-              
-                            </UpComments>
-                          ))}
-                          
-                      </>
-                :
-                <Message>로그인 후 댓글을 볼 수 있습니다</Message>
-                
-                }
-              </Comment>
               {uid ? (
-              <ConWrap>
-                  <Textarea
-                    value={newComment}
-                    onChange={(e) => setNewComment(e.target.value)}
-                    onKeyDown={(e) => {
-                      if (e.key === 'Enter') {
-                          e.preventDefault();
-                          CommentSubmit();
-                      }
-                    }}
-                    placeholder="댓글을 남겨보세요!"
-                  />
-                  <CommentBtn onClick={CommentSubmit}>등록</CommentBtn>
-              </ConWrap>
+                  <ConWrap>
+                  
+                    <UpComments>
+                      <Textarea value={comment} onChange={(e) => setComment(e.target.value)}
+                      onKeyDown={(e) => {
+                                if (e.key === 'Enter') {
+                                    e.preventDefault();
+                                    addComment();
+                                }
+                              }}
+                              placeholder="댓글을 남겨보세요!"
+                      />
+                      <CommentBtn onClick={()=>{addComment(uid)}}>등록</CommentBtn>
+                    </UpComments>
+                    
+                  </ConWrap>
       ) : (
         <Div onClick={()=>{navigate('/login')}}>로그인하면 지금 당장 그린퍼들과 대화할 수 있어요!</Div>
       )}
+      </ContentWrap>
     </>
   )
 }

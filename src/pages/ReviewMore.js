@@ -162,10 +162,10 @@ function ReviewMore() {
     const Scroll = () => {
       let pos = window.scrollY;
       if (pos + window.innerHeight === document.documentElement.scrollHeight) {
-       console.log("도착")
+      //  console.log("도착")
        
       }else{
-        console.log("미도착")
+        // console.log("미도착")
       }
     };
     window.addEventListener('scroll', Scroll);
