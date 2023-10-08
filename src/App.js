@@ -110,7 +110,7 @@ function Inner() {
           <Route path="notice" element={<Notice />} />
           <Route path="faq" element={<FAQ />} />
         </Route>
-        <Route path="notice/:id" element={<Noticedetail />}></Route>
+        <Route path="service/notice/:id" element={<Noticedetail />}></Route>
         <Route path="/login" element={<Login />}></Route>
         <Route path="/logout" element={<Logout />}></Route>
         <Route path="/member" element={<Member />}></Route>

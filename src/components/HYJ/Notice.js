@@ -166,7 +166,7 @@ function Notice(){
               return(
                 <div key={i}>
                   <li>{e.type}</li>
-                  <li><NavLink to={`notice/${e.id}`} state={e}>{e.title}</NavLink></li>
+                  <li><NavLink to={`/service/notice/${i+1}`} state={e}>{e.title}</NavLink></li>
                   <li>{e.date}</li>
                 </div>
               )
