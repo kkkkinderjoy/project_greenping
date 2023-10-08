@@ -201,7 +201,7 @@ function Comments() {
                           
                       </>
                 :
-                <Message>로그인 후 리뷰를 감상할 수 있습니다</Message>
+                <Message>로그인 후 댓글을 볼 수 있습니다</Message>
                 
                 }
               </Comment>

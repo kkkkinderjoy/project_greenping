@@ -148,7 +148,7 @@ const Homepage = styled.div`
   > svg {
     
     color: #999999;
-
+    cursor: pointer;
     padding-right: 3px;
   }
 `;
@@ -168,18 +168,24 @@ function Detail() {
   const [data, setData] = useState(dataList);
 
   // const [data, setData] = useState();
-  const [page, setPage] = useState(10);
+  const [page, setPage] = useState(23);
 
-  // useEffect(() => {
-  //   fetch(
-  //     `https://apis.data.go.kr/B551011/GoCamping/basedList?numOfRows=10&pageNo=1&MobileOS=etc&MobileApp=greening&serviceKey=${process.env.REACT_APP_publicDataKey}&_type=json`
+  useEffect(() => {
+    fetch(
+      `https://apis.data.go.kr/B551011/GoCamping/basedList?numOfRows=10&pageNo=1&MobileOS=etc&MobileApp=greening&serviceKey=${process.env.REACT_APP_publicDataKey}&_type=json`
 
-  //   )
-  //     .then(function (res) {
-  //       setData(res.data.response.body.items.item);
-  //     })
-  //     .catch(function (error) {});
-  // });
+    )
+      .then(function (res) {
+        setData(res.data.response.body.items.item);
+      })
+      .catch(function (error) {});
+  });
+
+  if(data.length === 0){
+
+      <div>잠시만 기다려 주세요</div>
+  }
+  
 
   return (
     <>
@@ -188,7 +194,7 @@ function Detail() {
           <Title>랭킹</Title>
           <Rank>
             {data &&
-              data.slice(0, page).map((e, i) => {
+              data.slice(13, page).map((e, i) => {
                 return (
                   <>
                       {e.firstImageUrl !== "" && 
@@ -205,6 +211,10 @@ function Detail() {
                           <FontAwesomeIcon icon={faLocationDot} />
                           {e.addr1}
                         </p>
+                        {
+                          e.themaEnvrnCl !== "" &&
+                          <>{e.themaEnvrnCl}</>
+                        }
                        
                         {e.resveUrl !== "" && (
                           <Homepage>
@@ -224,7 +234,7 @@ function Detail() {
           <AddPage>
             <FontAwesomeIcon
               onClick={() => setPage(page*2)}
-              icon={faChevronCircleDown} 
+              icon={faPlusCircle} 
             />
           </AddPage>
         </ContentWrap>
