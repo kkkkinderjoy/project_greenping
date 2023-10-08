@@ -11,12 +11,34 @@ import dataList from './../data/Choicedata'
 const Wrap = styled.div`
   width: 100%;
 `;
+const ContentWrap = styled.div`
+  max-width: 1280px;
+  margin: 60px auto;
+`;
 const Searchwrap = styled.div`
-  width: 1280px;
+  width: 100%;
   height: 400px;
   margin: 0 auto;
   border: 5px solid #ddd;
   border-radius: 10px;
+`;
+const Title = styled.div`
+  padding: 10px 20px;
+  font-weight: bold;
+  font-size: 2em;
+  position: relative;
+  margin-bottom: 10px;
+  &::after {
+    content: "";
+    width: 30px;
+    height: 5px;
+    margin-left: 0.5px;
+    background-color: #2ed090;
+    position: absolute;
+    top: -8px;
+    left: 18px;
+    border-radius: 2px;
+  }
 `;
 const SearchForm = styled.div`
   width: 80%;
@@ -177,92 +199,95 @@ function Navsearch() {
   return (
     <>
       <Wrap>
-        <Searchwrap>
-          <SearchForm>
-              <Searchbar>
-                <input
-                  type="text"
-                  placeholder="검색어를 입력하세요"
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                />
-              </Searchbar>
-              <Searchbar>
-                <select onChange={optionDonm} value={Selected}>
-                {/* <select onChange={optionDonm} value={Selected}> */}
-                  <option value="전체">전체</option>
-                  {Filterdonm.map((e, i) => {
-                    return <option key={i}>{e}</option>;
-                  })}
-                </select>
-                <select>
-                  <option value="전체">전체</option>
-                  {
-                    FilterSigun.map((e, i) => {
+        <ContentWrap>
+          <Title>캠핑장찾기</Title>
+          <Searchwrap>
+            <SearchForm>
+                <Searchbar>
+                  <input
+                    type="text"
+                    placeholder="검색어를 입력하세요"
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                  />
+                </Searchbar>
+                <Searchbar>
+                  <select onChange={optionDonm} value={Selected}>
+                  {/* <select onChange={optionDonm} value={Selected}> */}
+                    <option value="전체">전체</option>
+                    {Filterdonm.map((e, i) => {
                       return <option key={i}>{e}</option>;
                     })}
-                </select>
-              </Searchbar>
-                <button onClick={handleSearch}>검색하기</button>
-              <Searchbar>
+                  </select>
+                  <select>
+                    <option value="전체">전체</option>
+                    {
+                      FilterSigun.map((e, i) => {
+                        return <option key={i}>{e}</option>;
+                      })}
+                  </select>
+                </Searchbar>
+                  <button onClick={handleSearch}>검색하기</button>
+                <Searchbar>
 
-              </Searchbar>
-              {/* <Searchbar>
-                <ul>
-                  {
-                    data.map((e,i)=>{
-                      return (
-                        <li key={i}>#{e.themaEnvrnCl}</li>
-                      )
-                    })
-                  }
-                </ul>
-              </Searchbar> */}
-          </SearchForm>
-        </Searchwrap>
-        <SearchLine />
-        <Content>
-          <ContentItem>
-            {data && data.map((e, i) =>{
-              const listArray = e.sbrsCl.split(",");
-              const imgUrl = ["ground","hotwater","mart","playzone","pool","sports","tramp","volt","walk","wifi","wood"]
-              return(
-                <React.Fragment key={i}>
-                  {
-                    searchKeyword === searchTerm && 
-                      <NavLink to={`navdesc/${e.contentId}`} state={{e}}>
-                        <ul key={i}>
-                          <li>
-                            <img src={e.firstImageUrl} alt={e.facltNm}/>
-                          </li>
-                          <li>
-                            <ul>
-                              <li><FontAwesomeIcon icon={faUser}/> : {e.facltNm}</li>
-                              <li><FontAwesomeIcon icon={faLocationDot}/> : {e.addr1}</li>
-                              {
-                                e.tel !== "" && <li><FontAwesomeIcon icon={faPhoneVolume} /> : {e.tel}</li>
-                              }
-                              <li>
-                                  {
-                                    listArray.map((el,index)=>{
-                                      return (
-                                            <div key={index}>
-                                              <img src={`images/ico_${imgUrl[index]}.png`} alt="" />
-                                              <p>{el}</p> 
-                                            </div>
-                                      )
-                                    })
-                                  }
-                              </li>
-                            </ul>
-                          </li>
-                        </ul>
-                      </NavLink>
-                  }
-                </React.Fragment>
-                )}
-            )}
-          </ContentItem>
-        </Content>
+                </Searchbar>
+                {/* <Searchbar>
+                  <ul>
+                    {
+                      data.map((e,i)=>{
+                        return (
+                          <li key={i}>#{e.themaEnvrnCl}</li>
+                        )
+                      })
+                    }
+                  </ul>
+                </Searchbar> */}
+            </SearchForm>
+          </Searchwrap>
+          <SearchLine />
+          <Content>
+            <ContentItem>
+              {data && data.map((e, i) =>{
+                const listArray = e.sbrsCl.split(",");
+                const imgUrl = ["ground","hotwater","mart","playzone","pool","sports","tramp","volt","walk","wifi","wood"]
+                return(
+                  <React.Fragment key={i}>
+                    {
+                      searchKeyword === searchTerm && 
+                        <NavLink to={`navdesc/${e.contentId}`} state={{e}}>
+                          <ul key={i}>
+                            <li>
+                              <img src={e.firstImageUrl} alt={e.facltNm}/>
+                            </li>
+                            <li>
+                              <ul>
+                                <li><FontAwesomeIcon icon={faUser}/> : {e.facltNm}</li>
+                                <li><FontAwesomeIcon icon={faLocationDot}/> : {e.addr1}</li>
+                                {
+                                  e.tel !== "" && <li><FontAwesomeIcon icon={faPhoneVolume} /> : {e.tel}</li>
+                                }
+                                <li>
+                                    {
+                                      listArray.map((el,index)=>{
+                                        return (
+                                              <div key={index}>
+                                                <img src={`images/ico_${imgUrl[index]}.png`} alt="" />
+                                                <p>{el}</p> 
+                                              </div>
+                                        )
+                                      })
+                                    }
+                                </li>
+                              </ul>
+                            </li>
+                          </ul>
+                        </NavLink>
+                    }
+                  </React.Fragment>
+                  )}
+              )}
+            </ContentItem>
+          </Content>
+        </ContentWrap>
       </Wrap>
     </>
   );

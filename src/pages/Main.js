@@ -14,8 +14,8 @@ function Main() {
 
   return (
     <>
-       {/* <Msearch /> */}
       <Search />
+       <Msearch />
       <Choice />
       <Review />
       <Eventbanner />

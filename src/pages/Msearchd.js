@@ -19,6 +19,7 @@ const Searchwrap = styled.div`
     margin: 0 auto;
   }
 `;
+
 const SearchForm = styled.div`
   width: 80%;
   height: 300px;
@@ -134,13 +135,14 @@ function Msearchd() {
   const location = useLocation();
   const stateData = location.state;
   const [data, setData] = useState(dataList);
-  const [searchTerm, setSearchTerm] = useState(stateData.userinput);
+  const [searchTerm, setSearchTerm] = useState(stateData.userinput === '' ? "" : stateData.userinput);
   const [searchKeyword, setSearchKeyword] = useState(stateData.userinput);
   const [Selected, setSelected] = useState(stateData.userinput);
 //   const [Inputv, setInputv] = useState(stateData.userinput)
   // console.log(location.state.optiondonmSelect)
   // console.log(location.state.userinput)
-  // console.log(stateData)
+  const initialSearchTerm = typeof stateData.userinput === 'string' ? stateData.userinput : '';
+  console.log(stateData)
   
   const SbrsCl = ["전기","장작판매","물놀이장","놀이터","산책로","운동시설","무선인터넷","트렘폴린","마트.편의점","온수","운동장"]
 
@@ -196,8 +198,9 @@ function Msearchd() {
                 <input
                   type="text"
                   placeholder="검색어를 입력하세요"
-                  value={Selected}
-                  onChange={(e) => {setSearchTerm(e.target.value); setSearchKeyword(e.target.value)}}
+                  value={searchTerm}
+                  onChange={
+                  (e) => setSearchTerm(e.target.value)}
                 />
               </Searchbar>
               <Searchbar>
