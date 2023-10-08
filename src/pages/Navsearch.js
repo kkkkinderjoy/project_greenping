@@ -42,8 +42,8 @@ const Searchbar = styled.div`
     flex-basis: 30%;
     background-color: #98eecc;
     border-radius: 10px;
+    margin: 0 auto;
     @media screen and (max-width: 768px){
-    flex-direction: column;
     }
   }
   > select {
