@@ -368,17 +368,6 @@ function Board() {
 
 
 
-
-
-  
-
-
-
-
-
-
-  
-
   return (
     <>
       <BorderWrapper>

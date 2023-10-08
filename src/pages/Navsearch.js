@@ -171,7 +171,6 @@ function Navsearch() {
   // }, []);
 
 
-
   useEffect(() => {
     setSearchTerm(Selected);
     setSelected(Selected);
@@ -180,14 +179,16 @@ function Navsearch() {
     setData(
       dataList.filter(
         (e) =>
-          e.facltNm.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          e.facltNm.toLowerCase().includes(searchTerm.toLowerCase) ||
           e.addr1.includes(searchTerm) ||
-          e.induty.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          e.induty.toLowerCase().includes(searchTerm.toLowerCase) ||
           e.doNm.includes(searchTerm)
       )
     );
   }, []);
+
   
+
   const handleSearch = (el) => {
     setSearchKeyword(searchTerm);
     // stateData(searchTerm);

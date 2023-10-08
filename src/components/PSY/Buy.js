@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import data from './../../data/MarketData'
 import { styled } from 'styled-components'
 import { NavLink } from 'react-router-dom'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faUser } from '@fortawesome/free-solid-svg-icons'
 
 const Content = styled.div`
     width: 100%;
@@ -65,7 +67,7 @@ const ContentItem = styled.div`
     border: 1px solid #f2f2f2;
     }
   h3{
-    margin-bottom: 24px;
+    margin-top: 20px;
     font-size: 22px;
     text-align: center;
     padding: 30px 5px;
@@ -74,8 +76,8 @@ const ContentItem = styled.div`
   p{
     position: absolute;
     text-align: center;
-    top: 75px;
-    left: 40px;
+    top: 70px;
+    left: 20px;
     width: 50px;
     height: 50px;
     border-radius: 50%;
@@ -88,6 +90,7 @@ const ContentItem = styled.div`
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
+    position: relative;
     li{
         margin-bottom: 7px;
         font-size: 13px;
@@ -96,7 +99,7 @@ const ContentItem = styled.div`
         font-size: 18px;
         font-weight: bold;
         color: #000;
-        }
+      }
     }
   }
   @media screen and (max-width: 1200px){
@@ -106,6 +109,14 @@ const ContentItem = styled.div`
     flex-basis: 100%;
   }
 `  
+const ItemTitle = styled.div`
+  color: #999;
+  position: absolute;
+  top: 16px;
+  left: 50%; 
+  transform: translateX(-50%)
+`
+
 const Button = styled.button`
     position: absolute;
     width: 100px;
@@ -124,8 +135,8 @@ function Buy() {
     const [ID, setID] = useState("구매");
 
     const dataFilter =  data.filter(e =>{
-        return (e.ID === "구매" || e.ID === ID)
-      })
+      return (e.ID === "구매" || e.ID === ID)
+    })
 
     const FilterItem = [...new Set(data.map(e => e.ID))]
 
@@ -159,13 +170,14 @@ function Buy() {
              dataFilter.slice().reverse().map((e,i)=>{
                 return(
                 <ContentItem key={i}>
+                <ItemTitle>
+                  <FontAwesomeIcon icon={faUser} /> {e.NAME}
+                </ItemTitle>
                     <h3>{e.TITLE}</h3>
-                    <p>{e.ID}</p>
                     <img src={e.IMG} alt="구매용품 이미지들" />
                     <ul>
-                        <li>가격: {e.PRICE}</li>
-                        <li>업로드일: {e.DATE}</li>
-                        <li>작성자: {e.NAME}</li>
+                      <li>{e.PRICE}</li>
+                      <li>업로드일 : {e.DATE}</li>
                     </ul>
                     {
                       uid &&

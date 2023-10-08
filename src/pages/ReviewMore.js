@@ -9,20 +9,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useSelector } from 'react-redux';
 import { collection, doc, getDocs, getFirestore, orderBy, query } from 'firebase/firestore';
 
-
-
-const PagenationContent = styled.div`
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  padding: 20px;
-  @media screen and (max-width: 768px) {
-     display: none;
-  }
-`
-
 const ReviewContent = styled.div`
-  width: 80%;
+  max-width: 1280px;
   display: flex;
   flex-wrap: wrap;
   gap: 25px;
@@ -33,6 +21,11 @@ const ReviewContent = styled.div`
       flex-wrap: nowrap;
       width: 100%;
   }
+  @media screen and (max-width: 1024px) {
+    display: flex;
+    flex-direction: row;
+    width: 50%;
+  } 
 `
 
 const Container = styled.div`
@@ -42,13 +35,13 @@ const Container = styled.div`
   padding: 25px;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: space-between;
   height: auto;
   box-shadow: 0 0 10px #d7d7d7;
   border-radius: 1rem;
   img{ 
     width: 100%;
-    height: 400px;
+    height: 350px;
     border-radius: 0rem;
     background-image:  url(https://media.istockphoto.com/id/1055079680/ko/%EB%B2%A1%ED%84%B0/%EC%82%AC%EC%9A%A9%ED%95%A0-%EC%88%98-%EC%97%86%EB%8A%94-%EC%9D%B4%EB%AF%B8%EC%A7%80-%EC%B2%98%EB%9F%BC-%EA%B2%80%EC%9D%80-%EC%84%A0%ED%98%95-%EC%82%AC%EC%A7%84-%EC%B9%B4%EB%A9%94%EB%9D%BC.jpg?s=612x612&w=0&k=20&c=6lBCS8H2OQDQA_v38ZBOuuKTxKwN3OvYe1xinb7wTb8=);
     background-size: contain;
@@ -56,6 +49,7 @@ const Container = styled.div`
     background-position: center;
     margin-top: 20px;
   }
+
   @media screen and (max-width: 768px) {
     width: 85%;
     height: 600px;
@@ -64,6 +58,8 @@ const Container = styled.div`
       margin-top: 10px;
     }
   }
+
+
  `
 const ContainerWrap = styled.div`
   width: 100%;
@@ -103,10 +99,14 @@ const ButtonWrap = styled.div`
   justify-content: space-between;
   align-content: center;
   margin-top: 50px;
+  @media screen and (max-width: 768px) {
+    margin-top: 120px;
+    width: 90%;
+  }
 `;
 
 const Button = styled.button`
-   margin-bottom: 20px;
+  margin-bottom: 20px;
   background-color: #98eecc;
   padding: 20px;
   border-radius: 50%;
@@ -144,7 +144,6 @@ const Title = styled.div`
   }
 `;
 
-
 function ReviewMore() {
   
 const userState = useSelector((state) => state.user);
@@ -175,12 +174,13 @@ const userState = useSelector((state) => state.user);
         console.log(error);
       }
     };
-
     fetchPosts();
+    // setData(prevData => [...prevData, ...result]);
 };
   // 최초 마운트가 되었을때는 스크롤유무와 관계 없이 1회가 시작되어야 하므로 fetch를 마운트 되었을 때 실행  
 useEffect(() => {
     fetchData();
+    
 }, []);
 
 useEffect(() => {
@@ -190,12 +190,15 @@ useEffect(() => {
         return;
       }
       else if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) { 
+        setTimeout(() => {
           setLoading(loading + 9)
+        }, 1000);
     }
 }
+  
   window.addEventListener('scroll', scrollEvent);
   return () => window.removeEventListener('scroll', scrollEvent);
- 
+
 }, [loading]);
 
 
@@ -223,9 +226,9 @@ useEffect(() => {
                   <UserName>{e.name}</UserName>
                   </UserInfo>
                   <ContentTitle>{e.title}</ContentTitle>
-                  <div dangerouslySetInnerHTML={{__html: e.content}}/> 
+                  <div dangerouslySetInnerHTML={{__html: e.content}}/>          
               </ContainerWrap>
-              < UserDate>{e.timestamp?.toDate().toLocaleDateString()}</UserDate>
+              <UserDate>{e.timestamp?.toDate().toLocaleDateString()}</UserDate>
             </Container>
             </>
           );
@@ -234,5 +237,4 @@ useEffect(() => {
     </> 
   );
 }
-
 export default ReviewMore

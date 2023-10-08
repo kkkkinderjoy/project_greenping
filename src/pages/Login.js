@@ -157,7 +157,7 @@ function Login() {
         if(userDocSnapshot.exists()){
           const userData = userDocSnapshot.data();
           dispatch(loggedIn(userData));
-          navigate(-1);
+          navigate("/");
         }
       }catch(error){
         setError(errorMsg(error.code));

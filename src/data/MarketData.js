@@ -3,7 +3,7 @@ const data = [
         "ID": "판매",
         "IMG" : "https://idoogen.com/web/product/medium/202309/8ad6636c92eaec24d41c4f1dd6930569.jpg",
         "TITLE": "내가 판매할 물건은?",
-        "PRICE": "글쓰기"
+        "PRICE": "판매 글쓰기"
     },
     {   
         "NAME" : "수연",     

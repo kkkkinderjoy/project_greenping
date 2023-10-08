@@ -24,18 +24,14 @@ const ContainerWrap = styled.div`
   padding: 0 2%;
 `
 
-
-
-
 const ContentItem = styled.div`
+  text-align: center;
   flex-basis: 50%;
   background-color: #fff;
-  
   position: relative;
   display: none;
   @media screen and (min-width: 1024px){
     display: block;
-    
   }
   img{
     width: 300px; 
@@ -49,6 +45,8 @@ const ContentItem = styled.div`
     transform: translateX(-50%);
     }
   h3{
+    width: 400px;
+    display: inline-block;
     position: absolute;
     top: 7%;
     left: 50%;
@@ -75,7 +73,6 @@ const ContentItem = styled.div`
 `
 const ContentDesc = styled.div`
   flex-basis: 100%;
-  position: relative;
   @media screen and (min-width: 1024px){
       flex-basis: 50%;
   }
@@ -90,9 +87,6 @@ const Card = styled.div`
   position: relative;
   transition: 0.7s;
   background-color: #fff;
-  &:nth-last-child(1){
-    background-color: #e0fff3;
-  }
   &.on svg{
     scale: 1.2;
   }
@@ -132,22 +126,23 @@ const Card2 = styled.div`
   flex-basis: 50%;
   padding: 2.5rem;
   box-sizing: border-box;
+  cursor: pointer;
   position: relative;
-  background-color: #fff;
+  transition: 0.7s;
   &:hover svg{
     transform: translateX(15px);
   }
   @media screen and (max-width: 640px) {
     padding: 1rem;
   }
-  p{line-height: 1.7;}
+  p{margin: 1rem 0;}
   svg{
     position: absolute;
     left: 1rem;
     top: 13rem;
     font-size: 2.5rem;
+    transition: 0.7s;
     color: rgba(0,0,0,0.3);
-    transition: 0.3s;
     @media screen and (max-width: 640px) {font-size: 2rem;}
   }
   `
@@ -171,14 +166,19 @@ const data = [
 
 function Market() {
 
+  const [id,setId] = useState("양도")
 
   const FilterList = list.filter(e => {
-    return e.ID === "판매" || e.ID === "구매" || e.ID === "양도";
+    return (e.ID === "판매" || e.ID === "구매" || e.ID === "양도")
   });
-  console.log(FilterList)
 
   
-
+  console.log(FilterList)
+  const random = Math.floor(Math.random() * FilterList.length);
+  const rTitle = FilterList[random].TITLE;
+  const rPrice = FilterList[random].PRICE;
+  const rImg = FilterList[random].IMG;
+  // console.log(FilterList)
   const [isActive, setIsActive] = useState(0);
 
   return (
@@ -189,14 +189,33 @@ function Market() {
         <ContentItem>
         {
           FilterList.map((e,i)=>{
-            return(
-              isActive === i &&
-              <ul key={i}>
-                <h3>{e.TITLE}</h3>
-                <li>{e.PRICE}</li>
-                <img src={e.IMG} alt="마켓 이미지들" /> 
-              </ul>
-            )
+            if(e.ID === "판매"){
+              return(
+                isActive === 0 &&
+                <ul key={i}>
+                  <h3>{e.TITLE}</h3>
+                  <li>{e.PRICE}</li>
+                  <img src={e.IMG} alt="마켓 이미지들" /> 
+                </ul>
+              )
+            }else if(e.ID === "구매"){
+              return(
+                isActive === 1 &&
+                <ul key={i}>
+                  <h3>{rTitle}</h3>
+                  <li>{rPrice}</li>
+                  <img src={rImg} alt="마켓 이미지들" /> 
+                </ul>
+              )
+            }else if(e.ID === "양도"){
+              return(
+                isActive === 2 &&
+                <ul key={i}>
+                  <h3>{rTitle}</h3>
+                  <li>양도문의를 보내보세요</li>
+                  <img src={rImg} alt="마켓 이미지들" /> 
+                </ul>
+              )}
           })
         }
         </ContentItem>
@@ -215,11 +234,11 @@ function Market() {
             })
           }
           <NavLink to='/buy'>
-          <Card2>
-            <p>더 많은 용품을 보기 원한다면</p>
-            <p>마켓 페이지로 이동</p>
-            <FontAwesomeIcon icon={faArrowRight} />
-          </Card2>
+            <Card2>
+              <p>더 많은 용품을 보기 원한다면</p>
+              <p>마켓 페이지로 이동</p>
+              <FontAwesomeIcon icon={faArrowRight} />
+            </Card2>
           </NavLink>
         </ContentDesc>
       </ContainerWrap>
