@@ -9,9 +9,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 
 
+
 const Content = styled.div`
   width: 800px;
-  height: 700px;
+  height: 750px;
   border: 1px solid #ddd;
   border-radius: 10px;
   box-sizing: border-box;
@@ -176,6 +177,14 @@ function Inquiry() {
         <img src={data.IMG} alt='이미지'></img>
         <textarea rows='3' cols='33' maxLength={maxLength} className='textarea' placeholder='문의사항을 남겨주세요.' value={Comment} onChange={(e)=>{setComment(e.target.value)}}></textarea>
       </InputItem>
+        {inquiring.map((comment, commentIndex) => (     
+          <ul>
+            <li key={comment.id}>
+              <span>{comment.name}: {comment.content}</span>
+            </li>
+          </ul>
+        ))}
+
         {
           inquiring.map((comment, commentIndex) => (
             <ul>
@@ -186,6 +195,7 @@ function Inquiry() {
             </ul>    
             ))
         }
+
       <ButtonItem>
         <p>{Comment.length}/{maxLength}자</p>
         <Button onClick={() =>{addComment(uid)}}> 댓글달기</Button>

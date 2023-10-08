@@ -58,6 +58,7 @@ const CloseBtn = styled.button`
     background-color: #e9e9e9;
     border-radius: 50%;
     position: absolute;
+    border: none;
     right: 5%;
     top: 5%;
     z-index: 20000;
