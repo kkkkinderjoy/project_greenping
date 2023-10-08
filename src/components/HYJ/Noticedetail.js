@@ -57,7 +57,8 @@ function Noticedetail() {
                             return(
                                 <span>{e}<br /></span>
                             )
-                        })}</li>
+                        })}
+                        </li>
                     </ul>
                     <div>
 

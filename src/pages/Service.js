@@ -75,11 +75,11 @@ function Service() {
       <Title>고객센터</Title>
       <LinkList>
       
-                <LinkListItem onClick={()=>{setIsActive(true); navigate("/service/notice")}}>
-                  <span>공지사항</span>
+                <LinkListItem onClick={()=>setIsActive(true)}>
+                  <NavLink to="/service/notice"><span>공지사항</span></NavLink>
                 </LinkListItem>
-                <LinkListItem onClick={()=>{setIsActive(false); navigate("/service/faq")}}>
-                  <span>자주 묻는 질문</span>
+                <LinkListItem onClick={()=>setIsActive(false)}>
+                <NavLink to="/service/faq"><span>자주 묻는 질문</span></NavLink>
                 </LinkListItem>
       </LinkList>
         <ContainerWrap>
