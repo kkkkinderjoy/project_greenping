@@ -1,25 +1,14 @@
 
-import React, { useCallback, useEffect, useRef, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 
 import styled from "styled-components";
-
+import Pagenation from "../components/LJS/Pagenation";
 import { faPen, faUser } from "@fortawesome/free-solid-svg-icons";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useSelector } from 'react-redux';
-import { collection, deleteDoc, doc, getDocs, getFirestore, orderBy, query } from 'firebase/firestore';
+import { collection, doc, getDocs, getFirestore, orderBy, query } from 'firebase/firestore';
 
-
-
-const PagenationContent = styled.div`
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  padding: 20px;
-  @media screen and (max-width: 768px) {
-     display: none;
-  }
-`
 
 const ReviewContent = styled.div`
   width: 80%;
@@ -32,8 +21,13 @@ const ReviewContent = styled.div`
       flex-direction: column;
       flex-wrap: nowrap;
       width: 100%;
-      
   }
+  @media screen and (max-width: 1024px) {
+    display: flex;
+    flex-direction: row;
+    width: 50%;
+  } 
+ 
 `
 
 const Container = styled.div`
@@ -46,37 +40,34 @@ const Container = styled.div`
   justify-content: space-between;
   height: auto;
   box-shadow: 0 0 10px #d7d7d7;
- 
-
+  border-radius: 1rem;
   img{ 
     width: 100%;
-    height: 300px;
-    border-radius: 10px;
+    height: 350px;
+    border-radius: 0rem;
     background-image:  url(https://media.istockphoto.com/id/1055079680/ko/%EB%B2%A1%ED%84%B0/%EC%82%AC%EC%9A%A9%ED%95%A0-%EC%88%98-%EC%97%86%EB%8A%94-%EC%9D%B4%EB%AF%B8%EC%A7%80-%EC%B2%98%EB%9F%BC-%EA%B2%80%EC%9D%80-%EC%84%A0%ED%98%95-%EC%82%AC%EC%A7%84-%EC%B9%B4%EB%A9%94%EB%9D%BC.jpg?s=612x612&w=0&k=20&c=6lBCS8H2OQDQA_v38ZBOuuKTxKwN3OvYe1xinb7wTb8=);
     background-size: contain;
     background-repeat:  no-repeat;
     background-position: center;
     margin-top: 20px;
   }
+
   @media screen and (max-width: 768px) {
     width: 85%;
-    height: 550px;
+    height: 600px;
     padding: 20px;
     img{
       margin-top: 10px;
     }
   }
+
+
  `
 const ContainerWrap = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  div{
-    p{
-      height: 30px;
-    }
-  }
 `
 
 const UserInfo = styled.div`
@@ -104,16 +95,20 @@ const UserDate = styled.div`
 `
 
 const ButtonWrap = styled.div`
-  width: 90%;
+  width: 80%;
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
   align-content: center;
   margin-top: 50px;
+  @media screen and (max-width: 768px) {
+    margin-top: 120px;
+    width: 90%;
+  }
 `;
 
 const Button = styled.button`
-   margin-bottom: 20px;
+  margin-bottom: 20px;
   background-color: #98eecc;
   padding: 20px;
   border-radius: 50%;
@@ -152,72 +147,16 @@ const Title = styled.div`
 `;
 
 
-
 function ReviewMore() {
-
-  const [current, SetCurrent] = useState()
   
-
-  useEffect(() => {
-    const Scroll = () => {
-      let pos = window.scrollY;
-      if (pos + window.innerHeight === document.documentElement.scrollHeight) {
-       console.log("도착")
-       
-      }else{
-        console.log("미도착")
-      }
-    };
-    window.addEventListener('scroll', Scroll);
-
-  
-  }, []);
-
-  const UserBtnWrap = styled.div`
-  display: flex;
-  align-items: center;
-  margin-top: 31px;
-  color: #999999;
-`
-
-const UserBtn = styled.button`
-  padding: 10px 10px;
-  background-color: #fff;
-  color: #555555;
-  border: none;
-  cursor: pointer;
-  transition: 0.4s;
-  &:nth-child(1){
-    position: relative;
-    &:hover{
-      font-weight: bold;
-    }
-    &::after{
-        content: "";
-        position: absolute;
-        top: 12px;
-        right: 0;
-        width: 1px;
-        height: 15px;
-        background-color: #999999;
-      }
-  }
-  
-  &:nth-child(2):hover{
-      color: coral;
-      font-weight: bold;    
-
-    }
-
-`
-
-
-  const navigate = useNavigate();
-  const uid = sessionStorage.getItem("users")
-  const userState = useSelector((state) => state.user);
+const userState = useSelector((state) => state.user);
   const [posts, setPosts] = useState([]);
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(9);
+  const sliceData = posts.slice(posts.length-loading)
 
-  useEffect(() => {
+  const fetchData = async () => {
+    
     const fetchPosts = async () => {
       try {
         const q = query(
@@ -225,8 +164,8 @@ const UserBtn = styled.button`
           orderBy("timestamp", "desc")
         );
  
-        const snapShot = await getDocs(q);
-          
+      const snapShot = await getDocs(q);
+       
        const postArray = snapShot.docs.map((doc) => ({
            id: doc.id,
           ...doc.data(),
@@ -239,41 +178,36 @@ const UserBtn = styled.button`
       }
     };
     fetchPosts();
-  },[]);
-  
-
-  const [limit, setLimit] = useState(10);
-  const [page, setPage] = useState(1);
-  const offset = (page - 1) * limit;
-
-
-  const deletePost = async (uid) => {
-    const firestore = getFirestore();
-    const docRef = doc(firestore, "review", uid);
-  
-    try {
-      await deleteDoc(docRef);
-      alert("삭제가 완료되었습니다");
-     
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  
-  const handleDelete = (uid) => {
-    if (window.confirm("정말로 삭제하시겠습니까?")) {
-      deletePost(uid).then(() => {
-        const updatedPosts = posts.filter((post) => post.id !== uid);
-        setPosts(updatedPosts);
-        
-      
-      });
-    }
+    // setData(prevData => [...prevData, ...result]);
 };
+  // 최초 마운트가 되었을때는 스크롤유무와 관계 없이 1회가 시작되어야 하므로 fetch를 마운트 되었을 때 실행  
+useEffect(() => {
+    fetchData();
+    
+}, []);
+
+useEffect(() => {
+
+  const scrollEvent = () => {
+      if(posts.data){
+        return;
+      }
+      else if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) { 
+        setTimeout(() => {
+          setLoading(loading + 9)
+        }, 1000);
+          
+    }
+}
   
+  window.addEventListener('scroll', scrollEvent);
+  return () => window.removeEventListener('scroll', scrollEvent);
+
+}, [loading]);
+
+
   return (
     <>
-    
      <ButtonWrap>
         <Title>리뷰</Title>
         {
@@ -282,18 +216,13 @@ const UserBtn = styled.button`
                   <FontAwesomeIcon icon={faPen} /> 
               </Button>
             </Link>
-          
         }
         </ButtonWrap>
 
         <ReviewContent>
-        {posts && posts.map((e, i) => {
-        
+        { sliceData && sliceData.map((e, i) => {
           return (
             <>
-            {
-
-            }
             <Container>
               <ContainerWrap>
                   <UserInfo>
@@ -301,33 +230,14 @@ const UserBtn = styled.button`
                   <UserName>{e.name}</UserName>
                   </UserInfo>
                   <ContentTitle>{e.title}</ContentTitle>
-                  <div dangerouslySetInnerHTML={{__html: e.content}}/>            
+                  <div dangerouslySetInnerHTML={{__html: e.content}}/>          
               </ContainerWrap>
-              <UserDate>{e.timestamp.toDate().toLocaleDateString()}</UserDate>
-              {uid && uid === e.uid && (
-                    <UserBtnWrap>
-                      <UserBtn onClick={() => {
-                        navigate(`/edit`);
-                      }}>
-                        수정
-                      </UserBtn> 
-                      <UserBtn onClick={()=>handleDelete(e.id)}>삭제</UserBtn>
-                    </UserBtnWrap>
-                )}
+              <UserDate>{e.timestamp?.toDate().toLocaleDateString()}</UserDate>
             </Container>
             </>
           );
         })}
 
-
-          {/* <PagenationContent>
-      <Pagenation
-        total={posts.length}    
-        limit={limit}
-        page={page}
-        setPage={setPage}
-      />
-       </PagenationContent> */}
         </ReviewContent>
     </> 
   );
