@@ -2,6 +2,9 @@ import React, { useState } from 'react'
 import data from './../../data/MarketData'
 import { styled } from 'styled-components';
 import { NavLink, Navigate } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUser } from '@fortawesome/free-solid-svg-icons';
+
 
 const Content = styled.div`
     width: 100%;
@@ -66,24 +69,11 @@ const ContentItem = styled.div`
     display: block; margin: 0 auto; margin-bottom: 24px;
     }
   h3{
-    margin-bottom: 24px;
+    margin-top: 20px;
     font-size: 22px;
     text-align: center;
     padding: 30px 5px;
     position: relative;
-  }
-  p{
-    position: absolute;
-    text-align: center;
-    top: 75px;
-    left: 40px;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    background-color: #ddd;
-    line-height: 50px;
-    font-size: 1rem;
-    color: #fff;
   }
   ul{
     display: flex;
@@ -93,11 +83,6 @@ const ContentItem = styled.div`
         margin-bottom: 7px;
         font-size: 13px;
         color: rgb(153, 153, 153);
-        &:nth-child(1){
-        font-size: 18px;
-        font-weight: bold;
-        color: #000;
-        }
     }
   }
   @media screen and (max-width: 1200px){
@@ -107,6 +92,14 @@ const ContentItem = styled.div`
     flex-basis: 100%;
   }
 ` 
+const ItemTitle = styled.div`
+  color: #999;
+  position: absolute;
+  top: 16px;
+  left: 50%; 
+  transform: translateX(-50%)
+`
+
 const Button = styled.button`
   position: absolute;
   width: 100px;
@@ -163,12 +156,13 @@ function Assi() {
             FilterAssi.slice().reverse().map((e,i)=>{
               return(
                 <ContentItem key={i}>
+                <ItemTitle>
+                  <FontAwesomeIcon icon={faUser} /> {e.NAME}
+                </ItemTitle>
                   <h3>{e.TITLE}</h3>
-                  <p>{e.ID}</p>
                   <img src={e.IMG} alt='양도용품 이미지' />
                   <ul>
-                    <li>작성자: {e.NAME}</li>
-                    <li>업로드일: {e.DATE}</li>
+                    <li>업로드일 : {e.DATE}</li>
                   </ul>
                   {
                     uid && 
