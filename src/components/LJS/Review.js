@@ -9,31 +9,32 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 
+
+const Content= styled.div` 
+  padding: 10px;
+  max-width: 1280px;
+  margin: 0 auto;
+`
 const ContentWrap = styled.div`
   width: 100%;
   margin-top: 120px;
-`
-
-const Content= styled.div` 
-  margin: 0 auto;
+ 
 `
 
 const Title = styled.h3`
   text-align: center;
   font-size: 2.0em;
   margin-bottom: 60px;
-  
 `
 
 const List = styled.ul` //왼쪽으로 이동해야함
     display: flex;
     justify-content: flex-end;
-    margin-right: 6%;
+    margin-left: 12%;
     margin-bottom: 25px;
     @media screen and (max-width: 768px) {
         left: -20px;
         flex-wrap: wrap;
-        
     }
 `
 
@@ -57,81 +58,77 @@ const ListItem = styled.li`
 `
 
 const CardWrapper = styled.div`
-  max-width: 1280px;
-  margin: 0 auto;
+  // 컨테츠 감싸는 div
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
-  @media (max-width: 768px) {
+  width: 100%;
+    ul{
       display: flex;
-      flex-direction: column;
-      flex-wrap: wrap;
-    }
-  ul {
-    width: 42%;
-    margin-top: 10px;
-    display: flex;
-    justify-content: center;
-    height: 100%;
-    margin-right: 5px;
-    @media (max-width: 768px) {
-      display: flex;
-      flex-direction: column;
+      flex-basis: 48%;
       width: 100%;
+      gap: 3%;
+      margin-bottom: 25px;
+
+    @media (max-width: 768px) {
+        width: 85%;
+        display: flex;
+        flex-direction: column;
+        margin: 0 auto;
+      }
     }
-  }
+    @media screen and (max-width: 768px) {
+      flex-wrap: nowrap;
+      flex-direction: column;
+    }
 `
 
 const CardItem = styled.li`
   //이미지 li
-  padding: 5px;
-  width: 100%;
-  height: 240px;
-  @media (max-width: 768px) {
-    width: 90%;
-    margin: 0 auto;
-  }
+    width: 100%;
+    flex-basis: 60%;
+    height: 220px;
+    
+    @media screen and (max-width: 768px) {
+      width: 100%;
+    }
 `
 
 const CardImage = styled.img`
+  width: 100%;
   height: 100%;
-  width: 90%;
   border-radius: 10px;
   object-fit: cover;
+  flex-basis: 48%;
   @media (max-width: 768px) {
     width: 100%;
+    object-fit: cover;
   }
 `
-
 const CardTextWrapper = styled.li`
+  flex-basis: 60%;
   display: flex;
   flex-direction: column;
-  width: 48%;
-  margin-top: 30px;
+  justify-content: space-around;
   gap: 20px;
   @media (max-width: 768px) {
     width: 100%;
-    margin: 0 auto;
     margin-top: 20px;
-    display: flex;
-    align-items: center;
-    text-align: start;
+    display: flex;   
     margin-bottom: 10px;
   }
 `
-
 const CardTitle = styled.p`
   font-weight: 600;
-  font-size: 1.1em;
+  font-size: 1.2em;
   color: #333333;
+  
   @media (max-width: 768px) {
     margin-bottom: 5px;
   }
 `
 
 const CardDescription = styled.p`
-  
-  width: 300px;
   color: #666666;
   font-size: 0.9em;
   overflow: hidden;
@@ -142,27 +139,23 @@ const CardDescription = styled.p`
 	-webkit-box-orient: vertical;
   @media (max-width: 768px) {
     margin-bottom: 20px;
-    overflow: hidden;
-	  text-overflow: ellipsis;
-	  word-wrap: break-word;
-	  display: -webkit-box;
-	  -webkit-line-clamp: 2; /* ellipsis line */
+    overflow: visible;
+    -webkit-line-clamp: 6;
   }
 `
 
 const HashWrapper = styled.div`
-  margin-top: 60px;
+  margin-top: 10px;
   display: flex;
   font-size: 0.8em;
   text-align: center;
-  width: 350px;
+  width: 100%;
   gap: 2%;
   color: #666666;
+  
   div {
-    padding: 10px;
-    width: 100%;
-    border-radius: 10px;
-    border: 1px solid #ddd;
+   margin-right: 2%;
+   background-color : mintcream ;
     @media (max-width: 768px) {
       display: none;
     }
@@ -217,11 +210,11 @@ function Review() {
     return type === "" || e.type === type;
   });
 
- 
+
   return (
     <>
-      <ContentWrap>
         <Content>
+      <ContentWrap>
         <Title>리뷰</Title>
           <List>
             <ListItem className={type === "best" ? 'active' : ""} onClick={() => setType("best")} >인기순 </ListItem>
@@ -229,6 +222,7 @@ function Review() {
             <ListItem className={type === "recent" ? 'active' : ""} onClick={() => setType("recent")}> 최신순</ListItem>
           </List>
        
+        
         <CardWrapper>
           {
           CardMenu.slice(1,5).map((e,i)=>{
@@ -238,6 +232,7 @@ function Review() {
               <CardItem>
                 <CardImage src={e.img} alt="" />
               </CardItem>
+
               <CardTextWrapper>
                 <CardTitle>{e.title}</CardTitle>
                 <CardDescription>{e.desc}</CardDescription>
@@ -259,9 +254,9 @@ function Review() {
               <p>전체 리뷰 보기 <FontAwesomeIcon icon={faArrowRight} /></p>
               </NavLink>
             </Btn>
-        </CardWrapper>
-        </Content>
+        </CardWrapper>     
       </ContentWrap>
+        </Content>
     </>
   );
 }
