@@ -171,7 +171,6 @@ function Navsearch() {
   // }, []);
 
 
-
   useEffect(() => {
     setSearchTerm(Selected);
     setSelected(Selected);
@@ -187,7 +186,9 @@ function Navsearch() {
       )
     );
   }, []);
+
   
+
   const handleSearch = (el) => {
     setSearchKeyword(searchTerm);
     // stateData(searchTerm);

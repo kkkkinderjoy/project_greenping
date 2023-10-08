@@ -77,7 +77,7 @@ const Searchbar = styled.div`
     }
   }
   > select {
-    flex-basis: 80%;
+    flex-basis: 40%;
   }
 
 `;
@@ -276,7 +276,6 @@ function SearchD() {
                     placeholder="검색어를 입력하세요"
                     className="inputTxt"
                   />
-                  <button onClick={handleSearch}>검색하기</button>
                 </Searchbar>
                 <Searchbar>
                   <select onChange={optionDonm} value={Selected}>
@@ -292,6 +291,9 @@ function SearchD() {
                       return <option key={i}>{e}</option>;
                     })}
                   </select>
+                </Searchbar>
+                <Searchbar>
+                  <button onClick={handleSearch}>검색하기</button>
                 </Searchbar>
                 {/* <Searchbar>
                   <ul>
