@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import {
   addDoc,
   collection,deleteDoc,doc,getDoc,getDocs,
   getFirestore,onSnapshot,orderBy,query} from "firebase/firestore";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faPen, faTrash, faX } from "@fortawesome/free-solid-svg-icons";
 import TimeGap from "./../components/KNH/TimeGap.js"
+import Comments from "../components/KNH/Comments.js";
 
 const BorderWrapper = styled.div`
   max-width: 1280px;
@@ -52,8 +53,9 @@ const ListWrap = styled.div`
 `
 const List = styled.ul`
   margin: 0 auto;
-  flex-basis: 29%;
+  flex-basis: 109%;
   margin-top: 27px;
+
   margin-bottom: 4px;
   border: 1px solid #e5e7eb;
   border-radius: 1rem;
@@ -69,14 +71,8 @@ const List = styled.ul`
     object-fit: cover;
     margin-bottom: 10px;
   }
-  @media screen and (min-width: 641px) and (max-width: 786px){
-    flex-basis: 40%;
 
 
-  }
-  @media screen and (max-width: 640px){
-    flex-basis: 100%;
-  }
 `;
 
 const ListItem = styled.li`
@@ -144,7 +140,7 @@ const Profile = styled.div`
 const HeartWrap = styled.div`
   position: absolute;
   bottom: 20px;
-  right: 7%;
+  right: 4%;
   margin-top: 30px;
   width: 25px;
   height: 25px;
@@ -227,79 +223,10 @@ const UserBtn = styled.button`
 
 
 
-const Comment = styled.ul`
-  width: 80%;
-  margin: auto;
-  margin-top: 35px;
-  margin-bottom: 7px;
-  >h3{
-    font-size: 0.9em;
-    padding-bottom: 6px;
-    border-bottom: 1px solid #eee;
-  }
-  >span{
-    font-size: 0.7em;
-  }
-  button{
-    background: none;
-    border: none;
-
-  }
-  svg{
-    color: coral;
-    cursor: pointer;
-  }
-`
-
-const ConWrap = styled.div`
-  width:100%;
-  height: 40px;
-  margin: 8px auto;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-`
-
-const Textarea = styled.textarea`
-    width: 74%;
-    margin-left: 9%;
-    padding-left: 4%;
-    padding-top: 2%;
-    height: 2em;
-    border: 1px solid #eee;
-    outline: none;
-    resize: none;
-    &:focus{
-      border: 1px solid  #98eecc;;
-    }
-    border-radius: 10px;
-`
-
-const Div = styled.div`
-  width: 80%;
-  margin: auto;
-  padding: 0 2%;
-  padding-top: 2%;
-  height: 2em;
-  border: none;
-  font-size: 0.8em;
-  color: #999;
-  border: 1px solid #eee;
-  border-radius: 10px;
-`;
 
 
-const CommentBtn = styled.button`
-  width: 43px;
-  height: 90%;
-  margin-bottom: 3px;
-  border: none;
-  background-color: #333333;
-  color: white;
-  margin-top: 10px;
-  cursor: pointer;
-  border-radius: 12px;
-`
+
+
 
 
 const TopContent = styled.div`
@@ -385,6 +312,8 @@ function Board() {
 
 
 
+
+
   useEffect(() => {
     const fetchData = async () => {
       const postRef = collection(getFirestore(), "board");
@@ -402,53 +331,12 @@ function Board() {
 
 
 
-  // 댓글
 
-  const [comments, setComments] = useState([]); 
-  const [newComment, setNewComment] = useState("");
-
-  const addNewComment = async (postId) => {
-    const firestore = getFirestore();
-    
-    try {
-      const docRef = await addDoc(collection(firestore, "comments"), {
-        uid: userState.uid,
-        name: userState.data.name,
-        content: newComment,
-        postId: postId,
-      });
-
-
-        const commentData = {
-          id: docRef.id,
-          uid: userState.uid,
-          name: userState.data.name,
-          content: newComment,
-          postId: postId,
-        };
-        
-        setComments([...comments, commentData]);
-        setNewComment("");
-      } catch (error) {
-        console.error("댓글 추가 에러:", error);
-      }
-    };
+  
 
 
 
-    
-    const deleteCo = async (uid) => {
-      const firestore = getFirestore();
-      const docRef = doc(firestore, "comments", uid);
-    
-      try {
-        await deleteDoc(docRef);
-        alert("삭제가 완료되었습니다");
-       
-      } catch (error) {
-        console.log(error);
-      }
-    };
+
 
 
   
@@ -497,35 +385,8 @@ function Board() {
                 <ListItem>{e.title}</ListItem>
                 <ListItem>
                   <div dangerouslySetInnerHTML={{ __html: e.content }} />{" "}
-                </ListItem>
-
-          <Comment>
-            <h3>댓글</h3>
-                {comments.map((comment, commentIndex) => (
-                  
-                  <li key={comment.id}>
-                    <span>{comment.name}: {comment.content}</span>
-                    {userState.uid === comment.uid && (
-                      <button onClick={deleteCo}>
-                        <FontAwesomeIcon icon={faTrash}/>
-                      </button>
-                    )}
-                  </li>
-                ))}
-              </Comment>
-              {uid ? (
-              <ConWrap>
-                  <Textarea
-                    value={newComment}
-                    onChange={(e) => setNewComment(e.target.value)}
-                    placeholder="댓글을 남겨보세요!"
-                  />
-                  <CommentBtn onClick={() => addNewComment(e.id)}>등록</CommentBtn>
-              </ConWrap>
-      ) : (
-        <Div onClick={()=>{navigate('/login')}}>로그인 이후 이용해주세요</Div>
-      )}
-             
+                </ListItem>       
+             <Comments/>
                 <ListItem
                   onClick={() => {
                     toggleLike(i);

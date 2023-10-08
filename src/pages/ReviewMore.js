@@ -4,10 +4,10 @@ import React, { useCallback, useEffect, useRef, useState } from 'react'
 import styled from "styled-components";
 
 import { faPen, faUser } from "@fortawesome/free-solid-svg-icons";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useSelector } from 'react-redux';
-import { collection, doc, getDocs, getFirestore, orderBy, query } from 'firebase/firestore';
+import { collection, deleteDoc, doc, getDocs, getFirestore, orderBy, query } from 'firebase/firestore';
 
 
 
@@ -173,10 +173,47 @@ function ReviewMore() {
   
   }, []);
 
+  const UserBtnWrap = styled.div`
+  display: flex;
+  align-items: center;
+  margin-top: 31px;
+  color: #999999;
+`
+
+const UserBtn = styled.button`
+  padding: 10px 10px;
+  background-color: #fff;
+  color: #555555;
+  border: none;
+  cursor: pointer;
+  transition: 0.4s;
+  &:nth-child(1){
+    position: relative;
+    &:hover{
+      font-weight: bold;
+    }
+    &::after{
+        content: "";
+        position: absolute;
+        top: 12px;
+        right: 0;
+        width: 1px;
+        height: 15px;
+        background-color: #999999;
+      }
+  }
+  
+  &:nth-child(2):hover{
+      color: coral;
+      font-weight: bold;    
+
+    }
+
+`
 
 
-
-
+  const navigate = useNavigate();
+  const uid = sessionStorage.getItem("users")
   const userState = useSelector((state) => state.user);
   const [posts, setPosts] = useState([]);
 
@@ -208,6 +245,31 @@ function ReviewMore() {
   const [limit, setLimit] = useState(10);
   const [page, setPage] = useState(1);
   const offset = (page - 1) * limit;
+
+
+  const deletePost = async (uid) => {
+    const firestore = getFirestore();
+    const docRef = doc(firestore, "review", uid);
+  
+    try {
+      await deleteDoc(docRef);
+      alert("삭제가 완료되었습니다");
+     
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  
+  const handleDelete = (uid) => {
+    if (window.confirm("정말로 삭제하시겠습니까?")) {
+      deletePost(uid).then(() => {
+        const updatedPosts = posts.filter((post) => post.id !== uid);
+        setPosts(updatedPosts);
+        
+      
+      });
+    }
+};
   
   return (
     <>
@@ -242,6 +304,16 @@ function ReviewMore() {
                   <div dangerouslySetInnerHTML={{__html: e.content}}/>            
               </ContainerWrap>
               <UserDate>{e.timestamp.toDate().toLocaleDateString()}</UserDate>
+              {uid && uid === e.uid && (
+                    <UserBtnWrap>
+                      <UserBtn onClick={() => {
+                        navigate(`/edit`);
+                      }}>
+                        수정
+                      </UserBtn> 
+                      <UserBtn onClick={()=>handleDelete(e.id)}>삭제</UserBtn>
+                    </UserBtnWrap>
+                )}
             </Container>
             </>
           );
