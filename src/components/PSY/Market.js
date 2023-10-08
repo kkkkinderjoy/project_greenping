@@ -24,6 +24,9 @@ const ContainerWrap = styled.div`
   padding: 0 2%;
 `
 
+
+
+
 const ContentItem = styled.div`
   flex-basis: 50%;
   background-color: #fff;

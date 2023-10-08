@@ -1,7 +1,6 @@
 import React from 'react';
 
 function TimeGap({ timestamp }) {
-  console.log(timestamp)
   const getTimegap = () => {
     const createTime = timestamp.toMillis(); 
     const timeDiff = Date.now() - createTime;
