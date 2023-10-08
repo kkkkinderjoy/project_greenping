@@ -194,6 +194,7 @@ const UserBtn = styled.button`
         background-color: #999999;
       }
   }
+`
 
 const userState = useSelector((state) => state.user);
   const [posts, setPosts] = useState([]);
