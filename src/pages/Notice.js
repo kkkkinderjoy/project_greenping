@@ -39,9 +39,9 @@ const List = styled.ul`
 `
 
 const Listitem = styled.li`
-  li{
+  
   cursor: pointer;
-  font-size: 15px;
+  font-size: 1em;
   /* &::before{
     content: "";
     position: absolute;
@@ -52,7 +52,7 @@ const Listitem = styled.li`
     height: 15px;
     z-index: 50;
   } */
- }
+ 
 `
 
 const Container =styled.div`

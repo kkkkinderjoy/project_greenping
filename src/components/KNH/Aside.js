@@ -131,7 +131,7 @@ function Aside() {
       {isActive && 
         <ContentWrap>
            <Kakao isKakao> <Link id="kakao-talk-channel-chat-button"></Link></Kakao>
-          <>
+          
             <Link id="kakao-talk-channel-chat-button"></Link>
           {/* <Content isKakao>
           </Content> */}
