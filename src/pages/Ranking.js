@@ -10,7 +10,7 @@ import {
   faPlusCircle,
   faScroll,
 } from "@fortawesome/free-solid-svg-icons";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import axios from "axios";
 
 const Content = styled.div`
@@ -38,10 +38,10 @@ const Rank = styled.ul`
   margin: 60px auto;
   margin-top: 60px;
   display: flex;
-
   flex-wrap: wrap;
 `;
 const RankList = styled.li`
+  
   &:nth-child(1){
     margin-top : 30px;
   }
@@ -81,19 +81,31 @@ const Num = styled.p`
 const NIWrap = styled.div`
   flex-basis: 40%;
   display: flex;
+  position: relative;
   @media screen and (max-width:768px){
     
     flex-basis: 100%;
   }
+
  
 `
 
+const Medal = styled.img`
+  position: absolute;
+  top:0px;
+  left:0px;
+  width:55px;
+  height:55px;
+
+`
+
 const Image = styled.img`
-    width: 85%;
+    width: 400px;
     height: 250px;
     border-radius: 10px;
     margin-right: 20px;
     object-fit: cover;
+    
   
   @media screen and (max-width:768px){
     
@@ -110,6 +122,7 @@ const RankCon = styled.div`
   margin-left:20px;
   flex-basis: 63%;
   height: auto;
+  position: relative;
   p {
     margin-bottom: 12px;
   }
@@ -132,6 +145,17 @@ const RankCon = styled.div`
   p:nth-child(3) {
     font-size: 0.9em;
     line-height: 28px;
+  }
+  span{
+    position: absolute;
+    right: 50px;
+    bottom: -53px;
+    width: 70px;
+    height:30px;
+    font-weight: bold;
+
+
+
   }
 `;
 
@@ -193,19 +217,42 @@ function Detail() {
       <Content>
         <ContentWrap>
           <Title>랭킹</Title>
+
           <Rank>
             {data &&
               data.slice(13, page).map((e, i) => {
+
                 return (
                   <>
                       {e.firstImageUrl !== "" && 
                     <RankList>
                       <NIWrap>
 
+                      {
+                          i=== 0 &&
+                         <Medal src={`images/medal1.png`}></Medal>
+                          
+                        }
+                      {
+                          i=== 1 &&
+                         <Medal src={`images/medal2.png`}></Medal>
+                          
+                        }
+                      {
+                          i=== 2 &&
+                         <Medal src={`images/medal3.png`}></Medal>
+                          
+                        }
+
+                      
+
+
                       <Num>{i + 1}</Num>
+
                         <Image src={e.firstImageUrl} alt="{e.firstImageUrl}" />
                       </NIWrap>
                       <RankCon>
+                      <NavLink to={`navdesc/${e.contentId}`} state={{e}}>
                         <p>{e.facltNm}</p>
                         <p>
                           {" "}
@@ -214,7 +261,7 @@ function Detail() {
                         </p>
                         {
                           e.themaEnvrnCl !== "" &&
-                          <>{e.themaEnvrnCl}</>
+                          <p> # {e.themaEnvrnCl}</p>
                         }
                        
                         {e.resveUrl !== "" && (
@@ -225,6 +272,8 @@ function Detail() {
                             </Link>
                           </Homepage>
                         )}
+                        <span>상세보기</span>
+                        </NavLink>
                       </RankCon>
                     </RankList>
                       }
