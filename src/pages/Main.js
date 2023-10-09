@@ -10,6 +10,7 @@ import Msearch from '../components/CYR/Msearch';
 import Story from '../components/HYJ/Story';
 
 
+
 function Main() {
 
   return (
@@ -22,7 +23,6 @@ function Main() {
       <Market />
       <Story />
       <Content />
-
     </>
   )
 }
