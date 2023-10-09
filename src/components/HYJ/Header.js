@@ -206,7 +206,6 @@ const MnavList = styled.div`
         color: #A6F4D0;
       }
    }
-
   }
 `
 const MnavBanner = styled.div`
