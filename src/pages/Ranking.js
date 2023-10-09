@@ -15,6 +15,7 @@ import axios from "axios";
 
 const Content = styled.div`
   width: 100%;
+  margin-top: 60px;
 `;
 const ContentWrap = styled.div`
   max-width: 1280px;
@@ -22,36 +23,32 @@ const ContentWrap = styled.div`
 `;
 
 const Title = styled.div`
+  text-align: center;
   padding: 10px 20px;
   font-weight: bold;
-  font-size: 2em;
+  font-size: 2.2em;
   position: relative;
 
-  &::after {
-    content: "";
-    width: 30px;
-    height: 5px;
-    margin-left: 0.5px;
-    background-color: #2ed090;
-    position: absolute;
-    top: -8px;
-    left: 18px;
-    border-radius: 2px;
-  }
+
+
 `;
 
 const Rank = styled.ul`
-  width: 90%;
-  margin: 0 auto;
+  width : 100%;
+  margin: 60px auto;
   margin-top: 60px;
   display: flex;
 
   flex-wrap: wrap;
 `;
 const RankList = styled.li`
+  &:nth-child(1){
+    margin-top : 30px;
+  }
+  margin-left: 0%;
   width: 100%;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
   padding-bottom: 20px;
   margin-bottom: 20px;
@@ -67,6 +64,7 @@ const Num = styled.p`
  
   width: 40px;
   height: 40px;
+  padding-right:15px;
   border-radius: 10px;
   background-color: #fff;
   color: #999999;
@@ -81,7 +79,7 @@ const Num = styled.p`
 `;
 
 const NIWrap = styled.div`
-  flex-basis: 37%;
+  flex-basis: 40%;
   display: flex;
   @media screen and (max-width:768px){
     
@@ -92,14 +90,14 @@ const NIWrap = styled.div`
 
 const Image = styled.img`
     width: 85%;
-    height: 200px;
+    height: 250px;
     border-radius: 10px;
     margin-right: 20px;
     object-fit: cover;
   
   @media screen and (max-width:768px){
     
-    flex-basis: 74%;
+    flex-basis: 80%;
     height: 200px;
     margin: 3% 0;
     margin-right: 60px;
@@ -109,7 +107,8 @@ const Image = styled.img`
 `
 
 const RankCon = styled.div`
-  flex-basis: 68%;
+  margin-left:20px;
+  flex-basis: 63%;
   height: auto;
   p {
     margin-bottom: 12px;

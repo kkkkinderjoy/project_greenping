@@ -8,10 +8,11 @@ import { collection, doc, getDoc, getFirestore } from 'firebase/firestore'
 
 
 const LoginContent = styled.div`
+  display: flex;
   background-color: #f9fcfc;
-  padding-top: 60px;
-  padding-bottom: 140px;
-  
+  justify-content: center;
+  height: calc(100vh - 40px);
+  align-items: center;
 `
 
 const Content = styled.div`

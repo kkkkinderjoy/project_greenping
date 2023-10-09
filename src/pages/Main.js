@@ -10,19 +10,19 @@ import Msearch from '../components/CYR/Msearch';
 import Story from '../components/HYJ/Story';
 
 
+
 function Main() {
 
   return (
     <>
       <Search />
-       <Msearch />
+      {/* <Msearch /> */}
       <Choice />
       <Review />
       <Eventbanner />
       <Market />
       <Story />
       <Content />
-
     </>
   )
 }

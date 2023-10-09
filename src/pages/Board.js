@@ -11,6 +11,9 @@ import { faChartArea, faComment, faMessage, faPen, faTrash, faX } from "@fortawe
 import TimeGap from "./../components/KNH/TimeGap.js"
 import Comments from "../components/KNH/Comments.js";
 import Chat from './../components/KNH/Chatting.js';
+import Write from "./Write.js";
+import Ckeditor from "../components/KNH/Ckeditor.js";
+
 
 
 const BorderWrapper = styled.div`
@@ -22,30 +25,18 @@ const  HeadWrap = styled.div`
   max-width: 1280px;
   margin: 0 auto;
   display: flex;
-  justify-content: space-around;
+  text-align: center;
 
 `
 const Title = styled.div`
   padding: 10px 20px;
   font-weight: bold;
   font-size: 2em;
-  position: relative;
-
-  &::after {
-    content: "";
-    width: 30px;
-    height: 5px;
-    margin-left: 0.5px;
-    background-color: #2ed090;
-    position: absolute;
-    top: -8px;
-    left: 18px;
-    border-radius: 2px;
-  }
 `;
 
 const ListWrap = styled.div`
     width: 80%;
+    max-width: 1280px;
     margin: 0 auto;
     display: flex;
     flex-wrap: wrap;
@@ -199,6 +190,10 @@ const Button = styled.button`
   outline: none;
   border: none;
   cursor: pointer;
+  position: absolute;
+  right:34px;
+
+
   svg {
     color: #fff;
   }
@@ -279,6 +274,8 @@ function Board() {
   };
 
 
+  const {view} = useParams()
+
   useEffect(() => {
     const fetchPosts = async () => {
       try {
@@ -350,16 +347,18 @@ function Board() {
         {
              isModal && <Chat onClose={()=>{setIsModal(false)}}/>
         }
+
+
       <BorderWrapper>
         <HeadWrap>
           <Title>그린톡</Title>
-          {userState.uid && (
+        
             <Link to="/write">
               <Button>
                 <FontAwesomeIcon icon={faPen} />
               </Button>
             </Link>
-          )}
+       
         </HeadWrap>
         <ListWrap>
 
@@ -379,12 +378,13 @@ function Board() {
                   {uid && uid === e.uid && (
                     <UserBtnWrap>
                       <UserBtn onClick={() => {
-                        navigate(`/edit`);
+                        navigate(`/edit/${e.id}`);
                       }}>
                         수정
                       </UserBtn> 
                       <UserBtn onClick={()=>handleDelete(e.id)}>삭제</UserBtn>
                     </UserBtnWrap>
+              
                 )}
                 </TopContent>
                 </ListItem>
@@ -395,10 +395,11 @@ function Board() {
                 </ListItem>       
              
              
+                <Comments/>
+             
 
 
-
-             {userState.uid &&
+      
              <>
                 <ListItem
                   onClick={() => {
@@ -425,7 +426,7 @@ function Board() {
 
                 </ListItem>
                 </>
-                }
+                
               </List>
             );
           })}

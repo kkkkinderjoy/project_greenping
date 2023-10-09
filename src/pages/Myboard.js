@@ -18,26 +18,16 @@ const  HeadWrap = styled.div`
   width: 80%;
   margin: 0 auto;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+  text-align: center;
+
 
 `
 const Title = styled.div`
   padding: 10px 20px;
   font-weight: bold;
   font-size: 2em;
-  position: relative;
-
-  &::after {
-    content: "";
-    width: 30px;
-    height: 5px;
-    margin-left: 0.5px;
-    background-color: #2ed090;
-    position: absolute;
-    top: -8px;
-    left: 18px;
-    border-radius: 2px;
-  }
+ 
 `;
 const List = styled.ul`
   margin: 0 auto;
@@ -360,7 +350,7 @@ function Board() {
         <Nopost>
           <h3>텅</h3>
           <p>그린핑 회원들이 회원님을 기다리고 있어요 !</p>
-          <NoPtext onClick={()=>{nav('/write')}}>캠핑 얘기 하러 가기
+          <NoPtext onClick={()=>{nav('/board')}}>캠핑 얘기 하러 가기
             <FontAwesomeIcon icon={faRunning}></FontAwesomeIcon>
           </NoPtext>
         </Nopost>

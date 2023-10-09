@@ -14,6 +14,7 @@ import { doc, getDoc, getFirestore } from "firebase/firestore";
 const Container = styled.div`
   width: 100%;
   margin-top: 60px;
+  text-align:center;
 `;
 
 const InnerContainer = styled.div`
@@ -25,20 +26,9 @@ const Heading = styled.h3`
   padding: 10px 20px;
   font-weight: bold;
   font-size: 2em;
-  position: relative;
   margin-bottom: 60px;
   margin-left: 70px;
-  &::after {
-    content: "";
-    width: 30px;
-    height: 5px;
-    margin-left: 0.5px;
-    background-color: #2ed090;
-    position: absolute;
-    top: -8px;
-    left: 18px;
-    border-radius: 2px;
-  }
+ 
 `;
 
 const ContentWrapper = styled.div`
@@ -84,7 +74,7 @@ function Write() {
   const { board, view } = useParams();
   const [isModal, setIsModal] = useState(view ? false : true);
   const navigate = useNavigate();
-
+  const userState = useSelector((state) => state.user);
   const memberProfile = useSelector((state) => state.user);
   const [message, setMessage] = useState("");
   const [postData, setPostData] = useState(null);
@@ -93,9 +83,9 @@ function Write() {
 
 
   useEffect(() => {
-    if (board) {
+    if (board && view) {
       const fetchData = async () => {
-        const postRef = doc(getFirestore(), "board");
+        const postRef = doc(getFirestore(), "board", view);
         const postSnapShot = await getDoc(postRef);
         if (postSnapShot.exists()) {
           setPostData(postSnapShot.data());
@@ -114,27 +104,27 @@ function Write() {
     }
   });
 
-  // if (!memberProfile.loggedIn) {
-  //   return (
-  //     <>
-  //       {isModal && (
-  //         <Modal
-  //           error="로그인 이후 이용해주시기 바랍니다!"
-  //           onClose={() => {
-  //             setIsModal(false);
-  //             navigate("/login");
-  //           }}
-  //         />
-  //       )}
-  //     </>
-  //   );
-  // }
+  if (!userState.uid) {
+    return (
+      <>
+        {isModal && (
+          <Modal
+            error="로그인 이후 이용해주시기 바랍니다!"
+            onClose={() => {
+              setIsModal(false);
+              navigate("/login");
+            }}
+          />
+        )}
+      </>
+    );
+  }
 
   return (
     <>
       <Container>
         <InnerContainer>
-            <Heading>글쓰기</Heading>
+            <Heading>{ view  ? "글수정" : "글쓰기"}</Heading>
          
 
           <ContentWrapper>
@@ -154,6 +144,8 @@ function Write() {
           </ContentWrapper>
         </InnerContainer>
       </Container>
+
+ 
     </>
   );
 }

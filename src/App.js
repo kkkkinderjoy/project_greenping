@@ -37,6 +37,7 @@ import Navdescpage from "./pages/Navdescpage";
 import ReviewCk from "./components/LJS/ReviewCk";
 import ReviewWrite from "./pages/ReviewWrite";
 import Msearchd from "./pages/Msearchd";
+import ChoiceDescpage from "./pages/ChoiceDescpage";
 
 
 function App() {
@@ -123,7 +124,10 @@ function Inner() {
         <Route path="/Assi" element={<Assi />} />
         <Route path="/inquiry/:seq" element={<Inquiry />} />
         <Route path="/inquiry/:seq/:market" element={<Inquiry />} />
-      </Routes>
+        < Route path="/edit/:view" element={<Write />}/>
+        <Route path="/choicedesc/:seq"  element={<ChoiceDescpage />}/>
+       </Routes>
+
       <Aside />
       <Footer />
     </>

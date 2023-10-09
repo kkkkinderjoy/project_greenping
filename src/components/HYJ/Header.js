@@ -19,7 +19,6 @@ const Content = styled.div`
   @media screen and (min-width: 768px){height: 130px;}
 `
 
-
 const HeaderWrap = styled.div`
   max-width: 1280px;
   margin: 0 auto;
@@ -51,7 +50,6 @@ const Logo = styled.img`
 `
 
 
-
 const ListWrap = styled.div`
    display: flex;
    flex-basis: 85%;
@@ -60,19 +58,17 @@ const ListWrap = styled.div`
 `
 
 
-
 const List = styled.ul`
-  
   flex-basis: 100%;
   display: flex;
   font-weight: bold;
   
 `
 
-
 const ListItem = styled.li`
   flex-basis: 25%;
   text-align: center;
+  
   .active{
     color: #23D384;
   }
@@ -84,7 +80,6 @@ const ListItem = styled.li`
   }
  
 `
-
 
 const Input = styled.input`
   border: none;
@@ -144,12 +139,11 @@ const Hamburger= styled.div`
   @media screen and (min-width: 768px){display: none;}
 `
 
-
 const Mnav = styled.div` //모바일 네비
   width: 100%;
   height: 100%;
   position: fixed;
-  background-color: #eee;
+  background-color: white;
   left: ${({ $isopen }) => $isopen ? "0" : "100%;"};
   height: ${({ $isopen, $height }) => ($isopen === "true" ? $height : "100%")};
   top: 0;
@@ -158,7 +152,7 @@ const Mnav = styled.div` //모바일 네비
   box-sizing: border-box;
   z-index: 999;
   transition: all 0.5s;
-  @media screen and (min-width: 768px){display: none;}
+  @media screen and (min-width: 768px){display: none;}b
   >ul{
     margin-top: 24px;
   >li{
@@ -181,7 +175,7 @@ const MnavLogo = styled.div`
       margin: 0 auto;
       display: flex;
       align-items: center;
-      background-color: mintcream;
+      background-color: #eee;
       border-radius: 50%;
       width: 150px;
       height: 150px;
@@ -199,15 +193,25 @@ const MnavList = styled.div`
   display: flex;
   flex-direction: column;
   margin-top: 40px;
-
+     
   ul{
     justify-content: center;
-    margin-bottom: 40px;
+    margin-bottom: 30px;
     display: flex;
     cursor: pointer;
-    li:nth-child(1) {
-      flex-basis: 90%;
-    }
+    
+  
+   li{
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 24px;
+    &:hover{
+        color: #A6F4D0;
+      }
+   }
+
   }
 `
 const MnavBanner = styled.div`
@@ -217,6 +221,7 @@ const MnavBanner = styled.div`
 const MyList = styled.div`
 width: 90%;
 margin-top: 20px;
+margin-bottom: 15px;
 ul{
   display: flex;
   justify-content: space-around;
@@ -249,7 +254,7 @@ const MyPage = styled.ul`
   flex-direction: column;
 `
 const MPList = styled.li`
-   padding: 8px 13px;
+padding: 8px 10px;
   &:hover {
     background-color: #f0f0f0;
   }
@@ -366,8 +371,7 @@ function Header({userState}){
               <ul key={i}>
               <li  onClick={()=>{
                 setIsActive(!isActive)
-              }}><NavLink to={`/${LinkArray[i]}`}>{e}</NavLink></li>
-              <li><FontAwesomeIcon icon={faChevronRight}/></li>
+              }}><NavLink to={`/${LinkArray[i]}`}>{e}</NavLink><FontAwesomeIcon icon={faChevronRight}/></li>
               </ul>
               </>
             )
@@ -377,9 +381,9 @@ function Header({userState}){
         <MnavBanner>{Eventbanner()}</MnavBanner>
         </Mnav>        
         </HeaderWrap>
-         {/* 모바일네비 */}
          
      </Content>
+         {/* 모바일네비 */}
      <Hamburger style={{position: `${isActive ? "fixed" : "absolute"}`}} className={isActive && "on"} onClick={()=>{setIsActive(!isActive)}}>
                 {
                   Array(3).fill().map((_,i)=>{

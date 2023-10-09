@@ -89,6 +89,25 @@ const InputItem = styled.div`
     margin-left: 40%;
   }
 `
+const Textarea = styled.textarea`
+  width: 500px;
+  height: 200px;
+  position: absolute;
+  left: 45%;
+  transform: translateX(-55%);
+  margin-top: 7px;
+  margin-left: 10%;
+  margin-right: 1%;
+  padding-left: 4%;
+  padding-top: 3%;
+  border: 1px solid #eee;
+  outline: none;
+  resize: none;
+  &:focus{
+    border: 1px solid  #98eecc;
+  }
+  border-radius: 10px;
+`
 
 const Ment = styled.div`
   width: 400px;
@@ -106,27 +125,6 @@ const Ment = styled.div`
   width: 80%;
   height: 60%;
 }
-`
-
-const Textarea = styled.textarea`
-  max-width: 500px;
-  height: 200px;
-  position: absolute;
-  left: 45%;
-  top: 60%;
-  transform: translateX(-55%);
-  margin-top: 7px;
-  margin-left: 10%;
-  margin-right: 1%;
-  padding-left: 4%;
-  padding-top: 3%;
-  border: 1px solid #eee;
-  outline: none;
-  resize: none;
-  &:focus{
-    border: 1px solid  #98eecc;
-  }
-  border-radius: 10px;
 `
 
 const ButtonItem = styled.div`

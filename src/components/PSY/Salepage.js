@@ -218,6 +218,7 @@ function Salepage() {
           posts &&
           posts.map((e,i)=>{
             return(
+              uid && uid === e.uid &&
               <ContentItem key={i}>
                 <h3>{e.title}</h3>
                 <ul>

@@ -8,7 +8,7 @@ import list from './../../data/MarketData'
 const Container = styled.div`
   width: 100%;
   padding: 48px 0;
-  `
+`
 const Title = styled.h3`
 text-align: center;
 font-size: 2.0em;
@@ -70,7 +70,7 @@ const ContentItem = styled.div`
   @media screen and (max-width: 640px){
     flex-basis: 100%;
   }
-`
+` 
 const ContentDesc = styled.div`
   flex-basis: 100%;
   @media screen and (min-width: 1024px){
@@ -185,7 +185,7 @@ function Market() {
       <ContainerWrap>
         <ContentItem>
         {
-          FilterList.map((e,i) =>{
+          FilterList?.map((e,i)=>{
             if(e.ID === "판매"){
               return(
                 isActive === 0 &&
@@ -218,7 +218,7 @@ function Market() {
         </ContentItem>
         <ContentDesc>
           { 
-            FilterList && data.map((e,i)=>{
+            data?.map((e,i)=>{
               return(
                 <Card key={i}  onClick={()=>{
                   setIsActive(i);
