@@ -134,7 +134,6 @@ function Reserve({onClose}) {
   const [isModal, setIsModal] = useState(true);
   const [dateRange, setDateRange] = useState([null, null]);
   const [startDate, endDate] = dateRange;
-  const [data, setData] = useState()
   const [adultcount, setAdultCount] = useState(1);
   const [childcount, setChildCount] = useState(1);
 

@@ -52,7 +52,7 @@ const ServiceInfo = styled.div`
     width: 100%;
     display: flex;
     justify-content: space-around;
-    margin: 0;
+    margin: 20px;
 
     li{
       font-size: 1em;
@@ -66,7 +66,7 @@ const ServiceInfo = styled.div`
         position: absolute;
         width: 1px;
         height: 14px;
-        right: -7%;
+        right: -10%;
         top: 50%;
         transform: translateY(-50%);
         background-color: #000;

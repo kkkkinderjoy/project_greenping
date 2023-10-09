@@ -172,8 +172,8 @@ function SearchD() {
   const [searchTerm, setSearchTerm] = useState(stateData.optiondonmSelect === '' ? stateData.userinput : stateData.optiondonmSelect);
   const [searchKeyword, setSearchKeyword] = useState(stateData.optiondonmSelect === '' ? stateData.userinput : stateData.optiondonmSelect);
   const [Selected, setSelected] = useState(stateData.optiondonmSelect === '' ? stateData.userinput : stateData.optiondonmSelect);
-  const [Inputv, setInputv] = useState(stateData.userinput)
-  const [selectv, setselectv] = useState(stateData.optiondonmSelect)
+  // const [Inputv, setInputv] = useState(stateData.userinput)
+  // const [selectv, setselectv] = useState(stateData.optiondonmSelect)
   // console.log(location.state.optiondonmSelect)
   // console.log(location.state.userinput)
  
@@ -249,7 +249,17 @@ function SearchD() {
     setSelected(donmValue)
   };
 
- 
+  const filteredData = data.filter((e) => {
+    const matchesSearchTerm = e.facltNm.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      e.addr1.includes(searchTerm) ||
+      e.induty.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      e.doNm.includes(searchTerm);
+    const matchesSelected = Selected === "전체" || Selected === e.doNm;
+    
+    // 필터링 조건: searchTerm와 Selected 값이 일치하는 경우
+    return matchesSearchTerm && matchesSelected;
+  });
+  
   // useEffect(()=>{
   //     setSearchKeyword(stateData.optiondonmSelect)
   //    // setSearchKeyword(stateData.optiondonmSelect)
@@ -324,6 +334,7 @@ function SearchD() {
                 const listArray = e.sbrsCl.split(",");
                 const imgUrl = ["ground","hotwater","mart","playzone","pool","sports","tramp","volt","walk","wifi","wood"]
                 return(
+                  
                   <React.Fragment key={i}>
                     {
                       searchKeyword === searchTerm && 
