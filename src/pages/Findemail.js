@@ -161,18 +161,33 @@ function Findemail() {
     }
   } 
 
-  const passwordEdit = () => {
-    sendPasswordResetEmail(firebaseAuth,resultemail)
-    .then(function(){
+
+  const handleResetPassword = async () => {
+    try {
+      await sendPasswordResetEmail(firebaseAuth,resultemail)
       setMessage(`귀하의 ${resultemail.replace(/(.{4}).+(@.+)/,"$1*****$2")}로 메일을 전송 하였습니다.`)
       setModalOpen(!isModalOpen)
-      return
-    }).catch(error =>{
-      setMessage(error);
+    } catch (error) {
+      console.error(error.message);
       setModalOpen(!isModalOpen);
-      return;
-    })
+     
+    }
   }
+
+
+  // const handleResetPassword = () => {
+  //  
+  //   sendPasswordResetEmail(firebaseAuth,resultemail)
+  //   .then(function(){
+  //     setMessage(`귀하의 ${resultemail.replace(/(.{4}).+(@.+)/,"$1*****$2")}로 메일을 전송 하였습니다.`)
+  //     setModalOpen(!isModalOpen)
+  //     return
+  //   }).catch(error =>{
+  //     setMessage(error);
+  //     setModalOpen(!isModalOpen);
+  //     return;
+  //   })
+  // }
 
   return (
     <>
@@ -191,7 +206,7 @@ function Findemail() {
           <Button onClick={findID}>이메일 찾기</Button>
         </InputWrap>
         {
-          resultemail && <Button onClick={passwordEdit}>패스워드 재설정</Button>
+          resultemail && <Button onClick={handleResetPassword}>패스워드 재설정</Button>
         }
       </Content>
     </Container>
