@@ -214,8 +214,8 @@ function Market() {
                   <img src={rImg} alt="마켓 이미지들" /> 
                 </ul>
               )}
-          })
-        }
+            })
+          }
         </ContentItem>
         <ContentDesc>
           { 

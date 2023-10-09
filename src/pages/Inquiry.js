@@ -175,8 +175,7 @@ function Inquiry() {
         return(addComment);
       }else{
         alert("댓글이 작성되었습니다.")
-      }
-      
+    }
     try {
       const docRef = await addDoc(collection(firestore, "inquiring"), {
         uid: userState.uid,
