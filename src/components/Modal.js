@@ -5,6 +5,8 @@ import { faTriangleExclamation, faX } from '@fortawesome/free-solid-svg-icons';
 import Logout from '../pages/Logout';
 
 
+
+
 const ContentWrap = styled.div`
     position: fixed;
     top: 30%;

@@ -158,8 +158,12 @@ function Reserve({onClose}) {
 
 
   const PayBtn = () =>{
-        alert("결제가 완료되었습니다")
-        navigate(-1)
+
+    
+      alert("결제가 완료되었습니다")
+      navigate(-1)
+
+    
 
     
   }
@@ -218,7 +222,7 @@ function Reserve({onClose}) {
                 </Personnel>
             </Mwrap>
             <Mwrap>
-            <ReserBtn onClick={PayBtn()}>결제하기</ReserBtn>
+            <ReserBtn onClick={PayBtn}>결제하기</ReserBtn>
             </Mwrap>
         </ModalContent>
     </ModalWrap>
