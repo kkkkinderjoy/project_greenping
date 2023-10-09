@@ -60,7 +60,6 @@ function Saleeditor({ title, postData }) {
       addDoc(collection(getFirestore(), "market"), {
         title: title,
         content: writeData,
-        view: 1,
         uid: userState.uid,
         name: userState.data.name,
         timestamp: serverTimestamp(),

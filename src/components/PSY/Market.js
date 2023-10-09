@@ -166,18 +166,17 @@ const data = [
 
 function Market() {
 
-  const [id,setId] = useState("양도")
-
   const FilterList = list.filter(e => {
     return (e.ID === "판매" || e.ID === "구매" || e.ID === "양도")
   });
-  
+
   const random = Math.floor(Math.random() * FilterList.length);
   const rTitle = FilterList[random].TITLE;
   const rPrice = FilterList[random].PRICE;
   const rImg = FilterList[random].IMG;
 
   const [isActive, setIsActive] = useState(0);
+  console.log(isActive)
 
   return (
     <>
@@ -186,7 +185,7 @@ function Market() {
       <ContainerWrap>
         <ContentItem>
         {
-          FilterList.map((e,i)=>{
+          FilterList.map((e,i) =>{
             if(e.ID === "판매"){
               return(
                 isActive === 0 &&

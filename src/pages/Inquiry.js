@@ -34,6 +34,10 @@ const Title = styled.div`
   margin: 30px 130px;
   font-size: 30px;
   position: relative;
+  @media screen and (max-width: 640px){
+    text-align: center;
+    font-size: 25px;
+  }
   &::after {
   content: '';
   width: 30px;
@@ -44,7 +48,12 @@ const Title = styled.div`
   top: -15px;
   left: 0;
   border-radius: 2px;
+  @media screen and (max-width: 640px){
+    top: -15px;
+    left: 65px;
+    width: 15%;
   }
+}
 `
 
 const InputItem = styled.div`
@@ -60,6 +69,9 @@ const InputItem = styled.div`
     padding-top: 30px;
     margin-bottom: 30px;
     position: relative;
+    @media screen and (max-width: 640px){
+      font-size: 20px;
+    }
   }
   p{
     position: absolute;

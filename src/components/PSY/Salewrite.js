@@ -24,7 +24,22 @@ const InnerContainer = styled.div`
   margin: 0 auto;
 `;
 
-
+const Header = styled.div`
+  width: 90%;
+  display: flex;
+  justify-content: start;
+  margin-bottom: 20px;
+  p{
+    font-size: 1.5rem;
+    line-height: 2.5rem;
+    @media screen and (max-width: 640px){
+    font-size: 0.8rem;
+    }
+  }
+  @media screen and (max-width: 640px){
+    justify-content: space-around;
+    }
+`
 
 const Heading = styled.h3`
   padding: 10px 20px;
@@ -33,6 +48,10 @@ const Heading = styled.h3`
   position: relative;
   margin-bottom: 60px;
   margin-left: 70px;
+  @media screen and (max-width: 640px){
+    margin-left: 50px;
+    font-size: 25px;
+  }
   &::after {
     content: "";
     width: 87px;
@@ -44,16 +63,7 @@ const Heading = styled.h3`
     left: 20px;
     border-radius: 2px;
   }
-`;
 
-const Header = styled.div`
-  width: 400px;
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 50px;
-  p{
-    font-size: 1.5rem;
-  }
 `
 
 const ContentWrapper = styled.div`
@@ -79,6 +89,11 @@ const TextInput = styled.input`
   border-bottom: 1.5px solid #e6e6e6;
   font-size: 1.3em;
   outline: none;
+  @media screen and (max-width: 640px){
+    width: 80%;
+    margin: 0 15%;
+    font-size: 1rem;
+    }
   &:focus{
     border-bottom: 2px solid #98eecc;
   }
@@ -88,7 +103,10 @@ const ContentInputWrapper = styled.div`
   width: auto;
   margin-top: 30px;
   margin-left: 70px;
-
+  @media screen and (max-width: 640px){
+    width: 80%;
+    margin: 0 15%;
+    }
 `;
 
 
@@ -135,6 +153,7 @@ function Write() {
         <InnerContainer>
           <Header>
             <Heading>판매글 쓰기</Heading>
+            <Link to='/salepage'><p>내가 쓴글 보기</p></Link>
             </Header>
           <ContentWrapper>
               <TextInput
