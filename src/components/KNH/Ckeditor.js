@@ -31,13 +31,13 @@ import { firebaseAuth } from "../../firebase";
 
 const Button = styled.button`
   position: absolute;
-  top : 200px;
+  top : 220px;
   right: 4%;
   margin: 20px 12px;
   background-color:  #98eecc;
-  padding: 20px;
-  border-radius: 50%;
-  font-size: 1.1em;
+  padding: 12px;
+  border-radius: 6px;
+  font-size: 0.9em;
   line-height: 1.25rem;
   font-weight: bold;
   display: flex;
@@ -203,6 +203,7 @@ function Ckeditor({ title, postData }) {
     <>
       <Button onClick={dataSubmit}>
           <FontAwesomeIcon icon={faPaperPlane}/>
+          <p>업로드</p>
       </Button>
       <CKEditor
         editor={ClassicEditor}

@@ -7,6 +7,30 @@ import dataList from "./../data/Choicedata";
 
 
 
+const Button = styled.button`
+  color: white;
+  position: absolute;
+  right: 10%;
+  
+  margin: 20px 12px;
+  background-color:  #98eecc;
+  padding: 12px;
+  border-radius: 6px;
+  font-size: 0.9em;
+  line-height: 1.25rem;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  position: absolute;
+
+
+  svg {
+    color: #fff;
+  }
+`;
 const Wrap = styled.div`
   width: 100%;
   margin-top: 60px;
@@ -81,6 +105,8 @@ const Searchbar = styled.div`
     flex-basis: 30%;
     background-color: #98eecc;
     border-radius: 10px;
+  
+   
     @media screen and (max-width: 768px){
   flex-basis: 30%;
     }

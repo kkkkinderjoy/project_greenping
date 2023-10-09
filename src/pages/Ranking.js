@@ -53,14 +53,14 @@ const RankList = styled.li`
   padding-bottom: 20px;
   margin-bottom: 20px;
   border-bottom: 1px solid #ddd;
-  @media screen and (max-width:768px){
+  @media screen and (max-width:640px){
    flex-wrap: wrap;
   }
   cursor: pointer;
  
 `;
 
-const Num = styled.p`
+const Num = styled.div`
  
   width: 40px;
   height: 40px;
@@ -93,9 +93,9 @@ const NIWrap = styled.div`
 const Medal = styled.img`
   position: absolute;
   top:0px;
-  left:0px;
-  width:55px;
-  height:55px;
+  left:-3px;
+  width:57px;
+  height:57px;
 
 `
 
@@ -153,9 +153,16 @@ const RankCon = styled.div`
     width: 70px;
     height:30px;
     font-weight: bold;
+    @media screen and (max-width:768px){
+      position: absolute;
+      right: -16%;
+      bottom: -10px;
+  }
 
 
-
+  }
+  @media screen and (max-width:768px){
+   padding-left: 50px;
   }
 `;
 
@@ -230,24 +237,26 @@ function Detail() {
 
                       {
                           i=== 0 &&
-                         <Medal src={`images/medal1.png`}></Medal>
+                          <Medal src={`images/medal1.png`}></Medal>
                           
                         }
                       {
                           i=== 1 &&
-                         <Medal src={`images/medal2.png`}></Medal>
+                          <Medal src={`images/medal2.png`}></Medal>
                           
                         }
                       {
                           i=== 2 &&
-                         <Medal src={`images/medal3.png`}></Medal>
+                          <Medal src={`images/medal3.png`}></Medal>
                           
                         }
 
                       
-
-
-                      <Num>{i + 1}</Num>
+                        
+                        
+                         
+                          <Num>{i + 1}</Num>
+                      
 
                         <Image src={e.firstImageUrl} alt="{e.firstImageUrl}" />
                       </NIWrap>

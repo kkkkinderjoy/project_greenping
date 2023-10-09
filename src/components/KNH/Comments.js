@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { addDoc, collection, doc, getFirestore } from 'firebase/firestore';
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { styled } from 'styled-components';
 
 
@@ -90,43 +90,28 @@ const CommentBtn = styled.li`
 `
 const UpComments = styled.div`
 
-  display: flex;
-  align-items: center;
-  color: #777777;
-  margin-left: 10px;
-  padding-bottom: 7px;
-  border-bottom: 1px solid #eee;
-  margin-bottom: 10px;
-  font-size: 0.9em;
-  position: relative;
-  >p{
-    margin-left: 18px;
-    &:nth-child(1){
-      color: black;
-      font-weight: bold;
-      font-size: 0.9em;
-    }
+    width: 100%;
+    display: flex;
 
-    
-  }
-  >p:nth-child(2){
-        position: relative;
-        font-size: 0.8em;
-    &::after{
-      content: "";
-      position: absolute;
-      width: 1px;
-      height: 90%;
-      background-color: #e6e6e6;
-      left: -13%;
-      top: 1%;
+
+`
+
+const Uploaded = styled.div`
+    width: 100%;
+    display: flex;
+    margin-bottom: 30px;
+    >ul{
+        width: 100%;
+      >li{
+        margin: auto;
+        width: 80%;
+        display: flex;
+        padding: 8px;
+        border-bottom: 1px solid #eee;
+        justify-content: space-between;
+
+      }
     }
-  }
-  button{
-    position: absolute;
-    right: 2%;
-    bottom: 30%;
-  }
 
 `
 
@@ -146,30 +131,51 @@ function Comments() {
   const [comments, setComments] = useState([]);
   const userState = useSelector((state) => state.user);
   const uid = sessionStorage.getItem("users")
+  // const {view} =useParams()
 
-    const addComment = () =>{
-      if(comment.length === 0){
-        alert("댓글을 작성해주세요.")
-      }else{
-        alert("댓글이 작성되었습니다.")
-      }
-      const postRef = doc(collection(getFirestore(), "board"), uid);
-      const commentRef = collection(postRef, "comments");
-          addDoc(commentRef, {
-            text: comment,
-            name: userState&&userState.data.name,
-            uid: userState.uid,
+  //   const addComment = () =>{
+  //     if(comment.length === 0){
+  //       alert("댓글을 작성해주세요.")
+  //     }else{
+  //       alert("댓글이 작성되었습니다.")
+  //     }
+  //     const postRef = doc(collection(getFirestore(), "board"), view);
+  //     const commentRef = collection(postRef, "comments");
+  //         addDoc(commentRef, {
+  //           text: comment,
+  //           name: userState&&userState.data.name,
+  //           uid: userState.uid,
 
-        })
-      }
+  //       })
+  //     }
 
       
- 
 
-    // const CommentDel = (index) => {
-  
-   
-    // };
+
+  const handleCommentChange = (e) => {
+    setComment(e.target.value);
+  };
+
+  const handleAddComment = () => {
+    if (comment.trim() === '') {
+      alert('댓글을 작성하세요.');
+      return;
+    }
+
+    if (comment.length > 30) {
+      alert('댓글은 30자 이내로 작성해주세요.');
+      return;
+    }
+
+    setComments([...comments, comment]);
+    setComment('');
+  };
+
+  const handleDeleteComment = (index) => {
+    const updatedComments = [...comments];
+    updatedComments.splice(index, 1);
+    setComments(updatedComments);
+  };
 
   return (
     <>
@@ -178,25 +184,30 @@ function Comments() {
             <h3>댓글</h3>      
 
 
-                <UpComments>
-                    
-                  </UpComments>
+                <Uploaded>
+                    <ul>
+                      {comments.map((comment, index) => (
+                        <li key={index}>
+                          {comment}
+                          <button onClick={() => handleDeleteComment(index)}>
+                            <FontAwesomeIcon icon={faX}></FontAwesomeIcon>
+                          </button>
+                        </li>
+                      ))}
+                    </ul>
+                 </Uploaded>
 
                   
               {uid ? (
                   <ConWrap>
                   
                     <UpComments>
-                      <Textarea value={comment} onChange={(e) => setComment(e.target.value)}
-                      onKeyDown={(e) => {
-                                if (e.key === 'Enter') {
-                                    e.preventDefault();
-                                    addComment();
-                                }
-                              }}
+                      <Textarea 
+                              value={comment}
+                              onChange={handleCommentChange}
                               placeholder="댓글을 남겨보세요!"
                       />
-                      <CommentBtn onClick={()=>{addComment(uid)}}>등록</CommentBtn>
+                      <CommentBtn onClick={handleAddComment}>등록</CommentBtn>
                     </UpComments>
                     
                   </ConWrap>

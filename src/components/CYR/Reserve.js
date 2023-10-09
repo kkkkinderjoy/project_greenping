@@ -6,6 +6,7 @@ import DatePicker from 'react-datepicker'
 import "react-datepicker/dist/react-datepicker.css"
 import {ko} from 'date-fns/esm/locale'
 import {addDays, subDays} from 'date-fns'
+import { useNavigate } from 'react-router-dom';
 
 
 const ModalWrap = styled.div`
@@ -21,24 +22,25 @@ const ModalWrap = styled.div`
     justify-content: center;
 `
 const ModalContent = styled.div`
-    margin: 0 f3f3f3auto;
+    margin: 0 auto;
     width: 530px;
     height: 600px;
     background-color: #fff;
     padding: 30px;
+    padding-left: 45px;
     border-radius: 12px;
     box-shadow: 0 0 10px #d7d7d7;
     position: relative;
     overflow-y: scroll;
     &::-webkit-scrollbar {
-    width: 12px;
+    width: 8px;
     }
     &::-webkit-scrollbar-track {
     background-color: #f7f7f7;
     border-radius: 60px;
       }
     &::-webkit-scrollbar-thumb {
-    background-color: #A6F4D0;
+    background-color: #eee;
     border-radius: 100px;
 }
 
@@ -62,6 +64,7 @@ const MCloseBtn = styled.button`
     background-color: #e9e9e9;
     border-radius: 50%;
     position: absolute;
+    border: none;
     right: 5%;
     top: 5%;
     z-index: 20000;
@@ -80,8 +83,8 @@ const MCloseBtn = styled.button`
 
 const Mwrap = styled.div`
   width: 100%;
+  margin: 0 auto;
   margin-top: 10px;
-  left: 0;
   p{
     margin-bottom: 10px;
   }
@@ -130,12 +133,36 @@ const Title = styled.div`
 `;
 
 
+const ReserBtn = styled.button`
+    border: none;
+    margin: 40px auto;
+    width: 480px;
+    height: 50px;
+    margin-right: 40px;
+    border-radius: 10px;
+    background-color: #A6F4D0;
+    cursor: pointer;
+    
+
+
+`
+
 function Reserve({onClose}) {
   const [isModal, setIsModal] = useState(true);
   const [dateRange, setDateRange] = useState([null, null]);
   const [startDate, endDate] = dateRange;
   const [adultcount, setAdultCount] = useState(1);
   const [childcount, setChildCount] = useState(1);
+
+  const navigate = useNavigate()
+
+
+  const PayBtn = () =>{
+        alert("결제가 완료되었습니다")
+        navigate(-1)
+
+    
+  }
 
   return (
     <>
@@ -189,6 +216,9 @@ function Reserve({onClose}) {
                   <input type="radio" name="test" value="3" />방3
                   <input type="radio" name="test" value="4" />방4
                 </Personnel>
+            </Mwrap>
+            <Mwrap>
+            <ReserBtn onClick={PayBtn()}>결제하기</ReserBtn>
             </Mwrap>
         </ModalContent>
     </ModalWrap>
