@@ -11,13 +11,12 @@ import { faUser } from '@fortawesome/free-solid-svg-icons';
 
 const Content = styled.div`
   width: 40%;
-  height: 750px;
+  height: 800px;
   border: 1px solid #ddd;
   border-radius: 10px;
   box-sizing: border-box;
-  margin: 30px auto;
+  margin: 50px auto;
   position: relative;
-  margin: 8px auto;
   align-items: center;
   img{
     width: 300px; 
@@ -25,6 +24,7 @@ const Content = styled.div`
     display: block;
     margin: 0 auto;
     margin-top: 30px;
+    margin-bottom: 40px;
   }
   @media screen and (max-width: 640px){
     width: 80%;
@@ -50,7 +50,7 @@ const Title = styled.div`
   border-radius: 2px;
   @media screen and (max-width: 640px){
     top: -15px;
-    left: 65px;
+    left: 35%;
     width: 15%;
   }
 }
@@ -89,12 +89,16 @@ const InputItem = styled.div`
     margin-left: 40%;
   }
 `
-const Textarea = styled.textarea`
+const Txt = styled.div`
   width: 500px;
+  height: 40px;
+  margin: 0 auto;
+`
+
+
+const Textarea = styled.textarea`
+  width: 75%;
   height: 200px;
-  position: absolute;
-  left: 45%;
-  transform: translateX(-55%);
   margin-top: 7px;
   margin-left: 10%;
   margin-right: 1%;
@@ -107,15 +111,21 @@ const Textarea = styled.textarea`
     border: 1px solid  #98eecc;
   }
   border-radius: 10px;
+  @media screen and (max-width: 640px){
+      width: 70%;
+    }
 `
 
-const Ment = styled.div`
-  width: 400px;
+const MentWrap = styled.div`
+  width: 300px;
   display: flex;
   margin: 0 auto;
   ul{
     position: relative;
     width: 200px;
+    li{
+
+    }
     >svg{
       position: absolute;
       left: -15px;
@@ -219,25 +229,24 @@ function Inquiry() {
         </h3>
         <span>{data.PRICE}</span>
         <img src={data.IMG} alt='이미지'></img>
-        <Textarea rows='3' cols='33' maxLength={maxLength} className='textarea' placeholder='문의사항을 남겨주세요.' value={Comment} onChange={(e)=>{setComment(e.target.value)}}></Textarea>
+        <MentWrap>
+          {
+            inquiring.map((comment, commentIndex) => (
+              <ul>
+                <FontAwesomeIcon icon={faUser} /><li key={comment.id}>
+                  <span>{comment.name}: {comment.content}</span>
+                </li>
+              </ul>    
+            ))
+          }
+        </MentWrap>
       </InputItem>
-      <Ment>
-        {
-          inquiring.map((comment, commentIndex) => (
-            <ul>
-              <FontAwesomeIcon icon={faUser} />
-              <li key={comment.id}>
-                <span>{comment.name}: {comment.content}</span>
-              </li>
-            </ul>    
-          ))
-        }
-      </Ment>
       <ButtonItem>
         <p>{Comment.length}/{maxLength}자</p>
         <Button onClick={() =>{addComment(uid)}}> 댓글달기</Button>
         <Button onClick={() => navigate(-1)}> 돌아가기</Button>
       </ButtonItem>
+        <Textarea rows='3' cols='33' maxLength={maxLength} className='textarea' placeholder='문의사항을 남겨주세요.' value={Comment} onChange={(e)=>{setComment(e.target.value)}}></Textarea>
     </Content>
     </>
   )

@@ -112,13 +112,13 @@ function Sale({userState}){
     <Content>
       <TitleWrap>
       <ul>
-            {
-              Filter.map((e,i)=>{
-                return (
-                  <NavLink to={menu[i]}><li className={sale === i ? 'on' : ''} key={i}>{e}</li></NavLink>
-                )
-              })
-            }
+          {
+            Filter.map((e,i)=>{
+              return (
+                <NavLink to={menu[i]}><li className={sale === i ? 'on' : ''} key={i}>{e}</li></NavLink>
+              )
+            })
+          }
           </ul>
       </TitleWrap>
     {
