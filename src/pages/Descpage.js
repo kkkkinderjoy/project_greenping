@@ -30,10 +30,11 @@ const Dwrapper = styled.div`
     display: flex; 
     flex-wrap: wrap;
     justify-content: space-between;
+    flex-wrap: wrap;
     align-items: center;
     img{
         width: 100%;
-        height: 300px;
+        display: inline-block;
         border: 5px solid #ddd;
         margin: 20px;
     }
@@ -74,16 +75,12 @@ const Ddesc = styled.div`
     align-items: center;
     margin: 0 auto;
     display: flex; 
-    flex-direction: column;
-    justify-content: center;
     >svg{
-        margin-left: 20px;
         color: #98eecc;
     }
     >p{
-        margin: 20px auto;
-        line-height: 1.5;
-        text-align: center;
+        margin-left: 50px;
+        line-height: 50px;
     }
 `
 const SearchLine = styled.div`
@@ -102,6 +99,7 @@ return(
     <>
         {
              isModal && <Reserve onClose={()=>{setIsModal(false)}}/>
+             
         }
         <Title>캠핑장 정보</Title>
         <Dwrap>

@@ -74,7 +74,6 @@ const Ddesc = styled.div`
     margin: 0 auto;
     display: flex; 
     >svg{
-        margin-left: 20px;
         color: #98eecc;
     }
     >p{
