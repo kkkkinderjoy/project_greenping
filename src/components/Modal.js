@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faX } from '@fortawesome/free-solid-svg-icons';
+import { faTriangleExclamation, faX } from '@fortawesome/free-solid-svg-icons';
 import Logout from '../pages/Logout';
 
 
@@ -18,39 +18,26 @@ const ContentWrap = styled.div`
     justify-content: center;
 `
 const Content = styled.div`
-    margin: 0 f3f3f3auto;
-    width: 530px;
-    height: 600px;
+    flex-basis: 80%;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    height: 500px;
     background-color: #fff;
     padding: 30px;
     border-radius: 12px;
     box-shadow: 0 0 10px #d7d7d7;
     position: relative;
-    overflow-y: scroll;
-    &::-webkit-scrollbar {
-    width: 12px;
-    }
-    &::-webkit-scrollbar-track {
-    background-color: #f7f7f7;
-    border-radius: 60px;
-      }
-    &::-webkit-scrollbar-thumb {
-    background-color: #A6F4D0;
-    border-radius: 100px;
-}
-
-   
-    >img{
-      margin: 80px auto;
-      width: 130px;
-      height: 130px;
-    
+    >svg
+    {
+      flex-basis: 100%;
+      font-size: 100px;
+      color:red;
     }
     >p{
-      text-align: center;
-      font-size: 20px;
-      color: #000;
-    }
+      font-size: 16px;
+      font-weight: bold;
+      }
 `
 
 const CloseBtn = styled.button`
@@ -66,13 +53,11 @@ const CloseBtn = styled.button`
     align-items: center;
     cursor: pointer;
     font-size: 18px;
-      >p{color: gray;
-      opacity: 1;
-      font-weight: 100;
-      }
- 
-    
-    
+      >p{
+        color: gray;
+        opacity: 1;
+        font-weight: 100;
+        }  
 `
 
 const Button = styled.button`
@@ -85,30 +70,22 @@ const Button = styled.button`
   border-radius: 16px;
   color: #fff;
   cursor: pointer;
-  
-
 `
-
 
 function Modal({error,onClose}) {
   
-  const [isModal, setIsModal] = useState(true);
-
   return (
     <>
-    
-    {
-      isModal &&
-    
     <ContentWrap>
-        <Content >
+        <Content>
+          <FontAwesomeIcon icon={faTriangleExclamation}/>
             <CloseBtn  onClick={onClose}> 
-              <p><FontAwesomeIcon icon={faX} /></p>
+              <FontAwesomeIcon icon={faX} />
             </CloseBtn>
-        <p>{error}</p>
+          <p>{error}</p>
         </Content>
     </ContentWrap>
-    }
+  
     </>
   )
 }

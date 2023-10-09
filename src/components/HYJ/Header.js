@@ -176,7 +176,8 @@ const MnavTitle = styled.div`
       span{
         margin-bottom: 20px;
       }
-  `
+`
+
 const MnavLogo = styled.div`
       margin: 0 auto;
       display: flex;
@@ -194,12 +195,12 @@ const MnavLogo = styled.div`
       }
 `
 
+
 const MnavList = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
   margin-top: 40px;
-
   ul{
     justify-content: center;
     margin-bottom: 40px;
@@ -210,22 +211,25 @@ const MnavList = styled.div`
     }
   }
 `
+
+
 const MnavBanner = styled.div`
   width: 100%;
 `
 
+
 const MyList = styled.div`
 width: 90%;
 margin-top: 20px;
-ul{
-  display: flex;
-  justify-content: space-around;
-  align-content: center;
-  background-color: #FEFFDD;
-  
-  padding: 15px 0px;
-  border-radius: 10px;
-}
+  ul{
+    display: flex;
+    justify-content: space-around;
+    align-content: center;
+    background-color: #FEFFDD; 
+    padding: 15px 0px;
+    border-radius: 10px;
+  }
+
 `
 
 
@@ -241,6 +245,7 @@ const MPWrap = styled.div`
   border-radius: 10px;
 `
 
+
 const MyPage = styled.ul`
   list-style: none;
   padding: 0;
@@ -248,20 +253,22 @@ const MyPage = styled.ul`
   display: flex;
   flex-direction: column;
 `
+
+
 const MPList = styled.li`
-   padding: 8px 13px;
+   padding: 12px 15px;
   &:hover {
     background-color: #f0f0f0;
   }
-
 `
+
+
 
 const MyPageIcon = styled(FontAwesomeIcon)`
   margin-right: 5px;
   transition: transform 0.5s; 
   transform: rotate(${(props) => (props.isActive ? '180deg' : '0')});
-   
-`;
+`
 
 
 
