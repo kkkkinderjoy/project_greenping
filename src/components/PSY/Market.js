@@ -166,17 +166,43 @@ const data = [
 
 function Market() {
 
+  const [id, setID] = useState("")
+
+  const Buy = list.filter(e => {
+    return e.ID === "구매" || e.ID === id
+  })
+  console.log(Buy)
+
+  const Assi = list.filter(e =>{
+    return e.ID === "양도" || e.ID === id
+  })
+  console.log(Assi)
+
   const FilterList = list.filter(e => {
     return (e.ID === "판매" || e.ID === "구매" || e.ID === "양도")
   });
 
-  const random = Math.floor(Math.random() * FilterList.length);
-  const rTitle = FilterList[random].TITLE;
-  const rPrice = FilterList[random].PRICE;
-  const rImg = FilterList[random].IMG;
+  const Sale = [
+    {
+      "ID": "판매",
+      "IMG" : "https://idoogen.com/web/product/medium/202309/8ad6636c92eaec24d41c4f1dd6930569.jpg",
+      "TITLE": "내가 판매할 물건은?"
+    }
+  ]
 
-  const [isActive, setIsActive] = useState(0);
-  console.log(isActive)
+  const Buyrandom = Math.floor(Math.random() * Buy.length);
+  console.log(Buyrandom)
+  const Assirandom = Math.floor(Math.random() * Assi.length);
+
+  const BTitle = Buy[Buyrandom].TITLE;
+  const BPrice = Buy[Buyrandom].PRICE;
+  const BImg = Buy[Buyrandom].IMG;
+
+  const ATitle = Assi[Assirandom].TITLE;
+  const AImg = Assi[Assirandom].IMG;
+
+  const [isActive, setIsActive] = useState(false);
+  // console.log(isActive)
 
   return (
     <>
@@ -184,35 +210,40 @@ function Market() {
       <Title>그린마켓</Title>
       <ContainerWrap>
         <ContentItem>
-        {
-          FilterList?.map((e,i)=>{
-            if(e.ID === "판매"){
+          {
+            Sale.map((e,i)=>{
               return(
                 isActive === 0 &&
                 <ul key={i}>
-                  <h3>{e.TITLE}</h3>
-                  <li>{e.PRICE}</li>
-                  <img src={e.IMG} alt="마켓 이미지들" /> 
+                  <h3>{e.ID}</h3>
+                  <img src={e.IMG} alt="판매" />
+                  <li>{e.TITLE}</li>
                 </ul>
               )
-            }else if(e.ID === "구매"){
+            })
+          }
+          {
+            Buy.map((e,i)=>{
               return(
                 isActive === 1 &&
                 <ul key={i}>
-                  <h3>{rTitle}</h3>
-                  <li>{rPrice}</li>
-                  <img src={rImg} alt="마켓 이미지들" /> 
+                  <h3>{BTitle}</h3>
+                  <img src={BImg} alt="구매이미지" />
+                  <li>{BPrice}</li>
                 </ul>
-              )
-            }else if(e.ID === "양도"){
+              )}
+            )
+          }
+          {
+            Assi.map((e,i)=>{
               return(
                 isActive === 2 &&
                 <ul key={i}>
-                  <h3>{rTitle}</h3>
-                  <li>양도문의를 보내보세요</li>
-                  <img src={rImg} alt="마켓 이미지들" /> 
+                  <h3>{ATitle}</h3>
+                  <img src={AImg} alt="양도 이미지" />
+                  <li>문의하고 양도 받아보세요!</li>
                 </ul>
-              )}
+              )
             })
           }
         </ContentItem>
