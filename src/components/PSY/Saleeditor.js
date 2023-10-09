@@ -39,10 +39,7 @@ function Saleeditor({ title, postData }) {
   const navigate = useNavigate();
   const userState = useSelector((state) => state.user);
   const [writeData, setWriteData] = useState();
-  const [message, setMessage] = useState("");
   const [fileUrl, setFileUrl] = useState("");
-
-  // console.log(userState);
 
   useEffect(() => {
     if (postData) {
@@ -52,12 +49,10 @@ function Saleeditor({ title, postData }) {
 
   const dataSubmit = async () => {
     if (title.length === 0) {
-      setIsModal(!isModal);
-      setMessage("제목을 입력해주세요");
+      alert("제목을 입력해주세요");
       return;
     } else if (writeData.length === 0) {
-      setIsModal(!isModal);
-      setMessage("내용을 입력해주세요");
+      alert("내용을 입력해주세요");
       return;
     }
 
@@ -78,13 +73,12 @@ function Saleeditor({ title, postData }) {
     } catch (error) {
       alert(error);
       setIsModal(!isModal);
-      setMessage(error);
     }
   };
 
   const uploadToFirebase = async (file) => {
+    // 만들 폴더명 써야한다!
     const storageRef = ref(getStorage(), "marketimg/" + file.name);
-    // 만들 폴더명 써주기
     const upload = uploadBytesResumable(storageRef, file);
 
     return new Promise((resolve, reject) => {
@@ -103,7 +97,7 @@ function Saleeditor({ title, postData }) {
       );
     });
   };
-  // 사진 넣는 기능
+  // 사진 기능
   function UploadAdapter(editor) {
     editor.plugins.get("FileRepository").createUploadAdapter = (loader) => {
       return {

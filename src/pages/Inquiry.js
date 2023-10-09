@@ -153,7 +153,7 @@ function Inquiry() {
   const data = location.state;
   const [InputCnt, setInputCnt] = useState(0);
   const navigate = useNavigate();
-  const maxLength = 10;
+  const maxLength = 150;
 
   //댓글 글자수 제한
   const InputText = (Comment, setComment) => {

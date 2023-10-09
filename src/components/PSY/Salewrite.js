@@ -46,6 +46,16 @@ const Heading = styled.h3`
   }
 `;
 
+const Header = styled.div`
+  width: 400px;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 50px;
+  p{
+    font-size: 1.5rem;
+  }
+`
+
 const ContentWrapper = styled.div`
   width: 80%;
   margin: 50px auto;
@@ -62,14 +72,14 @@ const TextInput = styled.input`
   margin: 0 auto;
   margin-top: 10px;
   margin-left: 68px;
-  width: 89%;
+  width: 92.5%;
   padding: 5px;
   height: 37px;
   border: none;
   border-bottom: 1.5px solid #e6e6e6;
   font-size: 1.3em;
+  outline: none;
   &:focus{
-    outline: none;
     border-bottom: 2px solid #98eecc;
   }
 `;
@@ -78,13 +88,15 @@ const ContentInputWrapper = styled.div`
   width: auto;
   margin-top: 30px;
   margin-left: 70px;
+
 `;
 
 
 
 function Write() {
   const [txtTitle, setTxtTitle] = useState("");
-  const { board, view } = useParams();
+  // 제목데이터를 에디터로 넘겨야 함
+  const { market, view } = useParams();
   const [isModal, setIsModal] = useState(view ? false : true);
   const navigate = useNavigate();
 
@@ -96,9 +108,9 @@ function Write() {
 
 
   useEffect(() => {
-    if (board) {
+    if (market) {
       const fetchData = async () => {
-        const postRef = doc(getFirestore(), "board");
+        const postRef = doc(getFirestore(), "market");
         const postSnapShot = await getDoc(postRef);
         if (postSnapShot.exists()) {
           setPostData(postSnapShot.data());
@@ -117,27 +129,13 @@ function Write() {
     }
   });
 
-  // if (!memberProfile.loggedIn) {
-  //   return (
-  //     <>
-  //       {isModal && (
-  //         <Modal
-  //           error="로그인 이후 이용해주시기 바랍니다!"
-  //           onClose={() => {
-  //             setIsModal(false);
-  //             navigate("/login");
-  //           }}
-  //         />
-  //       )}
-  //     </>
-  //   );
-  // }
-
   return (
     <>
       <Container>
         <InnerContainer>
+          <Header>
             <Heading>판매글 쓰기</Heading>
+            </Header>
           <ContentWrapper>
               <TextInput
                 placeholder="제목"
