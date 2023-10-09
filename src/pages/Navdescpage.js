@@ -28,6 +28,7 @@ const Dwrapper = styled.div`
     margin: 0 auto;
     display: flex; 
     justify-content: space-between;
+    flex-wrap: wrap;
     align-items: center;
     img{
         width: 60%;
