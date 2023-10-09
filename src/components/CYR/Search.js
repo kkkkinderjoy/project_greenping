@@ -268,7 +268,14 @@ function Search() {
     setUserInput(ValueI);
   };
   // const Filterdonm = [...new Set(alldonm && alldonm.map((e) => e.doNm).sort())];
+
+
+
+  
   const Filterdonm = [...new Set(donm && donm.map((e) => e.doNm).sort())];
+
+
+
 
   //스크롤 이벤트
 

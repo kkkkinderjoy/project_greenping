@@ -53,6 +53,8 @@ const ServiceInfo = styled.div`
     flex-basis: 100%;
     margin: 0 auto;
     display: flex;
+    justify-content: space-around;
+    margin: 20px;
     li{
       font-size: 0.9em;
       position: relative;
@@ -61,7 +63,6 @@ const ServiceInfo = styled.div`
       a{
         color: #595959;
       }
-
       span::after{
        content: "";
        position: absolute;
