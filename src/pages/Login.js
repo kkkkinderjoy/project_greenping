@@ -11,7 +11,7 @@ const LoginContent = styled.div`
   display: flex;
   background-color: #f9fcfc;
   justify-content: center;
-  height: calc(100vh - 40px);
+  height: 98vh;
   align-items: center;
 `
 
@@ -86,14 +86,15 @@ const CheckboxContent = styled.div`
   align-items: center;
   font-size: 1em;
   color: #999;
+  gap: 3px;
 `
 
 const Checkbox = styled.input`
-  margin-right: 4px;
-  p{
+    margin-left: 3px;
+    
     font-size: 1em;
     color: #999999;
-  }
+  
  
 `
 
@@ -150,6 +151,7 @@ function Login() {
         const user = userLogin.user;
         console.log(user);
         sessionStorage.setItem("users",user.uid);
+        
         dispatch(logIn(user.uid));
         
         const userDoc = doc(collection(getFirestore(),"users"),user.uid);
@@ -184,8 +186,7 @@ function Login() {
           <Label>비밀번호</Label>
           </InputWrap>
           <CheckboxContent>
-            <Checkbox type="checkbox" />
-            <p>아이디 저장</p>
+            <Checkbox type="checkbox" /> 아이디 저장
           </CheckboxContent>  
           <Button type='submit'>로그인</Button>
           </form>

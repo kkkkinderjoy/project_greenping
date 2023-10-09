@@ -9,7 +9,7 @@ import { faAlignJustify } from '@fortawesome/free-solid-svg-icons'
 const Container = styled.div`
   width: 100%;
   margin: 60px 0;
-
+  height: 65vh;
 `
 
 const Title = styled.div`
@@ -32,7 +32,7 @@ const Content =styled.div`
  position: relative;
  width: 100%;
  border-top: 2px solid #474747;
- margin-top: 70px;
+ margin-top: 100px;
   
  ul{ 
     flex-basis: 100%;
@@ -40,7 +40,7 @@ const Content =styled.div`
     display: flex;
     justify-content: space-between;
     @media screen and (max-width:768px){
-        font-size: 0.8em;
+        font-size: 0.9em;
     }
     li{
         margin: 0 auto;
@@ -97,6 +97,9 @@ const Content =styled.div`
     padding: 10px;
 
     
+ }
+ @media screen and (max-width:768px){
+    font-size: 0.9em;
  }
  `
 
