@@ -7,6 +7,7 @@ import { logIn, loggedIn } from '../store'
 import { collection, doc, getDoc, getFirestore } from 'firebase/firestore'
 
 
+
 const LoginContent = styled.div`
   display: flex;
   background-color: #f9fcfc;
@@ -131,7 +132,7 @@ function Login() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const userState = useSelector(state => state.user);
-    console.log(userState)
+    //console.log(userState)
     const errorMsg = (errorCode) =>{
       const firebaseError = {
         'auth/user-not-found' :"이메일 혹은 비밀번호가 잘못 되었습니다.",
@@ -141,6 +142,7 @@ function Login() {
       return firebaseError[errorCode]|| '알 수 없는 에러가 발생했습니다.'
     }
 
+
     const LoginForm = async (e)=>{
       e.preventDefault();
       
@@ -148,10 +150,9 @@ function Login() {
         const userLogin = await signInWithEmailAndPassword(firebaseAuth, email, password);
         const user = userLogin.user;
         console.log(user);
-        sessionStorage.setItem("users",user.uid);
-        
+        sessionStorage.setItem("users",user.uid);        
         dispatch(logIn(user.uid));
-        
+
         const userDoc = doc(collection(getFirestore(),"users"),user.uid);
         const userDocSnapshot = await getDoc(userDoc);
         // console.log(userDocSnapshot.data())
@@ -183,9 +184,6 @@ function Login() {
               }} required/>
           <Label>비밀번호</Label>
           </InputWrap>
-          <CheckboxContent>
-            <Checkbox type="checkbox" /> 아이디 저장
-          </CheckboxContent>  
           <Button type='submit'>로그인</Button>
           </form>
           <p>{error}</p>
@@ -197,6 +195,8 @@ function Login() {
           </LinksWrapper>
       </Content>
     </LoginContent>
+   
+   
   )
 }
 

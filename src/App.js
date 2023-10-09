@@ -117,7 +117,6 @@ function Inner() {
         <Route path="/member" element={<Member />}></Route>
         <Route path="/modify" element={<Member />}></Route>
         <Route path="/findemail" element={<Findemail />}></Route>
-        {/* <Route path="/*" element={<Notfound />}></Route> */}
         <Route path="/sale" element={<Sale />} />
         <Route path="/salewrite" element={<Salewrite />} />
         <Route path="/salepage" element={<Salepage />} />
@@ -125,10 +124,10 @@ function Inner() {
         <Route path="/Assi" element={<Assi />} />
         <Route path="/inquiry/:seq" element={<Inquiry />} />
         <Route path="/inquiry/:seq/:market" element={<Inquiry />} />
-        < Route path="/edit/:view" element={<Write />}/>
+        <Route path="/edit/:view" element={<Write />}/>
         <Route path="/choicedesc/:seq"  element={<ChoiceDescpage />}/>
+        <Route path="/*" element={<Notfound />}></Route>
        </Routes>
-
       <Aside />
       <Footer />
     </>

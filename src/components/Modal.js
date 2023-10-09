@@ -5,13 +5,20 @@ import { faTriangleExclamation, faX } from '@fortawesome/free-solid-svg-icons';
 import Logout from '../pages/Logout';
 
 
+
+
+
 const ContentWrap = styled.div`
-    position: fixed;
-    top: 30%;
-    left: 37%;
-    width: 500px;
-    height: 500px;
-    z-index: 9999;  
+   position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    background-color:rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items:center;
+    justify-content: center; 
 `
 
 const Content = styled.div`
