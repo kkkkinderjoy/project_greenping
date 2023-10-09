@@ -160,7 +160,6 @@ function Salepage() {
         <TitleWrap>
           <ul>
             {
-              uid && uid === userUid &&
               Filter.map((e,i)=>{
                 return(
                   <NavLink to={menu[i]}><li className={sale === i ? 'on' : ''} key={i}>{e}
@@ -174,6 +173,7 @@ function Salepage() {
           posts &&
           posts.map((e,i)=>{
             return(
+              uid && uid === e.uid &&
               <ContentItem key={i}>
                 <h3>{e.title}</h3>
                 <ul>

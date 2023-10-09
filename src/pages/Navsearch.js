@@ -10,7 +10,16 @@ import dataList from './../data/Choicedata'
 
 const Wrap = styled.div`
   width: 100%;
+  margin-top: 60px;
 `;
+const Title = styled.div`
+  font-weight: bold;
+  font-size: 2em;
+  text-align: center;
+  @media screen and (max-width:768px){
+      font-size: 1.5em;
+  }
+`
 const ContentWrap = styled.div`
   max-width: 1280px;
   margin: 60px auto;
@@ -22,24 +31,7 @@ const Searchwrap = styled.div`
   border: 5px solid #ddd;
   border-radius: 10px;
 `;
-const Title = styled.div`
-  padding: 10px 20px;
-  font-weight: bold;
-  font-size: 2em;
-  position: relative;
-  margin-bottom: 10px;
-  &::after {
-    content: "";
-    width: 30px;
-    height: 5px;
-    margin-left: 0.5px;
-    background-color: #2ed090;
-    position: absolute;
-    top: -8px;
-    left: 18px;
-    border-radius: 2px;
-  }
-`;
+
 const SearchForm = styled.div`
   width: 80%;
   height: 300px;
@@ -218,8 +210,8 @@ function Navsearch() {
   return (
     <>
       <Wrap>
+        <Title>캠핑장찾기</Title>
         <ContentWrap>
-          <Title>캠핑장찾기</Title>
           <Searchwrap>
             <SearchForm>
                 <Searchbar>
