@@ -24,7 +24,14 @@ const Msearchbar = styled.div`
   align-items: center;
   flex-wrap: nowrap;
   border-radius: 10px;
-  background-color: #fff;
+  background-color: none;
+  @media screen and (max-width:640px){
+    position: absolute;
+    top: 0px;
+    margin-left: 10px;
+    z-index: 10000;
+
+  }
 `
 
 const Msearchinput = styled.input`

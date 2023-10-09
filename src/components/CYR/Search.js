@@ -46,7 +46,7 @@ const ContentWrap = styled.div`
   &.on {
     position: fixed;
     transform: translate(-50%, -50%);
-    top: 5%;
+    top: 50px;
     left: 50%;
     width: 100%;
     z-index: 10000;

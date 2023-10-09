@@ -37,6 +37,7 @@ import Navdescpage from "./pages/Navdescpage";
 import ReviewCk from "./components/LJS/ReviewCk";
 import ReviewWrite from "./pages/ReviewWrite";
 import Msearchd from "./pages/Msearchd";
+import ChoiceDescpage from "./pages/ChoiceDescpage";
 
 
 function App() {
@@ -85,7 +86,6 @@ function Inner() {
   return (
     <>
       <GlobalStyle />
-
       <Header userState={userState} />
       <Routes>
         <Route path="/" element={<Main />}></Route>
@@ -94,9 +94,10 @@ function Inner() {
         <Route path="/msearch/" element={<Msearchd />} />
         <Route path="/searchd/desc/:seq" element={<Descpage />} />
         <Route path="/navsearch/navdesc/:seq" element={<Navdescpage />} />
-        <Route path="/navdesc/:seq" element={<Navdescpage />} />
+        <Route path="/navdesc/:seq" element={<Navdescpage />} /> 
         <Route path="/desc/:seq" element={<Descpage />} />
-        <Route path="/ranking" element={<Ranking />} />
+        <Route path="/ranking/" element={<Ranking />} /> 
+        <Route path="/ranking/navdesc/:seq" element={<Navdescpage />} />
         <Route path="/reviewmore" element={<ReviewMore />}></Route>
         <Route path="/reviewck" element={<ReviewCk />}></Route>
         <Route path="/board" element={<Board/>}  />
@@ -124,8 +125,10 @@ function Inner() {
         <Route path="/Assi" element={<Assi />} />
         <Route path="/inquiry/:seq" element={<Inquiry />} />
         <Route path="/inquiry/:seq/:market" element={<Inquiry />} />
-        
-      </Routes>
+        < Route path="/edit/:view" element={<Write />}/>
+        <Route path="/choicedesc/:seq"  element={<ChoiceDescpage />}/>
+       </Routes>
+
       <Aside />
       <Footer />
     </>

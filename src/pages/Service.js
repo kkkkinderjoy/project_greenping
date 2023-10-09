@@ -12,12 +12,13 @@ const Container = styled.div`
 `
 
 const Title = styled.div`
+
   font-weight: bold;
   font-size: 2em;
   text-align: center;
-  @media screen and (max-width:768px){
+  /* @media screen and (max-width:768px){
       font-size: 1.5em;
-  }
+  } */
 `
 
 const  ContainerWrap = styled.div`
@@ -27,10 +28,12 @@ const  ContainerWrap = styled.div`
 `
 
 
-const LinkList = styled.ul`  
+const LinkList = styled.ul`
   display: flex;
-  gap: 10px;
-  margin-top: 30px;
+  height: 55px;
+  align-items: center;
+  gap: 15px;
+  margin: 30px 0 0;
   justify-content: center; 
   @media screen and (max-width:768px){
       margin-top: 20;
@@ -39,19 +42,34 @@ const LinkList = styled.ul`
 
 
 const LinkListItem = styled.li`
-  border: 1px solid #ddd;
-  border-radius: 12px;
-  text-align: center;
+  background: #f6f6f6;
   color: #666;
+  line-height: 50px;
+  height: 50px;
+  padding: 5px;
+  position: relative;
     span{
       cursor: pointer;
       display: block;
       padding: 20px 0px;
       font-size: 1.1em;
     }
-  &:hover{font-weight: bold;}
   @media screen and (max-width:768px){
       font-size: 0.9em;
+  }
+  &.on{
+  color: #fff;
+  background: #555;
+  }
+  &.on::before{
+   content:"" ;
+   position: absolute;
+   bottom: -5px;
+   left: 50%;
+   width: 12px;
+   height: 5px;
+   margin-left: -6px;
+   background: url(/images/service_arrow.png) no-repeat;
   }
 `
 
@@ -87,16 +105,17 @@ function Service() {
     }
   },[currentUrl])
 
+
   return (
     <>
       <Container>
       <Title>고객센터</Title>
       <LinkList>
       
-                <LinkListItem onClick={()=>{setIsActive(true); navigate("/service/notice")}}>
+                <LinkListItem className={isActive === true ? "on" : ""} onClick={()=>{setIsActive(true); navigate("/service/notice")}}>
                   <span>공지사항</span>
                 </LinkListItem>
-                <LinkListItem onClick={()=>{setIsActive(false); navigate("/service/faq")}}>
+                <LinkListItem className={isActive === true ? "" : "on"} onClick={()=>{setIsActive(false); navigate("/service/faq")}}>
                   <span>자주 묻는 질문</span>
                 </LinkListItem>
       </LinkList>

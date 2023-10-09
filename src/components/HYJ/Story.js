@@ -125,22 +125,22 @@ function Story() {
                 <ListItem>
                     <Insta>
                         <div><img src={`images/instalogo.png`} alt="instagram"/>
-                        <NavLink to="https://instagram.com/green_ping2023?igshid=MzRlODBiNWFlZA==">
+                        <NavLink to="https://instagram.com/green_ping2023?igshid=MzRlODBiNWFlZA==" target='_blank'>
                             <FontAwesomeIcon icon={faPlusCircle}/>
                         </NavLink>
                         </div>
                     </Insta>
                     <InstaWrap>
                             <ul>
-                                <li><NavLink to="https://instagram.com/green_ping2023?igshid=MzRlODBiNWFlZA==">#그린핑#캠핑고민#가을이벤트</NavLink></li>
+                                <li><NavLink to="https://instagram.com/green_ping2023?igshid=MzRlODBiNWFlZA==" target='_blank'>#그린핑#캠핑고민#가을이벤트#단풍</NavLink></li>
                            
-                                <li><NavLink to="https://instagram.com/green_ping2023?igshid=MzRlODBiNWFlZA==">#그린핑#텐트#장비#캠핑용품</NavLink></li>
+                                <li><NavLink to="https://instagram.com/green_ping2023?igshid=MzRlODBiNWFlZA==" target='_blank'>#텐트#장비#캠핑용품</NavLink></li>
                     
-                                <li><NavLink to="https://instagram.com/green_ping2023?igshid=MzRlODBiNWFlZA==">#그린핑#글램핑#텐트#야영장#오토캠핑장</NavLink></li>
+                                <li><NavLink to="https://instagram.com/green_ping2023?igshid=MzRlODBiNWFlZA==" target='_blank'>#글램핑#야영장#오토캠핑장</NavLink></li>
                         
-                                <li><NavLink to="https://instagram.com/green_ping2023?igshid=MzRlODBiNWFlZA==">#그린핑#캠핑음식#카라반</NavLink></li>
+                                <li><NavLink to="https://instagram.com/green_ping2023?igshid=MzRlODBiNWFlZA==" target='_blank'>#캠핑#카라반#카라반여행#유아동반</NavLink></li>
                             
-                                <li><NavLink to="https://instagram.com/green_ping2023?igshid=MzRlODBiNWFlZA==">#그린핑#가족여행#애견동반#캠핑장</NavLink></li>
+                                <li><NavLink to="https://instagram.com/green_ping2023?igshid=MzRlODBiNWFlZA==" target='_blank'>#가족여행#애견동반#캠핑장</NavLink></li>
                             </ul>
                             
                         </InstaWrap>
