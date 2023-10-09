@@ -16,9 +16,9 @@ const Title = styled.div`
   font-weight: bold;
   font-size: 2em;
   text-align: center;
-  @media screen and (max-width:768px){
+  /* @media screen and (max-width:768px){
       font-size: 1.5em;
-  }
+  } */
 `
 
 const  ContainerWrap = styled.div`
