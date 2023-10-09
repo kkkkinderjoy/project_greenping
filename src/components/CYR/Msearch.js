@@ -10,8 +10,8 @@ const Wrapper= styled.div`
     width: 100%;
     height: 100px;
     border-radius: 10px;
-    display: none;
-    @media screen and (min-width: 768px){ display: block;}
+    display: block;
+    @media screen and (min-width: 768px){ display: none;}
 `
 
 const Msearchbar = styled.div`
