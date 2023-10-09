@@ -146,7 +146,6 @@ function Navsearch() {
   const [searchTerm, setSearchTerm] = useState([]);
   const [searchKeyword, setSearchKeyword] = useState("");
   const [Selected, setSelected] = useState("");
-  const [selectvalue, setSelectvalue] = useState()
 
   const SbrsCl = ["전기","장작판매","물놀이장","놀이터","산책로","운동시설","무선인터넷","트렘폴린","마트.편의점","온수","운동장"]
 
@@ -177,7 +176,7 @@ function Navsearch() {
           e.doNm.includes(searchTerm)
       )
     );
-  }, []);
+  },[]);
 
   
 
@@ -200,7 +199,8 @@ function Navsearch() {
   //   setSelected(donmValue)
   // };
 
-  
+  console.log(searchTerm)
+  console.log(searchKeyword)
   const Filterdonm = [...new Set(data && data.map((e) => e.doNm).sort())];
   const FilterSigun = [...new Set(data.filter((e) =>{
     return Selected === e.doNm

@@ -235,7 +235,6 @@ const NavLinkWrap = styled.div`
 function Search() {
   const [dateRange, setDateRange] = useState([null, null]);
   const [startDate, endDate] = dateRange;
-  const [alldonm, setAllDonm] = useState([]);
   const [donm, setDonm] = useState(dataList);
   const [userInput, setUserInput] = useState("");
   const [optiondonmSelect, setOptionDonmSelect] = useState("");
