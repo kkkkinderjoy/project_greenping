@@ -9,15 +9,16 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 
 
-
 const Content = styled.div`
-  width: 800px;
+  width: 40%;
   height: 750px;
   border: 1px solid #ddd;
   border-radius: 10px;
   box-sizing: border-box;
   margin: 30px auto;
   position: relative;
+  margin: 8px auto;
+  align-items: center;
   img{
     width: 300px; 
     height: 300px; 
@@ -33,6 +34,10 @@ const Title = styled.div`
   margin: 30px 130px;
   font-size: 30px;
   position: relative;
+  @media screen and (max-width: 640px){
+    text-align: center;
+    font-size: 25px;
+  }
   &::after {
   content: '';
   width: 30px;
@@ -43,13 +48,17 @@ const Title = styled.div`
   top: -15px;
   left: 0;
   border-radius: 2px;
+  @media screen and (max-width: 640px){
+    top: -15px;
+    left: 65px;
+    width: 15%;
   }
+}
 `
 
 const InputItem = styled.div`
   width: 400px;
   margin: 0 auto;
-  position: relative;
   @media screen and (max-width: 640px){
     width: 80%;
     height: 60%;
@@ -57,13 +66,17 @@ const InputItem = styled.div`
   h3{
     font-size: 25px;
     text-align: center;
-    padding: 30px 5px;
+    padding-top: 30px;
+    margin-bottom: 30px;
     position: relative;
+    @media screen and (max-width: 640px){
+      font-size: 20px;
+    }
   }
   p{
     position: absolute;
     top: 15px;
-    left: 0;
+    left: -5px;
     width: 50px;
     height: 50px;
     border-radius: 50%;
@@ -96,20 +109,31 @@ const Textarea = styled.textarea`
   border-radius: 10px;
 `
 
-const ItemTitle = styled.div`
-  color: #999;
-  position: absolute;
-  top: 16px;
-  left: 50%; 
-  transform: translateX(-50%)
+const Ment = styled.div`
+  width: 400px;
+  display: flex;
+  margin: 0 auto;
+  ul{
+    position: relative;
+    width: 200px;
+    >svg{
+      position: absolute;
+      left: -15px;
+    }
+  }
+  @media screen and (max-width: 640px){
+  width: 80%;
+  height: 60%;
+}
 `
+
 const ButtonItem = styled.div`
   position: absolute;
   display: flex;
   justify-content: space-between;
   width: 250px;
   height: 40px;
-  bottom: 25px;
+  bottom: 10px;
   right: 13.5%;
   p{font-size: 13px; margin-top: 5px;}
 `
@@ -146,7 +170,7 @@ function Inquiry() {
     if (Comment.length > maxLength) {
       setComment(Comment.slice(0, maxLength));
     }
-    setInputCnt(Comment.length);
+    setInputCnt(Comment.length - 1);
   };
   
   //댓글 작성
@@ -161,8 +185,7 @@ function Inquiry() {
         return(addComment);
       }else{
         alert("댓글이 작성되었습니다.")
-      }
-      
+    }
     try {
       const docRef = await addDoc(collection(firestore, "inquiring"), {
         uid: userState.uid,
@@ -191,30 +214,25 @@ function Inquiry() {
     <Title>문의하기</Title>
     <Content>
       <InputItem>
-        <h3><p>{data.ID}</p>{data.TITLE}</h3>
+        <h3>
+          <p>{data.ID}</p>{data.TITLE}
+        </h3>
         <span>{data.PRICE}</span>
         <img src={data.IMG} alt='이미지'></img>
         <Textarea rows='3' cols='33' maxLength={maxLength} className='textarea' placeholder='문의사항을 남겨주세요.' value={Comment} onChange={(e)=>{setComment(e.target.value)}}></Textarea>
       </InputItem>
-        {inquiring.map((comment, commentIndex) => (     
-          <ul>
-            <li key={comment.id}>
-              <span>{comment.name}: {comment.content}</span>
-            </li>
-          </ul>
-        ))}
-
+      <Ment>
         {
           inquiring.map((comment, commentIndex) => (
             <ul>
-             <FontAwesomeIcon icon={faUser} />
-              <FontAwesomeIcon icon={faUser} /><li key={comment.id}>
+              <FontAwesomeIcon icon={faUser} />
+              <li key={comment.id}>
                 <span>{comment.name}: {comment.content}</span>
               </li>
             </ul>    
-            ))
+          ))
         }
-
+      </Ment>
       <ButtonItem>
         <p>{Comment.length}/{maxLength}자</p>
         <Button onClick={() =>{addComment(uid)}}> 댓글달기</Button>

@@ -28,6 +28,9 @@ const TitleWrap = styled.div`
         text-align: center;
         cursor: pointer;
         line-height: 50px;
+        @media screen and (max-width: 640px){
+      scale: 0.7;
+    }
     &.on{
         background-color: #24d181;
         color: #fff;

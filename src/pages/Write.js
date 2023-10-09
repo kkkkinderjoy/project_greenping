@@ -20,9 +20,7 @@ const Container = styled.div`
 const InnerContainer = styled.div`
   max-width: 1280px;
   margin: 0 auto;
-`;
-
-
+`
 
 const Heading = styled.h3`
   padding: 10px 20px;

@@ -301,13 +301,6 @@ function Board() {
   }, []);
 
 
-
-
-
-
-    
-
-
   const deletePost = async (uid) => {
     const firestore = getFirestore();
     const docRef = doc(firestore, "board", uid);
@@ -331,11 +324,6 @@ function Board() {
       });
     }
 };
-
-  
-
-
-
 
 
   useEffect(() => {

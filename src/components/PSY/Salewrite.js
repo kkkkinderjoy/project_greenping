@@ -16,85 +16,102 @@ import { doc, getDoc, getFirestore } from "firebase/firestore";
 
 const Container = styled.div`
   width: 100%;
-  height: 100%;
   margin-top: 60px;
 `;
 
 const InnerContainer = styled.div`
-  margin: 0 4px;
   max-width: 1280px;
   margin: 0 auto;
 `;
 
 const Header = styled.div`
-  width: 400px;
+  width: 90%;
   display: flex;
-  justify-content: space-between;
-  margin-bottom: 50px;
+  justify-content: start;
+  margin-bottom: 20px;
   p{
     font-size: 1.5rem;
+    line-height: 2.5rem;
+    @media screen and (max-width: 640px){
+    font-size: 0.8rem;
+    }
   }
-`;
+  @media screen and (max-width: 640px){
+    justify-content: space-around;
+    }
+`
 
 const Heading = styled.h3`
-  font-size: 2.2em;
+  padding: 10px 20px;
+  font-weight: bold;
+  font-size: 2em;
   position: relative;
+  margin-bottom: 60px;
+  margin-left: 70px;
+  @media screen and (max-width: 640px){
+    margin-left: 50px;
+    font-size: 25px;
+  }
   &::after {
     content: "";
-    width: 30px;
+    width: 87px;
     height: 5px;
     margin-left: 0.5px;
     background-color: #2ed090;
     position: absolute;
-    top: -17px;
-    left: 0;
+    top: -8px;
+    left: 20px;
     border-radius: 2px;
   }
-`;
+
+`
 
 const ContentWrapper = styled.div`
-  width: 100%;
+  width: 80%;
+  margin: 50px auto;
   height: 800px;
   margin-top: 30px;
-  padding-top: 20px;
-  padding-right: 120px;
+  padding-top: 24px;
+  padding-right: 9%;
   margin-top: 9px;
   border: 1px solid #e5e7eb;
-  border-radius: 0.375rem;
-  background-color: #fff;
-`;
-
-const ContentInner = styled.div`
-  display: flex;
-  justify-content: space-around;
-  width: 100%;
-  margin-top: 10px;
-  text-align: center;
-`;
-
-const Title = styled.h2`
-  font-size: 20px;
+  border-radius: 1rem;
 `;
 
 const TextInput = styled.input`
+  margin: 0 auto;
+  margin-top: 10px;
+  margin-left: 68px;
+  width: 92.5%;
   padding: 5px;
-  height: 40px;
-  border: 1px solid #e5e7eb;
-  flex-basis: 75%;
-  font-size: 15px;
+  height: 37px;
+  border: none;
+  border-bottom: 1.5px solid #e6e6e6;
+  font-size: 1.3em;
+  outline: none;
+  @media screen and (max-width: 640px){
+    width: 80%;
+    margin: 0 15%;
+    font-size: 1rem;
+    }
+  &:focus{
+    border-bottom: 2px solid #98eecc;
+  }
 `;
 
 const ContentInputWrapper = styled.div`
   width: auto;
-  margin-top: 20px;
+  margin-top: 30px;
   margin-left: 70px;
+  @media screen and (max-width: 640px){
+    width: 80%;
+    margin: 0 15%;
+    }
 `;
 
-const ContentLabel = styled.p`
-  margin-bottom: 15px;
-`;
 
-function Salewrite() {
+
+function Write() {
   const [txtTitle, setTxtTitle] = useState("");
   // 제목데이터를 에디터로 넘겨야 함
   const { market, view } = useParams();
@@ -102,13 +119,11 @@ function Salewrite() {
   const navigate = useNavigate();
 
   const memberProfile = useSelector((state) => state.user);
-  // 로그인 하지 않으면 이용할 수 없음
   const [message, setMessage] = useState("");
   const [postData, setPostData] = useState(null);
 
-  // 수정 버튼 홈페이지 이동 막기
   const uid = sessionStorage.getItem("users");
-  const [userUid, setUserUid] = useState(uid);
+
 
   useEffect(() => {
     if (market) {
@@ -132,28 +147,24 @@ function Salewrite() {
     }
   });
 
-
   return (
     <>
       <Container>
         <InnerContainer>
           <Header>
-            <Heading>판매 글쓰기</Heading>
+            <Heading>판매글 쓰기</Heading>
             <Link to='/salepage'><p>내가 쓴글 보기</p></Link>
-          </Header>
+            </Header>
           <ContentWrapper>
-            <ContentInner>
-              <Title>제목</Title>
               <TextInput
+                placeholder="제목"
                 defaultValue={postData && postData.title}
                 type="text"
                 onChange={(e) => {
                   setTxtTitle(e.target.value);
                 }}
               />
-            </ContentInner>
             <ContentInputWrapper>
-              <ContentLabel>내용</ContentLabel>
               <Saleeditor title={txtTitle} postData={postData} />
             </ContentInputWrapper>
           </ContentWrapper>
@@ -163,4 +174,4 @@ function Salewrite() {
   );
 }
 
-export default Salewrite;
+export default Write;

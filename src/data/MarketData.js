@@ -1,7 +1,7 @@
 const data = [
     {
-        "ID": "판매",
         "IMG" : "https://idoogen.com/web/product/medium/202309/8ad6636c92eaec24d41c4f1dd6930569.jpg",
+        "ID": "판매",
         "TITLE": "내가 판매할 물건은?",
         "PRICE": "판매 글쓰기"
     },
@@ -191,7 +191,7 @@ const data = [
         "NUM": 118,
         "DATE": "2023-07-01",
         "OBJ": "의자",
-        "TITLE": "초경량 롱 릴렉스 캠핑용 체어",
+        "TITLE": "경량 캠핑용 체어",
         "PRICE": "25,000원",
         "IMG": "https://idoogen.com/web/product/medium/202303/c28cf435812026ed28e1bd3def4f70c4.jpg"
     },

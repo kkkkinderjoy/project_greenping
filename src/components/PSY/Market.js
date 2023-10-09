@@ -166,20 +166,17 @@ const data = [
 
 function Market() {
 
-  const [id,setId] = useState("양도")
-
   const FilterList = list.filter(e => {
     return (e.ID === "판매" || e.ID === "구매" || e.ID === "양도")
   });
 
-  
-  // console.log(FilterList)
   const random = Math.floor(Math.random() * FilterList.length);
   const rTitle = FilterList[random].TITLE;
   const rPrice = FilterList[random].PRICE;
   const rImg = FilterList[random].IMG;
-  // console.log(FilterList)
+
   const [isActive, setIsActive] = useState(0);
+  console.log(isActive)
 
   return (
     <>
@@ -216,8 +213,8 @@ function Market() {
                   <img src={rImg} alt="마켓 이미지들" /> 
                 </ul>
               )}
-          })
-        }
+            })
+          }
         </ContentItem>
         <ContentDesc>
           { 

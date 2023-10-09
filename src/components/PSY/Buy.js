@@ -6,14 +6,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUser } from '@fortawesome/free-solid-svg-icons'
 
 const Content = styled.div`
-    width: 100%;
+  width: 100%;
 `
 const TitleWrap = styled.div`
-    max-width: 800px;
-    margin: 50px auto;
-    ul{
-        display: flex;
-        justify-content: space-between;
+  max-width: 800px;
+  margin: 50px auto;
+  ul{
+      display: flex;
+      justify-content: space-between;
     li{
         font-size: 30px;
         background-color: #fff;
@@ -27,6 +27,9 @@ const TitleWrap = styled.div`
     &.on{
         background-color: #24d181;
         color: #fff;
+    }
+    @media screen and (max-width: 640px){
+      scale: 0.7;
     }
   }
 }
