@@ -8,6 +8,7 @@ import { faUser } from '@fortawesome/free-solid-svg-icons'
 const Content = styled.div`
   width: 100%;
 `
+
 const TitleWrap = styled.div`
   max-width: 800px;
   margin: 50px auto;
@@ -35,25 +36,25 @@ const TitleWrap = styled.div`
 }
 `
 const ContentWrap = styled.div`
-    width: 100%;
-    height: 100%;
-    gap: 15px;
-    margin-bottom: 50px;
-    padding: 0 2%;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: start;
+  width: 100%;
+  height: 100%;
+  gap: 15px;
+  margin-bottom: 50px;
+  padding: 0 2%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: start;
 `
 const Tomain = styled.div`
-  width: 100%;
-  position: relative;
+  width: 96%;
+  display: flex;
+  justify-content: space-between;
   p{
-    position: absolute;
     font-size: 18px;
-    top: -10px;
-    right: 4%;
     color: #999;
+    &:nth-child(1){color: #333;}
   }
+  span{font-size: 22px; color: orangered;}
 `
 const ContentItem = styled.div`
   width: 500px;
@@ -109,7 +110,7 @@ const ContentItem = styled.div`
     flex-basis: 49%;
   }
   @media screen and (max-width: 640px){
-    flex-basis: 100%;
+    flex-basis: 95%;
   }
 `  
 const ItemTitle = styled.div`
@@ -167,6 +168,7 @@ function Buy() {
         </TitleWrap>
         <ContentWrap>
           <Tomain>
+            <p>총 <span>{dataFilter.length}</span>개</p>
             <NavLink to='/'><p>메인으로 돌아가기</p></NavLink>
           </Tomain>
             {

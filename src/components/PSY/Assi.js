@@ -46,15 +46,15 @@ const ContentWrap = styled.div`
     justify-content: start;
 `
 const Tomain = styled.div`
-  width: 100%;
-  position: relative;
+  width: 96%;
+  display: flex;
+  justify-content: space-between;
   p{
-    position: absolute;
     font-size: 18px;
-    top: -10px;
-    right: 4%;
     color: #999;
+    &:nth-child(1){color: #333;}
   }
+  span{font-size: 22px; color: orangered;}
 `
 
 const ContentItem = styled.div`
@@ -92,7 +92,7 @@ const ContentItem = styled.div`
     flex-basis: 49%;
   }
   @media screen and (max-width: 640px){
-    flex-basis: 100%;
+    flex-basis: 95%;
   }
 ` 
 const ItemTitle = styled.div`
@@ -118,24 +118,20 @@ const Button = styled.button`
 
 function Assi() {
 
-    const [ID, setID] = useState("양도");
-
-    const FilterAssi = data.filter(e =>{
-      return(e.ID === "양도" || e.ID === ID)
-    })
-    
-    console.log(FilterAssi)
-    
-    const AssiFilter = [...new Set(data.map(e => e.ID))]
-    console.log(AssiFilter)
-
-    const [assi, setAssi] = useState(2);
-
-    const menu = ["/sale", "/buy", "/assi"]
-
-    const uid = sessionStorage.getItem("users");
-    const [userUid, setUserUid] = useState(uid);
-    console.log(userUid)
+  const [ID, setID] = useState("양도");
+  const FilterAssi = data.filter(e =>{
+    return(e.ID === "양도" || e.ID === ID)
+  })
+  
+  console.log(FilterAssi)
+  
+  const AssiFilter = [...new Set(data.map(e => e.ID))]
+  console.log(AssiFilter)
+  const [assi, setAssi] = useState(2);
+  const menu = ["/sale", "/buy", "/assi"]
+  const uid = sessionStorage.getItem("users");
+  const [userUid, setUserUid] = useState(uid);
+  //console.log(userUid)
 
   return (
     <>
@@ -153,6 +149,7 @@ function Assi() {
         </TitleWrap>
         <ContentWrap>
           <Tomain>
+            <p>총 <span>{FilterAssi.length}</span>개</p>
             <NavLink to='/'><p>메인으로 돌아가기</p></NavLink>
           </Tomain>
           {

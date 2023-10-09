@@ -178,10 +178,6 @@ function Market() {
   })
   console.log(Assi)
 
-  const FilterList = list.filter(e => {
-    return (e.ID === "판매" || e.ID === "구매" || e.ID === "양도")
-  });
-
   const Sale = [
     {
       "ID": "판매",
@@ -201,7 +197,7 @@ function Market() {
   const ATitle = Assi[Assirandom].TITLE;
   const AImg = Assi[Assirandom].IMG;
 
-  const [isActive, setIsActive] = useState(false);
+  const [isActive, setIsActive] = useState(0);
   // console.log(isActive)
 
   return (
@@ -249,7 +245,7 @@ function Market() {
         </ContentItem>
         <ContentDesc>
           { 
-            data?.map((e,i)=>{
+            data.map((e,i)=>{
               return(
                 <Card key={i}  onClick={()=>{
                   setIsActive(i);
