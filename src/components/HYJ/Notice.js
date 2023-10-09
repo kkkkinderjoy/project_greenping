@@ -90,7 +90,7 @@ const Container =styled.div`
         text-align: left;
         font-weight: 500;
         color: #666666;
-        flex-basis: 15%;
+        
         padding: 15px 15px;
         @media screen and (max-width:768px){
           font-size: 0.7em;
@@ -98,20 +98,23 @@ const Container =styled.div`
         }
         &:nth-child(1){
           text-align: center;
+          flex-basis: 15%;
           @media screen and (max-width:768px){
           display: none;
         }
         }
         &:nth-child(2){
           cursor: pointer;
-          flex-basis: 70%;
+          flex-basis: 60%;
           @media screen and (max-width:768px){
           font-size: 0.7em;
         }
-        &:nth-child(3){
+        &:last-child{
           text-align: center;
+          flex-basis: 30%;
           @media screen and (max-width:768px){
-            flex-basis: 20%;
+            flex-basis: 40%;
+            
         }
         }
      }

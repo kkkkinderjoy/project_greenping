@@ -15,7 +15,6 @@ const Container = styled.div`
   display: flex;
   background-color: #f9fcfc;
   justify-content: center;
-  height: calc(100vh - 86px);
   align-items: center;
 
   
@@ -74,6 +73,10 @@ const Input = styled.input`
   border: 1px solid #ddd;
   border-radius: 5px;
   box-sizing: border-box;
+  &:focus{
+    outline: none;
+    border-color: #2ed090;
+  }
 `
 const Button = styled.button`
   width: 100%;
@@ -232,7 +235,7 @@ function Member() {
         name,
         phoneNumber,
         email,
-        dateOfBirth
+        dateOfBirth,
       }
 
     if(initialMode){
@@ -315,10 +318,8 @@ function Member() {
 
           <p>이름<span>*</span></p>
           <Input value={name} onChange={(e) => { setName(e.target.value) }} type='text' className='name' />
-
           <p>생년월일</p>
-          <Input onInput={DateOfBirth} maxLength={10} type='text' className='birth' />
-
+          <Input defaultValue={DateOfBirth} maxLength={10} onChange={(e) => {setDateOfBirth(e.target.value) }} type='text' className='birth' />
           <p>전화번호<span>*</span></p>
           <Input onInput={PhoneNumber} maxLength={13} type='text' className='phone' />
 

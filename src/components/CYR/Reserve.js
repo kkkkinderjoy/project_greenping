@@ -185,10 +185,10 @@ function Reserve({onClose}) {
             <Mwrap>
                 <Title>방 선택</Title>
                 <Personnel>
-                  <input type="checkbox" name="test" value="1" />방1
-                  <input type="checkbox" name="test" value="2" />방2
-                  <input type="checkbox" name="test" value="3" />방3
-                  <input type="checkbox" name="test" value="4" />방4
+                  <input type="radio" name="test" value="1" />방1
+                  <input type="radio" name="test" value="2" />방2
+                  <input type="radio" name="test" value="3" />방3
+                  <input type="radio" name="test" value="4" />방4
                 </Personnel>
             </Mwrap>
         </ModalContent>

@@ -27,29 +27,3 @@ ul{
   }
    
 
-.textarea{
-  border: 1px solid #ddd;
-  width: 500px;
-  height: 150px;
-  font-size: 1rem;
-  border-radius: 10px;
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  margin-top: 45px;
-}
-
-@media (max-width: 640px) {
-  .textarea {
-    width: 80%;
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-  }
-}
-
-.textarea:focus {
-  border-color: #2ed090;
-  outline: none;
-}
-

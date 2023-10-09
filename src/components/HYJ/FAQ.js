@@ -6,6 +6,7 @@ import { faArrowDown, faArrowUp, faChevronDown, faDownload } from '@fortawesome/
 
 const FAQContent = styled.div`
  padding: 60px 50px;
+ 
 `
 
 const FAQWrap = styled.div`
@@ -33,7 +34,7 @@ const Container =styled.div`
  position: relative;
  width: 100%;
  border-top: 2px solid #474747;
- font-size: 1em;
+ 
   
 `
 
@@ -53,7 +54,8 @@ const List =styled.ul`
 
 
 const ListItem =styled.li`
-  padding: 20px; 
+  
+  padding: 20px 70px; 
   cursor: pointer;
    display: flex;
    justify-content: space-between;

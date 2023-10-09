@@ -39,45 +39,54 @@ margin-top: 20px;
   h3{
     img{
       filter: grayscale(100%);
+      @media screen and (max-width:768px){display: none;}
     }
   }
 
 `
+const ServiceWrap = styled.div`
+  width: 100%;
+  margin: 0 auto;
+`
 const ServiceInfo = styled.div`
-  width: 35%;
   ul{
-    width: 100%;
+    flex-basis: 100%;
+    margin: 0 auto;
     display: flex;
-    justify-content: space-around;
-    margin: 20px 0;
     li{
-      font-size: 1em;
-      font-weight: 500;
+      font-size: 0.9em;
       position: relative;
+      flex-basis: 25%;
+      text-align: center;
       a{
-        color: #595959
+        color: #595959;
       }
-      &:not(:nth-last-child(1))::before{
-        content: "";
-        position: absolute;
-        width: 1px;
-        height: 14px;
-        right: -7%;
-        top: 50%;
-        transform: translateY(-50%);
-        background-color: #000;
+
+      span::after{
+       content: "";
+       position: absolute;
+       width: 1px;
+       height: 15px;
+       top: 2px;
+       right: 0;
+       background-color: #ddd;
+       @media screen and(min-width: 768px){ 
+       
       }
+      }
+      
+      
     }
-  }
-  @media screen and(min-width: 768px){
-    width: 100%;
     
   }
+  
 `
 
 const LinksContainer = styled.div`
   color: #999999;
   height: 100%;
+  margin: 0 auto;
+  
   ul{
     display: flex;
     justify-content: center;
@@ -146,18 +155,20 @@ function Footer(){
     <>
     <FooterContent>
       <FooterWrap>
-        <ServiceInfo>
-          <ul>
-            <li><NavLink to="/">서비스 이용약관</NavLink></li>
-            <li><NavLink to="/">개인정보 처리방침</NavLink></li>
-            <li><NavLink to="/">제휴 신청</NavLink></li>
-            <li><NavLink to="/">제휴 문의</NavLink></li>
-          </ul>
-        </ServiceInfo>
+        <ServiceWrap>
+          <ServiceInfo>
+            <ul>
+              <li><NavLink to="/">서비스 이용약관<span></span></NavLink></li>
+              <li><NavLink to="/">개인정보 처리방침<span></span></NavLink></li>
+              <li><NavLink to="/">제휴 신청<span></span></NavLink></li>
+              <li><NavLink to="/">제휴 문의</NavLink></li>
+            </ul>
+          </ServiceInfo>
+        </ServiceWrap>
         <Container>
           <LogoForm>
             <h3>
-              <img src="images/logo.png" alt="logo"/>
+              <img src={"images/logo.png"} alt="logo"/>
             </h3>
           </LogoForm>
           <LinksContainer>
@@ -177,10 +188,10 @@ function Footer(){
                   고객센터
                 </h2>
               </li>
-              <li><NavLink to="/">1588-9780</NavLink></li>
+              <li>1588-9780</li>
               <li><h3>영업시간</h3></li>
-              <li><NavLink to="/">평일 09:00 - 18:00</NavLink></li>
-              <li><NavLink to="/">점심시간 11:30 - 12:30</NavLink></li>
+              <li>평일 09:00 - 18:00</li>
+              <li>점심시간 11:30 - 12:30</li>
             </ul>
           </CustomerService>  
         </Container>  

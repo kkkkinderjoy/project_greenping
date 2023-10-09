@@ -8,7 +8,7 @@ import list from './../../data/MarketData'
 const Container = styled.div`
   width: 100%;
   padding: 48px 0;
-  `
+`
 const Title = styled.h3`
 text-align: center;
 font-size: 2.0em;
@@ -70,7 +70,7 @@ const ContentItem = styled.div`
   @media screen and (max-width: 640px){
     flex-basis: 100%;
   }
-`
+` 
 const ContentDesc = styled.div`
   flex-basis: 100%;
   @media screen and (min-width: 1024px){
@@ -166,20 +166,17 @@ const data = [
 
 function Market() {
 
-  const [id,setId] = useState("양도")
-
   const FilterList = list.filter(e => {
     return (e.ID === "판매" || e.ID === "구매" || e.ID === "양도")
   });
 
-  
-  console.log(FilterList)
   const random = Math.floor(Math.random() * FilterList.length);
   const rTitle = FilterList[random].TITLE;
   const rPrice = FilterList[random].PRICE;
   const rImg = FilterList[random].IMG;
-  // console.log(FilterList)
+
   const [isActive, setIsActive] = useState(0);
+  console.log(isActive)
 
   return (
     <>
@@ -188,7 +185,7 @@ function Market() {
       <ContainerWrap>
         <ContentItem>
         {
-          FilterList.map((e,i)=>{
+          FilterList?.map((e,i)=>{
             if(e.ID === "판매"){
               return(
                 isActive === 0 &&
@@ -216,12 +213,12 @@ function Market() {
                   <img src={rImg} alt="마켓 이미지들" /> 
                 </ul>
               )}
-          })
-        }
+            })
+          }
         </ContentItem>
         <ContentDesc>
           { 
-            data.map((e,i)=>{
+            data?.map((e,i)=>{
               return(
                 <Card key={i}  onClick={()=>{
                   setIsActive(i);
