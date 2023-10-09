@@ -7,11 +7,20 @@ import dataList from './../data/Choicedata'
 
 const Wrap = styled.div`
   width: 100%;
+  margin-top: 60px;
 `;
+const Title = styled.div`
+  font-weight: bold;
+  font-size: 2em;
+  text-align: center;
+  @media screen and (max-width:768px){
+      font-size: 1.5em;
+  }
+`
 const Searchwrap = styled.div`
-  max-width: 1200px;
+  max-width: 1280px;
   height: 400px;
-  margin: 0 auto;
+  margin: 60px auto;
   border: 5px solid #ddd;
   border-radius: 10px;
   @media screen and (max-width: 768px){
@@ -191,6 +200,7 @@ function Msearchd() {
   return (
     <>
       <Wrap>
+        <Title>캠핑장찾기</Title>
         <Searchwrap>
           <SearchForm>
               <Searchbar>

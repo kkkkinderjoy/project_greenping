@@ -9,6 +9,7 @@ import dataList from "./../data/Choicedata";
 
 const Wrap = styled.div`
   width: 100%;
+  margin-top: 60px;
 `;
 
 const ContentWrap = styled.div`
@@ -16,24 +17,32 @@ const ContentWrap = styled.div`
   margin: 60px auto;
 `;
 
+// const Title = styled.div`
+//   padding: 10px 20px;
+//   font-weight: bold;
+//   font-size: 2em;
+//   position: relative;
+//   margin-bottom: 10px;
+//   &::after {
+//     content: "";
+//     width: 30px;
+//     height: 5px;
+//     margin-left: 0.5px;
+//     background-color: #2ed090;
+//     position: absolute;
+//     top: -8px;
+//     left: 18px;
+//     border-radius: 2px;
+//   }
+// `;
 const Title = styled.div`
-  padding: 10px 20px;
   font-weight: bold;
   font-size: 2em;
-  position: relative;
-  margin-bottom: 10px;
-  &::after {
-    content: "";
-    width: 30px;
-    height: 5px;
-    margin-left: 0.5px;
-    background-color: #2ed090;
-    position: absolute;
-    top: -8px;
-    left: 18px;
-    border-radius: 2px;
+  text-align: center;
+  @media screen and (max-width:768px){
+      font-size: 1.5em;
   }
-`;
+`
 const Searchwrap = styled.div`
   max-width: 1200px;
   height: 400px;
@@ -265,8 +274,8 @@ function SearchD() {
   return (
     <>
       <Wrap>
+        <Title>캠핑장 찾기</Title>
         <ContentWrap>
-          <Title>캠핑장 찾기</Title>
           <Searchwrap>
             <SearchForm>
                 <Searchbar>

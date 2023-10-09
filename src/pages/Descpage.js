@@ -8,24 +8,34 @@ import Reserve from '../components/CYR/Reserve'
 
 const Dwrap = styled.div`
     width: 80%; border: 1px solid #ddd;
-    margin: 20px auto;
+    margin: 60px auto;
     >h2{
         text-align: center;
         margin: 20px 0; font-weight: bold;
     }
+`
+const Title = styled.div`
+  font-weight: bold;
+  margin-top: 60px;
+  font-size: 2em;
+  text-align: center;
+  @media screen and (max-width:768px){
+      font-size: 1.5em;
+  }
 `
 const Dwrapper = styled.div`
     width: 90%;
     height: 100%;
     margin: 0 auto;
     display: flex; 
+    flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
     img{
-        width: 60%;
+        width: 100%;
+        height: 300px;
         border: 5px solid #ddd;
         margin: 20px;
-        display: inline-block;
     }
 `
 const Imgdesc = styled.div`
@@ -63,14 +73,17 @@ const Ddesc = styled.div`
     height: 400px;
     align-items: center;
     margin: 0 auto;
-    display: flex; justify-content: space-between;
+    display: flex; 
+    flex-direction: column;
+    justify-content: center;
     >svg{
         margin-left: 20px;
         color: #98eecc;
     }
     >p{
-        margin-left: 50px;
-        line-height: 50px;
+        margin: 20px auto;
+        line-height: 1.5;
+        text-align: center;
     }
 `
 const SearchLine = styled.div`
@@ -90,6 +103,7 @@ return(
         {
              isModal && <Reserve onClose={()=>{setIsModal(false)}}/>
         }
+        <Title>캠핑장 정보</Title>
         <Dwrap>
             <h2>{facltNm}</h2>
             <Dwrapper>
