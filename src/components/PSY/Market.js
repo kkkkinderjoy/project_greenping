@@ -173,7 +173,7 @@ function Market() {
   });
 
   
-  console.log(FilterList)
+  // console.log(FilterList)
   const random = Math.floor(Math.random() * FilterList.length);
   const rTitle = FilterList[random].TITLE;
   const rPrice = FilterList[random].PRICE;
@@ -188,7 +188,7 @@ function Market() {
       <ContainerWrap>
         <ContentItem>
         {
-          FilterList.map((e,i)=>{
+          FilterList?.map((e,i)=>{
             if(e.ID === "판매"){
               return(
                 isActive === 0 &&
@@ -221,7 +221,7 @@ function Market() {
         </ContentItem>
         <ContentDesc>
           { 
-            data.map((e,i)=>{
+            data?.map((e,i)=>{
               return(
                 <Card key={i}  onClick={()=>{
                   setIsActive(i);
