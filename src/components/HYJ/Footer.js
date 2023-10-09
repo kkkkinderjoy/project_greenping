@@ -43,13 +43,17 @@ margin-top: 20px;
   }
 
 `
+const ServiceWrap = styled.div`
+  width: 100%;
+  margin: 0 auto;
+`
 const ServiceInfo = styled.div`
-  width: 35%;
   ul{
     width: 100%;
     display: flex;
     justify-content: space-around;
-    margin: 20px 0;
+    margin: 0;
+
     li{
       font-size: 1em;
       font-weight: 500;
@@ -67,12 +71,13 @@ const ServiceInfo = styled.div`
         transform: translateY(-50%);
         background-color: #000;
       }
+      @media screen and(min-width: 768px){ 
+        width: 100%;
+      
+      }
     }
   }
-  @media screen and(min-width: 768px){
-    width: 100%;
-    
-  }
+  
 `
 
 const LinksContainer = styled.div`
@@ -146,14 +151,16 @@ function Footer(){
     <>
     <FooterContent>
       <FooterWrap>
-        <ServiceInfo>
-          <ul>
-            <li><NavLink to="/">서비스 이용약관</NavLink></li>
-            <li><NavLink to="/">개인정보 처리방침</NavLink></li>
-            <li><NavLink to="/">제휴 신청</NavLink></li>
-            <li><NavLink to="/">제휴 문의</NavLink></li>
-          </ul>
-        </ServiceInfo>
+        <ServiceWrap>
+          <ServiceInfo>
+            <ul>
+              <li><NavLink to="/">서비스 이용약관</NavLink></li>
+              <li><NavLink to="/">개인정보 처리방침</NavLink></li>
+              <li><NavLink to="/">제휴 신청</NavLink></li>
+              <li><NavLink to="/">제휴 문의</NavLink></li>
+            </ul>
+          </ServiceInfo>
+        </ServiceWrap>
         <Container>
           <LogoForm>
             <h3>

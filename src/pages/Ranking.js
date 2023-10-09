@@ -15,6 +15,7 @@ import axios from "axios";
 
 const Content = styled.div`
   width: 100%;
+  margin-top: 60px;
 `;
 const ContentWrap = styled.div`
   max-width: 1280px;
@@ -22,33 +23,26 @@ const ContentWrap = styled.div`
 `;
 
 const Title = styled.div`
+  text-align: center;
   padding: 10px 20px;
   font-weight: bold;
-  font-size: 2em;
+  font-size: 2.2em;
   position: relative;
 
-  &::after {
-    content: "";
-    width: 30px;
-    height: 5px;
-    margin-left: 0.5px;
-    background-color: #2ed090;
-    position: absolute;
-    top: -8px;
-    left: 18px;
-    border-radius: 2px;
-  }
+
+
 `;
 
 const Rank = styled.ul`
-  width: 90%;
-  margin: 0 auto;
+
+  margin: 40px auto;
   margin-top: 60px;
   display: flex;
 
   flex-wrap: wrap;
 `;
 const RankList = styled.li`
+  margin-left: 20%;
   width: 100%;
   display: flex;
   justify-content: space-around;

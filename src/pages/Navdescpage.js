@@ -5,7 +5,15 @@ import { NavLink, useLocation } from 'react-router-dom'
 import { styled } from 'styled-components'
 import Reserve from '../components/CYR/Reserve'
 
-
+const Title = styled.div`
+  font-weight: bold;
+  margin-top: 60px;
+  font-size: 2em;
+  text-align: center;
+  @media screen and (max-width:768px){
+      font-size: 1.5em;
+  }
+`
 const Dwrap = styled.div`
     width: 80%; border: 1px solid #ddd;
     margin: 20px auto;
@@ -20,6 +28,7 @@ const Dwrapper = styled.div`
     margin: 0 auto;
     display: flex; 
     justify-content: space-between;
+    flex-wrap: wrap;
     align-items: center;
     img{
         width: 60%;
@@ -90,11 +99,12 @@ return(
         {
              isModal && <Reserve onClose={()=>{setIsModal(false)}}/>
         }
+        <Title>캠핑장 정보</Title>
         <Dwrap>
-            <h2>{facltNm}</h2>
+            <h2>{data.facltNm}</h2>
             <Dwrapper>
                 {
-                    data.firstImageUrl === "" ? <img src='https://www.placeholder.com/100x100' alt='img' /> : 
+                    data.firstImageUrl === "" ? <img src='https://via.placeholder.com/100x100' alt='img' /> : 
                     <img src={data.firstImageUrl} alt={data.facltNm} title={data.facltNm} /> 
                 }
                 <Imgdesc>
@@ -119,7 +129,7 @@ return(
                     data.intro !== "" 
                     && 
                     <>
-                        <FontAwesomeIcon icon={data.faCircleRight} />
+                        <FontAwesomeIcon icon={faCircleRight} />
                         <p>{data.intro}</p>
                     </>
                 }

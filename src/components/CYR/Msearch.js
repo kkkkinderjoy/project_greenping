@@ -10,6 +10,8 @@ const Wrapper= styled.div`
     width: 100%;
     height: 100px;
     border-radius: 10px;
+    display: block;
+    @media screen and (min-width: 768px){ display: none;}
 `
 
 const Msearchbar = styled.div`
@@ -22,7 +24,14 @@ const Msearchbar = styled.div`
   align-items: center;
   flex-wrap: nowrap;
   border-radius: 10px;
-  background-color: #fff;
+  background-color: none;
+  @media screen and (max-width:640px){
+    position: absolute;
+    top: 0px;
+    margin-left: 10px;
+    z-index: 10000;
+
+  }
 `
 
 const Msearchinput = styled.input`
