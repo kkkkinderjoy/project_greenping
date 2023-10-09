@@ -49,7 +49,6 @@ const Logo = styled.img`
   }
 `
 
-
 const ListWrap = styled.div`
    display: flex;
    flex-basis: 85%;
@@ -57,12 +56,10 @@ const ListWrap = styled.div`
    @media screen and (max-width:768px) {display: none;}
 `
 
-
 const List = styled.ul`
   flex-basis: 100%;
   display: flex;
   font-weight: bold;
-  
 `
 
 const ListItem = styled.li`
@@ -96,7 +93,6 @@ const Input = styled.input`
     border: 1px solid #2ed090;
   }
 `
-
 
 const NavMember = styled.div`
   font-size: 0.8em;
@@ -200,7 +196,6 @@ const MnavList = styled.div`
     display: flex;
     cursor: pointer;
     
-  
    li{
     display: flex;
     justify-content: space-between;
@@ -226,8 +221,7 @@ ul{
   display: flex;
   justify-content: space-around;
   align-content: center;
-  background-color: #FEFFDD;
-  
+  background-color: #FEFFDD; 
   padding: 15px 0px;
   border-radius: 10px;
 }
@@ -260,14 +254,12 @@ padding: 8px 10px;
   }
 
 `
-
 const MyPageIcon = styled(FontAwesomeIcon)`
   margin-right: 5px;
   transition: transform 0.5s; 
   transform: rotate(${(props) => (props.isActive ? '180deg' : '0')});
    
 `;
-
 
 
 function Header({userState}){
@@ -378,7 +370,7 @@ function Header({userState}){
           })
          }
         </MnavList>
-        <MnavBanner>{Eventbanner()}</MnavBanner>
+        <MnavBanner><Eventbanner/></MnavBanner>
         </Mnav>        
         </HeaderWrap>
          

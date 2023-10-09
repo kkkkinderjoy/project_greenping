@@ -232,7 +232,7 @@ function Member() {
         name,
         phoneNumber,
         email,
-        dateOfBirth
+        dateOfBirth,
       }
 
     if(initialMode){
@@ -315,10 +315,8 @@ function Member() {
 
           <p>이름<span>*</span></p>
           <Input value={name} onChange={(e) => { setName(e.target.value) }} type='text' className='name' />
-
           <p>생년월일</p>
-          <Input onInput={DateOfBirth} maxLength={10} type='text' className='birth' />
-
+          <Input defaultValue={DateOfBirth} maxLength={10} onChange={(e) => {setDateOfBirth(e.target.value) }} type='text' className='birth' />
           <p>전화번호<span>*</span></p>
           <Input onInput={PhoneNumber} maxLength={13} type='text' className='phone' />
 
