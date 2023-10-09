@@ -266,7 +266,7 @@ const MyPageIcon = styled(FontAwesomeIcon)`
 
 function Header({userState}){
   const ListItems = ['캠핑장 찾기','랭킹','리뷰', '그린톡','그린마켓','고객센터'] 
-  const LinkArray = ['','ranking','reviewmore','board','buy','service']
+  const LinkArray = ['navsearch','ranking','reviewmore','board','buy','service']
 
 
   const [isActive,setIsActive]=useState(false);
