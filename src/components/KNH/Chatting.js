@@ -198,80 +198,66 @@ const UserBtn = styled.button`
 
 `
 
+const Uploaded = styled.div`
+    width: 100%;
+    display: flex;
+    margin-bottom: 30px;
+    >ul{
+        width: 100%;
+      >li{
+        margin: auto;
+        width: 80%;
+        display: flex;
+        padding: 8px;
+        border-bottom: 1px solid #eee;
+        justify-content: space-between;
 
+        >button{
+          border: none;
+          padding: 8px 10px;
+        }
+      }
+    }
+
+`
 
 
 function Chatting({onClose}) {
 
 
+  const navigate = useNavigate()
+  const [comment, setComment] = useState("");
+  const [comments, setComments] = useState([]);
   const userState = useSelector((state) => state.user);
-
   const uid = sessionStorage.getItem("users")
-  const location = useLocation();
-  const data = location.state;
-  const [InputCnt, setInputCnt] = useState(0);
 
-  const maxLength = 30;
+      
 
-  const InputText = (Comment, setComment) => {
-    if (Comment.length > maxLength) {
-      setComment(Comment.slice(0, maxLength));
-    }
-    setInputCnt(Comment.length);
+
+  const handleCommentChange = (e) => {
+    setComment(e.target.value);
   };
-  
-  //댓글 작성
-  const [comments, setComments] = useState([]); 
-  const [Comment, setComment] = useState("");
 
-  const addComment = async (postId) => {
-    const firestore = getFirestore();
-    
-      if(Comment.length === 0){
-        alert("댓글을 작성해주세요.")
-        return(addComment);
-      }else{
-        alert("댓글이 작성되었습니다.")
-      }
-      
-    try {
-       const docRef = await addDoc(doc(collection(firestore, "comments")), {
-        uid: userState.uid,
-        name: userState.data.name,
-        content: Comment,
-      });
+  const handleAddComment = () => {
+    if (comment.trim() === '') {
+      alert('댓글을 작성하세요.');
+      return;
+    }
 
-      const commentData = {
-        id: docRef.id,
-        uid: userState.uid,
-        name: userState.data.name,
-        content: Comment,
-        postId: postId,
-      };
-        
-      setComments([...comments, commentData]);
-        setComment("");
-      } catch (error) {
-        console.error("댓글 추가 에러:", error);
-      }
-    };
+    if (comment.length > 30) {
+      alert('댓글은 30자 이내로 작성해주세요.');
+      return;
+    }
 
+    setComments([...comments, comment]);
+    setComment('');
+  };
 
-
-
-
-    const deleteComment = async (uid) => {
-        const firestore = getFirestore();
-        const docRef = doc(firestore, "comments", uid);
-      
-        try {
-          await deleteDoc(docRef);
-          alert("삭제가 완료되었습니다");
-         
-        } catch (error) {
-          console.log(error);
-        }
-      };
+  const handleDeleteComment = (index) => {
+    const updatedComments = [...comments];
+    updatedComments.splice(index, 1);
+    setComments(updatedComments);
+  };
 
 
   return (
@@ -282,31 +268,28 @@ function Chatting({onClose}) {
                 </CloseBtn>
                     <h3>댓글</h3>
 
-                    {comments.map((comment) => (     
-                        <ShowArea>
-                            <ShowCon key={comment.id}>
-                            <span>
-                                <p>{comment.name}</p> 
-                                <p>{comment.content}</p>
-                                </span>
-                                <p onClick={()=>deleteComment(comment.id)}>삭제</p>
-                            </ShowCon>
-                        </ShowArea>
-                        ))}
+                    <Uploaded>
+                    <ul>
+                      {comments.map((comment, index) => (
+                        <li key={index}>
+                          {comment}
+                          <button onClick={() => handleDeleteComment(index)}>
+                            <FontAwesomeIcon icon={faX}></FontAwesomeIcon>
+                          </button>
+                        </li>
+                      ))}
+                    </ul>
+                 </Uploaded>
             
             <ConWrap>
                   
                   <UpComments>
-                    <Textarea value={Comment}  maxLength={maxLength} onChange={(e) => setComment(e.target.value)}
-                    onKeyDown={(e) => {
-                              if (e.key === 'Enter') {
-                                  e.preventDefault();
-                                  addComment(uid);
-                              }
-                            }}
-                            placeholder= {"댓글을 작성하세요 !"}
-                    />
-                    <CommentBtn onClick={()=>{addComment(uid)}}>등록</CommentBtn>
+                  <Textarea 
+                              value={comment}
+                              onChange={handleCommentChange}
+                              placeholder="댓글을 남겨보세요!"
+                      />
+                    <CommentBtn onClick={handleAddComment}>등록</CommentBtn>
                   </UpComments>
                   
                 </ConWrap>

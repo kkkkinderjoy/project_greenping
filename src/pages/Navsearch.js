@@ -57,6 +57,8 @@ const Searchbar = styled.div`
     background-color: #98eecc;
     border-radius: 10px;
     margin: 0 auto;
+    border: none;
+    cursor: pointer;
     @media screen and (max-width: 768px){
 
     }

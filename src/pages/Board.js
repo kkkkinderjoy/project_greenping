@@ -23,12 +23,14 @@ const BorderWrapper = styled.div`
 
 const  HeadWrap = styled.div`
   max-width: 1280px;
-  margin: 0 auto;
+  margin: 50px auto;
   display: flex;
   text-align: center;
+  position: relative;
 
 `
 const Title = styled.div`
+  width: 100%;
   padding: 10px 20px;
   font-weight: bold;
   font-size: 2em;
@@ -148,7 +150,7 @@ const HeartWrap = styled.div`
 const MasWrap = styled.div`
   position: absolute;
   bottom: 20px;
-  right:110px;
+  right:88px;
   margin-top: 30px;
   cursor: pointer;
   width: 22px;
@@ -164,6 +166,9 @@ const MasWrap = styled.div`
       font-size: 1.1em;
       color: #333;
    }
+   @media screen and (min-width: 640px){
+    display: none;
+  }
 `;
 
 const Heart = styled.img`
@@ -178,11 +183,15 @@ const Heart = styled.img`
 
 
 const Button = styled.button`
+  color: white;
+  position: absolute;
+  right: 8%;
+  bottom: -60px;
   margin: 20px 12px;
   background-color:  #98eecc;
-  padding: 20px;
-  border-radius: 50%;
-  font-size: 1.1em;
+  padding: 12px;
+  border-radius: 6px;
+  font-size: 0.9em;
   line-height: 1.25rem;
   font-weight: bold;
   display: flex;
@@ -190,8 +199,7 @@ const Button = styled.button`
   outline: none;
   border: none;
   cursor: pointer;
-  position: absolute;
-  right:34px;
+
 
 
   svg {
@@ -238,7 +246,12 @@ const UserBtn = styled.button`
 `
 
 
+const CoWrap = styled.div`
+  @media screen and (max-width: 641px){
+    display: none;
+  }
 
+`
 
 
 
@@ -356,6 +369,7 @@ function Board() {
             <Link to="/write">
               <Button>
                 <FontAwesomeIcon icon={faPen} />
+                글작성
               </Button>
             </Link>
        
@@ -394,8 +408,9 @@ function Board() {
                   <div dangerouslySetInnerHTML={{ __html: e.content }} />{" "}
                 </ListItem>       
              
-             
-                <Comments/>
+                <CoWrap>
+                    <Comments/>
+                </CoWrap>
              
 
 
@@ -419,6 +434,7 @@ function Board() {
                 
                 </ListItem>
                 <ListItem>
+                 
                     <MasWrap onClick={()=>{setIsActive(true); 
                         setIsModal(true);}} >
                       <FontAwesomeIcon  icon={faMessage}></FontAwesomeIcon>
