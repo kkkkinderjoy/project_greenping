@@ -148,7 +148,7 @@ function Choice() {
                   <React.Fragment key={i}>
                     {
                         <ListItem>
-                      <NavLink to={`navdesc/${e.contentId}`} state={e}>
+                      <NavLink to={`/choicedesc/${e.contentId}`} state={e}>
                           {e.firstImageUrl !== "" && (
                             <img
                               src={e.firstImageUrl}

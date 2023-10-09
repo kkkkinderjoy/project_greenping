@@ -4,15 +4,19 @@ import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPaperPlane, faPen } from "@fortawesome/free-solid-svg-icons";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import {
   addDoc,
   collection,
   doc,
   getDoc,
+  getDocs,
   getFirestore,
+  orderBy,
+  query,
   serverTimestamp,
   setDoc,
+  updateDoc,
 } from "firebase/firestore";
 import { useSelector } from "react-redux";
 import {
@@ -59,6 +63,7 @@ function Ckeditor({ title, postData }) {
   const [message, setMessage] = useState("");
   const [fileUrl, setFileUrl] = useState("");
 
+  const {view} = useParams()
   // console.log(userState);
 
   useEffect(() => {
@@ -67,6 +72,45 @@ function Ckeditor({ title, postData }) {
     }
   }, [postData]);
 
+
+
+
+  
+  const [posts,setPosts] = useState()
+  
+  useEffect(() => {
+    const fetchPosts = async () => {
+      try {
+        const q = query(
+          collection(getFirestore(), "board"),
+          orderBy("timestamp", "desc")
+        );
+
+        const snapShot = await getDocs(q);
+
+        const postArray = snapShot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+          isLiked: doc.data().likes
+        }));
+        
+        setPosts(postArray);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchPosts();
+  }, [view]);
+
+
+
+
+
+
+
+
+
+
   const dataSubmit = async () => {
     if (title.length === 0 || writeData.length === 0) {
       alert("제목 혹은 내용을 입력해주세요");
@@ -74,25 +118,51 @@ function Ckeditor({ title, postData }) {
     } 
 
     try {
-      addDoc(collection(getFirestore(), "board"), {
-        title: title,
-        content: writeData,
-        view: 1,
-        uid: userState.uid,
-        name: userState.data.name,
-        timestamp: serverTimestamp(),
-        file: fileUrl,
-        likes: true,
-      });
 
-      alert("게시글이 성공적으로 등록되었습니다");
-      navigate(`/board`);
+      
+
+      //  수정기능
+       if(view){
+          const postRef = doc(getFirestore(), "board",view);
+          await updateDoc(postRef, {
+            title: title,
+            content: writeData,
+          })
+          alert ("게시물이 수정되었습니다")
+          navigate(`/board`);
+      
+      }else{
+      
+      
+        
+              addDoc(collection(getFirestore(), "board"), {
+                title: title,
+                content: writeData,
+                view: 1,
+                uid: userState.uid,
+                name: userState.data.name,
+                timestamp: serverTimestamp(),
+                file: fileUrl,
+                likes: true,
+              });
+        
+              alert("게시글 등록에 성공했습니다!");
+              navigate(`/board`);
+      
+      
+      
+      }
+
     } catch (error) {
       alert(error);
-      setIsModal(!isModal);
+    
       setMessage(error);
     }
   };
+
+
+
+
 
   const uploadToFirebase = async (file) => {
     const storageRef = ref(getStorage(), "images/" + file.name);

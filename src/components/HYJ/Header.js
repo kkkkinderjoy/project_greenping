@@ -249,7 +249,7 @@ const MyPage = styled.ul`
   flex-direction: column;
 `
 const MPList = styled.li`
-   padding: 8px 13px;
+padding: 8px 10px;
   &:hover {
     background-color: #f0f0f0;
   }

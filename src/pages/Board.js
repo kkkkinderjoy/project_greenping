@@ -11,38 +11,32 @@ import { faChartArea, faComment, faMessage, faPen, faTrash, faX } from "@fortawe
 import TimeGap from "./../components/KNH/TimeGap.js"
 import Comments from "../components/KNH/Comments.js";
 import Chat from './../components/KNH/Chatting.js';
+import Write from "./Write.js";
+import Ckeditor from "../components/KNH/Ckeditor.js";
 
 
-const Wrapper = styled.div`
+
+const BorderWrapper = styled.div`
   width: 100%;
-  margin-top: 60px;
-  
-`
-const Content = styled.div`
-  max-width: 1280px;
   
 `
 
 const  HeadWrap = styled.div`
-  width: 100%;
-  margin: 60px auto;
+  max-width: 1280px;
+  margin: 0 auto;
   display: flex;
   text-align: center;
-  justify-content: center;
-  position: relative;
-
 
 `
 const Title = styled.div`
   padding: 10px 20px;
   font-weight: bold;
-  font-size: 2.2em;
-
-
+  font-size: 2em;
 `;
 
 const ListWrap = styled.div`
     width: 80%;
+    max-width: 1280px;
     margin: 0 auto;
     display: flex;
     flex-wrap: wrap;
@@ -65,12 +59,10 @@ const List = styled.ul`
   padding-bottom: 95px;
   img {
     width: 100%;
-    max-height:500px; 
+    max-height:400px; 
     border-radius: 10px;
     object-fit: cover;
     margin-bottom: 10px;
-    margin-bottom: 20px;
-    
   }
 
 
@@ -152,8 +144,6 @@ const HeartWrap = styled.div`
   display: flex; 
    justify-content: center; 
    align-items: center; 
-
-   
 `;
 const MasWrap = styled.div`
   position: absolute;
@@ -174,17 +164,13 @@ const MasWrap = styled.div`
       font-size: 1.1em;
       color: #333;
    }
-   @media screen and (max-width: 768px) {
-    position: absolute;
-    right:90px;
-    }
 `;
 
 const Heart = styled.img`
   cursor:pointer ; 
   width:auto; 
   height:auto; 
-  margin-top: 17px;
+  margin-top: 8px;
   max-width :100% ; 
   max-height :100% ; 
 `;
@@ -192,9 +178,6 @@ const Heart = styled.img`
 
 
 const Button = styled.button`
-  position: absolute;
-  bottom: -70px;
-  right: 13%;
   margin: 20px 12px;
   background-color:  #98eecc;
   padding: 20px;
@@ -207,6 +190,10 @@ const Button = styled.button`
   outline: none;
   border: none;
   cursor: pointer;
+  position: absolute;
+  right:34px;
+
+
   svg {
     color: #fff;
   }
@@ -287,6 +274,8 @@ function Board() {
   };
 
 
+  const {view} = useParams()
+
   useEffect(() => {
     const fetchPosts = async () => {
       try {
@@ -300,7 +289,7 @@ function Board() {
         const postArray = snapShot.docs.map((doc) => ({
           id: doc.id,
           ...doc.data(),
-  
+          isLiked: doc.data().likes
         }));
         
         setPosts(postArray);
@@ -371,17 +360,17 @@ function Board() {
              isModal && <Chat onClose={()=>{setIsModal(false)}}/>
         }
 
-      <Wrapper>
-        <Content>
+
+      <BorderWrapper>
         <HeadWrap>
           <Title>그린톡</Title>
-      
+        
             <Link to="/write">
               <Button>
                 <FontAwesomeIcon icon={faPen} />
               </Button>
             </Link>
-         
+       
         </HeadWrap>
         <ListWrap>
 
@@ -401,12 +390,13 @@ function Board() {
                   {uid && uid === e.uid && (
                     <UserBtnWrap>
                       <UserBtn onClick={() => {
-                        navigate(`/edit`);
+                        navigate(`/edit/${e.id}`);
                       }}>
                         수정
                       </UserBtn> 
                       <UserBtn onClick={()=>handleDelete(e.id)}>삭제</UserBtn>
                     </UserBtnWrap>
+              
                 )}
                 </TopContent>
                 </ListItem>
@@ -417,10 +407,11 @@ function Board() {
                 </ListItem>       
              
              
+                <Comments/>
+             
 
 
-
-           
+      
              <>
                 <ListItem
                   onClick={() => {
@@ -452,8 +443,7 @@ function Board() {
             );
           })}
         </ListWrap>
-        </Content>
-      </Wrapper>
+      </BorderWrapper>
     </>
   );
 }
