@@ -76,6 +76,25 @@ const InputItem = styled.div`
     margin-left: 40%;
   }
 `
+const Textarea = styled.textarea`
+  width: 500px;
+  height: 200px;
+  position: absolute;
+  left: 45%;
+  transform: translateX(-55%);
+  margin-top: 7px;
+  margin-left: 10%;
+  margin-right: 1%;
+  padding-left: 4%;
+  padding-top: 3%;
+  border: 1px solid #eee;
+  outline: none;
+  resize: none;
+  &:focus{
+    border: 1px solid  #98eecc;
+  }
+  border-radius: 10px;
+`
 
 const ItemTitle = styled.div`
   color: #999;
@@ -175,7 +194,7 @@ function Inquiry() {
         <h3><p>{data.ID}</p>{data.TITLE}</h3>
         <span>{data.PRICE}</span>
         <img src={data.IMG} alt='이미지'></img>
-        <textarea rows='3' cols='33' maxLength={maxLength} className='textarea' placeholder='문의사항을 남겨주세요.' value={Comment} onChange={(e)=>{setComment(e.target.value)}}></textarea>
+        <Textarea rows='3' cols='33' maxLength={maxLength} className='textarea' placeholder='문의사항을 남겨주세요.' value={Comment} onChange={(e)=>{setComment(e.target.value)}}></Textarea>
       </InputItem>
         {inquiring.map((comment, commentIndex) => (     
           <ul>
