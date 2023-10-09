@@ -8,11 +8,6 @@ const GlobalStyle = createGlobalStyle`
     font-style: normal;
 }
 
-
-
-
-
-
 *{
     margin: 0;
     padding: 0;

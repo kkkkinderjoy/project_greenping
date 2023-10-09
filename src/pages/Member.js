@@ -15,7 +15,6 @@ const Container = styled.div`
   display: flex;
   background-color: #f9fcfc;
   justify-content: center;
-  height: calc(100vh - 86px);
   align-items: center;
 
   
@@ -74,6 +73,10 @@ const Input = styled.input`
   border: 1px solid #ddd;
   border-radius: 5px;
   box-sizing: border-box;
+  &:focus{
+    outline: none;
+    border-color: #2ed090;
+  }
 `
 const Button = styled.button`
   width: 100%;

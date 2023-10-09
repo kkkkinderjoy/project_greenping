@@ -55,7 +55,7 @@ const List =styled.ul`
 
 const ListItem =styled.li`
   
-  padding: 17px 50px; 
+  padding: 20px 70px; 
   cursor: pointer;
    display: flex;
    justify-content: space-between;

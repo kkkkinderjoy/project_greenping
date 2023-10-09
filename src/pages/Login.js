@@ -91,12 +91,10 @@ const CheckboxContent = styled.div`
 
 const Checkbox = styled.input`
     margin-left: 3px;
-    
     font-size: 1em;
     color: #999999;
-  
- 
 `
+
 
 const Button = styled.button`
   font-size: 1em;
@@ -174,10 +172,10 @@ function Login() {
         <Title>로그인</Title>
         <form onSubmit={LoginForm}>
           <InputWrap>
-          <Input type="email" className='email' placeholder='이메일' onChange={(e)=>{
-                setEmail(e.target.value)
-              }} required />
-          <Label>이메일</Label>
+            <Input type="email" className='email' placeholder='이메일' onChange={(e)=>{
+                  setEmail(e.target.value)
+                }} required />
+            <Label>이메일</Label>
           </InputWrap>
           <InputWrap>
           <Input type="password" className='password' placeholder='비밀번호' onChange={(e)=>{

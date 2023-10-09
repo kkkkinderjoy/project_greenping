@@ -166,7 +166,8 @@ const MnavTitle = styled.div`
       span{
         margin-bottom: 20px;
       }
-  `
+`
+
 const MnavLogo = styled.div`
       margin: 0 auto;
       display: flex;
@@ -183,6 +184,7 @@ const MnavLogo = styled.div`
         height: 100px;
       }
 `
+
 
 const MnavList = styled.div`
   width: 100%;
@@ -209,19 +211,22 @@ const MnavList = styled.div`
 
   }
 `
+
+
 const MnavBanner = styled.div`
   width: 100%;
 `
 
+
 const MyList = styled.div`
 width: 90%;
 margin-top: 20px;
-margin-bottom: 15px;
 ul{
   display: flex;
   justify-content: space-around;
   align-content: center;
-  background-color: #FEFFDD; 
+  background-color: #FEFFDD;
+  
   padding: 15px 0px;
   border-radius: 10px;
 }
@@ -240,6 +245,7 @@ const MPWrap = styled.div`
   border-radius: 10px;
 `
 
+
 const MyPage = styled.ul`
   list-style: none;
   padding: 0;
@@ -247,19 +253,22 @@ const MyPage = styled.ul`
   display: flex;
   flex-direction: column;
 `
+
+
 const MPList = styled.li`
-padding: 8px 10px;
+   padding: 8px 13px;
   &:hover {
     background-color: #f0f0f0;
   }
-
 `
+
 const MyPageIcon = styled(FontAwesomeIcon)`
   margin-right: 5px;
   transition: transform 0.5s; 
   transform: rotate(${(props) => (props.isActive ? '180deg' : '0')});
    
 `;
+
 
 
 function Header({userState}){

@@ -189,10 +189,10 @@ function Footer(){
                   고객센터
                 </h2>
               </li>
-              <li><NavLink to="/">1588-9780</NavLink></li>
+              <li>1588-9780</li>
               <li><h3>영업시간</h3></li>
-              <li><NavLink to="/">평일 09:00 - 18:00</NavLink></li>
-              <li><NavLink to="/">점심시간 11:30 - 12:30</NavLink></li>
+              <li>평일 09:00 - 18:00</li>
+              <li>점심시간 11:30 - 12:30</li>
             </ul>
           </CustomerService>  
         </Container>  

@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
-import { NavLink, useLocation } from 'react-router-dom'
+import { NavLink, useLocation, useNavigate } from 'react-router-dom'
 import data from "./../../data/NoticeData"
 import Service from '../../pages/Service'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAlignJustify } from '@fortawesome/free-solid-svg-icons'
+
 
 const Container = styled.div`
   width: 100%;
@@ -84,8 +85,8 @@ const Content =styled.div`
  p{
     padding: 100px 50px;
  }
- a{
-    
+ >div{ 
+    cursor: pointer;
     position: absolute;
     bottom: 10px;
     right: 20px;
@@ -104,12 +105,15 @@ const Content =styled.div`
  `
 
 function Noticedetail() {
+    const navigate = useNavigate();
     const[isActive,setIsActive]= useState(true);
     const location = useLocation();
     // console.log(location);
     const data = location.state;
     window.scrollTo(0,0); // 항상 스크롤이 상단에 있을려고 하면
-
+    const pagePrev = () =>{
+        navigate(-1)
+    }
     
   return (
     <>  
@@ -132,7 +136,7 @@ function Noticedetail() {
                             })}
                             </p>
                         }
-                        <NavLink to="/service/notice"><FontAwesomeIcon icon={faAlignJustify} />목록</NavLink>
+                        <div onClick={pagePrev}><FontAwesomeIcon icon={faAlignJustify}/>목록</div>
                     </Desc>
                 </Content>
             </ContainerWrap>
