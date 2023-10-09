@@ -19,6 +19,7 @@ const Container = styled.div`
 const InnerContainer = styled.div`
   max-width: 1280px;
   margin: 0 auto;
+  text-align: center;
 `;
 
 
@@ -26,21 +27,10 @@ const InnerContainer = styled.div`
 const Heading = styled.h3`
   padding: 10px 20px;
   font-weight: bold;
-  font-size: 2em;
-  position: relative;
+  font-size: 2.2em;
   margin-bottom: 60px;
   margin-left: 70px;
-  &::after {
-    content: "";
-    width: 30px;
-    height: 5px;
-    margin-left: 0.5px;
-    background-color: #2ed090;
-    position: absolute;
-    top: -8px;
-    left: 18px;
-    border-radius: 2px;
-  }
+
 `;
 
 const ContentWrapper = styled.div`
@@ -91,6 +81,8 @@ function Write() {
   const [message, setMessage] = useState("");
   const [postData, setPostData] = useState(null);
 
+
+
   const uid = sessionStorage.getItem("users");
 
 
@@ -134,6 +126,12 @@ function Write() {
 
   return (
     <>
+    
+      {
+        isModal &&
+        <Modal error="로그인 이후 이용해주시기 바랍니다!" onClose={()=>{setIsModal(false); navigate('/login')}}/>
+        // 유효성 검사 -> 주소를 잘못 쓴 경우 메인으로 가게 만듦
+      }
       <Container>
         <InnerContainer>
             <Heading>글쓰기</Heading>

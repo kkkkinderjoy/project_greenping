@@ -75,7 +75,7 @@ const UserInfo = styled.div`
 `
 
 const ContentTitle = styled.div`
-    font-weight: bold;
+    text-align: center;
     font-size: 18px;
     margin-bottom: 10px;
     flex-basis: 30%;
@@ -93,11 +93,12 @@ const UserDate = styled.div`
 `
 
 const ButtonWrap = styled.div`
-  width: 80%;
-  margin: 0 auto;
+  width: 100%;
+  margin: 60px auto;
   display: flex;
-  justify-content: space-between;
-  align-content: center;
+  position: relative;
+  justify-content: center;
+  text-align: center;
   margin-top: 50px;
   @media screen and (max-width: 768px) {
     margin-top: 120px;
@@ -106,8 +107,11 @@ const ButtonWrap = styled.div`
 `;
 
 const Button = styled.button`
-  margin-bottom: 20px;
-  background-color: #98eecc;
+  position: absolute;
+  bottom: -50px;
+  right: 13%;
+  margin: 20px 12px;
+  background-color:  #98eecc;
   padding: 20px;
   border-radius: 50%;
   font-size: 1.1em;
@@ -127,21 +131,10 @@ const Title = styled.div`
   padding: 10px 20px;
   font-weight: bold;
   font-size: 2.2em;
-  position: relative;
+
   line-height: 45px;
   margin-bottom: 20px;
 
-  &::after {
-    content: "";
-    width: 35px;
-    height: 5px;
-    margin-left: 0.5px;
-    background-color: #2ed090;
-    position: absolute;
-    top: 3px;
-    left: 18px;
-    border-radius: 2px;
-  }
 `;
 
 function ReviewMore() {
@@ -195,6 +188,7 @@ const UserBtn = styled.button`
       }
   }
 `
+
 
 const userState = useSelector((state) => state.user);
   const [posts, setPosts] = useState([]);
