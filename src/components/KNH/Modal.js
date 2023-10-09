@@ -17,7 +17,7 @@ const ContentWrap = styled.div`
     justify-content: center;
 `
 const Content = styled.div`
-    margin: 0 f3f3f3auto;
+    margin: 0 auto;
     width: 530px;
     height: 600px;
     background-color: #fff;

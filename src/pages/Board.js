@@ -416,6 +416,8 @@ function Board() {
 
       
              <>
+             {userState.uid &&
+             
                 <ListItem
                   onClick={() => {
                     toggleLike(i);
@@ -433,6 +435,9 @@ function Board() {
                   </HeartWrap>
                 
                 </ListItem>
+             
+             
+             }
                 <ListItem>
                  
                     <MasWrap onClick={()=>{setIsActive(true); 
