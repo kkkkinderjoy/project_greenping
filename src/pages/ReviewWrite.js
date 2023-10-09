@@ -160,8 +160,6 @@ function ReviewWrite() {
               />
             </ContentInner>
             <ContentInputWrapper>
-              <ContentLabel>내용</ContentLabel>
-              <p>sdaasdsda</p>
               <ReviewCk title={txtTitle} postData={postData} />
             </ContentInputWrapper>
           </ContentWrapper>

@@ -187,6 +187,7 @@ function Member() {
     return regex.test(dateOfBirth)
   }
 
+
   const isValidPhone = (phoneNumber) => {
     const regex = /^01[0-9]-[0-9]{3,4}-[0-9]{4}$/ //[]안은 사용 가능한 숫자 범위 / {}중괄호 안은 자릿 수
     return regex.test(phoneNumber);
@@ -315,11 +316,10 @@ function Member() {
           </Password>
             </>
             }
-
           <p>이름<span>*</span></p>
           <Input value={name} onChange={(e) => { setName(e.target.value) }} type='text' className='name' />
           <p>생년월일</p>
-          <Input defaultValue={DateOfBirth} maxLength={10} onChange={(e) => {setDateOfBirth(e.target.value) }} type='text' className='birth' />
+          <Input onInput={DateOfBirth} maxLength={10}  type='text' className='birth' />
           <p>전화번호<span>*</span></p>
           <Input onInput={PhoneNumber} maxLength={13} type='text' className='phone' />
 

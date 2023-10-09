@@ -208,7 +208,6 @@ const MnavList = styled.div`
         color: #A6F4D0;
       }
    }
-
   }
 `
 

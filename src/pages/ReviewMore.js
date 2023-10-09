@@ -15,6 +15,7 @@ const ReviewContent = styled.div`
   flex-wrap: wrap;
   gap: 25px;
   margin: 0 auto;
+  margin-bottom: 100px;
   @media screen and (max-width: 768px) {
       display: flex;
       flex-direction: column;
@@ -39,7 +40,7 @@ const Container = styled.div`
   box-shadow: 0 0 10px #d7d7d7;
   border-radius: 1rem;
   cursor: pointer;
-  
+
   img{ 
     width: 100%;
     height: 350px;
@@ -55,17 +56,19 @@ const Container = styled.div`
     width: 85%;
     height: 600px;
     padding: 20px;
+   
     img{
       margin-top: 10px;
     }
   }
-
  `
+
 const ContainerWrap = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
+  position: relative;
 `
 
 const UserInfo = styled.div`
@@ -81,11 +84,12 @@ const ContentTitle = styled.div`
     flex-basis: 30%;
     border-bottom: 1px solid #e5e7eb;
 `
+
 const UserName = styled.div`
     font-size: 14px;
     margin-left: 10px;
-   
 `
+
 const UserDate = styled.div`
   text-align: right;
   margin-top: 10px;
@@ -95,8 +99,6 @@ const UserDate = styled.div`
 const ButtonWrap = styled.div`
   width: 80%;
   margin: 0 auto;
-  display: flex;
-  justify-content: space-between;
   align-content: center;
   margin-top: 50px;
   @media screen and (max-width: 768px) {
@@ -106,11 +108,15 @@ const ButtonWrap = styled.div`
 `;
 
 const Button = styled.button`
-  margin-bottom: 20px;
-  background-color: #98eecc;
-  padding: 20px;
-  border-radius: 50%;
-  font-size: 1.1em;
+  color: white;
+  position: absolute;
+  right: 15%;
+  top: 20%;
+  margin: 20px 12px;
+  background-color:  #98eecc;
+  padding: 12px;
+  border-radius: 6px;
+  font-size: 0.9em;
   line-height: 1.25rem;
   font-weight: bold;
   display: flex;
@@ -121,38 +127,22 @@ const Button = styled.button`
   svg {
     color: #fff;
   }
+  @media screen and (max-width: 768px) {
+      right: 30px;
+  }
 `;
 
 const Title = styled.div`
   padding: 10px 20px;
+  text-align: center;
   font-weight: bold;
   font-size: 2.2em;
-  position: relative;
   line-height: 45px;
-  margin-bottom: 20px;
-
-  &::after {
-    content: "";
-    width: 35px;
-    height: 5px;
-    margin-left: 0.5px;
-    background-color: #2ed090;
-    position: absolute;
-    top: 3px;
-    left: 18px;
-    border-radius: 2px;
-  }
+  margin-bottom: 20px; 
 `;
 
-
-
-
-
-function ReviewMore() {
+function ReviewMore(event) {
  
-
-
-
 const userState = useSelector((state) => state.user);
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(9);
@@ -168,13 +158,11 @@ const userState = useSelector((state) => state.user);
           orderBy("timestamp", "desc")
         );
  
-      const snapShot = await getDocs(q);
-       
+       const snapShot = await getDocs(q);  
        const postArray = snapShot.docs.map((doc) => ({
            id: doc.id,
           ...doc.data(),
         }));
-    
         setPosts(postArray);
         console.log(postArray);
       } catch (error) {
@@ -186,19 +174,21 @@ const userState = useSelector((state) => state.user);
 };
   // 최초 마운트가 되었을때는 스크롤유무와 관계 없이 1회가 시작되어야 하므로 fetch를 마운트 되었을 때 실행  
 useEffect(() => {
-    fetchData();
-    
+    fetchData();   
 }, []);
 
-useEffect(() => {
 
+useEffect(() => {
+  
   const scrollEvent = () => {
+  
       if(posts.data){
-        return;
+        return;      
       }
       else if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) { 
         setTimeout(() => {
           setLoading(loading + 9)
+         
         }, 1000);
     }
 }
@@ -209,7 +199,6 @@ useEffect(() => {
 }, [loading]);
 
 
-
 return (
     <>
      <ButtonWrap>
@@ -217,7 +206,7 @@ return (
         {
             <Link to="/ReviewWrite">
               <Button>
-                  <FontAwesomeIcon icon={faPen} /> 
+                  <FontAwesomeIcon icon={faPen} /><span>글작성</span> 
               </Button>
             </Link>
         }
@@ -228,7 +217,6 @@ return (
           return (
             <>
             <Container key={i}>
-           
               <ContainerWrap>
                   <UserInfo>
                   <FontAwesomeIcon icon={faUser}></FontAwesomeIcon>
