@@ -1,6 +1,5 @@
 
 import React, { useCallback, useEffect, useState } from 'react'
-
 import styled from "styled-components";
 import Pagenation from "../components/LJS/Pagenation";
 import { faPen, faUser } from "@fortawesome/free-solid-svg-icons";
@@ -8,6 +7,7 @@ import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useSelector } from 'react-redux';
 import { collection, doc, getDocs, getFirestore, orderBy, query } from 'firebase/firestore';
+
 
 const ReviewContent = styled.div`
   max-width: 1280px;
@@ -18,18 +18,17 @@ const ReviewContent = styled.div`
   @media screen and (max-width: 768px) {
       display: flex;
       flex-direction: column;
-      flex-wrap: nowrap;
       width: 100%;
   }
-  @media screen and (max-width: 1024px) {
-    display: flex;
-    flex-direction: row;
-    width: 50%;
-  } 
+  @media screen and (max-width: 1024px){
+      display: flex;
+      flex-direction: column;
+      width: 80%;
+  }
 `
 
 const Container = styled.div`
-  flex-basis: 28%;
+  flex-basis: 27%;
   margin: 0 auto;
   border: 1px solid #eee;
   padding: 25px;
@@ -39,11 +38,13 @@ const Container = styled.div`
   height: auto;
   box-shadow: 0 0 10px #d7d7d7;
   border-radius: 1rem;
+  cursor: pointer;
+  
   img{ 
     width: 100%;
     height: 350px;
     border-radius: 0rem;
-    background-image:  url(https://media.istockphoto.com/id/1055079680/ko/%EB%B2%A1%ED%84%B0/%EC%82%AC%EC%9A%A9%ED%95%A0-%EC%88%98-%EC%97%86%EB%8A%94-%EC%9D%B4%EB%AF%B8%EC%A7%80-%EC%B2%98%EB%9F%BC-%EA%B2%80%EC%9D%80-%EC%84%A0%ED%98%95-%EC%82%AC%EC%A7%84-%EC%B9%B4%EB%A9%94%EB%9D%BC.jpg?s=612x612&w=0&k=20&c=6lBCS8H2OQDQA_v38ZBOuuKTxKwN3OvYe1xinb7wTb8=);
+    background-image: url(https://media.istockphoto.com/id/1055079680/ko/%EB%B2%A1%ED%84%B0/%EC%82%AC%EC%9A%A9%ED%95%A0-%EC%88%98-%EC%97%86%EB%8A%94-%EC%9D%B4%EB%AF%B8%EC%A7%80-%EC%B2%98%EB%9F%BC-%EA%B2%80%EC%9D%80-%EC%84%A0%ED%98%95-%EC%82%AC%EC%A7%84-%EC%B9%B4%EB%A9%94%EB%9D%BC.jpg?s=612x612&w=0&k=20&c=6lBCS8H2OQDQA_v38ZBOuuKTxKwN3OvYe1xinb7wTb8=);
     background-size: contain;
     background-repeat:  no-repeat;
     background-position: center;
@@ -58,7 +59,6 @@ const Container = styled.div`
       margin-top: 10px;
     }
   }
-
 
  `
 const ContainerWrap = styled.div`
@@ -144,63 +144,15 @@ const Title = styled.div`
   }
 `;
 
+
 function ReviewMore() {
-
-
-  const [current, SetCurrent] = useState()
-  
-
-  useEffect(() => {
-    const Scroll = () => {
-      let pos = window.scrollY;
-      if (pos + window.innerHeight === document.documentElement.scrollHeight) {
-      //  console.log("도착")
-       
-      }else{
-        // console.log("미도착")
-      }
-    };
-    window.addEventListener('scroll', Scroll);
-
-  
-  }, []);
-
-  const UserBtnWrap = styled.div`
-  display: flex;
-  align-items: center;
-  margin-top: 31px;
-  color: #999999;
-`
-
-const UserBtn = styled.button`
-  padding: 10px 10px;
-  background-color: #fff;
-  color: #555555;
-  border: none;
-  cursor: pointer;
-  transition: 0.4s;
-  &:nth-child(1){
-    position: relative;
-    &:hover{
-      font-weight: bold;
-    }
-    &::after{
-        content: "";
-        position: absolute;
-        top: 12px;
-        right: 0;
-        width: 1px;
-        height: 15px;
-        background-color: #999999;
-      }
-  }
-`
-
+ 
 const userState = useSelector((state) => state.user);
   const [posts, setPosts] = useState([]);
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(9);
   const sliceData = posts.slice(posts.length-loading)
+  const [isActive, setIsActive] = useState(false)
 
   const fetchData = async () => {
     
@@ -252,6 +204,7 @@ useEffect(() => {
 }, [loading]);
 
 
+
   return (
     <>
      <ButtonWrap>
@@ -269,7 +222,8 @@ useEffect(() => {
         { sliceData && sliceData.map((e, i) => {
           return (
             <>
-            <Container>
+            <Container >
+             
               <ContainerWrap>
                   <UserInfo>
                   <FontAwesomeIcon icon={faUser}></FontAwesomeIcon>
