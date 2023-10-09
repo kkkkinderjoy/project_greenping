@@ -69,17 +69,17 @@ const Label = styled.label`
   pointer-events: none;
 `
 const Button = styled.button`
+  font-size: 1em;
   background-color: #2ed090;
+  border: 1px solid #2ed090;
   color: #fff;
-  border: 1px solid #b2ffa4;
   width: 100%;
   height: 45px;
-  font-weight: bold;
-  border-radius: 5px;
+  border-radius: 10px;
   text-align: center;
-  line-height: 13px;
+  line-height: 1.3;
   cursor: pointer;
-  
+  margin-top: 25px;
 `
 
 function Findemail() {
