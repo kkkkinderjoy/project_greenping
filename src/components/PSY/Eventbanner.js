@@ -52,6 +52,18 @@ const StyleSlide = styled(SwiperSlide)`
 function Eventbanner() {
   return (
     <>
+
+<Swiper>
+    {
+            Array(6).fill().map((_,i)=>{
+              return(
+                <SwiperSlide key={i}>
+                  <img src={`./images/event${i+1}.jpg`} alt="slide" />
+                </SwiperSlide>
+              )
+            })
+          }
+    </Swiper>
       <StyledEventBanner>
         <StyleSwiper
           spaceBetween={10}
