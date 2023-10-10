@@ -126,7 +126,6 @@ const Container =styled.div`
 
 function Notice(){
     
-    //datalist.reverse(); //datalist 배열 역순으로 만들기
     const[data,setData] = useState(datalist);
     const[type,setType] = useState("전체");
     
@@ -144,7 +143,6 @@ function Notice(){
   return (
     <>
     <NoticeContent>
-     
         <TotalCnt>
           <div>총<p>{dataFilter.length}</p>건</div>
           <List>
@@ -162,7 +160,6 @@ function Notice(){
           </List>
         </TotalCnt>
         <Container>
-         
           <ul>
           { 
             dataFilter.slice().reverse().map((e,i)=>{
