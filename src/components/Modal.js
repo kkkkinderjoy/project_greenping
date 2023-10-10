@@ -7,7 +7,6 @@ import Logout from '../pages/Logout';
 
 
 
-
 const ContentWrap = styled.div`
    position: fixed;
     top: 0;
