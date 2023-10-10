@@ -5,7 +5,8 @@ import { logIn, logOut } from '../store'
 import { signOut } from 'firebase/auth'
 import { useNavigate } from 'react-router-dom'
 import { firebaseAuth } from '../firebase' 
-import Modal from "./../components/Modal"
+import Modal from '../components/Modal'
+
 
 function Logout() {
     const dispatch=useDispatch();
@@ -26,7 +27,9 @@ function Logout() {
 
   return (
     <>
-      {<Modal error="로그아웃이 되었습니다." onClose={()=>{setIsModal(false); navigate("/")}} />}
+      { isModal && 
+        <Modal error="로그아웃이 되었습니다." onClose={()=>{setIsModal(false); navigate(-1)}} />
+      }
     </>
   )
 }
