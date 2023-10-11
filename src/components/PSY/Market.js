@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartShopping, faHandshakeAngle, faMoneyCheckDollar, faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { NavLink } from "react-router-dom";
@@ -62,6 +62,7 @@ const ContentItem = styled.div`
       bottom: 10%;
       left: 50%;
       transform: translateX(-50%);
+      margin-bottom: 10px;
     }
   }
   @media screen and (max-width: 1200px){
@@ -166,39 +167,26 @@ const data = [
 
 function Market() {
 
-  const [id, setID] = useState("")
+  //const [randNumber, setRandNumber] = useState(null); //1개만 뜨게!! 구매 데이터가 랜덤으로 1개만 뜬다
+  
+  const [txt, setTxt] = useState(0);
+  const [FilterData, setFilterData] = useState([]);
+  const [randomData, setRandomData] = useState([]);
 
-  const Buy = list.filter(e => {
-    return e.ID === "구매" || e.ID === id
-  })
-  console.log(Buy)
-
-  const Assi = list.filter(e =>{
-    return e.ID === "양도" || e.ID === id
-  })
-  console.log(Assi)
-
-  const Sale = [
-    {
-      "ID": "판매",
-      "IMG" : "https://idoogen.com/web/product/medium/202309/8ad6636c92eaec24d41c4f1dd6930569.jpg",
-      "TITLE": "내가 판매할 물건은?"
+  useEffect(() => {
+    const txtList = ["판매", "구매", "양도"];
+    const randEvent = () => {
+      const dataFilter = list.filter(e => e.ID === txtList[txt]);
+      setFilterData(dataFilter); //3개를 한꺼번에 필터한다.
+      
+      const randomIndex = Math.floor(Math.random() * dataFilter.length); //랜덤함수
+      setRandomData(dataFilter[randomIndex]);
+      //console.log(randomData);
     }
-  ]
-
-  const Buyrandom = Math.floor(Math.random() * Buy.length);
-  console.log(Buyrandom)
-  const Assirandom = Math.floor(Math.random() * Assi.length);
-
-  const BTitle = Buy[Buyrandom].TITLE;
-  const BPrice = Buy[Buyrandom].PRICE;
-  const BImg = Buy[Buyrandom].IMG;
-
-  const ATitle = Assi[Assirandom].TITLE;
-  const AImg = Assi[Assirandom].IMG;
+    randEvent();
+  }, [txt]);
 
   const [isActive, setIsActive] = useState(0);
-  // console.log(isActive)
 
   return (
     <>
@@ -207,40 +195,12 @@ function Market() {
       <ContainerWrap>
         <ContentItem>
           {
-            Sale.map((e,i)=>{
-              return(
-                isActive === 0 &&
-                <ul key={i}>
-                  <h3>{e.ID}</h3>
-                  <img src={e.IMG} alt="판매" />
-                  <li>{e.TITLE}</li>
-                </ul>
-              )
-            })
-          }
-          {
-            Buy.map((e,i)=>{
-              return(
-                isActive === 1 &&
-                <ul key={i}>
-                  <h3>{BTitle}</h3>
-                  <img src={BImg} alt="구매이미지" />
-                  <li>{BPrice}</li>
-                </ul>
-              )}
-            )
-          }
-          {
-            Assi.map((e,i)=>{
-              return(
-                isActive === 2 &&
-                <ul key={i}>
-                  <h3>{ATitle}</h3>
-                  <img src={AImg} alt="양도 이미지" />
-                  <li>문의하고 양도 받아보세요!</li>
-                </ul>
-              )
-            })
+            <ul>
+              <h3>{randomData.ID}</h3>
+              <img src={randomData.IMG} alt="구매이미지" />
+              <p>{randomData.TITLE}</p>
+              <p>{randomData.PRICE}</p>
+            </ul>
           }
         </ContentItem>
         <ContentDesc>
@@ -248,7 +208,8 @@ function Market() {
             data.map((e,i)=>{
               return(
                 <Card key={i}  onClick={()=>{
-                  setIsActive(i);
+                  setIsActive(i)
+                  i !== 3 &&  setTxt(i);
                   }}>
                   <h3>{e.ID}</h3>
                   <p>{e.Desc}</p>

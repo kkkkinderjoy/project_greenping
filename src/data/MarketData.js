@@ -282,7 +282,7 @@ const data = [
         "DATE": "2022-05-20",
         "OBJ": "캠핑팬",
         "TITLE": "아웃도어 프리미엄 캠핑팬",
-        "PRICE": "79,000원",
+        // "PRICE": "79,000원",
         "IMG": "https://cdn.imweb.me/thumbnail/20230804/a814073fb6f38.jpg"
     },
     {
