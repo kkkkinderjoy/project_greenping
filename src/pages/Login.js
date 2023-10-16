@@ -81,20 +81,20 @@ const Label = styled.label`
 `
 
 
-const CheckboxContent = styled.div`
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  font-size: 1em;
-  color: #999;
-  gap: 3px;
-`
+// const CheckboxContent = styled.div`
+//   cursor: pointer;
+//   display: flex;
+//   align-items: center;
+//   font-size: 1em;
+//   color: #999;
+//   gap: 3px;
+// `
 
-const Checkbox = styled.input`
-    margin-left: 3px;
-    font-size: 1em;
-    color: #999999;
-`
+// const Checkbox = styled.input`
+//     margin-left: 3px;
+//     font-size: 1em;
+//     color: #999999;
+// `
 
 
 const Button = styled.button`
@@ -133,6 +133,7 @@ function Login() {
     const dispatch = useDispatch();
     const userState = useSelector(state => state.user);
     //console.log(userState)
+    
     const errorMsg = (errorCode) =>{
       const firebaseError = {
         'auth/user-not-found' :"이메일 혹은 비밀번호가 잘못 되었습니다.",
