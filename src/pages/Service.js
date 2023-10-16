@@ -89,22 +89,7 @@ function Service() {
     }
   ]
 
-  const currentUrl = window.location.href; 
-
-  useMemo(()=>{
-    if(currentUrl === "http://localhost:3000/service/notice"){
-      setIsActive(true)
-      return;
-    }
-    if(currentUrl === "http://localhost:3000/service/faq"){
-      setIsActive(false)
-      return;
-    }
-    if(currentUrl === "http://localhost:3000/service"){
-      setIsActive(true)
-    }
-  },[currentUrl])
-
+  
 
   return (
     <>
