@@ -25,7 +25,13 @@
 
 
 ## :two_women_holding_hands:맴버구성
-
+<br>
+<br>
+:green_heart: 최유리
+:blue_heart: 이정석
+:purple_heart: 박수연
+:yellow_heart: 홍윤정
+:heart: 김나현
 
 
 
