@@ -35,7 +35,10 @@
 <br>
 :yellow_heart: 홍윤정
 <br>
-:heart: 김나현
+:heart: 김나현 
+<br>
+상세페이지(https://www.notion.so/1847b9d9a73c4b148a3f5cd45ed0da36?pvs=4)
+
 <br>
 <br>
 <br>
