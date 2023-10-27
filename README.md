@@ -18,7 +18,14 @@
 ---
 
 
-### :open_file_folder:개발환경
+### :open_file_folder:기술 스택
+
+
+#### 1.Environment
+
+<img src="https://img.shields.io/badge/Visual Studio Code-007ACC?style=flat-square&logo=Visual Studio Code&logoColor=white"/>
+
+
 
 
 
