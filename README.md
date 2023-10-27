@@ -7,7 +7,7 @@
 <br>
 
 
-## :two_women_holding_hands:개발기간
+## :alarm_clock:개발기간
 *23.08.21 ~ 23.10.09
 
 
