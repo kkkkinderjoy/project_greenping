@@ -28,11 +28,18 @@
 <br>
 <br>
 :green_heart: 최유리
+<br>
 :blue_heart: 이정석
+<br>
 :purple_heart: 박수연
+<br>
 :yellow_heart: 홍윤정
+<br>
 :heart: 김나현
-
+<br>
+<br>
+<br>
+<br>
 
 
 
@@ -80,7 +87,6 @@
 ##### 4-4) Communication
 <img src="https://img.shields.io/badge/Notion-%23000000.svg?style=for-the-badge&logo=notion&logoColor=white">
 <img src="https://img.shields.io/badge/Discord-%235865F2.svg?style=for-the-badge&logo=discord&logoColor=white">
-=======
 
 
 
