@@ -44,6 +44,7 @@
 [나현페이지](https://pie-sunshine-ccc.notion.site/1847b9d9a73c4b148a3f5cd45ed0da36?pvs=4)
 [수연페이지](https://fortune-belly-670.notion.site/greenping-91cd4bfbc52f4e68b571045537b7b5dc?pvs=4)
 [윤정페이지](https://mixolydian-custard-f16.notion.site/61e0583380c54ebd8647ad9df87ba7ab?pvs=4)
+[유리페이지](https://www.notion.so/GreenPing-6b62a2c687b14c94b63c33785ff32ea5?pvs=4)
 <br>
 <br>
 <br>
