@@ -53,7 +53,7 @@
 <br>
 :heart: 김나현 (FE, 메인- 캠핑장 추천 / 그린톡 페이지 / 랭킹 페이지 / 어사이드) 
 <br>
-(https://pie-sunshine-ccc.notion.site/1847b9d9a73c4b148a3f5cd45ed0da36?pvs=4)
+(https://knhbank.notion.site/1847b9d9a73c4b148a3f5cd45ed0da36?pvs=4)
 <br>
 <br>
 <br>
