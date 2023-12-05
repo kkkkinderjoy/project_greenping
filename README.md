@@ -28,24 +28,33 @@
 *23.08.21 ~ 23.10.09
 
 
-## :two_women_holding_hands:멤버구성
+## :two_women_holding_hands:멤버구성 & 역할
 <br>
 <br>
-:green_heart: 최유리
+:green_heart: 최유리 (FE, 메인-검색 / 캠핑장 찾기 페이지) 
 <br>
-:blue_heart: 이정석
+(https://www.notion.so/GreenPing-6b62a2c687b14c94b63c33785ff32ea5?pvs=4)
 <br>
-:purple_heart: 박수연
 <br>
-:yellow_heart: 홍윤정
+:blue_heart: 이정석 (FE , 메인-캠핑관련 영상 슬라이드 및 리뷰 / 리뷰 페이지 / 회원가입) 
 <br>
-:heart: 김나현 
+(https://www.notion.so/Read-Me-ad239ef591894a8587ba3326be0f1fe6?pvs=4)
 <br>
-[나현페이지](https://pie-sunshine-ccc.notion.site/1847b9d9a73c4b148a3f5cd45ed0da36?pvs=4)
-[수연페이지](https://fortune-belly-670.notion.site/greenping-91cd4bfbc52f4e68b571045537b7b5dc?pvs=4)
-[윤정페이지](https://mixolydian-custard-f16.notion.site/61e0583380c54ebd8647ad9df87ba7ab?pvs=4)
-[유리페이지](https://www.notion.so/GreenPing-6b62a2c687b14c94b63c33785ff32ea5?pvs=4)
-[정석페이지](https://www.notion.so/Read-Me-ad239ef591894a8587ba3326be0f1fe6?pvs=4)
+<br>
+:purple_heart: 박수연 (FE, 메인-이벤트슬라이드 및 그린마켓 / 그린마켓 페이지 / 로고&배너 디자인) 
+<br>
+(https://fortune-belly-670.notion.site/greenping-91cd4bfbc52f4e68b571045537b7b5dc?pvs=4)
+<br>
+<br>
+:yellow_heart: 홍윤정 (FE, 로그인 / 고객센터 페이지) 
+<br>
+(https://mixolydian-custard-f16.notion.site/61e0583380c54ebd8647ad9df87ba7ab?pvs=4)
+<br>
+<br>
+:heart: 김나현 (FE, 메인- 캠핑장 추천 / 그린톡 페이지 / 랭킹 페이지 / 어사이드) 
+<br>
+(https://pie-sunshine-ccc.notion.site/1847b9d9a73c4b148a3f5cd45ed0da36?pvs=4)
+<br>
 <br>
 <br>
 <br>
@@ -59,7 +68,7 @@
 
 #### 1.Environment
 
-<img src="https://img.shields.io/badge/Visual Studio Code-007ACC?style=flat-square&logo=Visual Studio Code&logoColor=white"/>
+<img src="https://img.shields.io/badge/Visual Studio Code-007ACC?style=for-the-badge&logo=Visual Studio Code&logoColor=white"/>
 
 
 #### 2.Package Manager
