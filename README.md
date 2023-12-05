@@ -7,11 +7,15 @@
 <br>
 <br>
 
- 캠핑 관련 정보들과 서비스를 제공받고 활성화 된 커뮤니티로 소통이 가능한 사이트 입니다.
+캠핑을 즐기는 이들을 위한 통합 캠핑 예약 서비스로, 다양한 캠핑 관련 정보와 서비스를 제공합니다. 
+<br>
+사용자들은 캠핑장 예약뿐만 아니라, 리뷰와 의견을 교환하는 커뮤니티 기능을 통해 소통할 수 있으며 캠핑에 대한 다양한 정보를 보다 편리하게 얻을 수 있습니다.
+
+
 <br>
 <br>
 
-### :round_pushpin:배포주소 : <https://project-greenping-aql4akyqb-kkkkinderjoy.vercel.app/>
+### 📍 배포주소 : <https://project-greenping-aql4akyqb-kkkkinderjoy.vercel.app/>
 
 <br>
 <br>
@@ -24,7 +28,7 @@
 *23.08.21 ~ 23.10.09
 
 
-## :two_women_holding_hands:맴버구성
+## :two_women_holding_hands:멤버구성
 <br>
 <br>
 :green_heart: 최유리
@@ -33,10 +37,6 @@
 <br>
 :purple_heart: 박수연
 <br>
-
-
-<br>
-
 :yellow_heart: 홍윤정
 <br>
 :heart: 김나현 
@@ -63,7 +63,7 @@
 
 
 #### 2.Package Manager
-<img src="https://img.shields.io/badge/npm-CB3837?style=flat-square&logo=npm&logoColor=white"/>
+<img src="https://img.shields.io/badge/npm-CB3837?style=for-the-badge&logo=npm&logoColor=white"/>
 <img src= "https://img.shields.io/badge/yarn-%232C8EBB.svg?style=for-the-badge&logo=yarn&logoColor=white">
 
 
