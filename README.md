@@ -46,7 +46,7 @@
 (https://fortune-belly-670.notion.site/greenping-91cd4bfbc52f4e68b571045537b7b5dc?pvs=4)
 <br>
 <br>
-:yellow_heart: 홍윤정 (FE, 로그인 / 고객센터 페이지) 
+:yellow_heart: 홍윤정 (FE, 로그인 / 고객센터 페이지 / 깃허브 관리) 
 <br>
 (https://mixolydian-custard-f16.notion.site/61e0583380c54ebd8647ad9df87ba7ab?pvs=4)
 <br>
