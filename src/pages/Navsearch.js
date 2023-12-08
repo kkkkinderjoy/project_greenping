@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { NavLink, useLocation } from "react-router-dom";
-import axios from "axios";
-import { eachDayOfInterval } from "date-fns";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLocationDot, faPhoneVolume, faUser } from "@fortawesome/free-solid-svg-icons";
 import dataList from './../data/Choicedata'
@@ -168,7 +166,6 @@ function Navsearch() {
     setSearchTerm(Selected);
     setSelected(Selected);
     setSearchKeyword(Selected);
-    console.log(searchTerm, searchKeyword)
     setData(
       dataList.filter(
         (e) =>
@@ -201,14 +198,13 @@ function Navsearch() {
   //   setSelected(donmValue)
   // };
 
-  console.log(searchTerm)
-  console.log(searchKeyword)
+
   const Filterdonm = [...new Set(data && data.map((e) => e.doNm).sort())];
   const FilterSigun = [...new Set(data.filter((e) =>{
     return Selected === e.doNm
   }).map((e)=> e.sigunguNm))]
   // 필터를 돌려서 중복제거함
-  // console.log(searchKeyword)
+
   return (
     <>
       <Wrap>

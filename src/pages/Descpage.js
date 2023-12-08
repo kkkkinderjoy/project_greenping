@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React, { useState } from 'react'
 import { NavLink, useLocation } from 'react-router-dom'
 import { styled } from 'styled-components'
-import Reserve from '../components/CYR/Reserve'
+import Reserve from '../components/Reserve'
 
 
 const Dwrap = styled.div`

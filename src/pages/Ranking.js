@@ -198,8 +198,6 @@ const AddPage = styled.div`
 
 function Detail() {
   const [data, setData] = useState(dataList);
-
-  // const [data, setData] = useState();
   const [page, setPage] = useState(23);
 
   useEffect(() => {

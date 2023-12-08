@@ -3,13 +3,12 @@ import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPaperPlane, faPen } from "@fortawesome/free-solid-svg-icons";
+import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate, useParams } from "react-router-dom";
 import {
   addDoc,
   collection,
   doc,
-  getDoc,
   getDocs,
   getFirestore,
   orderBy,
@@ -26,8 +25,7 @@ import {
   getDownloadURL,
 } from "firebase/storage";
 
-import { firebaseAuth } from "../../firebase";
-// import { fireStore } from './../firebase';
+import { firebaseAuth } from "../firebase";
 
 const Button = styled.button`
   position: absolute;

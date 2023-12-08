@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import data from './../../data/MarketData'
+import data from './../data/MarketData'
 import { styled } from 'styled-components'
 import { NavLink } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Card from "./../../data/ReviewData";
+import Card from "./../data/ReviewData";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import {

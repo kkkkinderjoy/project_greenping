@@ -1,7 +1,7 @@
 import { Route, Routes, useNavigate } from "react-router-dom";
 import GlobalStyle from "./components/GlobalStyle";
-import Header from "./components/HYJ/Header";
-import Footer from "./components/HYJ/Footer";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
 import Main from "./pages/Main";
 import SearchD from "./pages/SearchD";
 import Ranking from "./pages/Ranking";
@@ -9,32 +9,32 @@ import ReviewMore from "./pages/ReviewMore";
 import Board from "./pages/Board";
 import Write from "./pages/Write";
 import Service from "./pages/Service";
-import Market from "./components/PSY/Market";
-import Notice from './components/HYJ/Notice';
-import FAQ from './components/HYJ/FAQ';
-import Noticedetail from "./components/HYJ/Noticedetail";
+import Market from "./components/Market";
+import Notice from './components/Notice';
+import FAQ from './components/FAQ';
+import Noticedetail from "./components/Noticedetail";
 import Login from "./pages/Login";
 import Logout from "./pages/Logout";
 import Member from "./pages/Member";
 import Findemail from "./pages/Findemail";
 import Modify from "./pages/Modify";
 import Descpage from "./pages/Descpage";
-import Notfound from "./components/KNH/Notfound";
+import Notfound from "./components/Notfound";
 import { Provider, useDispatch, useSelector } from "react-redux";
 import { collection, doc, getDoc, getFirestore } from "firebase/firestore";
 import store, { logIn, loggedIn } from "./store";
-import Aside from "./components/KNH/Aside";
-import Sale from "./components/PSY/Sale";
-import Buy from "./components/PSY/Buy";
-import Assi from "./components/PSY/Assi";
+import Aside from "./components/Aside";
+import Sale from "./components/Sale";
+import Buy from "./components/Buy";
+import Assi from "./components/Assi";
 import Inquiry from "./pages/Inquiry";
 import Myboard from "./pages/Myboard";
 import { useEffect } from "react";
 import Navsearch from "./pages/Navsearch";
-import Salepage from "./components/PSY/Salepage";
-import Salewrite from "./components/PSY/Salewrite";
+import Salepage from "./components/Salepage";
+import Salewrite from "./components/Salewrite";
 import Navdescpage from "./pages/Navdescpage";
-import ReviewCk from "./components/LJS/ReviewCk";
+import ReviewCk from "./components/ReviewCk";
 import ReviewWrite from "./pages/ReviewWrite";
 import Msearchd from "./pages/Msearchd";
 import ChoiceDescpage from "./pages/ChoiceDescpage";
@@ -52,12 +52,10 @@ function App() {
 
 function Inner() {
   const userState = useSelector((state) => state.user);
-  //console.log(userState);
+
 
   const dispatch = useDispatch();
   const uid = sessionStorage.getItem("users");
-
-  //console.log(uid);
 
   useEffect(() => {
     if (uid) {
@@ -66,10 +64,9 @@ function Inner() {
     const fetchUser = async () => {
       if (!uid) return;
       const userDoc = doc(collection(getFirestore(), "users"), uid);
-      //console.log(userDoc);
+    
       try {
         const docSnapshot = await getDoc(userDoc);
-        //console.log(docSnapshot);
         if (docSnapshot.exists()) {
           const userData = docSnapshot.data();
           dispatch(loggedIn(userData));

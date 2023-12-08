@@ -134,7 +134,6 @@ function Member() {
       const fetchUserData = async () =>{
         const userRef = doc(getFirestore(), "users" ,userUid);
         const userSnap = await getDoc(userRef);
-        // console.log(userSnap.data()); 
         
         if(userSnap.exists()){
           const data= userSnap.data();
@@ -166,7 +165,6 @@ function Member() {
 
   const DateOfBirth = (e) => {
     let value = e.target.value;
-    console.log(e.target.value)
     e.target.value = e.target.value.replace(/[^0-9]/g, '').replace(/^(\d{0,4})(\d{0,2})(\d{0,2})$/g, "$1-$2-$3").replace(/-{1,2}$/g, "");
     setDateOfBirth(value)
   };

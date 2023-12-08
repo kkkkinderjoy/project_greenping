@@ -9,7 +9,6 @@ import {
   useNavigate,
   Link,
 } from "react-router-dom";
-import Modal from "./../Modal";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import { doc, getDoc, getFirestore } from "firebase/firestore";

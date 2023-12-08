@@ -2,16 +2,14 @@ import React from "react";
 import styled from "styled-components";
 import { useState } from "react";
 import {
-  useAsyncError,
   useParams,
-  Navigate,
   useNavigate,
 } from "react-router-dom";
 import Modal from "../components/Modal";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
-import { doc, getDoc, getDocs, getFirestore } from "firebase/firestore";
-import ReviewCk from "../components/LJS/ReviewCk";
+import { doc, getDoc, getFirestore } from "firebase/firestore";
+import ReviewCk from "../components/ReviewCk";
 
 const Container = styled.div`
   width: 100%;

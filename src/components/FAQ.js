@@ -1,6 +1,6 @@
 import React, { Fragment, useState } from 'react'
 import { styled } from 'styled-components'
-import datalist from './../../data/FAQData'
+import datalist from '../data/FAQData'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowDown, faArrowUp, faChevronDown, faDownload } from '@fortawesome/free-solid-svg-icons'
 

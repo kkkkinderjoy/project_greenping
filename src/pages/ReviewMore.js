@@ -1,7 +1,7 @@
 
 import React, { useCallback, useEffect, useState } from 'react'
 import styled from "styled-components";
-import Pagenation from "../components/LJS/Pagenation";
+import Pagenation from "../components/Pagenation";
 import { faPen, faUser } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -164,7 +164,6 @@ const userState = useSelector((state) => state.user);
           ...doc.data(),
         }));
         setPosts(postArray);
-        console.log(postArray);
       } catch (error) {
         console.log(error);
       }

@@ -4,7 +4,7 @@ import "swiper/css/pagination";
 import "swiper/css";
 import { Autoplay, Pagination } from "swiper/modules";
 import { styled } from "styled-components";
-import './../../index.css'
+import './../index.css'
 
 const StyledEventBanner = styled.div`
   max-width: 100%;

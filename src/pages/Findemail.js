@@ -144,7 +144,6 @@ function Findemail() {
       }
       const userDoc = querySnapShot.docs[0];
       const userData = userDoc.data();
-      console.log(userData);
       const email = userData.email;
       setResultEmail(email);
       if(!email){

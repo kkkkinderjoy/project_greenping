@@ -132,7 +132,6 @@ function Login() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const userState = useSelector(state => state.user);
-    //console.log(userState)
     
     const errorMsg = (errorCode) =>{
       const firebaseError = {
@@ -150,13 +149,11 @@ function Login() {
       try{
         const userLogin = await signInWithEmailAndPassword(firebaseAuth, email, password);
         const user = userLogin.user;
-        console.log(user);
         sessionStorage.setItem("users",user.uid);        
         dispatch(logIn(user.uid));
 
         const userDoc = doc(collection(getFirestore(),"users"),user.uid);
         const userDocSnapshot = await getDoc(userDoc);
-        // console.log(userDocSnapshot.data())
         if(userDocSnapshot.exists()){
           const userData = userDocSnapshot.data();
           dispatch(loggedIn(userData));
