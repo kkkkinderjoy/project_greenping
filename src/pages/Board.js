@@ -8,11 +8,11 @@ import {
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChartArea, faComment, faMessage, faPen, faTrash, faX } from "@fortawesome/free-solid-svg-icons";
-import TimeGap from "./../components/KNH/TimeGap.js"
-import Comments from "../components/KNH/Comments.js";
-import Chat from './../components/KNH/Chatting.js';
+import TimeGap from "./../components/TimeGap.js"
+import Comments from "../components/Comments.js";
+import Chat from './../components/Chatting.js';
 import Write from "./Write.js";
-import Ckeditor from "../components/KNH/Ckeditor.js";
+import Ckeditor from "../components/Ckeditor.js";
 
 
 
@@ -344,7 +344,7 @@ function Board() {
       const postRef = collection(getFirestore(), "board");
       const postSnapShot = await getDoc(doc(postRef));
       const CurrentUser = postSnapShot._firestore._authCredentials.currentUser;
-      console.log(postSnapShot);
+
       if (CurrentUser.uid) {
         setPost(CurrentUser.uid);
       } else {

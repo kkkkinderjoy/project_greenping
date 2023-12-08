@@ -7,7 +7,7 @@ import {
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight, faPen, faRunning } from "@fortawesome/free-solid-svg-icons";
-import TimeGap from "./../components/KNH/TimeGap.js"
+import TimeGap from "./../components/TimeGap.js"
 
 const BorderWrapper = styled.div`
   max-width: 1280px;
@@ -284,7 +284,6 @@ function Board() {
       const postRef = collection(getFirestore(), "board");
       const postSnapShot = await getDoc(doc(postRef));
       const CurrentUser = postSnapShot._firestore._authCredentials.currentUser;
-      console.log(postSnapShot);
       if (CurrentUser.uid) {
         setPost(CurrentUser.uid);
       } else {

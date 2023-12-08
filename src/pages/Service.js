@@ -1,8 +1,8 @@
-import React, { useMemo, useState } from 'react'
-import { NavLink, Outlet, useNavigate, useParams } from 'react-router-dom';
+import React, { useState } from 'react'
+import {useNavigate, useParams } from 'react-router-dom';
 import { styled } from 'styled-components'
-import Notice from './../components/HYJ/Notice';
-import FAQ from './../components/HYJ/FAQ';
+import Notice from './../components/Notice';
+import FAQ from './../components/FAQ';
 
 
 

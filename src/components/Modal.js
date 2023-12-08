@@ -1,14 +1,11 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTriangleExclamation, faX } from '@fortawesome/free-solid-svg-icons';
-import Logout from '../pages/Logout';
-
-
+import { faX } from '@fortawesome/free-solid-svg-icons';
 
 
 const ContentWrap = styled.div`
-   position: fixed;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
@@ -17,28 +14,42 @@ const ContentWrap = styled.div`
     background-color:rgba(0, 0, 0, 0.2);
     display: flex;
     align-items:center;
-    justify-content: center; 
-`
-
-const Content = styled.div`
-    display: flex;
     justify-content: center;
-    flex-wrap: wrap;
+`
+const Content = styled.div`
+    margin: 0 auto;
+    width: 530px;
+    height: 600px;
     background-color: #fff;
-    padding: 50px;
+    padding: 30px;
     border-radius: 12px;
     box-shadow: 0 0 10px #d7d7d7;
     position: relative;
-    >svg
-    {
-      flex-basis: 100%;
-      font-size: 100px;
-      color:red;
+    overflow-y: scroll;
+    &::-webkit-scrollbar {
+    width: 12px;
+    }
+    &::-webkit-scrollbar-track {
+    background-color: #f7f7f7;
+    border-radius: 60px;
+      }
+    &::-webkit-scrollbar-thumb {
+    background-color: #A6F4D0;
+    border-radius: 100px;
+}
+
+   
+    >img{
+      margin: 80px auto;
+      width: 130px;
+      height: 130px;
+    
     }
     >p{
-      font-size: 16px;
-      font-weight: bold;
-      }
+      text-align: center;
+      font-size: 20px;
+      color: #000;
+    }
 `
 
 const CloseBtn = styled.button`
@@ -47,6 +58,7 @@ const CloseBtn = styled.button`
     background-color: #e9e9e9;
     border-radius: 50%;
     position: absolute;
+    border: none;
     right: 5%;
     top: 5%;
     z-index: 20000;
@@ -54,11 +66,13 @@ const CloseBtn = styled.button`
     align-items: center;
     cursor: pointer;
     font-size: 18px;
-      >p{
-        color: gray;
-        opacity: 1;
-        font-weight: 100;
-        }  
+      >p{color: gray;
+      opacity: 1;
+      font-weight: 100;
+      }
+ 
+    
+    
 `
 
 const Button = styled.button`
@@ -71,23 +85,25 @@ const Button = styled.button`
   border-radius: 16px;
   color: #fff;
   cursor: pointer;
+  
+
 `
 
-function Modal({error,onClose}) {
-  
+
+function Modal() {
+  const [error, setError] = useState("");
+  const [isModal, setIsModal] = useState(false);
   return (
-    <>
     <ContentWrap>
         <Content>
-          <FontAwesomeIcon icon={faTriangleExclamation}/>
-            <CloseBtn  onClick={onClose}> 
-              <FontAwesomeIcon icon={faX} />
+            <CloseBtn>
+              <p><FontAwesomeIcon onClose={()=>setIsModal(false)} icon={faX} /></p>
             </CloseBtn>
-          <p>{error}</p>
+            
+            <p>{error}</p>
+            
         </Content>
     </ContentWrap>
-  
-    </>
   )
 }
 

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import data from './../../data/MarketData'
+import data from '../data/MarketData'
 import { styled } from 'styled-components';
 import { NavLink, Navigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -123,15 +123,12 @@ function Assi() {
     return(e.ID === "양도" || e.ID === ID)
   })
   
-  console.log(FilterAssi)
   
   const AssiFilter = [...new Set(data.map(e => e.ID))]
-  console.log(AssiFilter)
   const [assi, setAssi] = useState(2);
   const menu = ["/sale", "/buy", "/assi"]
   const uid = sessionStorage.getItem("users");
   const [userUid, setUserUid] = useState(uid);
-  //console.log(userUid)
 
   return (
     <>

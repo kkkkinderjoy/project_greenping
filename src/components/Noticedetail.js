@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
-import { NavLink, useLocation, useNavigate } from 'react-router-dom'
-import data from "./../../data/NoticeData"
-import Service from '../../pages/Service'
+import { useLocation, useNavigate } from 'react-router-dom'
+import data from "./../data/NoticeData"
+import Service from '../pages/Service'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAlignJustify } from '@fortawesome/free-solid-svg-icons'
 
@@ -108,7 +108,6 @@ function Noticedetail() {
     const navigate = useNavigate();
     const[isActive,setIsActive]= useState(true);
     const location = useLocation();
-    // console.log(location);
     const data = location.state;
     window.scrollTo(0,0); // 항상 스크롤이 상단에 있을려고 하면
     const pagePrev = () =>{

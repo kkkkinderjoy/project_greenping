@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartShopping, faHandshakeAngle, faMoneyCheckDollar, faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { NavLink } from "react-router-dom";
 import { styled } from "styled-components";
-import list from './../../data/MarketData'
+import list from './../data/MarketData'
 
 const Container = styled.div`
   width: 100%;
@@ -181,7 +181,7 @@ function Market() {
       
       const randomIndex = Math.floor(Math.random() * dataFilter.length); //랜덤함수
       setRandomData(dataFilter[randomIndex]);
-      //console.log(randomData);
+  
     }
     randEvent();
   }, [txt]);

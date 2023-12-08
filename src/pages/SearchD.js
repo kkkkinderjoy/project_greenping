@@ -200,9 +200,7 @@ function SearchD() {
   const [Selected, setSelected] = useState(stateData.optiondonmSelect === '' ? stateData.userinput : stateData.optiondonmSelect);
   // const [Inputv, setInputv] = useState(stateData.userinput)
   // const [selectv, setselectv] = useState(stateData.optiondonmSelect)
-  // console.log(location.state.optiondonmSelect)
-  // console.log(location.state.userinput)
- 
+
 
   // const SbrsCl = ["전기","장작판매","물놀이장","놀이터","산책로","운동시설","무선인터넷","트렘폴린","마트.편의점","온수","운동장"]
 
@@ -211,7 +209,7 @@ function SearchD() {
   //     setSearchTerm(Selected);
   //     setSelected(Selected);
   //     setSearchKeyword(Selected);
-  //     console.log(searchTerm, searchKeyword)
+  //   
   //   fetch(
   //     "https://apis.data.go.kr/B551011/GoCamping/basedList?numOfRows=100&pageNo=1&MobileOS=ETC&MobileApp=project&serviceKey=hQ42F%2BSKq2L%2FUrlhNoGxv63elQn7W8CmL22xl6yXuGk%2BMz0zdU%2Frk2CIdCeX5%2BYPmg39K5QBYCeSgUyqtD7Qdg%3D%3D&_type=json"
   //   )
@@ -306,7 +304,7 @@ function SearchD() {
     return Selected === e.doNm
   }).map((e)=> e.sigunguNm))]
   // 필터를 돌려서 중복제거함
-  // console.log(searchKeyword)
+
   return (
     <>
       <Wrap>

@@ -1,10 +1,9 @@
 import React, { useState } from 'react'
-import data from './../../data/MarketData'
+import data from './../data/MarketData'
 import { styled } from 'styled-components';
 import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCartShopping } from '@fortawesome/free-solid-svg-icons';
-import Write from '../../pages/Write';
 import Salewrite from './Salewrite';
 
 const Content = styled.div`
@@ -103,7 +102,7 @@ function Sale({userState}){
 
     const uid = sessionStorage.getItem("users");
     const [userUid, setUserUid] = useState(uid);
-    console.log(userUid)
+  
     //로그인 했을때 문의하기버튼 보이게 
     const navigate = useNavigate();
 

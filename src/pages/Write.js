@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import Ckeditor from "../components/KNH/Ckeditor";
+import Ckeditor from "../components/Ckeditor";
 import { useState } from "react";
 import {
   useParams,
@@ -104,24 +104,17 @@ function Write() {
     }
   });
 
-  if (!userState.uid) {
-    return (
-      <>
-        {isModal && (
-          <Modal
-            error="로그인 이후 이용해주시기 바랍니다!"
-            onClose={() => {
-              setIsModal(false);
-              navigate("/login");
-            }}
-          />
-        )}
-      </>
-    );
-  }
+  useEffect(() => {
+    if (!userState.uid) {
+      alert("로그인 이후 이용해주세요");
+      navigate("/login");
+    }
+  }, [userState.uid, navigate]);
 
   return (
     <>
+    {
+      userState.uid &&
       <Container>
         <InnerContainer>
             <Heading>{ view  ? "글수정" : "글쓰기"}</Heading>
@@ -145,7 +138,7 @@ function Write() {
         </InnerContainer>
       </Container>
 
- 
+    }
     </>
   );
 }

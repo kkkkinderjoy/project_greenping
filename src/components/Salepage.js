@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 import { deleteDoc,collection, getDocs, getDoc, getFirestore, orderBy, query, doc } from "firebase/firestore";
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import styled from "styled-components";
-import data from "./../../data/MarketData"
+import data from "./../data/MarketData"
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -125,9 +125,7 @@ const UserBtn = styled.button`
 function Salepage() {
     
     const Filter = [...new Set(data.map(e => e.ID))]
-
     const menu = ["/sale" , "/buy", "/assi"]
-    
     const [sale, setSale] = useState(0);
     const [post, setPost] = useState();
     const [posts, setPosts] = useState([]);
@@ -142,7 +140,6 @@ function Salepage() {
         const postRef = collection(getFirestore(), "market");
         const postSnapShot = await getDoc(doc(postRef));
         const CurrentUser = postSnapShot._firestore._authCredentials.currentUser;
-        console.log(CurrentUser.uid);
         if (CurrentUser.uid) {
           console.log("정상");
           setPost(CurrentUser.uid);

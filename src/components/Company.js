@@ -83,7 +83,6 @@ function Company() {
     useEffect(()=>{
         const scrollEvent = ()=>{
             const rect = document.querySelector("#content").getBoundingClientRect();
-            console.log(rect)
             if(rect.top-200 <= window.innerHeight && rect.bottom >= 0){
                 //위치값이 실제 200보다 작다면
                 setIsView(true);

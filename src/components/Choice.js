@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 import { styled } from "styled-components";
-import dataList from "./../../data/Choicedata";
+import dataList from "./../data/Choicedata";
 import { NavLink } from "react-router-dom";
 
 const ContentWrap = styled.div`
@@ -121,7 +121,7 @@ function Choice() {
         const Random = Math.floor(Math.random() * Result.length);
         Array.push(Result[Random])
         setData(Array)
-        console.log(Array)
+
       }
     }
     RandomData()

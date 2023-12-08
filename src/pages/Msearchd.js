@@ -148,16 +148,13 @@ function Msearchd() {
   const [searchKeyword, setSearchKeyword] = useState(stateData.userInput);
   const [Selected, setSelected] = useState(stateData.userInput);
 //   const [Inputv, setInputv] = useState(stateData.userinput)
-  // console.log(location.state.optiondonmSelect)
-  console.log(location.state.userInput)
 
-  
+
   const SbrsCl = ["전기","장작판매","물놀이장","놀이터","산책로","운동시설","무선인터넷","트렘폴린","마트.편의점","온수","운동장"]
 
   useEffect(() => {
     setSearchTerm(Selected);
     setSearchKeyword(Selected);
-    console.log(searchTerm, searchKeyword)
         setData(
           dataList.filter(
             (e) =>

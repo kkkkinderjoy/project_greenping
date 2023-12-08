@@ -2,17 +2,12 @@ import React, { useEffect, useState } from "react";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import styled from "styled-components";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPen } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
 import {
   addDoc,
   collection,
-  doc,
-  getDoc,
   getFirestore,
   serverTimestamp,
-  setDoc,
 } from "firebase/firestore";
 import { useSelector } from "react-redux";
 import {
@@ -26,7 +21,7 @@ import {
   getAuth,
   signInWithEmailAndPassword,
 } from "firebase/auth";
-import { firebaseAuth } from "../../firebase";
+import { firebaseAuth } from "../firebase";
 
 const Button = styled.button`
   border-radius: 0.5rem;

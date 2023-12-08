@@ -7,7 +7,7 @@ import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCalendar, faCalendarAlt, faCalendarCheck, faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
-import dataList from "./../../data/Choicedata";
+import dataList from "./../data/Choicedata";
 
 const Content = styled.div`
   margin-top: 5px;
