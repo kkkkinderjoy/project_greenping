@@ -38,7 +38,7 @@
 <br>
 :blue_heart: 이정석 (FE , 메인-캠핑관련 영상 슬라이드 및 리뷰 / 리뷰 페이지 / 회원가입) 
 <br>
-(https://www.notion.so/Read-Me-ad239ef591894a8587ba3326be0f1fe6?pvs=4)
+(https://unexpected-moth-906.notion.site/Read-Me-ad239ef591894a8587ba3326be0f1fe6)
 <br>
 <br>
 :purple_heart: 박수연 (FE, 메인-이벤트슬라이드 및 그린마켓 / 그린마켓 페이지 / 로고&배너 디자인) 
