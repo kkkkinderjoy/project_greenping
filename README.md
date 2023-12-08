@@ -15,7 +15,7 @@
 <br>
 <br>
 
-### 📍 배포주소 : <https://project-greenping-aql4akyqb-kkkkinderjoy.vercel.app/>
+### 📍 배포주소 : https://project-greenping.vercel.app/board
 
 <br>
 <br>
