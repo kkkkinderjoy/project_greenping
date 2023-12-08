@@ -142,14 +142,6 @@ function Buy() {
       return (e.ID === "구매" || e.ID === ID)
     })
 
-    /* const txtList = ["판매", "구매", "양도"];
-    const [txt, setTxt] = useState(2);
-    const [FilterData, setFilterData] = useState([]);
-
-    const Fdata = data.filter(e => e.ID === txtList[txt]);
-    console.log(Fdata) */
-
-
     const FilterItem = [...new Set(data.map(e => e.ID))]
 
     const [buy, setBuy] = useState(1);
@@ -158,7 +150,7 @@ function Buy() {
 
     const uid = sessionStorage.getItem("users");
     const [userUid, setUserUid] = useState(uid);
-    //console.log(userUid)
+    console.log(userUid)
 
   return (
     <>

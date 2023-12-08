@@ -52,48 +52,44 @@ const StyleSlide = styled(SwiperSlide)`
 function Eventbanner() {
   return (
     <>
-
-<StyledEventBanner>
-<Swiper>
-    {
-            Array(6).fill().map((_,i)=>{
-              return(
-                <SwiperSlide 
-                key={i}
-                spaceBetween={10}
-                autoplay={{
-                  delay: 4000,
-                  disableOnInteraction: false,
-                }}
-                pagination={{ clickable: true }}
-                grabCursor={false}
-                modules={[Autoplay, Pagination]}
-                slidesPerView={2}
-                slidesPerGroup={2}
-                loop={true}
-                breakpoints= {{
-                  768: {
-                    slidesPerView : 2,
-                    slidesPerGroup : 2
-                  }  ,
-                  1024:{
-                    slidesPerView: 2,
-                    slidesPerGroup : 2
-                    }
-      
-                }
-                }
-      
-                
-                >
-                  <img src={`./images/event${i+1}.jpg`} alt="slide" />
-                </SwiperSlide>
-              )
-            })
-          }
-    </Swiper>
-
-    </StyledEventBanner>
+    <StyledEventBanner>
+      <Swiper
+      spaceBetween={10}
+      autoplay={{
+        delay: 4000,
+        disableOnInteraction: false,
+      }}
+      pagination={{ clickable: true }}
+      grabCursor={false}
+      modules={[Autoplay, Pagination]}
+      slidesPerView={2}
+      slidesPerGroup={2}
+      loop={true}
+      breakpoints= {{
+        768: {
+          slidesPerView : 2,
+          slidesPerGroup : 2
+        }  ,
+        1024:{
+          slidesPerView: 2,
+          slidesPerGroup : 2
+        }
+      }
+      }
+      >
+        {
+          Array(6).fill().map((_,i)=>{
+            return(
+              <SwiperSlide 
+              key={i}
+              >
+              <img src={`./images/event${i+1}.jpg`} alt="slide" />
+              </SwiperSlide>
+            )
+          })
+        }
+      </Swiper>
+      </StyledEventBanner>
 
     
       {/* <StyledEventBanner>
