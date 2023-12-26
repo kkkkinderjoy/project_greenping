@@ -1,10 +1,8 @@
-import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, getFirestore, increment, onSnapshot, orderBy, query, serverTimestamp, updateDoc } from 'firebase/firestore';
 import styled from 'styled-components';
-import { useEffect, useState } from 'react';
+import {  useState } from 'react';
 import React from 'react';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { comment } from 'postcss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faX } from '@fortawesome/free-solid-svg-icons';
 
@@ -224,15 +222,8 @@ const Uploaded = styled.div`
 
 function Chatting({onClose}) {
 
-
-  const navigate = useNavigate()
   const [comment, setComment] = useState("");
   const [comments, setComments] = useState([]);
-  const userState = useSelector((state) => state.user);
-  const uid = sessionStorage.getItem("users")
-
-      
-
 
   const handleCommentChange = (e) => {
     setComment(e.target.value);

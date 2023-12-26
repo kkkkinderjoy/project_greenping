@@ -287,8 +287,6 @@ function Board() {
   };
 
 
-  const {view} = useParams()
-
   useEffect(() => {
     const fetchPosts = async () => {
       try {
