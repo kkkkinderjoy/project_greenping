@@ -13,7 +13,7 @@ function TimeGap({ timestamp }) {
         return ` 방금`
       }
 
-      if( minutegap <= 60){
+      if( minutegap <= 1){
         return ` 방금`
       }
     

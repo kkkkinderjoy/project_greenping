@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronUp } from "@fortawesome/free-solid-svg-icons";
-import { faInstagram } from "@fortawesome/free-brands-svg-icons";
-import { faMessage } from "@fortawesome/free-regular-svg-icons";
 import { styled } from "styled-components";
-import { Link } from "react-router-dom";
+
 
 const Wrap = styled.div`
   position: fixed;
@@ -38,16 +36,18 @@ const Content = styled.li`
   margin-bottom: 10px;
   text-align: center;
   cursor: pointer;
-  font-size: 1.2em;
-  img {
-    width: 23px;
-    height:23px;
+  &:nth-child(1){
+    background-color: #FAE24C;
   }
-  
-  
+  img{
+    width: 25px;
+    height: 25px;
+  }
   a{
-    width: 20px;
-    height: 20px;
+    width: 25px;
+    height: 25px;
+
+    
   }
   @media screen and (max-width: 640px){
     &:nth-child(2){
@@ -69,11 +69,7 @@ const Content = styled.li`
   
 `;
 
-const Kakao = styled.li`
-  /* @media screen and (max-width: 640px){
-    display: none;
-  } */
-`
+
 
 function Aside() {
   const [isActive, setIsActive] = useState(false);
@@ -86,38 +82,13 @@ function Aside() {
         setIsActive(false);
       }
     };
-    window.addEventListener("scroll", isActiveClick);
+      window.addEventListener("scroll", isActiveClick);
     return () => {
       window.removeEventListener("scroll", isActiveClick); 
     };
   }, []);
 
-  useEffect(()=>{
-    const script = document.createElement('script');
-    script.async = true;
-    try{
-      if (window.Kakao) {
-        const kakao = window.Kakao;
-        if (!kakao.isInitialized()) {
-          kakao.init(process.env.REACT_APP_KakaoKey);
-        }
-      }
 
-    window.Kakao.Channel.createChatButton({
-      container: '#kakao-talk-channel-chat-button',
-      channelPublicId: '_dxlaCG',
-      title: 'consult',
-      size: 'small',
-      color: 'yellow',
-      shape: 'pc',
-      supportMultipleDensities: true,
-    });
-    document.body.appendChild(script);
-    document.body.removeChild(script);
-  } catch (err){
-    
-  }
-  })
 
   const moveToTop = () =>
     window.scrollTo({
@@ -125,21 +96,33 @@ function Aside() {
       behavior: "smooth",
     });
 
+  const addKakaoChannel = () => {
+    if (window.Kakao) {
+      //카카오 스크립트가 로드된 경우
+      const kakao = window.Kakao;
+
+      //인증이 안되어있는 경우 인증한다.
+      if (!kakao.isInitialized()) {
+        kakao.init(process.env.REACT_APP_KakaoKey);
+      }
+
+      kakao.Channel.chat({
+        channelPublicId: '_dxlaCG', //카카오 채널 ID
+      });
+    }
+  };
+
+
   return (
     <>
         <Wrap isActive={isActive}>
       {isActive && 
         <ContentWrap>
-           <Kakao isKakao> <Link id="kakao-talk-channel-chat-button"></Link></Kakao>
-
-            <Link id="kakao-talk-channel-chat-button"></Link>
-          {/* <Content isKakao>
-          </Content> */}
-          {/* <Content>
-            <Link to="https://instagram.com/green_ping2023?igshid=MzRlODBiNWFlZA==">
-              <img src={`images/instagram.png`} alt="instagram" />
-            </Link>
-          </Content> */}
+          <Content>
+            <div id="chat-channel-button" onClick={addKakaoChannel}>
+                <img src="/images/kakaochannel.png" alt="카카오톡 채널 채팅"/>
+            </div>
+          </Content>
           <Content onClick={moveToTop}>
             <FontAwesomeIcon icon={faChevronUp} />
           </Content>
