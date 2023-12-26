@@ -62,16 +62,12 @@ function Ckeditor({ title, postData }) {
   const [fileUrl, setFileUrl] = useState("");
 
   const {view} = useParams()
-  // console.log(userState);
 
   useEffect(() => {
     if (postData) {
       setWriteData(postData.content);
     }
   }, [postData]);
-
-
-
 
   
   const [posts,setPosts] = useState()
@@ -99,11 +95,6 @@ function Ckeditor({ title, postData }) {
     };
     fetchPosts();
   }, [view]);
-
-
-
-
-
 
 
 
@@ -218,13 +209,11 @@ function Ckeditor({ title, postData }) {
           ],
         }}
         onReady={(editor) => {
-          // You can store the "editor" and use when it is needed.
           console.log("Editor is ready to use!", editor);
         }}
         onChange={(event, editor) => {
           const data = editor.getData();
           setWriteData(data);
-          console.log({ event, editor, data });
         }}
         onBlur={(event, editor) => {
           console.log("Blur.", editor);

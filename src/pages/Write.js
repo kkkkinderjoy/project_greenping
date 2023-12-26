@@ -77,13 +77,14 @@ function Write() {
   const userState = useSelector((state) => state.user);
   const memberProfile = useSelector((state) => state.user);
   const [message, setMessage] = useState("");
-  const [postData, setPostData] = useState(null);
+  const [postData, setPostData] = useState();
 
+ 
   const uid = sessionStorage.getItem("users");
 
 
   useEffect(() => {
-    if (board && view) {
+    if (view) {
       const fetchData = async () => {
         const postRef = doc(getFirestore(), "board", view);
         const postSnapShot = await getDoc(postRef);
@@ -118,10 +119,7 @@ function Write() {
       <Container>
         <InnerContainer>
             <Heading>{ view  ? "글수정" : "글쓰기"}</Heading>
-         
-
           <ContentWrapper>
-           
               <TextInput
                 placeholder="제목"
                 defaultValue={postData && postData.title}
@@ -130,7 +128,6 @@ function Write() {
                   setTxtTitle(e.target.value);
                 }}
               />
-            
             <ContentInputWrapper>
               <Ckeditor title={txtTitle} postData={postData} />
             </ContentInputWrapper>

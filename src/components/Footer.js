@@ -159,10 +159,10 @@ function Footer(){
         <ServiceWrap>
           <ServiceInfo>
             <ul>
-              <li><NavLink to="/">서비스 이용약관<span></span></NavLink></li>
-              <li><NavLink to="/">개인정보 처리방침<span></span></NavLink></li>
-              <li><NavLink to="/">제휴 신청<span></span></NavLink></li>
-              <li><NavLink to="/">제휴 문의</NavLink></li>
+              <li>서비스 이용약관</li>
+              <li>개인정보 처리방침</li>
+              <li>제휴 신청</li>
+              <li>제휴 문의</li>
             </ul>
           </ServiceInfo>
         </ServiceWrap>
